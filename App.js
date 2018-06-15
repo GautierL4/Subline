@@ -1,23 +1,23 @@
 import React from 'react';
+import {StackNavigator} from 'react-navigation';
 import { StyleSheet, Text, View } from 'react-native';
+import HomePage from './components/Views/HomePage';
 
 export default class App extends React.Component {
   render() {
     return (
-      <View style={styles.container}>
-        <Text>Open up App.js to start working on your app!</Text>
-        <Text>Changes you make will automatically reload.</Text>
-        <Text>Shake your phone to open the developer menu.</Text>
-      </View>
+      <RootStack />
     );
   }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+export const RootStack = StackNavigator(
+  {
+    HomePage: { screen: HomePage },
   },
-});
+  {
+    initialRouteName: 'HomePage',
+    headerMode: 'none'
+  }
+);
+
