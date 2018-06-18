@@ -1,5 +1,5 @@
 import React from 'react';
-import {StackNavigator} from 'react-navigation';
+import {createStackNavigator} from 'react-navigation';
 import { StyleSheet, Text, View } from 'react-native';
 import HomePage from './components/Views/HomePage';
 
@@ -11,7 +11,7 @@ export default class App extends React.Component {
   }
 }
 
-export const RootStack = StackNavigator(
+export const RootStack = createStackNavigator(
   {
     HomePage: { screen: HomePage },
   },

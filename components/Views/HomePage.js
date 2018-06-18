@@ -15,7 +15,7 @@ class HomePage extends React.Component {
         this.setState({ isLoading: true });
         //Setting the loading screen for 3 seconds
         setTimeout(() => { this.setState({ isLoading: false })
-        }, 3000 );
+        }, 2500);
     }
 
     render(){
