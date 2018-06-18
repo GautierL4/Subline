@@ -15,7 +15,7 @@ class HomePage extends React.Component {
         this.setState({ isLoading: true });
         //Setting the loading screen for 3 seconds
         setTimeout(() => { this.setState({ isLoading: false })
-        }, 2500);
+        }, 3000);
     }
 
     render(){
@@ -24,7 +24,7 @@ class HomePage extends React.Component {
         if(this.state.isLoading){
             return(
             <View style={{flex: 1, backgroundColor: 'black',width:screenWidth, height:screenHeight, alignItems: 'center',justifyContent: 'center'}}>
-                <Image style={{width: 80, height: 80,}} source={require('../../icons/loading.gif')} />
+                <Image style={{width: 80, height: 80,}} source={require('../../icons/loading-start.gif')} />
             </View>
             );
         }
