@@ -31,46 +31,50 @@ class HomePage extends React.Component {
         }
         else{
             return(
-                <View style={{flex:1,width:screenWidth, height:screenHeight,alignItems: 'center', justifyContent: 'center'}}>
-                    <View style={styles.container}>
-                        <Image source={require('../../icons/loading-start.gif')} style={{width: 90, height: 90}}/>
-                    </View>
-                    <View style={{flexDirection:'row',alignItems: 'center',justifyContent: 'center',position:'relative',top:-25}}>
-                        <TouchableNativeFeedback style={{flex:1,flexDirection:'row',alignItems: 'center',justifyContent: 'center',padding:5}}>
-                        <View style={styles.searchBar}>
-                            <Image source={require('../../icons/search.png')} style={styles.ImageStyle} />
-                            <Text style={styles.input}>Où souhaitez-vous aller ?</Text>
+                <View style={styles.container}>
+                    <ScrollView horizontal={false} contentContainerStyle={{flexGrow: 1}}>
+                        <View style={styles.header}>
+                            <Image source={require('../../icons/loading-start.gif')} style={{width: 90, height: 90}}/>
                         </View>
-                        </TouchableNativeFeedback >
-                    </View>
-                    <Text style={{fontSize: 28, textAlign: 'center', margin: 10}}>Vos arrêts</Text>
-                    <ScrollView horizontal={true}>
-                        <View style={{flex:1,backgroundColor:'red',width:screenWidth/3,height:100}}>
-                        <Text>95-01</Text>
-                        </View>
-                        <View style={{flex:1,backgroundColor:'blue',width:screenWidth/3,height:100}}>
-                        <Text>95-01</Text>
-                        </View>
-                        <View style={{flex:1,backgroundColor:'red',width:screenWidth/3,height:100}}>
-                        <Text>95-01</Text>
-                        </View>
-                        <View style={{flex:1,backgroundColor:'blue',width:screenWidth/3,height:100}}>
-                        <Text>95-01</Text>
-                        </View>
-                    </ScrollView>
-                    <Text style={{fontSize: 28, textAlign: 'center', margin: 10}}>Vos itinéraires</Text>
-                    <ScrollView horizontal={true}>
-                        <View style={{flex:1,backgroundColor:'red',width:screenWidth/3,height:100}}>
-                        <Text>10 arpents - Jussieu</Text>
-                        </View>
-                        <View style={{flex:1,backgroundColor:'blue',width:screenWidth/3,height:100}}>
-                        <Text>Les Halles - Bibliothèque François Mittérant</Text>
-                        </View>
-                        <View style={{flex:1,backgroundColor:'red',width:screenWidth/3,height:100}}>
-                        <Text>Noisy-Champs - Gare de Lyon</Text>
-                        </View>
-                        <View style={{flex:1,backgroundColor:'blue',width:screenWidth/3,height:100}}>
-                        <Text>Strasbourg Saint-Denis - Odéon</Text>
+                        <View style={styles.body}>
+                            <View style={{flexDirection:'row',alignItems: 'center',justifyContent: 'center',position:'relative',top:-25}}>
+                                <TouchableNativeFeedback style={{flex:1,flexDirection:'row',alignItems: 'center',justifyContent: 'center',padding:5}}>
+                                    <View style={styles.searchBar}>
+                                        <Image source={require('../../icons/search.png')} style={styles.ImageStyle} />
+                                        <Text style={styles.input}>Où souhaitez-vous aller ?</Text>
+                                    </View>
+                                </TouchableNativeFeedback >
+                            </View>
+                            <Text style={{fontSize: 28, textAlign: 'center', margin: 10}}>Vos arrêts</Text>
+                            <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+                                <View style={{flex:1,backgroundColor:'red',width:screenWidth/3,height:100}}>
+                                <Text>95-01</Text>
+                                </View>
+                                <View style={{flex:1,backgroundColor:'blue',width:screenWidth/3,height:100}}>
+                                <Text>95-01</Text>
+                                </View>
+                                <View style={{flex:1,backgroundColor:'red',width:screenWidth/3,height:100}}>
+                                <Text>95-01</Text>
+                                </View>
+                                <View style={{flex:1,backgroundColor:'blue',width:screenWidth/3,height:100}}>
+                                <Text>95-01</Text>
+                                </View>
+                            </ScrollView>
+                            <Text style={{fontSize: 28, textAlign: 'center', margin: 10}}>Vos itinéraires</Text>
+                            <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+                                <View style={{flex:1,backgroundColor:'red',width:screenWidth/3,height:100}}>
+                                <Text>10 arpents - Jussieu</Text>
+                                </View>
+                                <View style={{flex:1,backgroundColor:'blue',width:screenWidth/3,height:100}}>
+                                <Text>Les Halles - Bibliothèque François Mittérant</Text>
+                                </View>
+                                <View style={{flex:1,backgroundColor:'red',width:screenWidth/3,height:100}}>
+                                <Text>Noisy-Champs - Gare de Lyon</Text>
+                                </View>
+                                <View style={{flex:1,backgroundColor:'blue',width:screenWidth/3,height:100}}>
+                                <Text>Strasbourg Saint-Denis - Odéon</Text>
+                                </View>
+                            </ScrollView>
                         </View>
                     </ScrollView>
                 </View>
@@ -81,11 +85,20 @@ class HomePage extends React.Component {
 
 const styles = StyleSheet.create({
     container: {
+        flex:1,
+        alignItems: 'center', 
+        justifyContent: 'center',
+        backgroundColor: '#fff'
+    },
+    header: {
       flex: 2,
       backgroundColor: '#000',
       alignItems: 'center',
       justifyContent: 'center',
       alignSelf: 'stretch',
+    },
+    body: {
+        flex: 3,
     },
     home: {
       flex:1,
