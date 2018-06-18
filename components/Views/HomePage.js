@@ -27,6 +27,7 @@ class HomePage extends React.Component {
                 <Image style={{width: 80, height: 80,}} source={require('../../icons/loading-start.gif')} />
             </View>
             );
+            
         }
         else{
             return(
