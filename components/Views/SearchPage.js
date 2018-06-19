@@ -20,21 +20,17 @@ class SearchPage extends React.Component {
     render(){
         return(
             <View style={styles.container}>
-                <ScrollView horizontal={false} contentContainerStyle={{flexGrow: 1}}>
                     <View style={styles.header}>
                         <Image source={require('../../icons/loading-start.gif')} style={{width: 90, height: 90}}/>
                     </View>
                     <View style={styles.body}>
-                        <View style={{flexDirection:'row',alignItems: 'center',justifyContent: 'center',position:'relative',top:-25}}>
-                            <TouchableWithoutFeedback onPress={() => this.props.navigation.navigate('SearchPage')} style={{flex:1,flexDirection:'row',alignItems: 'center',justifyContent: 'center',padding:5}}>
+                        <View style={{flexDirection:'row',alignItems: 'center',justifyContent: 'center',top:-25}}>
                                 <View style={styles.searchBar}>
                                     <Image source={require('../../icons/search.png')} style={styles.ImageStyle} />
-                                    <Text style={styles.input}>Où souhaitez-vous aller ?</Text>
+                                    <TextInput onChangeText={(text) => this.AutomaticResearch(text)} style={styles.input} underlineColorAndroid='rgba(0,0,0,0)' placeholder="Votre destination" autoFocus />
                                 </View>
-                            </TouchableWithoutFeedback>
                         </View>
                     </View>
-                </ScrollView>
             </View>
         )
     }
@@ -68,6 +64,7 @@ const styles = StyleSheet.create({
     },
     body: {
         flex: 3,
+        width: screenWidth,
     },
     stopCardBox: {
         flex:1,
