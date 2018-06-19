@@ -36,7 +36,7 @@ class HomePage extends React.Component {
                         </View>
                         <View style={styles.body}>
                             <View style={{flexDirection:'row',alignItems: 'center',justifyContent: 'center',position:'relative',top:-25}}>
-                                <TouchableWithoutFeedback onPress={()=> this.props.navigation.navigate('SearchPages')} style={{flex:1,flexDirection:'row',alignItems: 'center',justifyContent: 'center',padding:5}}>
+                                <TouchableWithoutFeedback onPress={() => this.props.navigation.navigate('SearchPage')} style={{flex:1,flexDirection:'row',alignItems: 'center',justifyContent: 'center',padding:5}}>
                                     <View style={styles.searchBar}>
                                         <Image source={require('../../icons/search.png')} style={styles.ImageStyle} />
                                         <Text style={styles.input}>Où souhaitez-vous aller ?</Text>
