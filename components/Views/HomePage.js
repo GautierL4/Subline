@@ -32,7 +32,7 @@ class HomePage extends React.Component {
                 <View style={styles.container}>
                     <ScrollView horizontal={false} contentContainerStyle={{flexGrow: 1}}>
                         <View style={styles.header}>
-                            <Image source={require('../../icons/loading-start.gif')} style={{width: 90, height: 90}}/>
+                            <Image source={require('../../icons/subline.png')} style={{width: 90, height: 90}}/>
                         </View>
                         <View style={styles.body}>
                             <View style={{flexDirection:'row',alignItems: 'center',justifyContent: 'center',position:'relative',top:-25}}>
@@ -144,7 +144,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         alignSelf: 'stretch',
-        height: 250,
+        height: 230,
     },
     title: {
         fontSize: 20, 
@@ -206,7 +206,7 @@ const styles = StyleSheet.create({
             width: 0
         },
         //android
-        elevation: 7,
+        elevation: 5,
         flex:0.9,
         flexDirection:'row'
     },
