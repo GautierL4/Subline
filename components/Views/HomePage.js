@@ -120,23 +120,33 @@ class HomePage extends React.Component {
                             </ScrollView>
                             <Text style={styles.title}>Vos itinéraires</Text>
                             <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-                                <View style={styles.stopCardBox}>
-                                    <View style={styles.stopCard}>
+                                <View style={styles.stopJourneyCard}>
+                                    <View style={styles.journeyCard}>
+                                        <View style={styles.journeyCardTop}>
+                                            <View style={styles.journeyCardTopRow}>
+                                                <Image style={styles.journeyCardTopRowImg} source={require('../../assets/icons/map-location.png')} />
+                                                <Text style={styles.journeyCardTopRowTxt}>Châtelet-Les-Halles</Text>
+                                            </View>
+                                            <View style={styles.journeyCardTopRow}>
+                                                <Image style={styles.journeyCardTopRowImg} source={require('../../assets/icons/target.png')} />
+                                                <Text style={styles.journeyCardTopRowTxt}>43 rue de Bruxelles, Paris 75004</Text>
+                                            </View>
+                                        </View>
+                                        <View style={styles.journeyCardBottom}></View>
+                                    </View>
+                                </View>
+                                <View style={styles.stopJourneyCard}>
+                                    <View style={styles.journeyCard}>
                                     <Text>95-01</Text>
                                     </View>
                                 </View>
-                                <View style={styles.stopCardBox}>
-                                    <View style={styles.stopCard}>
+                                <View style={styles.stopJourneyCard}>
+                                    <View style={styles.journeyCard}>
                                     <Text>95-01</Text>
                                     </View>
                                 </View>
-                                <View style={styles.stopCardBox}>
-                                    <View style={styles.stopCard}>
-                                    <Text>95-01</Text>
-                                    </View>
-                                </View>
-                                <View style={styles.stopCardBox}>
-                                    <View style={styles.stopCard}>
+                                <View style={styles.stopJourneyCard}>
+                                    <View style={styles.journeyCard}>
                                     <Text>95-01</Text>
                                     </View>
                                 </View>
@@ -280,6 +290,55 @@ const styles = StyleSheet.create({
         fontSize: 20,
         marginLeft: 10,
         color: '#8A8A8A'
+    },
+    stopJourneyCard: {
+        flex:1,
+        height:170,
+        flexDirection:'row',
+        alignItems: 'center',
+        justifyContent: 'center',
+        width:screenWidth-(screenWidth/13)
+    },
+    journeyCard: {
+        flexDirection:'row',
+        alignItems: 'center',
+        height:140,
+        backgroundColor: '#ffffff',
+        borderRadius: 5,
+        //IOS
+        shadowOpacity: 0.2,
+        shadowRadius: 7,
+        shadowOffset: {
+            height: 4,
+            width: 0
+        },
+        //android
+        elevation: 7,
+        flex:0.95,
+        flexDirection:'row'
+    },
+    journeyCardTop: {
+        flex: 1,
+        marginLeft: 10,
+        marginRight: 10,
+        borderBottomColor: '#e5e5e5',
+        borderBottomWidth: 1,
+    },
+    journeyCardBottom: {
+        marginLeft: 10,
+        marginRight: 10
+    },
+    journeyCardTopRow: {
+        flexDirection:'row',
+        marginBottom: 10,
+    },
+    journeyCardTopRowImg: {
+        height: 20,
+        width: 20,
+    },
+    journeyCardTopRowTxt: {
+        marginLeft: 10,
+        fontSize: 15,
     },
     mapCardBox: {
         flex:1,
