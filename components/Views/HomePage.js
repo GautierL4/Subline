@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, Image, Animated, TextInput, TouchableWithoutFeedback, ScrollView, Dimensions } from 'react-native';
+import { StyleSheet, Text, View, Image, Animated, TextInput, TouchableWithoutFeedback, ScrollView, Dimensions, TouchableHighlight, TouchableOpacity } from 'react-native';
 
 class HomePage extends React.Component {
 
@@ -45,6 +45,24 @@ class HomePage extends React.Component {
                             </View>
                             <Text style={styles.title}>Vos arrêts</Text>
                             <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+                                <TouchableOpacity onPress={()=>console.log('hey')} style={styles.stopCardBox}>
+                                    <View style={styles.stopCard}>
+                                        <View style={styles.stopCardLine}>
+                                            <Image source={require('../../assets/icons/icon_bus.png')} style={styles.stopCardLineIcon}/>
+                                            <Text style={styles.stopCardLineDirection}>Aéroport Cdg1 RER B</Text>
+                                            <Text style={styles.stopCardLineNumber}>95-01</Text>
+                                        </View>
+                                        <View style={styles.stopCardPlace}>
+                                            <Text style={styles.stopCardPlaceText}>Hôtel de ville</Text>
+                                            <Text style={styles.stopCardPlaceNextPassageLabel}>Prochains passage :</Text>
+                                            <View style={styles.stopCardPlaceNextPassage}>
+                                                <Text style={styles.stopCardPlaceNextPassageTextHighLight}>10:05</Text>
+                                                <Text style={styles.stopCardPlaceNextPassageText}>10:35</Text>
+                                                <Text style={styles.stopCardPlaceNextPassageText}>11:23</Text>
+                                            </View>
+                                        </View>
+                                    </View>
+                                </TouchableOpacity>
                                 <View style={styles.stopCardBox}>
                                     <View style={styles.stopCard}>
                                         <View style={styles.stopCardLine}>
@@ -53,22 +71,50 @@ class HomePage extends React.Component {
                                             <Text style={styles.stopCardLineNumber}>95-01</Text>
                                         </View>
                                         <View style={styles.stopCardPlace}>
+                                            <Text style={styles.stopCardPlaceText}>Jussieu</Text>
+                                            <Text style={styles.stopCardPlaceNextPassageLabel}>Prochains passage :</Text>
+                                            <View style={styles.stopCardPlaceNextPassage}>
+                                                <Text style={styles.stopCardPlaceNextPassageTextHighLight}>10:05</Text>
+                                                <Text style={styles.stopCardPlaceNextPassageText}>10:35</Text>
+                                                <Text style={styles.stopCardPlaceNextPassageText}>11:23</Text>
+                                            </View>
                                         </View>
                                     </View>
                                 </View>
                                 <View style={styles.stopCardBox}>
                                     <View style={styles.stopCard}>
-                                    <Text>95-01</Text>
+                                        <View style={styles.stopCardLine}>
+                                            <Image source={require('../../assets/icons/icon_bus.png')} style={styles.stopCardLineIcon}/>
+                                            <Text style={styles.stopCardLineDirection}>Aéroport Cdg1 RER B</Text>
+                                            <Text style={styles.stopCardLineNumber}>95-01</Text>
+                                        </View>
+                                        <View style={styles.stopCardPlace}>
+                                            <Text style={styles.stopCardPlaceText}>Aéroport Cdg1 RER B</Text>
+                                            <Text style={styles.stopCardPlaceNextPassageLabel}>Prochains passage :</Text>
+                                            <View style={styles.stopCardPlaceNextPassage}>
+                                                <Text style={styles.stopCardPlaceNextPassageTextHighLight}>10:05</Text>
+                                                <Text style={styles.stopCardPlaceNextPassageText}>10:35</Text>
+                                                <Text style={styles.stopCardPlaceNextPassageText}>11:23</Text>
+                                            </View>
+                                        </View>
                                     </View>
                                 </View>
                                 <View style={styles.stopCardBox}>
                                     <View style={styles.stopCard}>
-                                    <Text>95-01</Text>
-                                    </View>
-                                </View>
-                                <View style={styles.stopCardBox}>
-                                    <View style={styles.stopCard}>
-                                    <Text>95-01</Text>
+                                        <View style={styles.stopCardLine}>
+                                            <Image source={require('../../assets/icons/icon_bus.png')} style={styles.stopCardLineIcon}/>
+                                            <Text style={styles.stopCardLineDirection}>Aulnay-sous-Bois</Text>
+                                            <Text style={styles.stopCardLineNumber}>95-01</Text>
+                                        </View>
+                                        <View style={styles.stopCardPlace}>
+                                            <Text style={styles.stopCardPlaceText}>Hôtel de ville</Text>
+                                            <Text style={styles.stopCardPlaceNextPassageLabel}>Prochains passage :</Text>
+                                            <View style={styles.stopCardPlaceNextPassage}>
+                                                <Text style={styles.stopCardPlaceNextPassageTextHighLight}>10:05</Text>
+                                                <Text style={styles.stopCardPlaceNextPassageText}>10:35</Text>
+                                                <Text style={styles.stopCardPlaceNextPassageText}>11:23</Text>
+                                            </View>
+                                        </View>
                                     </View>
                                 </View>
                             </ScrollView>
@@ -199,6 +245,19 @@ const styles = StyleSheet.create({
     stopCardPlace: {
         flex: 2,
     },
+    stopCardPlaceText: {
+        fontSize: 20,
+        marginLeft: 10,
+        marginBottom: 10,
+        fontWeight: 'bold'
+    },
+    stopCardPlaceNextPassageLabel: {
+        fontSize: 12,
+        marginLeft: 10,
+    },
+    stopCardPlaceNextPassage: {
+        flexDirection:'row',
+    },
     stopCardLineDirection: {
         fontSize: 10,
     },    
@@ -210,6 +269,17 @@ const styles = StyleSheet.create({
         width:30,
         height:30,
         marginBottom:5,
+    },
+    stopCardPlaceNextPassageTextHighLight: {
+        fontSize: 20,
+        marginLeft: 10,
+        fontWeight: 'bold',
+        color: '#000'
+    },
+    stopCardPlaceNextPassageText: {
+        fontSize: 20,
+        marginLeft: 10,
+        color: '#8A8A8A'
     },
     mapCardBox: {
         flex:1,
