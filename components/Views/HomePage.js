@@ -47,7 +47,13 @@ class HomePage extends React.Component {
                             <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
                                 <View style={styles.stopCardBox}>
                                     <View style={styles.stopCard}>
-                                    <Text>95-01</Text>
+                                        <View style={styles.stopCardLine}>
+                                            <Image source={require('../../assets/icons/icon_bus.png')} style={styles.stopCardLineIcon}/>
+                                            <Text style={styles.stopCardLineDirection}>Aéroport Cdg1 RER B</Text>
+                                            <Text style={styles.stopCardLineNumber}>95-01</Text>
+                                        </View>
+                                        <View style={styles.stopCardPlace}>
+                                        </View>
                                     </View>
                                 </View>
                                 <View style={styles.stopCardBox}>
@@ -182,6 +188,28 @@ const styles = StyleSheet.create({
         elevation: 7,
         flex:0.95,
         flexDirection:'row'
+    },
+    stopCardLine: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+        borderRightColor: '#e5e5e5',
+        borderRightWidth: 1,
+    },
+    stopCardPlace: {
+        flex: 2,
+    },
+    stopCardLineDirection: {
+        fontSize: 10,
+    },    
+    stopCardLineNumber: {
+        fontSize: 25,
+        fontWeight: 'bold'
+    },
+    stopCardLineIcon: {
+        width:30,
+        height:30,
+        marginBottom:5,
     },
     mapCardBox: {
         flex:1,
