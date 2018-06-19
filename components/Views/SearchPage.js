@@ -1,5 +1,8 @@
 import React from 'react';
 import { StyleSheet, Text, View, Image, Animated, TextInput, TouchableWithoutFeedback, ScrollView, Dimensions, FlatList } from 'react-native';
+import APIHandler from '../API/APIHandler.js';
+
+const APIManager = new APIHandler();
 
 class SearchPage extends React.Component {
 
@@ -14,6 +17,12 @@ class SearchPage extends React.Component {
 
     AutoCompleteResearch(input){
         this.setState({search: input});
+        APIManager.getAutoCompletePlaces(this.state.search).then(data=> {
+            this.setState({
+                locations: data
+            });
+        }).catch(error => console.error(error));
+        
     }
 
     
