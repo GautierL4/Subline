@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, Image, Animated, TextInput, TouchableNativeFeedback, ScrollView, Dimensions } from 'react-native';
+import { StyleSheet, Text, View, Image, Animated, TextInput, TouchableWithoutFeedback, ScrollView, Dimensions } from 'react-native';
 
 class HomePage extends React.Component {
 
@@ -19,8 +19,6 @@ class HomePage extends React.Component {
     }
 
     render(){
-        let screenWidth = Dimensions.get('window').width;
-        let screenHeight = Dimensions.get('window').height;
         if(this.state.isLoading){
             return(
             <View style={{flex: 1, backgroundColor: 'black',width:screenWidth, height:screenHeight, alignItems: 'center',justifyContent: 'center'}}>
@@ -38,43 +36,90 @@ class HomePage extends React.Component {
                         </View>
                         <View style={styles.body}>
                             <View style={{flexDirection:'row',alignItems: 'center',justifyContent: 'center',position:'relative',top:-25}}>
-                                <TouchableNativeFeedback onPress={()=> this.props.navigation.navigate('SearchPages')} style={{flex:1,flexDirection:'row',alignItems: 'center',justifyContent: 'center',padding:5}}>
+                                <TouchableWithoutFeedback onPress={()=> this.props.navigation.navigate('SearchPages')} style={{flex:1,flexDirection:'row',alignItems: 'center',justifyContent: 'center',padding:5}}>
                                     <View style={styles.searchBar}>
                                         <Image source={require('../../icons/search.png')} style={styles.ImageStyle} />
                                         <Text style={styles.input}>Où souhaitez-vous aller ?</Text>
                                     </View>
-                                </TouchableNativeFeedback >
+                                </TouchableWithoutFeedback>
                             </View>
-                            <Text style={{fontSize: 28, textAlign: 'center', margin: 10}}>Vos arrêts</Text>
+                            <Text style={styles.title}>Vos arrêts</Text>
                             <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-                                <View style={{flex:1,backgroundColor:'red',width:screenWidth/3,height:100}}>
-                                <Text>95-01</Text>
+                                <View style={styles.stopCardBox}>
+                                    <View style={styles.stopCard}>
+                                    <Text>95-01</Text>
+                                    </View>
                                 </View>
-                                <View style={{flex:1,backgroundColor:'blue',width:screenWidth/3,height:100}}>
-                                <Text>95-01</Text>
+                                <View style={styles.stopCardBox}>
+                                    <View style={styles.stopCard}>
+                                    <Text>95-01</Text>
+                                    </View>
                                 </View>
-                                <View style={{flex:1,backgroundColor:'red',width:screenWidth/3,height:100}}>
-                                <Text>95-01</Text>
+                                <View style={styles.stopCardBox}>
+                                    <View style={styles.stopCard}>
+                                    <Text>95-01</Text>
+                                    </View>
                                 </View>
-                                <View style={{flex:1,backgroundColor:'blue',width:screenWidth/3,height:100}}>
-                                <Text>95-01</Text>
+                                <View style={styles.stopCardBox}>
+                                    <View style={styles.stopCard}>
+                                    <Text>95-01</Text>
+                                    </View>
                                 </View>
                             </ScrollView>
-                            <Text style={{fontSize: 28, textAlign: 'center', margin: 10}}>Vos itinéraires</Text>
+                            <Text style={styles.title}>Vos itinéraires</Text>
                             <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-                                <View style={{flex:1,backgroundColor:'red',width:screenWidth/3,height:100}}>
-                                <Text>10 arpents - Jussieu</Text>
+                                <View style={styles.stopCardBox}>
+                                    <View style={styles.stopCard}>
+                                    <Text>95-01</Text>
+                                    </View>
                                 </View>
-                                <View style={{flex:1,backgroundColor:'blue',width:screenWidth/3,height:100}}>
-                                <Text>Les Halles - Bibliothèque François Mittérant</Text>
+                                <View style={styles.stopCardBox}>
+                                    <View style={styles.stopCard}>
+                                    <Text>95-01</Text>
+                                    </View>
                                 </View>
-                                <View style={{flex:1,backgroundColor:'red',width:screenWidth/3,height:100}}>
-                                <Text>Noisy-Champs - Gare de Lyon</Text>
+                                <View style={styles.stopCardBox}>
+                                    <View style={styles.stopCard}>
+                                    <Text>95-01</Text>
+                                    </View>
                                 </View>
-                                <View style={{flex:1,backgroundColor:'blue',width:screenWidth/3,height:100}}>
-                                <Text>Strasbourg Saint-Denis - Odéon</Text>
+                                <View style={styles.stopCardBox}>
+                                    <View style={styles.stopCard}>
+                                    <Text>95-01</Text>
+                                    </View>
                                 </View>
                             </ScrollView>
+                            <Text style={styles.title}>Plans</Text>
+                            <View style={styles.mapCardBox}>
+                                <View style={styles.mapCard}>
+                                    <Text>Plan Métro</Text>
+                                </View>
+                            </View>
+                            <View style={styles.mapCardBox}>
+                                <View style={styles.mapCard}>
+                                    <Text>Plan RER et transiliens</Text>
+                                </View>
+                            </View>
+                            <View style={styles.mapCardBox}>
+                                <View style={styles.mapCard}>
+                                    <Text>Plan des Bus</Text>
+                                </View>
+                            </View>
+                            <View style={styles.mapCardBox}>
+                                <View style={styles.mapCard}>
+                                    <Text>Plan des Noctiliens</Text>
+                                </View>
+                            </View>
+                            <View style={styles.mapCardBox}>
+                                <View style={styles.mapCard}>
+                                    <Text>Accès Aéroport</Text>
+                                </View>
+                            </View>
+                            <View style={styles.mapCardBox}>
+                                <View style={styles.mapCard}>
+                                    <Text>Carte intéractive</Text>
+                                </View>
+                            </View>
                         </View>
                     </ScrollView>
                 </View>
@@ -82,6 +127,9 @@ class HomePage extends React.Component {
         }
     }
 }
+
+const screenWidth = Dimensions.get('window').width;
+const screenHeight = Dimensions.get('window').height;
 
 const styles = StyleSheet.create({
     container: {
@@ -91,19 +139,82 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff'
     },
     header: {
-      flex: 2,
-      backgroundColor: '#000',
-      alignItems: 'center',
-      justifyContent: 'center',
-      alignSelf: 'stretch',
+        flex: 2,
+        backgroundColor: '#000',
+        alignItems: 'center',
+        justifyContent: 'center',
+        alignSelf: 'stretch',
+        height: 250,
+    },
+    title: {
+        fontSize: 20, 
+        textAlign: 'center', 
+        margin: 10,
+        color: "#898989",
+        textAlign:'left',
+        marginBottom: 10,
     },
     body: {
         flex: 3,
+    },
+    stopCardBox: {
+        flex:1,
+        height:160,
+        flexDirection:'row',
+        alignItems: 'center',
+        justifyContent: 'center',
+        width:screenWidth-(screenWidth/13)
+    },
+    stopCard: {
+        flexDirection:'row',
+        alignItems: 'center',
+        height:130,
+        backgroundColor: '#ffffff',
+        borderRadius: 5,
+        //IOS
+        shadowOpacity: 0.2,
+        shadowRadius: 7,
+        shadowOffset: {
+            height: 4,
+            width: 0
+        },
+        //android
+        elevation: 7,
+        flex:0.95,
+        flexDirection:'row'
+    },
+    mapCardBox: {
+        flex:1,
+        height:75,
+        flexDirection:'row',
+        alignItems: 'center',
+        justifyContent: 'center',
+        width:screenWidth
+    },
+    mapCard: {
+        flexDirection:'row',
+        alignItems: 'center',
+        height:60,
+        backgroundColor: '#ffffff',
+        justifyContent: 'center',
+        borderRadius: 5,
+        //IOS
+        shadowOpacity: 0.2,
+        shadowRadius: 7,
+        shadowOffset: {
+            height: 4,
+            width: 0
+        },
+        //android
+        elevation: 7,
+        flex:0.9,
+        flexDirection:'row'
     },
     home: {
       flex:1,
       alignItems: 'center',
       justifyContent: 'center',
+
     },
     input: {
       color: "#666666",
