@@ -27,7 +27,7 @@ class SearchPage extends React.Component {
                         <View style={{flexDirection:'row',alignItems: 'center',justifyContent: 'center',top:-25}}>
                                 <View style={styles.searchBar}>
                                     <Image source={require('../../icons/search.png')} style={styles.ImageStyle} />
-                                    <TextInput onChangeText={(text) => this.AutomaticResearch(text)} style={styles.input} underlineColorAndroid='rgba(0,0,0,0)' placeholder="Votre destination" autoFocus />
+                                    <TextInput onChangeText={(text) => this.AutoCompleteResearch(text)} style={styles.input} underlineColorAndroid='rgba(0,0,0,0)' placeholder="Votre destination" autoFocus />
                                 </View>
                         </View>
                     </View>
