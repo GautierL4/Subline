@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, Image, Animated, TextInput, TouchableWithoutFeedback, ScrollView, Dimensions } from 'react-native';
+import { StyleSheet, Text, View, Image, Animated, TextInput, TouchableWithoutFeedback, ScrollView, Dimensions, FlatList } from 'react-native';
 
 class SearchPage extends React.Component {
 
@@ -29,6 +29,16 @@ class SearchPage extends React.Component {
                                     <Image source={require('../../assets/icons/search.png')} style={styles.ImageStyle} />
                                     <TextInput onChangeText={(text) => this.AutoCompleteResearch(text)} style={styles.input} underlineColorAndroid='rgba(0,0,0,0)' placeholder="Votre destination" autoFocus />
                                 </View>
+                        </View>
+                        <Text style={styles.title}>Stations</Text>
+                        <View style={{flex:8,alignItems: 'center'}}>
+                            <FlatList style={{flex:1,flexDirection:'column'}} data={this.state.cities} renderItem={({item}) => 
+                                <TouchableNativeFeedback style={styles.resultClickable} onPress={() =>this.changeCityAndCountry(item.city,item.country,item.l)}>
+                                    <View style={styles.resultItem}>
+                                    <Text style={styles.resultItemText}>{item.name+", "+item.country}</Text>
+                                    </View>
+                                </TouchableNativeFeedback>}
+                            keyExtractor={(item, index) => index} />
                         </View>
                     </View>
             </View>
