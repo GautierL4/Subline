@@ -22,7 +22,7 @@ class HomePage extends React.Component {
         if(this.state.isLoading){
             return(
             <View style={{flex: 1, backgroundColor: 'black',width:screenWidth, height:screenHeight, alignItems: 'center',justifyContent: 'center'}}>
-                <Image style={{width: 80, height: 80,}} source={require('../../icons/loading-start.gif')} />
+                <Image style={{width: 80, height: 80,}} source={require('../../assets/icons/loading-start.gif')} />
             </View>
             );
             
@@ -32,13 +32,13 @@ class HomePage extends React.Component {
                 <View style={styles.container}>
                     <ScrollView horizontal={false} contentContainerStyle={{flexGrow: 1}}>
                         <View style={styles.header}>
-                            <Image source={require('../../icons/subline.png')} style={{width: 90, height: 90}}/>
+                            <Image source={require('../../assets/icons/subline.png')} style={{width: 90, height: 90}}/>
                         </View>
                         <View style={styles.body}>
                             <View style={{flexDirection:'row',alignItems: 'center',justifyContent: 'center',position:'relative',top:-25}}>
                                 <TouchableWithoutFeedback onPress={()=> this.props.navigation.navigate('SearchPages')} style={{flex:1,flexDirection:'row',alignItems: 'center',justifyContent: 'center',padding:5}}>
                                     <View style={styles.searchBar}>
-                                        <Image source={require('../../icons/search.png')} style={styles.ImageStyle} />
+                                        <Image source={require('../../assets/icons/search.png')} style={styles.ImageStyle} />
                                         <Text style={styles.input}>Où souhaitez-vous aller ?</Text>
                                     </View>
                                 </TouchableWithoutFeedback>
