@@ -96,11 +96,13 @@ class HomePage extends React.Component {
                                 </View>
                             </ScrollView>
                             <Text style={styles.title}>Plans</Text>
-                            <View style={styles.mapCardBox}>
-                                <View style={styles.mapCard}>
-                                    <Text>Plan Métro</Text>
+                            <TouchableWithoutFeedback onPress={() => this.props.navigation.navigate('MapPage')}>
+                                <View style={styles.mapCardBox}>
+                                    <View style={styles.mapCard} >
+                                        <Text>Plan Métro</Text>
+                                    </View>
                                 </View>
-                            </View>
+                            </TouchableWithoutFeedback>
                             <View style={styles.mapCardBox}>
                                 <View style={styles.mapCard}>
                                     <Text>Plan RER et transiliens</Text>
