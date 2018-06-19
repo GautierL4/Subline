@@ -36,7 +36,7 @@ class HomePage extends React.Component {
                         </View>
                         <View style={styles.body}>
                             <View style={{flexDirection:'row',alignItems: 'center',justifyContent: 'center',position:'relative',top:-25}}>
-                                <TouchableWithoutFeedback  style={{flex:1,flexDirection:'row',alignItems: 'center',justifyContent: 'center',padding:5}}>
+                                <TouchableWithoutFeedback onPress={()=> this.props.navigation.navigate('SearchPages')} style={{flex:1,flexDirection:'row',alignItems: 'center',justifyContent: 'center',padding:5}}>
                                     <View style={styles.searchBar}>
                                         <Image source={require('../../icons/search.png')} style={styles.ImageStyle} />
                                         <Text style={styles.input}>Où souhaitez-vous aller ?</Text>
@@ -172,10 +172,10 @@ const styles = StyleSheet.create({
         backgroundColor: '#ffffff',
         borderRadius: 5,
         //IOS
-        shadowOpacity: 0.3,
-        shadowRadius: 50,
+        shadowOpacity: 0.2,
+        shadowRadius: 7,
         shadowOffset: {
-            height: 0,
+            height: 4,
             width: 0
         },
         //android
@@ -199,10 +199,10 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         borderRadius: 5,
         //IOS
-        shadowOpacity: 0.3,
-        shadowRadius: 50,
+        shadowOpacity: 0.2,
+        shadowRadius: 7,
         shadowOffset: {
-            height: 0,
+            height: 4,
             width: 0
         },
         //android
@@ -235,12 +235,12 @@ const styles = StyleSheet.create({
       backgroundColor: '#ffffff',
       borderRadius: 5,
       //IOS
-      shadowOpacity: 0.3,
-      shadowRadius: 50,
-      shadowOffset: {
-          height: 0,
-          width: 0
-      },
+        shadowOpacity: 0.2,
+        shadowRadius: 7,
+        shadowOffset: {
+            height: 4,
+            width: 0
+        },
       //android
       elevation: 7,
       flex:0.9,
