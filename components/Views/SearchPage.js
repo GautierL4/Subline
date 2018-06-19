@@ -21,12 +21,12 @@ class SearchPage extends React.Component {
         return(
             <View style={styles.container}>
                     <View style={styles.header}>
-                        <Image source={require('../../icons/loading-start.gif')} style={{width: 90, height: 90}}/>
+                        <Image source={require('../../assets/icons/loading-start.gif')} style={{width: 90, height: 90}}/>
                     </View>
                     <View style={styles.body}>
                         <View style={{flexDirection:'row',alignItems: 'center',justifyContent: 'center',top:-25}}>
                                 <View style={styles.searchBar}>
-                                    <Image source={require('../../icons/search.png')} style={styles.ImageStyle} />
+                                    <Image source={require('../../assets/icons/search.png')} style={styles.ImageStyle} />
                                     <TextInput onChangeText={(text) => this.AutoCompleteResearch(text)} style={styles.input} underlineColorAndroid='rgba(0,0,0,0)' placeholder="Votre destination" autoFocus />
                                 </View>
                         </View>
