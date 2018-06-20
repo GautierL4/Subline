@@ -31,7 +31,6 @@ class APIHandler{
         try{
             response = await this.getAutoCompletePlaces(userInput);
             var data = this.extractDataFromResponse(response);
-            
         }
         catch(e){
             console.error(e);
