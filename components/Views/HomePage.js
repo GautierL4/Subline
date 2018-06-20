@@ -1,5 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View, Image, Animated, TextInput, TouchableWithoutFeedback, ScrollView, Dimensions, TouchableHighlight, TouchableOpacity } from 'react-native';
+import { styles } from '../../assets/styles/style';
 
 class HomePage extends React.Component {
 
@@ -120,6 +121,34 @@ class HomePage extends React.Component {
                             </ScrollView>
                             <Text style={styles.title}>Vos itinéraires</Text>
                             <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+                                <TouchableOpacity style={styles.stopJourneyCard}>
+                                    <View style={styles.journeyCard}>
+                                        <View style={styles.journeyCardTop}>
+                                            <View style={styles.journeyCardTopRow}>
+                                                <Image style={styles.journeyCardTopRowImg} source={require('../../assets/icons/map-location.png')} />
+                                                <Text style={styles.journeyCardTopRowTxt}>Châtelet-Les-Halles</Text>
+                                            </View>
+                                            <View style={styles.journeyCardTopRow}>
+                                                <Image style={styles.journeyCardTopRowImg} source={require('../../assets/icons/target.png')} />
+                                                <Text style={styles.journeyCardTopRowTxt}>43 rue de Bruxelles, Paris 75004</Text>
+                                            </View>
+                                        </View>
+                                        <View style={styles.journeyCardBottom}>
+                                            <Image style={styles.journeyCardBottomImg} source={require('../../assets/icons/lines/RERBgenRVB.png')} />
+                                            <Image style={styles.journeyCardBottomImgDot} source={require('../../assets/icons/dot.png')} />
+                                            <Image style={styles.journeyCardBottomImg} source={require('../../assets/icons/lines/RERAgenRVB.png')} />
+                                            <Image style={styles.journeyCardBottomImgDot} source={require('../../assets/icons/dot.png')} />
+                                            <Image style={styles.journeyCardBottomImg} source={require('../../assets/icons/walk.png')} />
+                                            <Image style={styles.journeyCardBottomImgDot} source={require('../../assets/icons/dot.png')} />
+                                            <View style={styles.busCard}>
+                                                <Image source={require('../../assets/icons/icon_bus.png')} style={styles.busCardImgBus} />
+                                                <Text style={styles.busCardTxt}>95-01</Text>
+                                            </View>
+                                            <Image style={styles.journeyCardBottomImgDot} source={require('../../assets/icons/dot.png')} />
+                                            <Image style={styles.journeyCardBottomImg} source={require('../../assets/icons/lines/M7bisgenRVB.png')} />
+                                        </View>
+                                    </View>
+                                </TouchableOpacity>
                                 <View style={styles.stopJourneyCard}>
                                     <View style={styles.journeyCard}>
                                         <View style={styles.journeyCardTop}>
@@ -132,22 +161,76 @@ class HomePage extends React.Component {
                                                 <Text style={styles.journeyCardTopRowTxt}>43 rue de Bruxelles, Paris 75004</Text>
                                             </View>
                                         </View>
-                                        <View style={styles.journeyCardBottom}></View>
+                                        <View style={styles.journeyCardBottom}>
+                                            <Image style={styles.journeyCardBottomImg} source={require('../../assets/icons/lines/RERBgenRVB.png')} />
+                                            <Image style={styles.journeyCardBottomImgDot} source={require('../../assets/icons/dot.png')} />
+                                            <Image style={styles.journeyCardBottomImg} source={require('../../assets/icons/lines/RERAgenRVB.png')} />
+                                            <Image style={styles.journeyCardBottomImgDot} source={require('../../assets/icons/dot.png')} />
+                                            <Image style={styles.journeyCardBottomImg} source={require('../../assets/icons/walk.png')} />
+                                            <Image style={styles.journeyCardBottomImgDot} source={require('../../assets/icons/dot.png')} />
+                                            <View style={styles.busCard}>
+                                                <Image source={require('../../assets/icons/icon_bus.png')} style={styles.busCardImgBus} />
+                                                <Text style={styles.busCardTxt}>95-01</Text>
+                                            </View>
+                                            <Image style={styles.journeyCardBottomImgDot} source={require('../../assets/icons/dot.png')} />
+                                            <Image style={styles.journeyCardBottomImg} source={require('../../assets/icons/lines/M7bisgenRVB.png')} />
+                                        </View>
                                     </View>
                                 </View>
                                 <View style={styles.stopJourneyCard}>
                                     <View style={styles.journeyCard}>
-                                    <Text>95-01</Text>
+                                        <View style={styles.journeyCardTop}>
+                                            <View style={styles.journeyCardTopRow}>
+                                                <Image style={styles.journeyCardTopRowImg} source={require('../../assets/icons/map-location.png')} />
+                                                <Text style={styles.journeyCardTopRowTxt}>Châtelet-Les-Halles</Text>
+                                            </View>
+                                            <View style={styles.journeyCardTopRow}>
+                                                <Image style={styles.journeyCardTopRowImg} source={require('../../assets/icons/target.png')} />
+                                                <Text style={styles.journeyCardTopRowTxt}>43 rue de Bruxelles, Paris 75004</Text>
+                                            </View>
+                                        </View>
+                                        <View style={styles.journeyCardBottom}>
+                                            <Image style={styles.journeyCardBottomImg} source={require('../../assets/icons/lines/RERBgenRVB.png')} />
+                                            <Image style={styles.journeyCardBottomImgDot} source={require('../../assets/icons/dot.png')} />
+                                            <Image style={styles.journeyCardBottomImg} source={require('../../assets/icons/lines/RERAgenRVB.png')} />
+                                            <Image style={styles.journeyCardBottomImgDot} source={require('../../assets/icons/dot.png')} />
+                                            <Image style={styles.journeyCardBottomImg} source={require('../../assets/icons/walk.png')} />
+                                            <Image style={styles.journeyCardBottomImgDot} source={require('../../assets/icons/dot.png')} />
+                                            <View style={styles.busCard}>
+                                                <Image source={require('../../assets/icons/icon_bus.png')} style={styles.busCardImgBus} />
+                                                <Text style={styles.busCardTxt}>95-01</Text>
+                                            </View>
+                                            <Image style={styles.journeyCardBottomImgDot} source={require('../../assets/icons/dot.png')} />
+                                            <Image style={styles.journeyCardBottomImg} source={require('../../assets/icons/lines/M7bisgenRVB.png')} />
+                                        </View>
                                     </View>
                                 </View>
                                 <View style={styles.stopJourneyCard}>
                                     <View style={styles.journeyCard}>
-                                    <Text>95-01</Text>
-                                    </View>
-                                </View>
-                                <View style={styles.stopJourneyCard}>
-                                    <View style={styles.journeyCard}>
-                                    <Text>95-01</Text>
+                                        <View style={styles.journeyCardTop}>
+                                            <View style={styles.journeyCardTopRow}>
+                                                <Image style={styles.journeyCardTopRowImg} source={require('../../assets/icons/map-location.png')} />
+                                                <Text style={styles.journeyCardTopRowTxt}>Châtelet-Les-Halles</Text>
+                                            </View>
+                                            <View style={styles.journeyCardTopRow}>
+                                                <Image style={styles.journeyCardTopRowImg} source={require('../../assets/icons/target.png')} />
+                                                <Text style={styles.journeyCardTopRowTxt}>43 rue de Bruxelles, Paris 75004</Text>
+                                            </View>
+                                        </View>
+                                        <View style={styles.journeyCardBottom}>
+                                            <Image style={styles.journeyCardBottomImg} source={require('../../assets/icons/lines/RERBgenRVB.png')} />
+                                            <Image style={styles.journeyCardBottomImgDot} source={require('../../assets/icons/dot.png')} />
+                                            <Image style={styles.journeyCardBottomImg} source={require('../../assets/icons/lines/RERAgenRVB.png')} />
+                                            <Image style={styles.journeyCardBottomImgDot} source={require('../../assets/icons/dot.png')} />
+                                            <Image style={styles.journeyCardBottomImg} source={require('../../assets/icons/walk.png')} />
+                                            <Image style={styles.journeyCardBottomImgDot} source={require('../../assets/icons/dot.png')} />
+                                            <View style={styles.busCard}>
+                                                <Image source={require('../../assets/icons/icon_bus.png')} style={styles.busCardImgBus} />
+                                                <Text style={styles.busCardTxt}>95-01</Text>
+                                            </View>
+                                            <Image style={styles.journeyCardBottomImgDot} source={require('../../assets/icons/dot.png')} />
+                                            <Image style={styles.journeyCardBottomImg} source={require('../../assets/icons/lines/M7bisgenRVB.png')} />
+                                        </View>
                                     </View>
                                 </View>
                             </ScrollView>
@@ -194,218 +277,5 @@ class HomePage extends React.Component {
 
 const screenWidth = Dimensions.get('window').width;
 const screenHeight = Dimensions.get('window').height;
-
-const styles = StyleSheet.create({
-    container: {
-        flex:1,
-        alignItems: 'center', 
-        justifyContent: 'center',
-        backgroundColor: '#fff'
-    },
-    header: {
-        flex: 2,
-        backgroundColor: '#000',
-        alignItems: 'center',
-        justifyContent: 'center',
-        alignSelf: 'stretch',
-        height: 230,
-    },
-    title: {
-        fontSize: 20, 
-        textAlign: 'center', 
-        margin: 10,
-        color: "#898989",
-        textAlign:'left',
-        marginBottom: 10,
-    },
-    body: {
-        flex: 3,
-    },
-    stopCardBox: {
-        flex:1,
-        height:160,
-        flexDirection:'row',
-        alignItems: 'center',
-        justifyContent: 'center',
-        width:screenWidth-(screenWidth/13)
-    },
-    stopCard: {
-        flexDirection:'row',
-        alignItems: 'center',
-        height:130,
-        backgroundColor: '#ffffff',
-        borderRadius: 5,
-        //IOS
-        shadowOpacity: 0.2,
-        shadowRadius: 7,
-        shadowOffset: {
-            height: 4,
-            width: 0
-        },
-        //android
-        elevation: 7,
-        flex:0.95,
-        flexDirection:'row'
-    },
-    stopCardLine: {
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
-        borderRightColor: '#e5e5e5',
-        borderRightWidth: 1,
-    },
-    stopCardPlace: {
-        flex: 2,
-    },
-    stopCardPlaceText: {
-        fontSize: 20,
-        marginLeft: 10,
-        marginBottom: 10,
-        fontWeight: 'bold'
-    },
-    stopCardPlaceNextPassageLabel: {
-        fontSize: 12,
-        marginLeft: 10,
-    },
-    stopCardPlaceNextPassage: {
-        flexDirection:'row',
-    },
-    stopCardLineDirection: {
-        fontSize: 10,
-    },    
-    stopCardLineNumber: {
-        fontSize: 25,
-        fontWeight: 'bold'
-    },
-    stopCardLineIcon: {
-        width:30,
-        height:30,
-        marginBottom:5,
-    },
-    stopCardPlaceNextPassageTextHighLight: {
-        fontSize: 20,
-        marginLeft: 10,
-        fontWeight: 'bold',
-        color: '#000'
-    },
-    stopCardPlaceNextPassageText: {
-        fontSize: 20,
-        marginLeft: 10,
-        color: '#8A8A8A'
-    },
-    stopJourneyCard: {
-        flex:1,
-        height:170,
-        flexDirection:'row',
-        alignItems: 'center',
-        justifyContent: 'center',
-        width:screenWidth-(screenWidth/13)
-    },
-    journeyCard: {
-        flexDirection:'row',
-        alignItems: 'center',
-        height:140,
-        backgroundColor: '#ffffff',
-        borderRadius: 5,
-        //IOS
-        shadowOpacity: 0.2,
-        shadowRadius: 7,
-        shadowOffset: {
-            height: 4,
-            width: 0
-        },
-        //android
-        elevation: 7,
-        flex:0.95,
-        flexDirection:'row'
-    },
-    journeyCardTop: {
-        flex: 1,
-        marginLeft: 10,
-        marginRight: 10,
-        borderBottomColor: '#e5e5e5',
-        borderBottomWidth: 1,
-    },
-    journeyCardBottom: {
-        marginLeft: 10,
-        marginRight: 10
-    },
-    journeyCardTopRow: {
-        flexDirection:'row',
-        marginBottom: 10,
-    },
-    journeyCardTopRowImg: {
-        height: 20,
-        width: 20,
-    },
-    journeyCardTopRowTxt: {
-        marginLeft: 10,
-        fontSize: 15,
-    },
-    mapCardBox: {
-        flex:1,
-        height:75,
-        flexDirection:'row',
-        alignItems: 'center',
-        justifyContent: 'center',
-        width:screenWidth
-    },
-    mapCard: {
-        flexDirection:'row',
-        alignItems: 'center',
-        height:60,
-        backgroundColor: '#ffffff',
-        justifyContent: 'center',
-        borderRadius: 5,
-        //IOS
-        shadowOpacity: 0.2,
-        shadowRadius: 7,
-        shadowOffset: {
-            height: 4,
-            width: 0
-        },
-        //android
-        elevation: 5,
-        flex:0.9,
-        flexDirection:'row'
-    },
-    home: {
-      flex:1,
-      alignItems: 'center',
-      justifyContent: 'center',
-
-    },
-    input: {
-      color: "#666666",
-      fontWeight: 'bold',
-      fontSize: 18,
-      padding: 10,
-      flex:0.8,
-    },
-    ImageStyle: {
-      margin: 10,
-      paddingLeft: 5,
-      resizeMode : 'contain',
-      alignItems: 'center',
-      maxHeight:20,
-      flex:0.1,
-    },
-    searchBar: {
-      backgroundColor: '#ffffff',
-      borderRadius: 5,
-      //IOS
-        shadowOpacity: 0.2,
-        shadowRadius: 7,
-        shadowOffset: {
-            height: 4,
-            width: 0
-        },
-      //android
-      elevation: 7,
-      flex:0.9,
-      flexDirection:'row'
-    },
-  });
-  
 
 export default HomePage;
