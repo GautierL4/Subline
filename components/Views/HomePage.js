@@ -47,7 +47,7 @@ class HomePage extends React.Component {
                             <Text style={styles.title}>Vos arrêts</Text>
                             <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
                                 <TouchableOpacity onPress={()=>console.log('hey')} style={styles.stopCardBox}>
-                                    <View style={styles.stopCard}>
+                                    <View style={[styles.stopCard,styles.card]}>
                                         <View style={styles.stopCardLine}>
                                             <Image source={require('../../assets/icons/icon_bus.png')} style={styles.stopCardLineIcon}/>
                                             <Text style={styles.stopCardLineDirection}>Aéroport Cdg1 RER B</Text>
@@ -65,7 +65,7 @@ class HomePage extends React.Component {
                                     </View>
                                 </TouchableOpacity>
                                 <View style={styles.stopCardBox}>
-                                    <View style={styles.stopCard}>
+                                    <View style={[styles.stopCard,styles.card]}>
                                         <View style={styles.stopCardLine}>
                                             <Image source={require('../../assets/icons/icon_bus.png')} style={styles.stopCardLineIcon}/>
                                             <Text style={styles.stopCardLineDirection}>Aéroport Cdg1 RER B</Text>
@@ -83,7 +83,7 @@ class HomePage extends React.Component {
                                     </View>
                                 </View>
                                 <View style={styles.stopCardBox}>
-                                    <View style={styles.stopCard}>
+                                    <View style={[styles.stopCard,styles.card]}>
                                         <View style={styles.stopCardLine}>
                                             <Image source={require('../../assets/icons/icon_bus.png')} style={styles.stopCardLineIcon}/>
                                             <Text style={styles.stopCardLineDirection}>Aéroport Cdg1 RER B</Text>
@@ -101,7 +101,7 @@ class HomePage extends React.Component {
                                     </View>
                                 </View>
                                 <View style={styles.stopCardBox}>
-                                    <View style={styles.stopCard}>
+                                    <View style={[styles.stopCard,styles.card]}>
                                         <View style={styles.stopCardLine}>
                                             <Image source={require('../../assets/icons/icon_bus.png')} style={styles.stopCardLineIcon}/>
                                             <Text style={styles.stopCardLineDirection}>Aulnay-sous-Bois</Text>
@@ -122,7 +122,7 @@ class HomePage extends React.Component {
                             <Text style={styles.title}>Vos itinéraires</Text>
                             <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
                                 <TouchableOpacity style={styles.stopJourneyCard}>
-                                    <View style={styles.journeyCard}>
+                                    <View style={[styles.journeyCard,styles.card]}>
                                         <View style={styles.journeyCardTop}>
                                             <View style={styles.journeyCardTopRow}>
                                                 <Image style={styles.journeyCardTopRowImg} source={require('../../assets/icons/map-location.png')} />
@@ -150,7 +150,7 @@ class HomePage extends React.Component {
                                     </View>
                                 </TouchableOpacity>
                                 <View style={styles.stopJourneyCard}>
-                                    <View style={styles.journeyCard}>
+                                    <View style={[styles.journeyCard,styles.card]}>
                                         <View style={styles.journeyCardTop}>
                                             <View style={styles.journeyCardTopRow}>
                                                 <Image style={styles.journeyCardTopRowImg} source={require('../../assets/icons/map-location.png')} />
@@ -178,7 +178,7 @@ class HomePage extends React.Component {
                                     </View>
                                 </View>
                                 <View style={styles.stopJourneyCard}>
-                                    <View style={styles.journeyCard}>
+                                    <View style={[styles.journeyCard,styles.card]}>
                                         <View style={styles.journeyCardTop}>
                                             <View style={styles.journeyCardTopRow}>
                                                 <Image style={styles.journeyCardTopRowImg} source={require('../../assets/icons/map-location.png')} />
@@ -206,7 +206,7 @@ class HomePage extends React.Component {
                                     </View>
                                 </View>
                                 <View style={styles.stopJourneyCard}>
-                                    <View style={styles.journeyCard}>
+                                    <View style={[styles.journeyCard,styles.card]}>
                                         <View style={styles.journeyCardTop}>
                                             <View style={styles.journeyCardTopRow}>
                                                 <Image style={styles.journeyCardTopRowImg} source={require('../../assets/icons/map-location.png')} />

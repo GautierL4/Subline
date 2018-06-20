@@ -10,6 +10,19 @@ export const styles = StyleSheet.create({
         justifyContent: 'center',
         backgroundColor: '#fff'
     },
+    card: {
+        backgroundColor: '#ffffff',
+        borderRadius: 5,
+        //IOS
+        shadowOpacity: 0.2,
+        shadowRadius: 7,
+        shadowOffset: {
+            height: 4,
+            width: 0
+        },
+        //android
+        elevation: 7,
+    },
     header: {
         flex: 2,
         backgroundColor: '#000',
@@ -41,17 +54,6 @@ export const styles = StyleSheet.create({
         flexDirection:'row',
         alignItems: 'center',
         height:130,
-        backgroundColor: '#ffffff',
-        borderRadius: 5,
-        //IOS
-        shadowOpacity: 0.2,
-        shadowRadius: 7,
-        shadowOffset: {
-            height: 4,
-            width: 0
-        },
-        //android
-        elevation: 7,
         flex:0.95,
         flexDirection:'row'
     },
@@ -114,17 +116,6 @@ export const styles = StyleSheet.create({
         alignItems: 'stretch',
         justifyContent: 'flex-start',
         height:140,
-        backgroundColor: '#ffffff',
-        borderRadius: 5,
-        //IOS
-        shadowOpacity: 0.2,
-        shadowRadius: 7,
-        shadowOffset: {
-            height: 4,
-            width: 0
-        },
-        //android
-        elevation: 7,
         flex:0.95,
     },
     journeyCardTop: {
