@@ -1,5 +1,6 @@
 import React from 'react';
-import { StyleSheet, Text, View, Image, Animated, TextInput, TouchableWithoutFeedback, ScrollView, Dimensions } from 'react-native';
+import { StyleSheet, Text, View, Image, Animated, TextInput, TouchableWithoutFeedback, ScrollView, Dimensions, WebView } from 'react-native';
+import { Constants } from 'expo';
 
 class MapPage extends React.Component {
 
@@ -12,23 +13,29 @@ class MapPage extends React.Component {
     }
 
 
-    AutoCompleteResearch(input){
-        this.setState({search: input});
-    }
-
     
     render(){
+
         return(
             <View style={styles.container}>
+                
+                   <WebView
+          bounces={false}
+          scrollEnabled={false} 
+          source={{ uri: 'https://www.ratp.fr/sites/default/files/plans-lignes/Plans-essentiels/Plan-Metro.pdf' }} />
+      
                    <TouchableWithoutFeedback onPress={() => this.props.navigation.navigate('HomePage')}>
                        <View style={styles.returnButton} >
-                          <Text>Retour</Text>
+                          <Image style={styles.returnArrow} source={require('../../assets/icons/go-back-left-arrow.png')} />
                        </View>
                    </TouchableWithoutFeedback>
+                                  
             </View>
         )
     }
 }
+
+
 
 const screenWidth = Dimensions.get('window').width;
 const screenHeight = Dimensions.get('window').height;
@@ -36,9 +43,8 @@ const screenHeight = Dimensions.get('window').height;
 const styles = StyleSheet.create({
     container: {
         flex:1,
-        alignItems: 'center', 
-        justifyContent: 'center',
-        backgroundColor: '#fff'
+        backgroundColor: '#fff',
+        paddingTop: Constants.statusBarHeight
     },
     returnButton: {
 
@@ -50,6 +56,13 @@ const styles = StyleSheet.create({
         height:50,
         width:50
     },
+    returnArrow: {
+
+        height:25,
+        width:25,
+        margin:12
+        
+    }
   });
 
   export default MapPage;
