@@ -9,28 +9,34 @@ class SearchPage extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            location: null,
+            locations: {stops: null,
+                        places: null},
             search: ''
         };
     }
 
 
-    AutoCompleteResearch(input){
+    async AutoCompleteResearch(input){
         this.setState({search: input});
-        APIManager.getAutoCompletePlaces(this.state.search).then(data=> {
-            this.setState({
-                locations: data
-            });
-        }).catch(error => console.error(error));
-        
+        try{
+            data = await APIManager.getPlaces(this.state.search)
+        }
+        catch(e){
+            console.error(e);
+        }
+        console.log(data);
+        if(!(typeof data === "undefined")){
+            this.setState({locations: data})
+        }
     }
+
+    async 
 
     
     render(){
         return(
             <View style={styles.container}>
                     <View style={styles.header}>
-                        <Image source={require('../../assets/icons/loading-start.gif')} style={{width: 90, height: 90}}/>
                     </View>
                     <View style={styles.body}>
                         <View style={{flexDirection:'row',alignItems: 'center',justifyContent: 'center',top:-25}}>
@@ -39,16 +45,29 @@ class SearchPage extends React.Component {
                                     <TextInput onChangeText={(text) => this.AutoCompleteResearch(text)} style={styles.input} underlineColorAndroid='rgba(0,0,0,0)' placeholder="Votre destination" autoFocus />
                                 </View>
                         </View>
-                        <Text style={styles.title}>Stations</Text>
-                        <View style={{flex:8,alignItems: 'center'}}>
-                            <FlatList style={{flex:1,flexDirection:'column'}} data={this.state.cities} renderItem={({item}) => 
-                                <TouchableNativeFeedback style={styles.resultClickable} onPress={() =>this.changeCityAndCountry(item.city,item.country,item.l)}>
+                        
+                        <View style={{flex:2,alignItems: 'center'}}>
+                            <Text style={styles.title}>Stations</Text>
+                            <FlatList style={{flex:1,flexDirection:'column'}} data={this.state.locations.stops} renderItem={({item}) => 
+                                <TouchableWithoutFeedback style={styles.resultClickable} onPress={() =>this.changeCityAndCountry(item.id)}>
                                     <View style={styles.resultItem}>
-                                    <Text style={styles.resultItemText}>{item.name+", "+item.country}</Text>
+                                        <Text style={styles.resultItemText}>{item.name}</Text>
                                     </View>
-                                </TouchableNativeFeedback>}
+                                </TouchableWithoutFeedback>}
                             keyExtractor={(item, index) => index} />
                         </View>
+
+                        <View style={{flex:2,alignItems: 'center'}}>
+                            <Text style={styles.title}>Lieux</Text>
+                            <FlatList style={{flex:1,flexDirection:'column'}} data={this.state.locations.places} renderItem={({item}) => 
+                                <TouchableWithoutFeedback style={styles.resultClickable} onPress={() =>this.changeCityAndCountry(item.id)}>
+                                    <View style={styles.resultItem}>
+                                        <Text style={styles.resultItemText}>{item.name}</Text>
+                                    </View>
+                                </TouchableWithoutFeedback>}
+                            keyExtractor={(item, index) => index} />
+                        </View>
+
                     </View>
             </View>
         )
@@ -66,12 +85,11 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff'
     },
     header: {
-        flex: 2,
         backgroundColor: '#000',
         alignItems: 'center',
         justifyContent: 'center',
         alignSelf: 'stretch',
-        height: 250,
+        height: 100
     },
     title: {
         fontSize: 20, 
@@ -144,6 +162,20 @@ const styles = StyleSheet.create({
       justifyContent: 'center',
 
     },
+    resultClickable: {
+        flex:1,
+        borderRadius: 50,
+      },
+    resultItem: {
+        height:50,
+        alignItems: 'center', 
+        flexDirection: 'row',
+        flex:1,
+      },
+      resultItemText: {
+        fontSize: 17,
+        color: 'black',
+      },
     input: {
       color: "#666666",
       fontWeight: 'bold',
