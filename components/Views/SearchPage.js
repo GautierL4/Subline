@@ -1,5 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View, Image, Animated, TextInput, TouchableWithoutFeedback, ScrollView, Dimensions, FlatList } from 'react-native';
+import { styles } from '../../assets/styles/style';
 import APIHandler from '../API/APIHandler.js';
 
 const APIManager = new APIHandler();
@@ -24,7 +25,6 @@ class SearchPage extends React.Component {
         catch(e){
             console.error(e);
         }
-        console.log(data);
         if(!(typeof data === "undefined")){
             this.setState({locations: data})
         }
@@ -77,135 +77,135 @@ class SearchPage extends React.Component {
 const screenWidth = Dimensions.get('window').width;
 const screenHeight = Dimensions.get('window').height;
 
-const styles = StyleSheet.create({
-    container: {
-        flex:1,
-        alignItems: 'center', 
-        justifyContent: 'center',
-        backgroundColor: '#fff'
-    },
-    header: {
-        backgroundColor: '#000',
-        alignItems: 'center',
-        justifyContent: 'center',
-        alignSelf: 'stretch',
-        height: 100
-    },
-    title: {
-        fontSize: 20, 
-        textAlign: 'center', 
-        margin: 10,
-        color: "#898989",
-        textAlign:'left',
-        marginBottom: 10,
-    },
-    body: {
-        flex: 3,
-        width: screenWidth,
-    },
-    stopCardBox: {
-        flex:1,
-        height:160,
-        flexDirection:'row',
-        alignItems: 'center',
-        justifyContent: 'center',
-        width:screenWidth-(screenWidth/13)
-    },
-    stopCard: {
-        flexDirection:'row',
-        alignItems: 'center',
-        height:130,
-        backgroundColor: '#ffffff',
-        borderRadius: 5,
-        //IOS
-        shadowOpacity: 0.2,
-        shadowRadius: 7,
-        shadowOffset: {
-            height: 4,
-            width: 0
-        },
-        //android
-        elevation: 7,
-        flex:0.95,
-        flexDirection:'row'
-    },
-    mapCardBox: {
-        flex:1,
-        height:75,
-        flexDirection:'row',
-        alignItems: 'center',
-        justifyContent: 'center',
-        width:screenWidth
-    },
-    mapCard: {
-        flexDirection:'row',
-        alignItems: 'center',
-        height:60,
-        backgroundColor: '#ffffff',
-        justifyContent: 'center',
-        borderRadius: 5,
-        //IOS
-        shadowOpacity: 0.2,
-        shadowRadius: 7,
-        shadowOffset: {
-            height: 4,
-            width: 0
-        },
-        //android
-        elevation: 7,
-        flex:0.9,
-        flexDirection:'row'
-    },
-    home: {
-      flex:1,
-      alignItems: 'center',
-      justifyContent: 'center',
+// const styles = StyleSheet.create({
+//     container: {
+//         flex:1,
+//         alignItems: 'center', 
+//         justifyContent: 'center',
+//         backgroundColor: '#fff'
+//     },
+//     header: {
+//         backgroundColor: '#000',
+//         alignItems: 'center',
+//         justifyContent: 'center',
+//         alignSelf: 'stretch',
+//         height: 100
+//     },
+//     title: {
+//         fontSize: 20, 
+//         textAlign: 'center', 
+//         margin: 10,
+//         color: "#898989",
+//         textAlign:'left',
+//         marginBottom: 10,
+//     },
+//     body: {
+//         flex: 3,
+//         width: screenWidth,
+//     },
+//     stopCardBox: {
+//         flex:1,
+//         height:160,
+//         flexDirection:'row',
+//         alignItems: 'center',
+//         justifyContent: 'center',
+//         width:screenWidth-(screenWidth/13)
+//     },
+//     stopCard: {
+//         flexDirection:'row',
+//         alignItems: 'center',
+//         height:130,
+//         backgroundColor: '#ffffff',
+//         borderRadius: 5,
+//         //IOS
+//         shadowOpacity: 0.2,
+//         shadowRadius: 7,
+//         shadowOffset: {
+//             height: 4,
+//             width: 0
+//         },
+//         //android
+//         elevation: 7,
+//         flex:0.95,
+//         flexDirection:'row'
+//     },
+//     mapCardBox: {
+//         flex:1,
+//         height:75,
+//         flexDirection:'row',
+//         alignItems: 'center',
+//         justifyContent: 'center',
+//         width:screenWidth
+//     },
+//     mapCard: {
+//         flexDirection:'row',
+//         alignItems: 'center',
+//         height:60,
+//         backgroundColor: '#ffffff',
+//         justifyContent: 'center',
+//         borderRadius: 5,
+//         //IOS
+//         shadowOpacity: 0.2,
+//         shadowRadius: 7,
+//         shadowOffset: {
+//             height: 4,
+//             width: 0
+//         },
+//         //android
+//         elevation: 7,
+//         flex:0.9,
+//         flexDirection:'row'
+//     },
+//     home: {
+//       flex:1,
+//       alignItems: 'center',
+//       justifyContent: 'center',
 
-    },
-    resultClickable: {
-        flex:1,
-        borderRadius: 50,
-      },
-    resultItem: {
-        height:50,
-        alignItems: 'center', 
-        flexDirection: 'row',
-        flex:1,
-      },
-      resultItemText: {
-        fontSize: 17,
-        color: 'black',
-      },
-    input: {
-      color: "#666666",
-      fontWeight: 'bold',
-      fontSize: 18,
-      padding: 10,
-      flex:0.8,
-    },
-    ImageStyle: {
-      margin: 10,
-      paddingLeft: 5,
-      resizeMode : 'contain',
-      alignItems: 'center',
-      maxHeight:20,
-      flex:0.1,
-    },
-    searchBar: {
-      backgroundColor: '#ffffff',
-      borderRadius: 5,
-      //IOS
-        shadowOpacity: 0.2,
-        shadowRadius: 7,
-        shadowOffset: {
-            height: 4,
-            width: 0
-        },
-      //android
-      elevation: 7,
-      flex:0.9,
-      flexDirection:'row'
-    },
-  });
+//     },
+//     resultClickable: {
+//         flex:1,
+//         borderRadius: 50,
+//       },
+//     resultItem: {
+//         height:50,
+//         alignItems: 'center', 
+//         flexDirection: 'row',
+//         flex:1,
+//       },
+//       resultItemText: {
+//         fontSize: 17,
+//         color: 'black',
+//       },
+//     input: {
+//       color: "#666666",
+//       fontWeight: 'bold',
+//       fontSize: 18,
+//       padding: 10,
+//       flex:0.8,
+//     },
+//     ImageStyle: {
+//       margin: 10,
+//       paddingLeft: 5,
+//       resizeMode : 'contain',
+//       alignItems: 'center',
+//       maxHeight:20,
+//       flex:0.1,
+//     },
+//     searchBar: {
+//       backgroundColor: '#ffffff',
+//       borderRadius: 5,
+//       //IOS
+//         shadowOpacity: 0.2,
+//         shadowRadius: 7,
+//         shadowOffset: {
+//             height: 4,
+//             width: 0
+//         },
+//       //android
+//       elevation: 7,
+//       flex:0.9,
+//       flexDirection:'row'
+//     },
+//   });
 
   export default SearchPage;

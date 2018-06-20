@@ -30,7 +30,10 @@ class APIHandler{
     async getPlaces(userInput){
         try{
             response = await this.getAutoCompletePlaces(userInput);
-            var data = this.extractDataFromResponse(response);
+            console.log(response);
+            if(!(response.message == "Search word absent")){
+                var data = this.extractDataFromResponse(response);
+            }
         }
         catch(e){
             console.error(e);
