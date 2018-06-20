@@ -1,4 +1,8 @@
 import { APIkey } from './key.js';
+//import base64 from "base-64";
+
+//const EncodedKey = base64.encode(`${APIkey}:${""}`);
+
 
 const header = { headers : 
                     {'Authorization': APIkey}
@@ -30,7 +34,10 @@ class APIHandler{
     async getPlaces(userInput){
         try{
             response = await this.getAutoCompletePlaces(userInput);
-            var data = this.extractDataFromResponse(response);
+            console.log(response);
+            if(!(response.message == "Search word absent")){
+                var data = this.extractDataFromResponse(response);
+            }
         }
         catch(e){
             console.error(e);
