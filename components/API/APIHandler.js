@@ -1,10 +1,7 @@
 import { APIkey } from './key.js';
-import base64 from "base-64";
 
-const EncodedKey = base64.encode(`${APIkey}:${""}`);
-const header = { headers : {
-                    'Authorization': APIkey
-                }
+const header = { headers : 
+                    {'Authorization': APIkey}
                 };
 
 
