@@ -240,6 +240,6 @@ export const styles = StyleSheet.create({
       //android
       elevation: 7,
       flex:0.9,
-      flexDirection:'row'
+      flexDirection:'row',
     },
   });
