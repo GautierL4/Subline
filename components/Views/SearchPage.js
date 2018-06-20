@@ -9,20 +9,22 @@ class SearchPage extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            location: null,
+            locations: null,
             search: ''
         };
     }
 
 
-    AutoCompleteResearch(input){
+    async AutoCompleteResearch(input){
         this.setState({search: input});
-        APIManager.getAutoCompletePlaces(this.state.search).then(data=> {
-            this.setState({
-                locations: data
-            });
-        }).catch(error => console.error(error));
-        
+        try{
+            data = await APIManager.getPlaces(this.state.search)
+        }
+        catch(e){
+            console.error(e);
+        }
+        this.setState({locations: data})
+        console.log(this.state.locations);
     }
 
     
