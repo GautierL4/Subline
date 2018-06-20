@@ -120,6 +120,34 @@ class HomePage extends React.Component {
                             </ScrollView>
                             <Text style={styles.title}>Vos itinéraires</Text>
                             <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+                                <TouchableOpacity style={styles.stopJourneyCard}>
+                                    <View style={styles.journeyCard}>
+                                        <View style={styles.journeyCardTop}>
+                                            <View style={styles.journeyCardTopRow}>
+                                                <Image style={styles.journeyCardTopRowImg} source={require('../../assets/icons/map-location.png')} />
+                                                <Text style={styles.journeyCardTopRowTxt}>Châtelet-Les-Halles</Text>
+                                            </View>
+                                            <View style={styles.journeyCardTopRow}>
+                                                <Image style={styles.journeyCardTopRowImg} source={require('../../assets/icons/target.png')} />
+                                                <Text style={styles.journeyCardTopRowTxt}>43 rue de Bruxelles, Paris 75004</Text>
+                                            </View>
+                                        </View>
+                                        <View style={styles.journeyCardBottom}>
+                                            <Image style={styles.journeyCardBottomImg} source={require('../../assets/icons/lines/RERBgenRVB.png')} />
+                                            <Image style={styles.journeyCardBottomImgDot} source={require('../../assets/icons/dot.png')} />
+                                            <Image style={styles.journeyCardBottomImg} source={require('../../assets/icons/lines/RERAgenRVB.png')} />
+                                            <Image style={styles.journeyCardBottomImgDot} source={require('../../assets/icons/dot.png')} />
+                                            <Image style={styles.journeyCardBottomImg} source={require('../../assets/icons/walk.png')} />
+                                            <Image style={styles.journeyCardBottomImgDot} source={require('../../assets/icons/dot.png')} />
+                                            <View style={styles.busCard}>
+                                                <Image source={require('../../assets/icons/icon_bus.png')} style={styles.busCardImgBus} />
+                                                <Text style={styles.busCardTxt}>95-01</Text>
+                                            </View>
+                                            <Image style={styles.journeyCardBottomImgDot} source={require('../../assets/icons/dot.png')} />
+                                            <Image style={styles.journeyCardBottomImg} source={require('../../assets/icons/lines/M7bisgenRVB.png')} />
+                                        </View>
+                                    </View>
+                                </TouchableOpacity>
                                 <View style={styles.stopJourneyCard}>
                                     <View style={styles.journeyCard}>
                                         <View style={styles.journeyCardTop}>
@@ -132,22 +160,76 @@ class HomePage extends React.Component {
                                                 <Text style={styles.journeyCardTopRowTxt}>43 rue de Bruxelles, Paris 75004</Text>
                                             </View>
                                         </View>
-                                        <View style={styles.journeyCardBottom}></View>
+                                        <View style={styles.journeyCardBottom}>
+                                            <Image style={styles.journeyCardBottomImg} source={require('../../assets/icons/lines/RERBgenRVB.png')} />
+                                            <Image style={styles.journeyCardBottomImgDot} source={require('../../assets/icons/dot.png')} />
+                                            <Image style={styles.journeyCardBottomImg} source={require('../../assets/icons/lines/RERAgenRVB.png')} />
+                                            <Image style={styles.journeyCardBottomImgDot} source={require('../../assets/icons/dot.png')} />
+                                            <Image style={styles.journeyCardBottomImg} source={require('../../assets/icons/walk.png')} />
+                                            <Image style={styles.journeyCardBottomImgDot} source={require('../../assets/icons/dot.png')} />
+                                            <View style={styles.busCard}>
+                                                <Image source={require('../../assets/icons/icon_bus.png')} style={styles.busCardImgBus} />
+                                                <Text style={styles.busCardTxt}>95-01</Text>
+                                            </View>
+                                            <Image style={styles.journeyCardBottomImgDot} source={require('../../assets/icons/dot.png')} />
+                                            <Image style={styles.journeyCardBottomImg} source={require('../../assets/icons/lines/M7bisgenRVB.png')} />
+                                        </View>
                                     </View>
                                 </View>
                                 <View style={styles.stopJourneyCard}>
                                     <View style={styles.journeyCard}>
-                                    <Text>95-01</Text>
+                                        <View style={styles.journeyCardTop}>
+                                            <View style={styles.journeyCardTopRow}>
+                                                <Image style={styles.journeyCardTopRowImg} source={require('../../assets/icons/map-location.png')} />
+                                                <Text style={styles.journeyCardTopRowTxt}>Châtelet-Les-Halles</Text>
+                                            </View>
+                                            <View style={styles.journeyCardTopRow}>
+                                                <Image style={styles.journeyCardTopRowImg} source={require('../../assets/icons/target.png')} />
+                                                <Text style={styles.journeyCardTopRowTxt}>43 rue de Bruxelles, Paris 75004</Text>
+                                            </View>
+                                        </View>
+                                        <View style={styles.journeyCardBottom}>
+                                            <Image style={styles.journeyCardBottomImg} source={require('../../assets/icons/lines/RERBgenRVB.png')} />
+                                            <Image style={styles.journeyCardBottomImgDot} source={require('../../assets/icons/dot.png')} />
+                                            <Image style={styles.journeyCardBottomImg} source={require('../../assets/icons/lines/RERAgenRVB.png')} />
+                                            <Image style={styles.journeyCardBottomImgDot} source={require('../../assets/icons/dot.png')} />
+                                            <Image style={styles.journeyCardBottomImg} source={require('../../assets/icons/walk.png')} />
+                                            <Image style={styles.journeyCardBottomImgDot} source={require('../../assets/icons/dot.png')} />
+                                            <View style={styles.busCard}>
+                                                <Image source={require('../../assets/icons/icon_bus.png')} style={styles.busCardImgBus} />
+                                                <Text style={styles.busCardTxt}>95-01</Text>
+                                            </View>
+                                            <Image style={styles.journeyCardBottomImgDot} source={require('../../assets/icons/dot.png')} />
+                                            <Image style={styles.journeyCardBottomImg} source={require('../../assets/icons/lines/M7bisgenRVB.png')} />
+                                        </View>
                                     </View>
                                 </View>
                                 <View style={styles.stopJourneyCard}>
                                     <View style={styles.journeyCard}>
-                                    <Text>95-01</Text>
-                                    </View>
-                                </View>
-                                <View style={styles.stopJourneyCard}>
-                                    <View style={styles.journeyCard}>
-                                    <Text>95-01</Text>
+                                        <View style={styles.journeyCardTop}>
+                                            <View style={styles.journeyCardTopRow}>
+                                                <Image style={styles.journeyCardTopRowImg} source={require('../../assets/icons/map-location.png')} />
+                                                <Text style={styles.journeyCardTopRowTxt}>Châtelet-Les-Halles</Text>
+                                            </View>
+                                            <View style={styles.journeyCardTopRow}>
+                                                <Image style={styles.journeyCardTopRowImg} source={require('../../assets/icons/target.png')} />
+                                                <Text style={styles.journeyCardTopRowTxt}>43 rue de Bruxelles, Paris 75004</Text>
+                                            </View>
+                                        </View>
+                                        <View style={styles.journeyCardBottom}>
+                                            <Image style={styles.journeyCardBottomImg} source={require('../../assets/icons/lines/RERBgenRVB.png')} />
+                                            <Image style={styles.journeyCardBottomImgDot} source={require('../../assets/icons/dot.png')} />
+                                            <Image style={styles.journeyCardBottomImg} source={require('../../assets/icons/lines/RERAgenRVB.png')} />
+                                            <Image style={styles.journeyCardBottomImgDot} source={require('../../assets/icons/dot.png')} />
+                                            <Image style={styles.journeyCardBottomImg} source={require('../../assets/icons/walk.png')} />
+                                            <Image style={styles.journeyCardBottomImgDot} source={require('../../assets/icons/dot.png')} />
+                                            <View style={styles.busCard}>
+                                                <Image source={require('../../assets/icons/icon_bus.png')} style={styles.busCardImgBus} />
+                                                <Text style={styles.busCardTxt}>95-01</Text>
+                                            </View>
+                                            <Image style={styles.journeyCardBottomImgDot} source={require('../../assets/icons/dot.png')} />
+                                            <Image style={styles.journeyCardBottomImg} source={require('../../assets/icons/lines/M7bisgenRVB.png')} />
+                                        </View>
                                     </View>
                                 </View>
                             </ScrollView>
@@ -302,8 +384,9 @@ const styles = StyleSheet.create({
         width:screenWidth-(screenWidth/13)
     },
     journeyCard: {
-        flexDirection:'row',
-        alignItems: 'center',
+        flexDirection:'column',
+        alignItems: 'stretch',
+        justifyContent: 'flex-start',
         height:140,
         backgroundColor: '#ffffff',
         borderRadius: 5,
@@ -317,22 +400,30 @@ const styles = StyleSheet.create({
         //android
         elevation: 7,
         flex:0.95,
-        flexDirection:'row'
     },
     journeyCardTop: {
-        flex: 1,
-        marginLeft: 10,
-        marginRight: 10,
+        flex: 3,
+        marginLeft: 20,
+        marginRight: 20,
+        // marginBottom: 20,
+        marginTop: 20,
         borderBottomColor: '#e5e5e5',
         borderBottomWidth: 1,
     },
     journeyCardBottom: {
-        marginLeft: 10,
-        marginRight: 10
+        flex: 2,
+        marginLeft: 20,
+        marginRight: 20,
+        marginTop: 10,
+        marginBottom: 10,
+        flexDirection:'row',
+        justifyContent: 'flex-start',
+        alignItems: 'center',
     },
     journeyCardTopRow: {
         flexDirection:'row',
         marginBottom: 10,
+        alignItems: 'flex-start',
     },
     journeyCardTopRowImg: {
         height: 20,
@@ -341,6 +432,35 @@ const styles = StyleSheet.create({
     journeyCardTopRowTxt: {
         marginLeft: 10,
         fontSize: 15,
+    },
+    journeyCardBottomImg: {
+        width: 20,
+        height: 20,
+        marginRight: 5,
+    },
+    journeyCardBottomImgDot: {
+        width: 3,
+        height: 3,
+        marginRight: 5,
+    },
+    busCard: {
+        flexDirection: 'row',
+        borderRadius: 2,
+        borderColor: '#e5e5e5',
+        borderWidth: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+        height: 20,
+        marginRight: 5,
+    },
+    busCardImgBus: {
+        width: 15,
+        height: 15,
+        marginRight: 2,
+    },
+    busCardTxt: {
+        fontWeight: 'bold',
+        fontSize: 10,
     },
     mapCardBox: {
         flex:1,
