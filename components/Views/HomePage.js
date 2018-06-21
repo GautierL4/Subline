@@ -2,6 +2,38 @@ import React from 'react';
 import { StyleSheet, Text, View, Image, Animated, TextInput, TouchableWithoutFeedback, ScrollView, Dimensions, TouchableHighlight, TouchableOpacity } from 'react-native';
 import { styles } from '../../assets/styles/style';
 
+class FadeInView extends React.Component {
+    state = {
+      fadeAnim: new Animated.Value(screenHeight),  // Initial value for opacity: 0
+    }
+  
+    componentDidMount() {
+      Animated.timing(                  // Animate over time
+        this.state.fadeAnim,            // The animated value to drive
+        {
+          toValue: 230,                   // Animate to opacity: 1 (opaque)
+          duration: 1000,              // Make it take a while
+          delay: 3000
+        }
+      ).start();                        // Starts the animation
+    }
+  
+    render() {
+      let { fadeAnim } = this.state;
+  
+      return (
+        <Animated.View                 // Special animatable View
+          style={{
+            ...this.props.style,
+            height: fadeAnim,         // Bind opacity to animated value
+          }}
+        >
+          {this.props.children}
+        </Animated.View>
+      );
+    }
+  }
+
 class HomePage extends React.Component {
 
     constructor(props){
@@ -16,15 +48,15 @@ class HomePage extends React.Component {
         this.setState({ isLoading: true });
         //Setting the loading screen for 3 seconds
         setTimeout(() => { this.setState({ isLoading: false })
-        }, 3000);
+        }, 4000);
     }
 
     render(){
         if(this.state.isLoading){
             return(
-            <View style={{flex: 1, backgroundColor: 'black',width:screenWidth, height:screenHeight, alignItems: 'center',justifyContent: 'center'}}>
+            <FadeInView style={{backgroundColor: 'black',width:screenWidth,flexDirection:'row', alignItems: 'center',justifyContent: 'center'}}>
                 <Image style={{width: 80, height: 80,}} source={require('../../assets/icons/loading-start.gif')} />
-            </View>
+            </FadeInView>
             );
             
         }
