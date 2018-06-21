@@ -2,6 +2,9 @@ import React from 'react';
 import { StyleSheet, Text, View, Image, Animated, TextInput, TouchableWithoutFeedback, ScrollView, Dimensions, FlatList } from 'react-native';
 import { styles } from '../../assets/styles/style';
 import APIHandler from '../API/APIHandler.js';
+import DisplayJourneysPage from './DisplayJourneysPage.js';
+
+const journeysPage = new DisplayJourneysPage();
 
 const APIManager = new APIHandler();
 
@@ -30,7 +33,11 @@ class SearchPage extends React.Component {
         }
     }
 
-    async 
+    selectPlace(id,name){
+        console.log(id,name);
+        journeysPage.getPlaceData(id,name);
+        this.props.navigation.navigate('DisplayJourneysPage');
+    }
 
     
     render(){
@@ -49,7 +56,7 @@ class SearchPage extends React.Component {
                         <View style={{flex:2,alignItems: 'center'}}>
                             <Text style={styles.title}>Stations</Text>
                             <FlatList style={{flex:1,flexDirection:'column'}} data={this.state.locations.stops} renderItem={({item}) => 
-                                <TouchableWithoutFeedback style={styles.resultClickable} onPress={() =>this.changeCityAndCountry(item.id)}>
+                                <TouchableWithoutFeedback style={styles.resultClickable} onPress={() =>this.selectPlace(item.id,item.name)}>
                                     <View style={styles.resultItem}>
                                         <Text style={styles.resultItemText}>{item.name}</Text>
                                     </View>
@@ -60,7 +67,7 @@ class SearchPage extends React.Component {
                         <View style={{flex:2,alignItems: 'center'}}>
                             <Text style={styles.title}>Lieux</Text>
                             <FlatList style={{flex:1,flexDirection:'column'}} data={this.state.locations.places} renderItem={({item}) => 
-                                <TouchableWithoutFeedback style={styles.resultClickable} onPress={() =>this.changeCityAndCountry(item.id)}>
+                                <TouchableWithoutFeedback style={styles.resultClickable} onPress={() =>this.selectPlace(item.id,item.name)}>
                                     <View style={styles.resultItem}>
                                         <Text style={styles.resultItemText}>{item.name}</Text>
                                     </View>
