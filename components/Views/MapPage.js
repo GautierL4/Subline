@@ -20,9 +20,9 @@ class MapPage extends React.Component {
             <View style={styles.container}>
                 
                    <WebView
-          bounces={false}
-          scrollEnabled={false} 
-          source={{ uri: 'https://www.ratp.fr/sites/default/files/plans-lignes/Plans-essentiels/Plan-Metro.pdf' }} />
+                        bounces={false}
+                        scrollEnabled={false} 
+                        source={{ uri: 'https://www.ratp.fr/sites/default/files/plans-lignes/Plans-essentiels/Plan-Metro.pdf' }} />
       
                    <TouchableWithoutFeedback onPress={() => this.props.navigation.navigate('HomePage')}>
                        <View style={styles.returnButton} >

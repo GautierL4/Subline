@@ -8,6 +8,8 @@ const journeysPage = new DisplayJourneysPage();
 
 const APIManager = new APIHandler();
 
+
+
 class SearchPage extends React.Component {
 
     constructor(props) {
@@ -15,10 +17,11 @@ class SearchPage extends React.Component {
         this.state = {
             locations: {stops: null,
                         places: null},
-            search: ''
+            search: '',
         };
+        this.placeholder = this.props.navigation.getParam('placeholder','Votre destination');
+        this.typename = this.props.navigation.getParam('type','destination');
     }
-
 
     async AutoCompleteResearch(input){
         this.setState({search: input});
@@ -35,12 +38,14 @@ class SearchPage extends React.Component {
 
     selectPlace(id,name){
         console.log(id,name);
-        journeysPage.getPlaceData(id,name);
+        journeysPage.getPlaceData(id,name,this.typename);
         this.props.navigation.navigate('DisplayJourneysPage');
     }
 
     
     render(){
+
+        
         return(
             <View style={styles.container}>
                     <View style={styles.header}>
@@ -49,7 +54,7 @@ class SearchPage extends React.Component {
                         <View style={{flexDirection:'row',alignItems: 'center',justifyContent: 'center',top:-25}}>
                                 <View style={styles.searchBar}>
                                     <Image source={require('../../assets/icons/search.png')} style={styles.ImageStyle} />
-                                    <TextInput onChangeText={(text) => this.AutoCompleteResearch(text)} style={styles.input} underlineColorAndroid='rgba(0,0,0,0)' placeholder="Votre destination" autoFocus />
+                                    <TextInput onChangeText={(text) => this.AutoCompleteResearch(text)} style={styles.input} underlineColorAndroid='rgba(0,0,0,0)' placeholder={this.placeholder} autoFocus />
                                 </View>
                         </View>
                         
