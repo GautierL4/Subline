@@ -267,38 +267,78 @@ class HomePage extends React.Component {
                                 </View>
                             </ScrollView>
                             <Text style={styles.title}>Plans</Text>
-                            <TouchableWithoutFeedback onPress={() => this.props.navigation.navigate('MapPage')}>
+                            <TouchableWithoutFeedback onPress={() => {
+                                this.props.navigation.navigate('MapPage', {
+                                    param: 'https://www.ratp.fr/sites/default/files/plans-lignes/Plans-essentiels/Plan-Metro.1496264586.pdf',
+                                });
+                                 }}>
+                                 
                                 <View style={styles.mapCardBox}>
                                     <View style={styles.mapCard} >
                                         <Text>Plan Métro</Text>
                                     </View>
                                 </View>
                             </TouchableWithoutFeedback>
-                            <View style={styles.mapCardBox}>
-                                <View style={styles.mapCard}>
-                                    <Text>Plan RER et transiliens</Text>
+                            <TouchableWithoutFeedback onPress={() => {
+                                this.props.navigation.navigate('MapPage', {
+                                    param: 'https://drive.google.com/viewerng/viewer?embedded=true&url=https://www.ratp.fr/sites/default/files/plans-lignes/Plans-essentiels/Plan-RER-et-transiliens.1505744115.pdf',
+                                });
+                                 }}>
+                                 
+                                <View style={styles.mapCardBox}>
+                                    <View style={styles.mapCard} >
+                                        <Text>Plan RER et Transiliens</Text>
+                                    </View>
                                 </View>
-                            </View>
-                            <View style={styles.mapCardBox}>
-                                <View style={styles.mapCard}>
-                                    <Text>Plan des Bus</Text>
+                            </TouchableWithoutFeedback>
+                             <TouchableWithoutFeedback onPress={() => {
+                                this.props.navigation.navigate('MapPage', {
+                                    param: 'https://drive.google.com/viewerng/viewer?embedded=true&url=https://www.ratp.fr/sites/default/files/plans-lignes/Plans-essentiels/Plan-des-Bus.1496264585.pdf',
+                                });
+                                 }}>
+                                 
+                                <View style={styles.mapCardBox}>
+                                    <View style={styles.mapCard} >
+                                        <Text>Plan des bus</Text>
+                                    </View>
                                 </View>
-                            </View>
-                            <View style={styles.mapCardBox}>
-                                <View style={styles.mapCard}>
-                                    <Text>Plan des Noctiliens</Text>
+                            </TouchableWithoutFeedback>
+                             <TouchableWithoutFeedback onPress={() => {
+                                this.props.navigation.navigate('MapPage', {
+                                    param: 'https://drive.google.com/viewerng/viewer?embedded=true&url=https://www.ratp.fr/sites/default/files/plans-lignes/Plans-essentiels/Plan-des-Noctilien.1527497902.pdf',
+                                });
+                                 }}>
+                                 
+                                <View style={styles.mapCardBox}>
+                                    <View style={styles.mapCard} >
+                                        <Text>Plan des Noctilien</Text>
+                                    </View>
                                 </View>
-                            </View>
-                            <View style={styles.mapCardBox}>
-                                <View style={styles.mapCard}>
-                                    <Text>Accès Aéroport</Text>
+                            </TouchableWithoutFeedback>
+                             <TouchableWithoutFeedback onPress={() => {
+                                this.props.navigation.navigate('MapPage', {
+                                    param: 'https://drive.google.com/viewerng/viewer?embedded=true&url=https://www.ratp.fr/sites/default/files/plans-lignes/Plans-essentiels/Acces-Aeroports.1496264586.pdf',
+                                });
+                                 }}>
+                                 
+                                <View style={styles.mapCardBox}>
+                                    <View style={styles.mapCard} >
+                                        <Text>Accès Aéroports</Text>
+                                    </View>
                                 </View>
-                            </View>
-                            <View style={styles.mapCardBox}>
-                                <View style={styles.mapCard}>
-                                    <Text>Carte intéractive</Text>
+                            </TouchableWithoutFeedback>
+                           <TouchableWithoutFeedback onPress={() => {
+                                this.props.navigation.navigate('MapPage', {
+                                    param: 'http://tracker.geops.de/?z=13&s=1&x=261676.7892&y=6251254.5413&l=transport',
+                                });
+                                 }}>
+                                 
+                                <View style={styles.mapCardBox}>
+                                    <View style={styles.interractiveMapCard} >
+                                        <Text style={ styles.interractiveMapColor}>Carte intéractive</Text>
+                                    </View>
                                 </View>
-                            </View>
+                            </TouchableWithoutFeedback>
                         </View>
                     </ScrollView>
                 </View>

@@ -206,6 +206,32 @@ export const styles = StyleSheet.create({
         flex:0.9,
         flexDirection:'row'
     },
+    interractiveMapCard: {
+
+        flexDirection:'row',
+        alignItems: 'center',
+        height:60,
+        backgroundColor: '#000',
+        
+        justifyContent: 'center',
+        borderRadius: 5,
+        //IOS
+        shadowOpacity: 0.2,
+        shadowRadius: 7,
+        shadowOffset: {
+            height: 4,
+            width: 0
+        },
+        //android
+        elevation: 5,
+        flex:0.9,
+        flexDirection:'row'
+
+    },
+    interractiveMapColor: {
+
+        color:"#ffffff"
+    },
     home: {
       flex:1,
       alignItems: 'center',
