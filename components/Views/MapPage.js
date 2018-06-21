@@ -47,7 +47,6 @@ const styles = StyleSheet.create({
         paddingTop: Constants.statusBarHeight
     },
     returnButton: {
-
         backgroundColor:'#000',
         position:'absolute',
         borderRadius:5,
@@ -57,11 +56,9 @@ const styles = StyleSheet.create({
         width:50
     },
     returnArrow: {
-
         height:25,
         width:25,
-        margin:12
-        
+        margin:12  
     }
   });
 
