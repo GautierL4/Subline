@@ -16,13 +16,26 @@ class MapPage extends React.Component {
     
     render(){
 
+       
+        
+          const { navigation } = this.props;
+        //  console.log(navigation.getParam('param', 'https://www.ratp.fr/sites/default/files/plans-lignes/Plans-essentiels/Plan-Metro.1496264586.pdf'));
+        // if(navigation.getParam('param') {
+
+             const source = navigation.getParam('param');
+
+            
+             console.log(source);
+        // }
+
+
         return(
             <View style={styles.container}>
                 
-                   <WebView
-          bounces={false}
-          scrollEnabled={false} 
-          source={{ uri: 'https://www.ratp.fr/sites/default/files/plans-lignes/Plans-essentiels/Plan-Metro.pdf' }} />
+                   <WebView 
+                        bounces={false}
+                        scrollEnabled={false} 
+                        source={{uri:source}} />
       
                    <TouchableWithoutFeedback onPress={() => this.props.navigation.navigate('HomePage')}>
                        <View style={styles.returnButton} >
