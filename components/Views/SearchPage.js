@@ -2,9 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View, Image, Animated, TextInput, TouchableWithoutFeedback, TouchableOpacity, ScrollView, Dimensions, FlatList } from 'react-native';
 import { styles } from '../../assets/styles/style';
 import APIHandler from '../API/APIHandler.js';
-import DisplayJourneysPage from './DisplayJourneysPage.js';
 
-const journeysPage = new DisplayJourneysPage();
 
 const APIManager = new APIHandler();
 
@@ -18,6 +16,7 @@ class SearchPage extends React.Component {
             locations: {stops: null,
                         places: null},
             search: '',
+            savedParams: this.props.navigation.getParam('savedParams',null)
         };
         this.placeholder = this.props.navigation.getParam('placeholder','Votre destination');
         this.typename = this.props.navigation.getParam('type','destination');
@@ -37,10 +36,28 @@ class SearchPage extends React.Component {
     }
 
     selectPlace(id,name){
-        console.log(id,name);
-        journeysPage.getPlaceData(id,name,this.typename);
-        this.props.navigation.navigate('DisplayJourneysPage');
+        params = {
+            id: id,
+            name: name,
+        }
+        console.log(this.state.savedParams);
+        if(this.typename == "destination"){
+            this.setState({savedParams: params});
+            this.props.navigation.navigate('DisplayJourneysPage', {
+                destination: params,
+            });
+        }
+        else{
+            this.props.navigation.replace('DisplayJourneysPage', {
+                destination: this.state.savedParams,
+                departure: {
+                    id: id,
+                    name: name,
+                }
+            });
+        }
     }
+
 
     
     render(){
