@@ -40,17 +40,15 @@ class SearchPage extends React.Component {
 
     sendFirstInputData(id,name){
         params = {
+            departure: {
+                id: null,
+                name: null,
+            },
             destination : {
                 id: id,
                 name: name,
             },
         };
-        this.setState({ savedParams: {
-            destination: {
-                id:id,
-                name:name,
-            }
-        } });
         this.props.navigation.navigate('DisplayJourneysPage', {
             destination: params.destination,
             savedParams: params
@@ -65,12 +63,7 @@ class SearchPage extends React.Component {
                 name: name,
             }
         };
-        this.setState({savedParams: params});
-        this.props.navigation.replace('DisplayJourneysPage', {
-            savedParams: params,
-            destination: params.destination,
-            departure: params.departure,
-        });
+        this.redirectWithPreviousParams(params);
     }
 
     sendDestinationData(id,name){
@@ -81,7 +74,10 @@ class SearchPage extends React.Component {
             },
             departure: this.state.savedParams.departure,
         };
-        this.setState({saveParams: params});
+        this.redirectWithPreviousParams(params);
+    }
+
+    redirectWithPreviousParams(params){
         this.props.navigation.replace('DisplayJourneysPage', {
             destination: params.destination,
             departure: params.departure,
