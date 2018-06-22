@@ -20,7 +20,7 @@ class DisplayJourneysPage extends React.Component {
             }
         };
     }
-
+    
     getPlaceData(id,name,type){
         console.log(id,name,type);
         if(type == "destination"){
@@ -34,21 +34,21 @@ class DisplayJourneysPage extends React.Component {
     }
 
     getDepartureData(id,name){
-        let departure = {
-            id: id,
-            name: name
-        };
+        var departure = this.state.departure;
+        departure.id = id;
+        departure.name = name;
         this.setState({
             departure: departure,
         });
+        console.log(this.state.departure);
     }
 
     getDestinationData(id,name){
+        var destination = this.state.destination;
+        destination.id = id;
+        destination.name = name;
         this.setState({
-            destination: {
-                id: id,
-                name: name
-            },
+            destination: destination,
         });
         console.log(this.state.destination);
     }
