@@ -38,57 +38,68 @@ class SearchPage extends React.Component {
         }
     }
 
+    sendFirstInputData(id,name){
+        params = {
+            destination : {
+                id: id,
+                name: name,
+            },
+        };
+        this.setState({ savedParams: {
+            destination: {
+                id:id,
+                name:name,
+            }
+        } });
+        this.props.navigation.navigate('DisplayJourneysPage', {
+            destination: params.destination,
+            savedParams: params
+        });
+    }
+
+    sendDepartureData(id,name){
+        params = {
+            destination : this.state.savedParams.destination,
+            departure : {
+                id: id,
+                name: name,
+            }
+        };
+        this.setState({savedParams: params});
+        this.props.navigation.replace('DisplayJourneysPage', {
+            savedParams: params,
+            destination: params.destination,
+            departure: params.departure,
+        });
+    }
+
+    sendDestinationData(id,name){
+        params = {
+            destination : {
+                id: id,
+                name: name,
+            },
+            departure: this.state.savedParams.departure,
+        };
+        this.setState({saveParams: params});
+        this.props.navigation.replace('DisplayJourneysPage', {
+            destination: params.destination,
+            departure: params.departure,
+            savedParams: params,
+        });
+    }
+
     selectPlace(id,name){
         console.log(this.typename);
         console.log(this.state.savedParams);
         if(this.typename == "firstInput"){
-            params = {
-                destination : {
-                    id: id,
-                    name: name,
-                },
-            };
-            this.setState({ savedParams: {
-                destination: {
-                    id:id,
-                    name:name,
-                }
-            } });
-            this.props.navigation.navigate('DisplayJourneysPage', {
-                destination: params.destination,
-                savedParams: params
-            });
+            this.sendFirstInputData(id,name);
         }
         else if(this.typename == "departure"){
-            console.log('state dest',this.state.savedParams.destination);
-            params = {
-                destination : this.state.savedParams.destination,
-                departure : {
-                    id: id,
-                    name: name,
-                }
-            };
-            this.setState({savedParams: params});
-            this.props.navigation.replace('DisplayJourneysPage', {
-                savedParams: params,
-                destination: params.destination,
-                departure: params.departure,
-            });
+            this.sendDepartureData(id,name);
         }
         else if(this.typename == "destination"){
-            params = {
-                destination : {
-                    id: id,
-                    name: name,
-                },
-                departure: this.state.savedParams.departure,
-            };
-            this.setState({saveParams: params});
-            this.props.navigation.replace('DisplayJourneysPage', {
-                destination: params.destination,
-                departure: params.departure,
-                savedParams: params,
-            });
+            this.sendDestinationData(id,name);
         }
     }
 
