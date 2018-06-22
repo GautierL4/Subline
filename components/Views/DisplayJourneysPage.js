@@ -19,7 +19,7 @@ class DisplayJourneysPage extends React.Component {
                 id: null,
                 name: "Destination",
             }),
-            savedParams: this.props.navigation.getParam('destination')
+            savedParams: this.props.navigation.getParam('savedParams')
         };
         console.log(this.state);
     }
@@ -38,7 +38,7 @@ class DisplayJourneysPage extends React.Component {
                     </View>
 
                     <View style={{flexDirection:'row',alignItems: 'center',justifyContent: 'center'}}>
-                        <TouchableWithoutFeedback onPress={() => this.props.navigation.navigate('SearchPage')} style={{flex:1,flexDirection:'row',alignItems: 'center',justifyContent: 'center',padding:5}}>
+                        <TouchableWithoutFeedback onPress={() => this.props.navigation.replace('SearchPage',{ type: "destination" ,savedParams: this.state.savedParams })} style={{flex:1,flexDirection:'row',alignItems: 'center',justifyContent: 'center',padding:5}}>
                             <View style={styles.searchBar}>
                                 <Image source={require('../../assets/icons/search.png')} style={styles.ImageStyle} />
                                 <Text style={styles.input}>{this.state.destination.name}</Text>
