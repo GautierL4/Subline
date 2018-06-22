@@ -336,6 +336,7 @@ class HomePage extends React.Component {
                                 <View style={styles.mapCardBox}>
                                     <View style={styles.interractiveMapCard} >
                                         <Text style={ styles.interractiveMapColor}>Carte intéractive</Text>
+                                        <Image source={require('../../assets/icons/connection-signal.png')} style={styles.interractiveImg} />
                                     </View>
                                 </View>
                             </TouchableWithoutFeedback>

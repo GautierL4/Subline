@@ -214,6 +214,14 @@ export const styles = StyleSheet.create({
         height: 15,
         marginRight: 2,
     },
+    interractiveImg: {
+
+         width: 15,
+        height: 15,
+        transform: [{ rotate: '20deg'}],
+        marginLeft:2,
+        marginBottom:2,
+    },
     busCardTxt: {
         fontWeight: 'bold',
         fontSize: 10,
