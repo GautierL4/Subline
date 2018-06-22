@@ -8,7 +8,7 @@ export const styles = StyleSheet.create({
         flex:1,
         alignItems: 'center', 
         justifyContent: 'center',
-        backgroundColor: '#fff'
+        backgroundColor: '#fff',
     },
     card: {
         backgroundColor: '#ffffff',
@@ -28,8 +28,13 @@ export const styles = StyleSheet.create({
         backgroundColor: '#000',
         alignItems: 'center',
         justifyContent: 'center',
-        alignSelf: 'stretch',
+        alignSelf: 'stretch',  
+    },
+    headerMax: {
         height: 230,
+    },
+    headerMini: {
+        height: 50,
     },
     title: {
         fontSize: 20, 
@@ -160,6 +165,40 @@ export const styles = StyleSheet.create({
         height: 3,
         marginRight: 5,
     },
+    resultCardBox: {
+        flex:1,
+        height:220,
+        flexDirection:'row',
+        alignItems: 'center',
+        justifyContent: 'center',
+        width:screenWidth
+    },
+    resultCard: {
+        flexDirection:'row',
+        alignItems: 'flex-start',
+        height:200,
+        justifyContent: 'flex-start',
+        flex:0.9,
+        flexDirection:'row',
+        paddingTop: 10,
+        paddingBottom: 10,
+        
+    },
+    resultClickable: {
+        
+    },
+    resultItem: {
+        marginBottom: 10,
+        paddingBottom: 10,
+        borderBottomColor: '#e5e5e5',
+        borderBottomWidth: 1,
+        marginLeft: 20,
+        marginRight: 20,
+    },
+    resultItemText: {
+        fontSize: 17,
+        fontWeight: 'bold',
+    },
     busCard: {
         flexDirection: 'row',
         borderRadius: 2,
@@ -174,6 +213,14 @@ export const styles = StyleSheet.create({
         width: 15,
         height: 15,
         marginRight: 2,
+    },
+    interractiveImg: {
+
+         width: 15,
+        height: 15,
+        transform: [{ rotate: '20deg'}],
+        marginLeft:2,
+        marginBottom:2,
     },
     busCardTxt: {
         fontWeight: 'bold',
@@ -268,4 +315,18 @@ export const styles = StyleSheet.create({
       flex:0.9,
       flexDirection:'row',
     },
+    returnButton: {
+        backgroundColor:'#000',
+        position:'absolute',
+        borderRadius:5,
+        top:25,
+        left:13,
+        height:50,
+        width:50
+    },
+    returnArrow: {
+        height:25,
+        width:25,
+        margin:12
+    }
   });

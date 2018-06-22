@@ -64,7 +64,7 @@ class HomePage extends React.Component {
             return(
                 <View style={styles.container}>
                     <ScrollView horizontal={false} contentContainerStyle={{flexGrow: 1}}>
-                        <View style={styles.header}>
+                        <View style={[styles.header,styles.headerMax]}>
                             <Image source={require('../../assets/icons/subline.png')} style={{width: 90, height: 90}}/>
                         </View>
                         <View style={styles.body}>
@@ -336,6 +336,7 @@ class HomePage extends React.Component {
                                 <View style={styles.mapCardBox}>
                                     <View style={styles.interractiveMapCard} >
                                         <Text style={ styles.interractiveMapColor}>Carte intéractive</Text>
+                                        <Image source={require('../../assets/icons/connection-signal.png')} style={styles.interractiveImg} />
                                     </View>
                                 </View>
                             </TouchableWithoutFeedback>
