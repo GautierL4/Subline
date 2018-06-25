@@ -35,7 +35,7 @@ class DisplayJourneysPage extends React.Component {
         catch(e){
             console.error(e);
         }
-        console.log(data);
+        console.log("Data from API",data);
     }
 
     render(){

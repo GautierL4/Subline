@@ -88,11 +88,12 @@ class APIHandler{
         journey = [];
         for(let i=0;i<response.journeys.length;i++){
             journey[i] = {
-                duration : response.journey[i].id,
-                sections: response.journey[i].sections,
-                type: response.journey[i].type,
+                duration : response.journeys[i].id,
+                sections: response.journeys[i].sections,
+                type: response.journeys[i].type,
             };
         }
+        return journey;
     }
 
     //Extract stop area and places from API Response
