@@ -226,6 +226,15 @@ export const styles = StyleSheet.create({
         fontWeight: 'bold',
         fontSize: 10,
     },
+    select: {
+
+        flexDirection:'row',
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginTop:0,
+        borderWidth:1,
+        borderColor:'#ff0000',
+    },
     mapCardBox: {
         flex:1,
         height:75,

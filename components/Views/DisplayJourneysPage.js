@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, Image, Animated, TextInput, TouchableWithoutFeedback, ScrollView, Dimensions, FlatList } from 'react-native';
+import { StyleSheet, Text, View, Image, Animated, TextInput, TouchableWithoutFeedback, ScrollView, Dimensions, FlatList, Picker } from 'react-native';
 import { styles } from '../../assets/styles/style';
 import APIHandler from '../API/APIHandler.js';
 
@@ -25,6 +25,12 @@ class DisplayJourneysPage extends React.Component {
     }
 
     render(){
+
+        date = null;
+
+        console.log(APIManager.getJourney(this.state.departure.id, this.state.destination.id,date));
+
+
         return(
             <View style={styles.container}>
                 <View style={styles.header}>
@@ -45,9 +51,12 @@ class DisplayJourneysPage extends React.Component {
                             </View>
                         </TouchableWithoutFeedback>
                     </View>
+                    
                 </View>
 
                  <View style={styles.body}>
+
+                      
                  </View>
             </View>
         )

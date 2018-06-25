@@ -11,6 +11,10 @@ const header = { headers :
 
 const APIBaseURL = 'https://api.navitia.io/v1/';
 const autoCompleteService = 'places?q=';
+const to = 'journeys?to=';
+const from = 'from=';
+const departureArivalDate = 'datetime_represents=departure&datetime=';
+const arrivalDate = 'datetime_represents=arrival&datetime=';
 
 class APIHandler{
 
@@ -43,6 +47,28 @@ class APIHandler{
             console.error(e);
         }
         return data;
+    }
+
+
+    async getJourney(departure,arrival,date){
+
+        if(date == null){
+
+            var request = APIBaseURL + this.coverage + to + departure + '&' + from + arrival + '&';
+        } else {
+
+             var request = APIBaseURL + this.coverage + to + departure + '&' + from + arrival + '&' + arrivalDate + date + '&';
+        }
+
+
+       
+        try{
+            let response = await fetch(request,header);
+            responseJson = await response.json();
+        } catch(e){
+            console.error(e);
+        }
+        return responseJson;
     }
 
     //Extract stop area and places from API Response
