@@ -58,7 +58,6 @@ class SearchPage extends React.Component {
 
     async sendFirstInputData(id,name){
         try{
-            console.log(this.state);
             params = {
                 departure: {
                     id: this.state.departure.id,
@@ -129,7 +128,7 @@ class SearchPage extends React.Component {
     render(){
              
         return(
-            <View style={[styles.container,]}>
+            <View style={[styles.container]}>
                 <ScrollView horizontal={false} contentContainerStyle={{flexGrow: 1}} style={{width:screenWidth}}>
                     <View style={{flexDirection:'row',height:100,backgroundColor:'#000',width:500}}>
                         <TouchableWithoutFeedback onPress={() => this.props.navigation.navigate('HomePage')}>
