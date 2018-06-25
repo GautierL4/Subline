@@ -26,7 +26,7 @@ class MapPage extends React.Component {
              const source = navigation.getParam('param');
 
             
-             console.log(source);
+            //  console.log(source);
         // }
 
 

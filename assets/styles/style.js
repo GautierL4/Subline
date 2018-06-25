@@ -159,11 +159,15 @@ export const styles = StyleSheet.create({
         width: 20,
         height: 20,
         marginRight: 5,
+        marginTop:2,
+        marginBottom: 2,
     },
     journeyCardBottomImgDot: {
         width: 3,
         height: 3,
         marginRight: 5,
+        marginTop:2,
+        marginBottom: 2,
     },
     resultCardBox: {
         flex:1,
@@ -236,7 +240,6 @@ export const styles = StyleSheet.create({
         borderColor:'#ff0000',
     },
     mapCardBox: {
-        flex:1,
         height:75,
         flexDirection:'row',
         alignItems: 'center',
@@ -246,7 +249,7 @@ export const styles = StyleSheet.create({
     mapCard: {
         flexDirection:'row',
         alignItems: 'center',
-        height:60,
+        minHeight: 60,
         backgroundColor: '#ffffff',
         justifyContent: 'center',
         borderRadius: 5,
