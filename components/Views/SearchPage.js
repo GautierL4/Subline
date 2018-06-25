@@ -25,6 +25,24 @@ class SearchPage extends React.Component {
         this.typename = this.props.navigation.getParam('type');
     }
 
+    componentDidMount(){
+        this.getCurrentLocation();
+    }
+
+    getCurrentLocation(){
+        navigator.geolocation.getCurrentPosition(
+                (position) => {
+                    var departure = {
+                        id: position.coords.longitude + ";" +position.coords.latitude,
+                        name: "Ma position"
+                    }
+                    this.setState({departure: departure});
+                },
+                (error) => console.log(error),
+                { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 },
+            );
+    }
+
     async AutoCompleteResearch(input){
         this.setState({search: input});
         try{
@@ -38,21 +56,30 @@ class SearchPage extends React.Component {
         }
     }
 
-    sendFirstInputData(id,name){
-        params = {
-            departure: {
-                id: null,
-                name: null,
-            },
-            destination : {
-                id: id,
-                name: name,
-            },
-        };
-        this.props.navigation.navigate('DisplayJourneysPage', {
-            destination: params.destination,
-            savedParams: params
-        });
+    async sendFirstInputData(id,name){
+        try{
+            console.log(this.state);
+            params = {
+                departure: {
+                    id: this.state.departure.id,
+                    name: this.state.departure.name,
+                },
+                destination : {
+                    id: id,
+                    name: name,
+                },
+            };
+            this.props.navigation.navigate('DisplayJourneysPage', {
+                departure: this.state.departure,
+                destination: params.destination,
+                savedParams: params
+            });
+        }
+        catch(e){
+            console.error(e);
+        }
+        
+        
     }
 
     sendDepartureData(id,name){
@@ -85,7 +112,7 @@ class SearchPage extends React.Component {
         });
     }
 
-    selectPlace(id,name){
+    async selectPlace(id,name){ 
         if(this.typename == "firstInput"){
             this.sendFirstInputData(id,name);
         }
