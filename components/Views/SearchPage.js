@@ -2,9 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View, Image, Animated, TextInput, TouchableWithoutFeedback, TouchableOpacity, ScrollView, Dimensions, FlatList } from 'react-native';
 import { styles } from '../../assets/styles/style';
 import APIHandler from '../API/APIHandler.js';
-import DisplayJourneysPage from './DisplayJourneysPage.js';
 
-const journeysPage = new DisplayJourneysPage();
 
 const APIManager = new APIHandler();
 
@@ -18,9 +16,13 @@ class SearchPage extends React.Component {
             locations: {stops: null,
                         places: null},
             search: '',
+            savedParams: this.props.navigation.getParam('savedParams',{
+                destination:null,
+                departure: null
+            })
         };
         this.placeholder = this.props.navigation.getParam('placeholder','Votre destination');
-        this.typename = this.props.navigation.getParam('type','destination');
+        this.typename = this.props.navigation.getParam('type');
     }
 
     async AutoCompleteResearch(input){
@@ -36,11 +38,67 @@ class SearchPage extends React.Component {
         }
     }
 
-    selectPlace(id,name){
-        console.log(id,name);
-        journeysPage.getPlaceData(id,name,this.typename);
-        this.props.navigation.navigate('DisplayJourneysPage');
+    sendFirstInputData(id,name){
+        params = {
+            departure: {
+                id: null,
+                name: null,
+            },
+            destination : {
+                id: id,
+                name: name,
+            },
+        };
+        this.props.navigation.navigate('DisplayJourneysPage', {
+            destination: params.destination,
+            savedParams: params
+        });
     }
+
+    sendDepartureData(id,name){
+        params = {
+            destination : this.state.savedParams.destination,
+            departure : {
+                id: id,
+                name: name,
+            }
+        };
+        this.redirectWithPreviousParams(params);
+    }
+
+    sendDestinationData(id,name){
+        params = {
+            destination : {
+                id: id,
+                name: name,
+            },
+            departure: this.state.savedParams.departure,
+        };
+        this.redirectWithPreviousParams(params);
+    }
+
+    redirectWithPreviousParams(params){
+        this.props.navigation.replace('DisplayJourneysPage', {
+            destination: params.destination,
+            departure: params.departure,
+            savedParams: params,
+        });
+    }
+
+    selectPlace(id,name){
+        console.log(this.typename);
+        console.log(this.state.savedParams);
+        if(this.typename == "firstInput"){
+            this.sendFirstInputData(id,name);
+        }
+        else if(this.typename == "departure"){
+            this.sendDepartureData(id,name);
+        }
+        else if(this.typename == "destination"){
+            this.sendDestinationData(id,name);
+        }
+    }
+
 
     
     render(){

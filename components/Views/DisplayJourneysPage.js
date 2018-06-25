@@ -7,50 +7,21 @@ const APIManager = new APIHandler();
 
 class DisplayJourneysPage extends React.Component {
 
+
     constructor(props) {
         super(props);
         this.state = {
-            departure: {
-                id: "",
+            departure: this.props.navigation.getParam('departure', {
+                id: null,
                 name: "Ma position",
-            },
-            destination: {
-                id: "",
+            }),
+            destination: this.props.navigation.getParam('destination', {
+                id: null,
                 name: "Destination",
-            }
+            }),
+            savedParams: this.props.navigation.getParam('savedParams')
         };
-    }
-
-    getPlaceData(id,name,type){
-        console.log(id,name,type);
-        if(type == "destination"){
-            console.log('destination');
-            this.getDestinationData(id,name);
-        }
-        else if(type == "departure"){
-            console.log('departure');
-            this.getDepartureData(id,name);
-        }
-    }
-
-    getDepartureData(id,name){
-        let departure = {
-            id: id,
-            name: name
-        };
-        this.setState({
-            departure: departure,
-        });
-    }
-
-    getDestinationData(id,name){
-        this.setState({
-            destination: {
-                id: id,
-                name: name
-            },
-        });
-        console.log(this.state.destination);
+        console.log(this.state);
     }
 
     render(){
@@ -58,7 +29,7 @@ class DisplayJourneysPage extends React.Component {
             <View style={styles.container}>
                 <View style={styles.header}>
                     <View style={{flexDirection:'row',alignItems: 'center',justifyContent: 'center', marginBottom: 15 }}>
-                        <TouchableWithoutFeedback onPress={() => this.props.navigation.navigate('DepartureSearchPage',{ type:'departure', placeholder: 'Point de départ'})} style={{flex:1,flexDirection:'row',alignItems: 'center',justifyContent: 'center',padding:5}}>
+                        <TouchableWithoutFeedback onPress={() => this.props.navigation.navigate('DepartureSearchPage',{ type:'departure', placeholder: 'Point de départ', savedParams: this.state.savedParams})} style={{flex:1,flexDirection:'row',alignItems: 'center',justifyContent: 'center',padding:5}}>
                             <View style={styles.searchBar}>
                                 <Image source={require('../../assets/icons/search.png')} style={styles.ImageStyle} />
                                 <Text style={styles.input}>{this.state.departure.name}</Text>
@@ -67,7 +38,7 @@ class DisplayJourneysPage extends React.Component {
                     </View>
 
                     <View style={{flexDirection:'row',alignItems: 'center',justifyContent: 'center'}}>
-                        <TouchableWithoutFeedback onPress={() => this.props.navigation.navigate('SearchPage')} style={{flex:1,flexDirection:'row',alignItems: 'center',justifyContent: 'center',padding:5}}>
+                        <TouchableWithoutFeedback onPress={() => this.props.navigation.replace('SearchPage',{ type: "destination" ,savedParams: this.state.savedParams })} style={{flex:1,flexDirection:'row',alignItems: 'center',justifyContent: 'center',padding:5}}>
                             <View style={styles.searchBar}>
                                 <Image source={require('../../assets/icons/search.png')} style={styles.ImageStyle} />
                                 <Text style={styles.input}>{this.state.destination.name}</Text>
