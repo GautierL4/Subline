@@ -1,5 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View, Image, Animated, TextInput, TouchableWithoutFeedback, ScrollView, Dimensions, WebView } from 'react-native';
+import { styles, screenWidth, screenHeight } from '../../assets/styles/style';
 import { Constants } from 'expo';
 
 class MapPage extends React.Component {
@@ -38,7 +39,7 @@ class MapPage extends React.Component {
                         source={{uri:source}} />
       
                    <TouchableWithoutFeedback onPress={() => this.props.navigation.navigate('HomePage')}>
-                       <View style={styles.returnButton} >
+                       <View style={styles.returnButtonBg} >
                           <Image style={styles.returnArrow} source={require('../../assets/icons/go-back-left-arrow.png')} />
                        </View>
                    </TouchableWithoutFeedback>
@@ -47,32 +48,5 @@ class MapPage extends React.Component {
         )
     }
 }
-
-
-
-const screenWidth = Dimensions.get('window').width;
-const screenHeight = Dimensions.get('window').height;
-
-const styles = StyleSheet.create({
-    container: {
-        flex:1,
-        backgroundColor: '#fff',
-        paddingTop: Constants.statusBarHeight
-    },
-    returnButton: {
-        backgroundColor:'#000',
-        position:'absolute',
-        borderRadius:5,
-        top:25,
-        left:13,
-        height:50,
-        width:50
-    },
-    returnArrow: {
-        height:25,
-        width:25,
-        margin:12  
-    }
-  });
 
   export default MapPage;

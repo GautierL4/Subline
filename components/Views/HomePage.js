@@ -153,7 +153,7 @@ class HomePage extends React.Component {
                             </ScrollView>
                             <Text style={styles.title}>Vos itinéraires</Text>
                             <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-                                <TouchableOpacity style={styles.stopJourneyCard}>
+                                <TouchableOpacity style={styles.stopJourneyCard} onPress={() => this.props.navigation.navigate('JourneyPage')}>
                                     <View style={[styles.journeyCard,styles.card]}>
                                         <View style={styles.journeyCardTop}>
                                             <View style={styles.journeyCardTopRow}>
