@@ -336,5 +336,12 @@ export const styles = StyleSheet.create({
         height:25,
         width:25,
         margin:12
+    },
+    buttonTop: {
+        borderRadius:5,
+        top:25,
+        left:13,
+        height:50,
+        width:50 
     }
   });

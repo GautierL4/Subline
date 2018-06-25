@@ -13,11 +13,30 @@ class JourneyPage extends React.Component {
                 <ScrollView horizontal={false} contentContainerStyle={{flexGrow: 1}} style={{width:screenWidth}}>
                     <View style={{flexDirection:'row',height:230,backgroundColor:'#000',width:500}}>
                         <View style={{flexDirection:'row'}}>
+                        <View style={{flex:1,flexDirection:'row'}}>
                             <TouchableWithoutFeedback onPress={() => this.props.navigation.navigate('HomePage')}>
-                                <View style={styles.returnButton} >
+                                <View style={styles.buttonTop} >
                                     <Image style={styles.returnArrow} source={require('../../assets/icons/go-back-left-arrow.png')} />
                                 </View>
                             </TouchableWithoutFeedback>
+                        </View>
+                        <View style={{flex:1,flexDirection:'row'}}>
+                            <TouchableWithoutFeedback onPress={() => this.props.navigation.navigate('HomePage')}>
+                                <View style={styles.buttonTop} >
+                                    <Image style={styles.returnArrow} source={require('../../assets/icons/refresh.png')} />
+                                </View>
+                            </TouchableWithoutFeedback>
+                            <TouchableWithoutFeedback onPress={() => this.props.navigation.navigate('HomePage')}>
+                                <View style={styles.buttonTop} >
+                                    <Image style={styles.returnArrow} source={require('../../assets/icons/alarm_off.png')} />
+                                </View>
+                            </TouchableWithoutFeedback>
+                            <TouchableWithoutFeedback onPress={() => this.props.navigation.navigate('HomePage')}>
+                                <View style={styles.buttonTop} >
+                                    <Image style={styles.returnArrow} source={require('../../assets/icons/star_off.png')} />
+                                </View>
+                            </TouchableWithoutFeedback>
+                        </View>  
                         </View>
                         <View></View>
                     </View>
