@@ -308,7 +308,7 @@ export const styles = StyleSheet.create({
       alignItems: 'center',
       maxHeight:20,
       flex:0.1,
-      marginTop:13,
+      marginTop:12,
     },
     searchBar: {
       backgroundColor: '#ffffff',
@@ -348,9 +348,6 @@ export const styles = StyleSheet.create({
         margin:12
     },
     buttonTop: {
-        borderRadius:5,
-        top:25,
-        left:13,
         height:50,
         width:50 
     }

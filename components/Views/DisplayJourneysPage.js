@@ -34,7 +34,25 @@ class DisplayJourneysPage extends React.Component {
         return(
             <View style={styles.container}>
                 <View style={styles.header}>
-                    <View style={{flexDirection:'row',alignItems: 'center',justifyContent: 'center', marginBottom: 15 }}>
+                    <View style={{flexDirection:'row',height:50}}>
+                        <View style={{flex:0.9,flexDirection:'row'}}>
+                            <View style={{flex:1,flexDirection:'row'}}>
+                                <TouchableWithoutFeedback onPress={() => this.props.navigation.navigate('HomePage')}>
+                                    <View style={styles.buttonTop} >
+                                        <Image style={styles.returnArrow} source={require('../../assets/icons/go-back-left-arrow.png')} />
+                                    </View>
+                                </TouchableWithoutFeedback>
+                            </View>
+                            <View style={{flex:1,flexDirection:'row',justifyContent: 'flex-end'}}>
+                                <TouchableWithoutFeedback onPress={() => this.props.navigation.navigate('HomePage')}>
+                                    <View style={styles.buttonTop} >
+                                        <Image style={styles.returnArrow} source={require('../../assets/icons/inverse.png')} />
+                                    </View>
+                                </TouchableWithoutFeedback>
+                            </View>
+                        </View>
+                    </View>
+                    <View style={{flexDirection:'row',alignItems: 'center',justifyContent: 'center' }}>
                         <TouchableWithoutFeedback onPress={() => this.props.navigation.navigate('DepartureSearchPage',{ type:'departure', placeholder: 'Point de départ', savedParams: this.state.savedParams})} style={{flex:1,flexDirection:'row',alignItems: 'center',justifyContent: 'center',padding:5}}>
                             <View style={styles.searchBar}>
                                 <Image source={require('../../assets/icons/map-location.png')} style={styles.ImageStyle} />
@@ -43,7 +61,7 @@ class DisplayJourneysPage extends React.Component {
                         </TouchableWithoutFeedback>
                     </View>
 
-                    <View style={{flexDirection:'row',alignItems: 'center',justifyContent: 'center'}}>
+                    <View style={{flexDirection:'row',alignItems: 'center',justifyContent: 'center',marginTop:15}}>
                         <TouchableWithoutFeedback onPress={() => this.props.navigation.replace('SearchPage',{ type: "destination" ,savedParams: this.state.savedParams })} style={{flex:1,flexDirection:'row',alignItems: 'center',justifyContent: 'center',padding:5}}>
                             <View style={styles.searchBar}>
                                 <Image source={require('../../assets/icons/target.png')} style={styles.ImageStyle} />
