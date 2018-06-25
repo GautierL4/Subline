@@ -86,8 +86,6 @@ class SearchPage extends React.Component {
     }
 
     selectPlace(id,name){
-        console.log(this.typename);
-        console.log(this.state.savedParams);
         if(this.typename == "firstInput"){
             this.sendFirstInputData(id,name);
         }
@@ -102,8 +100,7 @@ class SearchPage extends React.Component {
 
     
     render(){
-
-        
+             
         return(
             <View style={[styles.container,]}>
                 <ScrollView horizontal={false} contentContainerStyle={{flexGrow: 1}} style={{width:screenWidth}}>
