@@ -21,30 +21,7 @@ class DisplayJourneysPage extends React.Component {
             }),
             savedParams: this.props.navigation.getParam('savedParams')
         };
-    }
-
-    componentDidMount(){
-        this.getCurrentLocation();
-    }
-
-    getCurrentLocation(){
-        navigator.geolocation.getCurrentPosition(
-                (position) => this.extractCurrentLocation(position),
-                (error) => console.log(error),
-                { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 },
-            );
-    }
-
-    extractCurrentLocation(position){
-        departure = this.state.departure;
-        let longitude = position.coords.longitude;
-        let latitude = position.coords.latitude;
-        let coords = longitude + ";" + latitude;
-        departure.id = coords;
-        this.setState({
-            departure: departure
-        });
-        console.log("State after geolocation",this.state);
+        console.log("DisplayJourneyPage",this.state);
     }
 
     render(){

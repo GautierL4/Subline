@@ -19,6 +19,7 @@ export const RootStack = createStackNavigator(
   {
     HomePage: { screen: HomePage },
     SearchPage: { screen: SearchPage },
+    DepartureSearchPage: { screen: SearchPage},
     JourneyPage: { screen: JourneyPage},
     MapPage: { screen: MapPage },
     DisplayJourneysPage: { screen: DisplayJourneysPage},
