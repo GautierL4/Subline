@@ -1,5 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View, Image, Animated, TextInput, TouchableWithoutFeedback, ScrollView, Dimensions, FlatList, Picker } from 'react-native';
+import ModalDropdown from 'react-native-modal-dropdown';
 import { styles } from '../../assets/styles/style';
 import APIHandler from '../API/APIHandler.js';
 
@@ -59,12 +60,11 @@ class DisplayJourneysPage extends React.Component {
                             </View>
                         </TouchableWithoutFeedback>
                     </View>
-                    <View>
-                    <Picker style={{width:150,color:'#fff'}}>
-                        <Picker.Item label="Maintenant" value="now" />
-                        <Picker.Item label="Heure de départ" value="start" />
-                        <Picker.Item label="Heure d'arrivée" value="end" />
-                    </Picker>
+                    <View style={{ height:47, flexDirection:"row"}}>
+                      <ModalDropdown style={{width:100,backgroundColor:'#000000', marginTop:30, marginBottom:0, marginRight:0}}
+                                     textStyle={{ color:'#ffffff',fontSize:17}}
+                                     dropdownStyle={{ height:103,marginTop:3 }} defaultValue="Maintenant" options={['Maintenant', "Heure d'arrivée","Heure de départ"]}/>
+                                      <Image source={require('../../assets/icons/sort-down.png')} style={{ height:8, width:8, marginTop:35, marginBottom:0, marginLeft:-8 }} />
                     </View>
                     
                 </View>
