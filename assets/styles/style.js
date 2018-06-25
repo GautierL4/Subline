@@ -1,7 +1,7 @@
 import { StyleSheet, Dimensions } from 'react-native';
 
-const screenWidth = Dimensions.get('window').width;
-const screenHeight = Dimensions.get('window').height;
+export const screenWidth = Dimensions.get('window').width;
+export const screenHeight = Dimensions.get('window').height;
 
 export const styles = StyleSheet.create({
     container: {
@@ -315,8 +315,16 @@ export const styles = StyleSheet.create({
       flex:0.9,
       flexDirection:'row',
     },
-    returnButton: {
+    returnButtonBg: {
         backgroundColor:'#000',
+        position:'absolute',
+        borderRadius:5,
+        top:25,
+        left:13,
+        height:50,
+        width:50
+    },
+    returnButton: {
         position:'absolute',
         borderRadius:5,
         top:25,
