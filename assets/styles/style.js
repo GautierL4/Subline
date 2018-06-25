@@ -308,6 +308,7 @@ export const styles = StyleSheet.create({
       alignItems: 'center',
       maxHeight:20,
       flex:0.1,
+      marginTop:13,
     },
     searchBar: {
       backgroundColor: '#ffffff',
