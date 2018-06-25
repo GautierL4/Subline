@@ -5,6 +5,7 @@ import HomePage from './components/Views/HomePage';
 import SearchPage from './components/Views/SearchPage';
 import MapPage from './components/Views/MapPage';
 import DisplayJourneysPage from './components/Views/DisplayJourneysPage';
+import JourneyPage from './components/Views/JourneyPage';
 
 export default class App extends React.Component {
   render() {
@@ -18,7 +19,7 @@ export const RootStack = createStackNavigator(
   {
     HomePage: { screen: HomePage },
     SearchPage: { screen: SearchPage },
-    DepartureSearchPage: { screen: SearchPage},
+    JourneyPage: { screen: JourneyPage},
     MapPage: { screen: MapPage },
     DisplayJourneysPage: { screen: DisplayJourneysPage},
   },
