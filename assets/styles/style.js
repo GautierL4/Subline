@@ -24,11 +24,11 @@ export const styles = StyleSheet.create({
         elevation: 7,
     },
     header: {
-        flex: 2,
         backgroundColor: '#000',
         alignItems: 'center',
         justifyContent: 'center',
         alignSelf: 'stretch',  
+        height: 230,
     },
     headerMax: {
         height: 230,
@@ -350,5 +350,5 @@ export const styles = StyleSheet.create({
     buttonTop: {
         height:50,
         width:50 
-    }
+    },
   });
