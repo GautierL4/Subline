@@ -24,13 +24,21 @@ class DisplayJourneysPage extends React.Component {
         console.log("DisplayJourneyPage",this.state);
     }
 
+    componentDidMount(){
+        this.searchJourney();
+    }
+
+    async searchJourney(){
+        try{
+            data = await APIManager.getJourneys(this.state.departure.id, this.state.destination.id);
+        }
+        catch(e){
+            console.error(e);
+        }
+        console.log(data);
+    }
+
     render(){
-
-        date = null;
-
-        console.log(APIManager.getJourney(this.state.departure.id, this.state.destination.id,date));
-
-
         return(
             <View style={styles.container}>
                 <View style={styles.header}>
