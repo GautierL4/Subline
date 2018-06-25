@@ -74,11 +74,17 @@ class DisplayJourneysPage extends React.Component {
                             </View>
                         </TouchableWithoutFeedback>
                     </View>
+                    <View>
+                    <Picker style={{width:150,color:'#fff'}}>
+                        <Picker.Item label="Maintenant" value="now" />
+                        <Picker.Item label="Heure de départ" value="start" />
+                        <Picker.Item label="Heure d'arrivée" value="end" />
+                    </Picker>
+                    </View>
                     
                 </View>
 
                  <View style={styles.body}>
-
                       
                  </View>
             </View>
