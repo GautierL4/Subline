@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, Image, Animated, TextInput, TouchableWithoutFeedback, ScrollView, Dimensions, TouchableHighlight, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, Image, Animated, TextInput, TouchableWithoutFeedback, ScrollView, Dimensions, TouchableHighlight, TouchableOpacity, AsyncStorage } from 'react-native';
 import { styles } from '../../assets/styles/style';
 
 class FadeInView extends React.Component {
@@ -51,7 +51,18 @@ class HomePage extends React.Component {
         }, 4000);
     }
 
+    async displayBookmark() {
+
+    const value = await AsyncStorage.getItem('key');
+      console.log(value);
+       
+        
+    }
+
     render(){
+
+        this.displayBookmark();
+
         if(this.state.isLoading){
             return(
             <FadeInView style={{backgroundColor: 'black',width:screenWidth,flexDirection:'row', alignItems: 'center',justifyContent: 'center'}}>
@@ -269,7 +280,7 @@ class HomePage extends React.Component {
                             <Text style={styles.title}>Plans</Text>
                             <TouchableWithoutFeedback onPress={() => {
                                 this.props.navigation.navigate('MapPage', {
-                                    param: 'https://www.ratp.fr/sites/default/files/plans-lignes/Plans-essentiels/Plan-Metro.1496264586.pdf',
+                                    param: 'https://drive.google.com/viewerng/viewer?embedded=true&url=https://www.ratp.fr/sites/default/files/plans-lignes/Plans-essentiels/Plan-Metro.1496264586.pdf',
                                 });
                                  }}>
                                  
