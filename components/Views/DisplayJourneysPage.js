@@ -105,8 +105,8 @@ class DisplayJourneysPage extends React.Component {
                                     <Image style={styles.journeyCardBottomImg} source={require('../../assets/icons/lines/M7bisgenRVB.png')} />
                                     <Image style={styles.journeyCardBottomImgDot} source={require('../../assets/icons/dot.png')} />
                                     <Image style={styles.journeyCardBottomImg} source={require('../../assets/icons/lines/M7bisgenRVB.png')} />
-                                    <Image style={styles.journeyCardBottomImgDot} source={require('../../assets/icons/dot.png')} />
-                                    <Image style={styles.journeyCardBottomImg} source={require('../../assets/icons/lines/M7bisgenRVB.png')} />
+                                    {/*<Image style={styles.journeyCardBottomImgDot} source={require('../../assets/icons/dot.png')} />
+                                    <Image style={styles.journeyCardBottomImg} source={require('../../assets/icons/lines/M7bisgenRVB.png')} />*/}
                                 </View>
                                 <View style={{flex:1,flexDirection:'row',justifyContent: 'flex-end',alignItems:'center',marginRight:20}}>
                                     <Text style={{fontSize:24,fontWeight:"bold"}}>14</Text>
@@ -134,8 +134,8 @@ class DisplayJourneysPage extends React.Component {
                                             <Image style={styles.journeyCardBottomImg} source={require('../../assets/icons/lines/M7bisgenRVB.png')} />
                                             <Image style={styles.journeyCardBottomImgDot} source={require('../../assets/icons/dot.png')} />
                                             <Image style={styles.journeyCardBottomImg} source={require('../../assets/icons/lines/M7bisgenRVB.png')} />
-                                            <Image style={styles.journeyCardBottomImgDot} source={require('../../assets/icons/dot.png')} />
-                                            <Image style={styles.journeyCardBottomImg} source={require('../../assets/icons/lines/M7bisgenRVB.png')} />
+                                            {/*<Image style={styles.journeyCardBottomImgDot} source={require('../../assets/icons/dot.png')} />
+                                            <Image style={styles.journeyCardBottomImg} source={require('../../assets/icons/lines/M7bisgenRVB.png')} />*/}
                                         </View>
                                         <View style={{flex:1,flexDirection:'row',justifyContent: 'flex-end',alignItems:'center'}}>
                                             <Text style={{fontSize:24,fontWeight:"bold"}}>14</Text>

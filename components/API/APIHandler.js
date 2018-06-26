@@ -13,7 +13,7 @@ const APIBaseURL = 'https://api.navitia.io/v1/';
 const autoCompleteService = 'places?q=';
 const to = 'journeys?to=';
 const from = 'from=';
-const departureArrivalDate = 'datetime_represents=departure&datetime=';
+const departureDate = 'datetime_represents=departure&datetime=';
 const arrivalDate = 'datetime_represents=arrival&datetime=';
 
 class APIHandler{
@@ -59,7 +59,7 @@ class APIHandler{
                 var request = APIBaseURL + this.coverage + to + departure + '&' + from + arrival + '&' + arrivalDate + date + '&';
             }
             else{
-                var request = APIBaseURL + this.coverage + to + departure + '&' + from + arrival + '&' + departureArrivalDate + date + '&';
+                var request = APIBaseURL + this.coverage + to + departure + '&' + from + arrival + '&' + departureDate + date + '&';
             }
         }       
         try{
