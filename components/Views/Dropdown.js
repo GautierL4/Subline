@@ -8,49 +8,77 @@ class Dropdown extends React.Component {
     constructor() {
         super();
         this.state = {
-            display: {
+            displayOptions: {
                 display:'none',
                 flex:0,
-            }
+            },
+            display: {
+                display:'flex',
+                flex:1,
+            },
+            options: [
+                'Maintenant',
+                'Heure de départ',
+                'Heure d\'arrivée',
+            ]
         };
     }
 
     displayOptions() {
-        if(this.state.display.display=='none') {
+        if(this.state.displayOptions.display=='none') {
             this.setState({
-                display: {display:'flex',flex:1}
-
+                displayOptions: {display:'flex',flex:1},
+                display: {display:'none',flex:0}
             });
         } else {
             this.setState({
-                display: {display:'none',flex:0}
+                displayOptions: {display:'none',flex:0},
+                display: {display:'flex',flex:1}
             });
-        }
-        // console.log(this.state.display)
-        
+        }        
+    }
+
+    async chooseDate() {
+        try {
+            const {action, year, month, day} = await DatePickerAndroid.open({
+              // Use `new Date()` for current date.
+              // May 25 2020. Month 0 is January.
+              date: new Date(2020, 4, 25)
+            });
+            if (action !== DatePickerAndroid.dismissedAction) {
+              // Selected year, month (0-11), day
+            }
+          } catch ({code, message}) {
+            console.warn('Cannot open date picker', message);
+          }
     }
 
     render(){
-        
         return (
             <View style={{ flex:1, flexDirection:'row'}}>
-                <TouchableOpacity onPress={()=>this.displayOptions()} style={{justifyContent:'center',alignItems:'center'}}>
-                    <View style={{flexDirection:'row',justifyContent:'center',alignItems:'center'}}>
-                        <Text style={{color:'#fff',fontSize:14}}>Maintenant</Text>
-                        <Image style={{height:8,width:8,marginLeft:5}} source={require('../../assets/icons/sort-down.png')} />
-                    </View>
-                </TouchableOpacity>
-                <TouchableOpacity onPress={()=>this.displayOptions()} style={[this.state.display,{justifyContent:'center',alignItems:'center'}]}>
-                    <View style={{flexDirection:'row',justifyContent:'center',alignItems:'center'}}>
-                        <Text style={{color:'#fff',fontSize:14}}>Heure de départ</Text>
-                    </View>
-                </TouchableOpacity>
-                <TouchableOpacity onPress={()=>this.displayOptions()} style={[this.state.display,{justifyContent:'center',alignItems:'center'}]}>
-                    <View style={{flexDirection:'row',justifyContent:'center',alignItems:'center'}}>
-                        <Text style={{color:'#fff',fontSize:14}}>Heure d'arrivée</Text>
-                    </View>
-                </TouchableOpacity>
-
+                <View style={{flex:0.9,flexDirection:'row',justifyContent:'center',alignItems:'center'}}>
+                    <TouchableOpacity onPress={()=>this.displayOptions()} style={[this.state.display,{justifyContent:'center',alignItems:'center'}]}>
+                        <View style={{flexDirection:'row',justifyContent:'center',alignItems:'center'}}>
+                            <Text style={{color:'#fff',fontSize:14}}>{this.state.options[0]}</Text>
+                            <Image style={{height:8,width:8,marginLeft:5}} source={require('../../assets/icons/sort-down.png')} />
+                        </View>
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={()=>this.chooseDate()} style={[this.state.displayOptions,{justifyContent:'center',alignItems:'center'}]}>
+                        <View style={{flexDirection:'row',justifyContent:'center',alignItems:'center'}}>
+                            <Text style={{color:'#fff',fontSize:14}}>{this.state.options[0]}</Text>
+                        </View>
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={()=>this.chooseDate()} style={[this.state.displayOptions,{justifyContent:'center',alignItems:'center'}]}>
+                        <View style={{flexDirection:'row',justifyContent:'center',alignItems:'center'}}>
+                            <Text style={{color:'#fff',fontSize:14}}>{this.state.options[1]}</Text>
+                        </View>
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={()=>this.chooseDate()} style={[this.state.displayOptions,{justifyContent:'center',alignItems:'center'}]}>
+                        <View style={{flexDirection:'row',justifyContent:'center',alignItems:'center'}}>
+                            <Text style={{color:'#fff',fontSize:14}}>{this.state.options[2]}</Text>
+                        </View>
+                    </TouchableOpacity>
+                </View>
             </View>
         )
          
