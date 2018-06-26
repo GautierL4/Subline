@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, Image, Animated, TextInput, TouchableWithoutFee
 import ModalDropdown from 'react-native-modal-dropdown';
 import { styles, screenWidth, screenHeight } from '../../assets/styles/style';
 import APIHandler from '../API/APIHandler.js';
+import Dropdown from '../Views/Dropdown';
 
 const APIManager = new APIHandler();
 
@@ -36,7 +37,7 @@ class DisplayJourneysPage extends React.Component {
         catch(e){
             console.error(e);
         }
-        console.log("Data from API",data);
+        // console.log("Data from API",data);
     }
 
     render(){
@@ -79,12 +80,7 @@ class DisplayJourneysPage extends React.Component {
                                 </View>
                             </TouchableWithoutFeedback>
                         </View>
-                        <View style={{ height:50, flexDirection:"row"}}>
-                        <ModalDropdown style={{width:100,backgroundColor:'#000000', marginTop:20, marginBottom:0, marginRight:0}}
-                                        textStyle={{ color:'#ffffff',fontSize:17}}
-                                        dropdownStyle={{ height:103,marginTop:3 }} defaultValue="Maintenant" options={['Maintenant', "Heure d'arrivée","Heure de départ"]}/>
-                                        <Image source={require('../../assets/icons/sort-down.png')} style={{ height:8, width:8, marginTop:20, marginBottom:0, marginLeft:-8 }} />
-                        </View> 
+                        <Dropdown />
                     </View>
                     <View style={styles.body}>
                         <Text style={styles.title}>Meilleur itinéraire</Text>
