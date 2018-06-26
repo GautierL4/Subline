@@ -31,7 +31,7 @@ class MapPage extends React.Component {
 
 
         return(
-            <View style={styles.container}>
+            <View style={{flex:1,backgroundColor: '#fff',paddingTop: Constants.statusBarHeight}}>
                 
                    <WebView 
                         bounces={false}
