@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, Image, Animated, TextInput, TouchableWithoutFeedback, ScrollView, Dimensions, FlatList, Picker, StatusBar } from 'react-native';
+import { StyleSheet, Text, View, Image, Animated, TextInput, TouchableWithoutFeedback, ScrollView, Dimensions, FlatList, Picker, StatusBar, TouchableOpacity } from 'react-native';
 import ModalDropdown from 'react-native-modal-dropdown';
 import { styles, screenWidth, screenHeight } from '../../assets/styles/style';
 import APIHandler from '../API/APIHandler.js';
@@ -89,7 +89,7 @@ class DisplayJourneysPage extends React.Component {
                     <View style={styles.body}>
                         <Text style={styles.title}>Meilleur itinéraire</Text>
                         <View style={styles.mapCardBox}>
-                            <View style={[styles.card,styles.mapCard]}>
+                            <TouchableOpacity style={[styles.card,styles.mapCard]}>
                                 <View style={{flex:3,marginLeft:20,flexDirection:'row',alignItems:'center',flexWrap: 'wrap',}}>
                                     <Image style={styles.journeyCardBottomImg} source={require('../../assets/icons/lines/RERBgenRVB.png')} />
                                     <Image style={styles.journeyCardBottomImgDot} source={require('../../assets/icons/dot.png')} />
@@ -112,12 +112,12 @@ class DisplayJourneysPage extends React.Component {
                                     <Text style={{fontSize:24,fontWeight:"bold"}}>14</Text>
                                     <Text style={{fontSize:12,marginTop:9,marginLeft:5}}>min</Text>
                                 </View>
-                            </View>
+                            </TouchableOpacity>
                         </View> 
                         <Text style={styles.title}>Autres itinéraires</Text>
                         <View style={styles.mapCardBox}>
                             <View style={[styles.card,styles.mapCard,{flexDirection:'column'}]}>
-                                <View style={{flexDirection:'column',alignSelf: 'stretch',borderBottomColor: '#e5e5e5',borderBottomWidth: 1,marginLeft:20,marginRight:20,paddingTop:10}}>
+                                <TouchableOpacity style={{flexDirection:'column',alignSelf: 'stretch',borderBottomColor: '#e5e5e5',borderBottomWidth: 1,marginLeft:20,marginRight:20,paddingTop:10}}>
                                     <View style={{flexDirection:'row'}}>
                                         <View style={{flex:3,flexDirection:'row',alignItems:'center',flexWrap: 'wrap',}}>
                                             <Image style={styles.journeyCardBottomImg} source={require('../../assets/icons/lines/RERBgenRVB.png')} />
@@ -142,11 +142,11 @@ class DisplayJourneysPage extends React.Component {
                                             <Text style={{fontSize:12,marginTop:9,marginLeft:5}}>min</Text>
                                         </View>
                                     </View>
-                                    <View>
+                                    <View style={{marginBottom:10}}>
                                         <Text style={{fontSize:12,color:'#898989'}}>Le moins de marche à pied</Text>
                                     </View>
-                                </View>
-                                <View style={{flexDirection:'column',alignSelf: 'stretch',borderBottomColor: '#e5e5e5',borderBottomWidth: 1,marginLeft:20,marginRight:20,paddingTop:10}}>
+                                </TouchableOpacity>
+                                <TouchableOpacity style={{flexDirection:'column',alignSelf: 'stretch',borderBottomColor: '#e5e5e5',borderBottomWidth: 1,marginLeft:20,marginRight:20,paddingTop:10}}>
                                     <View style={{flexDirection:'row'}}>
                                         <View style={{flex:3,flexDirection:'row',alignItems:'center',flexWrap: 'wrap',}}>
                                             <Image style={styles.journeyCardBottomImg} source={require('../../assets/icons/lines/RERBgenRVB.png')} />
@@ -165,10 +165,10 @@ class DisplayJourneysPage extends React.Component {
                                             <Text style={{fontSize:12,marginTop:9,marginLeft:5}}>min</Text>
                                         </View>
                                     </View>
-                                    <View>
-                                        <Text style={{fontSize:12,color:'#898989'}}>Le moins de correspondance</Text>
+                                    <View style={{marginBottom:10}}>
+                                        <Text style={{fontSize:12,color:'#898989',}}>Le moins de correspondance</Text>
                                     </View>
-                                </View>
+                                </TouchableOpacity>
                             </View>
                         </View> 
                     </View>
