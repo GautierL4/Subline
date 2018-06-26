@@ -1,7 +1,8 @@
 import React from 'react';
-import { StyleSheet, Text, View, Image, Animated, TextInput, TouchableWithoutFeedback, ScrollView, Dimensions, FlatList, Picker, StatusBar, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, DatePickerAndroid, TimePickerAndroid, Image, Animated, TextInput, TouchableWithoutFeedback, ScrollView, Dimensions, FlatList, Picker, StatusBar, TouchableOpacity } from 'react-native';
 import ModalDropdown from 'react-native-modal-dropdown';
 import { styles, screenWidth, screenHeight } from '../../assets/styles/style';
+import DatePicker from 'react-native-datepicker'
 
 class Dropdown extends React.Component {
 
@@ -16,11 +17,11 @@ class Dropdown extends React.Component {
                 display:'flex',
                 flex:1,
             },
-            options: [
-                'Maintenant',
-                'Heure de départ',
-                'Heure d\'arrivée',
-            ]
+            title: 'Maintenant',
+            when: {
+                datetime:null,
+                type:'now'
+            },
         };
     }
 
@@ -38,19 +39,40 @@ class Dropdown extends React.Component {
         }        
     }
 
-    async chooseDate() {
+    async chooseDate(type) {
+        var datetime = null
+        var title = type=='departure' ? 'Partir le ' : type=='arrival' ? 'Arrivé le ' : null
         try {
             const {action, year, month, day} = await DatePickerAndroid.open({
-              // Use `new Date()` for current date.
-              // May 25 2020. Month 0 is January.
-              date: new Date(2020, 4, 25)
+                date: new Date()
             });
-            if (action !== DatePickerAndroid.dismissedAction) {
-              // Selected year, month (0-11), day
-            }
-          } catch ({code, message}) {
+            try {
+                const {action, hour, minute} = await TimePickerAndroid.open({});
+                title+=day+'/'+this.addAZeroBeforeADigit(month+1)+'/'+year+' à '+this.addAZeroBeforeADigit(hour)+'h'+this.addAZeroBeforeADigit(minute)
+                datetime = year + '' + this.addAZeroBeforeADigit(month+1) + '' + this.addAZeroBeforeADigit(day) + 'T' + this.addAZeroBeforeADigit(hour) + '' + this.addAZeroBeforeADigit(minute) + '00'
+            } catch ({code, message}) {
+                console.warn('Cannot open time picker', message);
+            } 
+        } catch ({code, message}) {
             console.warn('Cannot open date picker', message);
-          }
+        }
+        this.setState({
+            when: {datetime:datetime,type:type},
+            title: title,
+        });      
+        this.displayOptions()
+    }
+
+    addAZeroBeforeADigit(digit) {
+        return digit<10 ? '0'+digit : digit
+    }
+
+    resetToNow() {
+        this.setState({
+            when: {datetime:null,type:'now'},
+            title: 'Maintenant',
+        });      
+        this.displayOptions()
     }
 
     render(){
@@ -59,23 +81,23 @@ class Dropdown extends React.Component {
                 <View style={{flex:0.9,flexDirection:'row',justifyContent:'center',alignItems:'center'}}>
                     <TouchableOpacity onPress={()=>this.displayOptions()} style={[this.state.display,{justifyContent:'center',alignItems:'center'}]}>
                         <View style={{flexDirection:'row',justifyContent:'center',alignItems:'center'}}>
-                            <Text style={{color:'#fff',fontSize:14}}>{this.state.options[0]}</Text>
+                            <Text style={{color:'#fff',fontSize:14}}>{this.state.title}</Text>
                             <Image style={{height:8,width:8,marginLeft:5}} source={require('../../assets/icons/sort-down.png')} />
                         </View>
                     </TouchableOpacity>
-                    <TouchableOpacity onPress={()=>this.chooseDate()} style={[this.state.displayOptions,{justifyContent:'center',alignItems:'center'}]}>
+                    <TouchableOpacity onPress={()=>this.resetToNow()} style={[this.state.displayOptions,{justifyContent:'center',alignItems:'center'}]}>
                         <View style={{flexDirection:'row',justifyContent:'center',alignItems:'center'}}>
-                            <Text style={{color:'#fff',fontSize:14}}>{this.state.options[0]}</Text>
+                            <Text style={{color:'#fff',fontSize:14}}>Maintenant</Text>
                         </View>
                     </TouchableOpacity>
-                    <TouchableOpacity onPress={()=>this.chooseDate()} style={[this.state.displayOptions,{justifyContent:'center',alignItems:'center'}]}>
+                    <TouchableOpacity onPress={()=>this.chooseDate('departure')} style={[this.state.displayOptions,{justifyContent:'center',alignItems:'center'}]}>
                         <View style={{flexDirection:'row',justifyContent:'center',alignItems:'center'}}>
-                            <Text style={{color:'#fff',fontSize:14}}>{this.state.options[1]}</Text>
+                            <Text style={{color:'#fff',fontSize:14}}>Heure de départ</Text>
                         </View>
                     </TouchableOpacity>
-                    <TouchableOpacity onPress={()=>this.chooseDate()} style={[this.state.displayOptions,{justifyContent:'center',alignItems:'center'}]}>
+                    <TouchableOpacity onPress={()=>this.chooseDate('arrival')} style={[this.state.displayOptions,{justifyContent:'center',alignItems:'center'}]}>
                         <View style={{flexDirection:'row',justifyContent:'center',alignItems:'center'}}>
-                            <Text style={{color:'#fff',fontSize:14}}>{this.state.options[2]}</Text>
+                            <Text style={{color:'#fff',fontSize:14}}>Heure d'arrivée</Text>
                         </View>
                     </TouchableOpacity>
                 </View>
