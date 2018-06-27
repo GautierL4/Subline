@@ -172,16 +172,14 @@ export const styles = StyleSheet.create({
     },
     resultCardBox: {
         flex:1,
-        height:220,
         flexDirection:'row',
-        alignItems: 'center',
+        alignItems: 'flex-start',
         justifyContent: 'center',
-        width:screenWidth
+        width:screenWidth,
     },
     resultCard: {
         flexDirection:'row',
         alignItems: 'flex-start',
-        height:200,
         justifyContent: 'flex-start',
         flex:0.9,
         flexDirection:'row',

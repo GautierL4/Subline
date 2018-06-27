@@ -99,34 +99,18 @@ class APIHandler{
     //Extract stop area and places from API Response
     extractPlacesFromResponse(response){
         places = [];
-        stops = [];
-        var j = 0;
-        var k = 0;
         for(let i=0;i<response.places.length;i++){
-            if(response.places[i].embedded_type != "stop_area"){
-                places[j] = {
-                    id : response.places[i].id,
-                    name : response.places[i].name
-                }
-                j++;
-            }
-            else{
-                stops[k] = {
-                    id : response.places[i].id,
-                    name : response.places[i].name
-                }
-                k++;
+            places[i] = {
+                id : response.places[i].id,
+                name : response.places[i].name,
+                type : response.places[i].embedded_type
             }
         }
-
         data = {
             places: places,
-            stops: stops
         }
-
         return data;
     }
-
 
 }
 

@@ -13,13 +13,9 @@ class SearchPage extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            locations: {stops: null,
-                        places: null},
+            locations: {places: null},
             search: '',
-            savedParams: this.props.navigation.getParam('savedParams',{
-                destination:null,
-                departure: null
-            })
+            savedParams: this.props.navigation.getParam('savedParams',{ destination:null, departure: null })
         };
         this.placeholder = this.props.navigation.getParam('placeholder','Votre destination');
         this.typename = this.props.navigation.getParam('type');
@@ -145,10 +141,10 @@ class SearchPage extends React.Component {
                                 </View>
                         </View>
 
-                        <Text style={styles.title}>Stations</Text>
+                        <Text style={styles.title}>Résultats</Text>
                         <View style={styles.resultCardBox}>
                             <View style={[styles.card,styles.resultCard]}>
-                                <FlatList style={{flex:1,flexDirection:'column'}} data={this.state.locations.stops} renderItem={({item}) => 
+                                <FlatList style={{flex:1,flexDirection:'column'}} data={this.state.locations.places} renderItem={({item}) => 
                                     <TouchableWithoutFeedback style={styles.resultClickable} onPress={() =>this.selectPlace(item.id,item.name)}>
                                         <View style={styles.resultItem}>
                                             <Text style={styles.resultItemText}>{item.name}</Text>
@@ -158,20 +154,8 @@ class SearchPage extends React.Component {
                             </View>
                         </View>
 
-                        <Text style={styles.title}>Lieux</Text>
-                        <View style={styles.resultCardBox}>
-                            <View style={[styles.card,styles.resultCard]}>
-                                <FlatList style={{flex:1,flexDirection:'column'}} data={this.state.locations.places} renderItem={({item}) => 
-                                    <TouchableWithoutFeedback style={styles.resultClickable} onPress={() =>this.selectPlace(item.id,item.name)}>
-                                        <View style={styles.resultItem}>
-                                            <Text style={styles.resultItemText}>{item.name}</Text>
-                                        </View>
-                                    </TouchableWithoutFeedback>}
-                            keyExtractor={(item, index) => index.toString} />
-                            </View>
-                        </View>
                     </View> 
-                    </ScrollView>
+                </ScrollView>
             </View>
         )
     }
