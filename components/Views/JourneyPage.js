@@ -2,6 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View, Image, Animated, TextInput, TouchableWithoutFeedback, TouchableOpacity, ScrollView, Dimensions, FlatList, AsyncStorage, Easing  } from 'react-native';
 import { styles, screenWidth, screenHeight } from '../../assets/styles/style';
 import APIHandler from '../API/APIHandler.js';
+import PartOfJourney from '../Views/PartOfJourney';
 
 const APIManager = new APIHandler();
 
@@ -96,7 +97,14 @@ class JourneyPage extends React.Component {
                         </View>
                     </View>
                     <View style={styles.body}> 
-                        <Image style={styles.returnArrow} source={require('../../assets/icons/star_off.png')} />
+                        {/* <Text style={styles.title}>Carte</Text> */}
+                        <Text style={styles.title}>Itinéraire</Text>
+                        <View style={{flexDirection:'row',alignItems: 'center',justifyContent: 'center',}}>
+                            <View style={[styles.card,{flex:0.9,flexDirection:'column'}]}>
+                                <PartOfJourney/>
+                                <PartOfJourney/>
+                            </View>
+                        </View>
                     </View>
                 </ScrollView>
             </View>
