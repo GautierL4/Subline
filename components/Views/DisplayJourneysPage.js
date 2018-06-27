@@ -92,7 +92,7 @@ class DisplayJourneysPage extends React.Component {
                 <View style={styles.container}>
                     <ScrollView horizontal={false} contentContainerStyle={{flexGrow: 1}} style={{width:screenWidth}}>
                         <View style={styles.header}>
-                            <View style={{flexDirection:'row',height:60,justifyContent:'center'}}>
+                            <View style={{flexDirection:'row',height:80,justifyContent:'center'}}>
                                 <View style={{flex:0.9,flexDirection:'row',}}>
                                     <View style={{flex:1,flexDirection:'row',alignItems:'center'}}>
                                         <TouchableWithoutFeedback onPress={() => this.props.navigation.navigate('HomePage')}>

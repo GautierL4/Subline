@@ -26,9 +26,10 @@ export const styles = StyleSheet.create({
     header: {
         backgroundColor: '#000',
         alignItems: 'center',
-        justifyContent: 'center',
+        justifyContent: 'flex-start',
         alignSelf: 'stretch',  
         height: 230,
+        flexDirection: 'column',
     },
     headerMax: {
         height: 230,

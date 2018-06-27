@@ -75,7 +75,7 @@ class HomePage extends React.Component {
             return(
                 <View style={styles.container}>
                     <ScrollView horizontal={false} contentContainerStyle={{flexGrow: 1}}>
-                        <View style={[styles.header,styles.headerMax]}>
+                        <View style={[styles.header,styles.headerMax,{justifyContent: 'center',}]}>
                             <Image source={require('../../assets/icons/subline.png')} style={{width: 90, height: 90}}/>
                         </View>
                         <View style={styles.body}>
