@@ -134,6 +134,8 @@ class APIHandler{
             places[i] = {
                 id : response.pt_objects[i].id,
                 name : response.pt_objects[i].name,
+                bgColor: response.pt_objects[i].line.color,
+                color: response.pt_objects[i].line.text_color,
                 // type : response.pt_objects[i].embedded_type
             }
         }
