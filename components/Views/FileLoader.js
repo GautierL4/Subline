@@ -1,5 +1,6 @@
 const icons = {
     walkIcon: require('../../assets/icons/walk.png'),
+    wait: require('../../assets/icons/wait.png'),
     M1: require('../../assets/icons/lines/M1genRVB.png'),
     M2: require('../../assets/icons/lines/M2genRVB.png'),
     M3: require('../../assets/icons/lines/M3genRVB.png'),
@@ -17,6 +18,9 @@ const icons = {
     M14: require('../../assets/icons/lines/M14genRVB.png'),
     RERA: require('../../assets/icons/lines/RERAgenRVB.png'),
     RERB: require('../../assets/icons/lines/RERBgenRVB.png'),
+    RERC: require('../../assets/icons/lines/RERCgenRVB.png'),
+    RERD: require('../../assets/icons/lines/RERDgenRVB.png'),
+    RERE: require('../../assets/icons/lines/REREgenRVB.png'),
     T1: require('../../assets/icons/lines/T1genRVB.png'),
     T2: require('../../assets/icons/lines/T2genRVB.png'),
     T3a: require('../../assets/icons/lines/T3a-genRVB.png'),
@@ -25,6 +29,15 @@ const icons = {
     T6: require('../../assets/icons/lines/T6genRVB.png'),
     T7: require('../../assets/icons/lines/T7genRVB.png'),
     T8: require('../../assets/icons/lines/T8genRVB.png'),
+    T4: require('../../assets/icons/lines/tn-icon-t4.png'),
+    TRAINH: require('../../assets/icons/lines/tn-icon-trah.png'),
+    TRAINJ: require('../../assets/icons/lines/tn-icon-traj.png'),
+    TRAINK: require('../../assets/icons/lines/tn-icon-trak.png'),
+    TRAINL: require('../../assets/icons/lines/tn-icon-tral.png'),
+    TRAINN: require('../../assets/icons/lines/tn-icon-tran.png'),
+    TRAINP: require('../../assets/icons/lines/tn-icon-trap.png'),
+    TRAINR: require('../../assets/icons/lines/tn-icon-trar.png'),
+    TRAINU: require('../../assets/icons/lines/tn-icon-trau.png'),
     Bus: require('../../assets/icons/icon_bus.png'),
 };
 
@@ -50,7 +63,7 @@ class FileLoader {
         }
         else if(section.type == "waiting"){
             console.log("Get Wait Icon");
-            return "waitIcon";
+            return icons.wait;
         }
         else{
             console.log("Get Public Transportation Icon");
@@ -71,6 +84,39 @@ class FileLoader {
                 case 'B':
                     icon = icons.RERB;
                     break;
+                case 'C':
+                    icon = icons.RERC;
+                    break;
+                case 'D':
+                    icon = icons.RERD;
+                    break;
+                case 'E':
+                    icon = icons.RERE;
+                    break;
+                case 'H':
+                    icon = icons.TRAINH;
+                    break;
+                case 'J':
+                    icon = icons.TRAINJ;
+                    break;
+                case 'K':
+                    icon = icons.TRAINK;
+                    break;
+                case 'L':
+                    icon = icons.TRAINL;
+                    break;
+                case 'N':
+                    icon = icons.TRAINN;
+                    break;
+                case 'P':
+                    icon = icons.TRAINP;
+                    break;      
+                case 'R':
+                    icon = icons.TRAINR;
+                    break; 
+                case 'U':
+                    icon = icons.TRAINU;
+                    break; 
                 case '1':
                     icon = icons.M1;
                     break;

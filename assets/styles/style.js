@@ -169,6 +169,7 @@ export const styles = StyleSheet.create({
         marginRight: 5,
         marginTop:4,
         marginBottom: 4,
+        alignSelf: 'center',
     },
     resultCardBox: {
         flex:1,
@@ -324,6 +325,7 @@ export const styles = StyleSheet.create({
             height: 4,
             width: 0
         },
+        height:45,
       //android
       elevation: 7,
       flex:0.9,
