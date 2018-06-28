@@ -118,7 +118,7 @@ class APIHandler{
 
     async getAutoCompleteLines(userInput){
         var request = APIBaseURL + this.coverage + autoCompleteLinesService + userInput + lineOption;
-        console.log(request);
+        // console.log(request);
         try{
             let response = await fetch(request,header);
             responseJson = await response.json();
@@ -154,7 +154,7 @@ class APIHandler{
         catch(e){
             console.error(e);
         }
-        console.log(data);
+        // console.log(data);
         return data;
     }
 
