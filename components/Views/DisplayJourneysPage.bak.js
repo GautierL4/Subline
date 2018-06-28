@@ -2,12 +2,10 @@ import React from 'react';
 import { StyleSheet, Text, View, Image, Animated, TextInput, TouchableWithoutFeedback, ScrollView, Dimensions, FlatList, Picker, StatusBar, TouchableOpacity } from 'react-native';
 import ModalDropdown from 'react-native-modal-dropdown';
 import { styles, screenWidth, screenHeight } from '../../assets/styles/style';
-import FileLoader from './FileLoader.js';
 import APIHandler from '../API/APIHandler.js';
 import Dropdown from '../Views/Dropdown';
 
 const APIManager = new APIHandler();
-const IconLoader = new FileLoader();
 
 class DisplayJourneysPage extends React.Component {
 
@@ -30,7 +28,6 @@ class DisplayJourneysPage extends React.Component {
     }
 
     componentDidMount(){
-        console.log("get data from API");
         this.searchJourney();
     }
 
@@ -42,12 +39,7 @@ class DisplayJourneysPage extends React.Component {
             console.error(e);
         }
         this.setState({data: data, isLoading: false});
-        
-    }
-
-    convertSecondsToMinutes(seconds){
-        var minutes = Math.floor(seconds / 60);
-        return minutes;
+        //  console.log("Data from API",this.state.data);
     }
 
     renderBestJourney(){
@@ -87,16 +79,7 @@ class DisplayJourneysPage extends React.Component {
             }
         }
     }
-
-    
     render(){
-
-        
-
-        const _renderSeparator = () => (
-            <Image style={styles.journeyCardBottomImgDot} source={require('../../assets/icons/dot.png')} />
-        )
-
         if(this.state.isLoading){
             return(
                 <View style={{width: screenWidth, height: screenHeight, flex:1, alignItems: 'center', justifyContent: 'center', backgroundColor: 'black'}}>
@@ -144,68 +127,16 @@ class DisplayJourneysPage extends React.Component {
                                     </View>
                                 </TouchableWithoutFeedback>
                             </View>
+                            {/* <View style={{ height:50, flexDirection:"row"}}>
+                            </View>  */}
                             <Dropdown />
                         </View>
                         <View style={styles.body}>
-                        
-                            <Text style={styles.title}>Itinéraires</Text>
+                        { this.renderBestJourney() }
+                            <Text style={styles.title}>Autres itinéraires</Text>
                             <View style={styles.mapCardBox}>
                                 <View style={[styles.card,styles.mapCard,{flexDirection:'column'}]}>
                                     <TouchableOpacity style={{flexDirection:'column',alignSelf: 'stretch',borderBottomColor: '#e5e5e5',borderBottomWidth: 1,marginLeft:20,marginRight:20,paddingTop:10}}>
-                                        <View style={{flexDirection:'row'}}>
-                                            <View style={{flex:3,flexDirection:'row',alignItems:'center',flexWrap: 'wrap',}}>
-                                                <FlatList data={this.state.data[0].sections} horizontal={true} ItemSeparatorComponent={_renderSeparator} renderItem={({item})=> 
-                                                    {
-                                                        let icon = IconLoader.getIconBySection(item);
-                                                        return(
-                                                            <Image style={styles.journeyCardBottomImg} source={icon} />
-                                                        )
-                                                    }
-                                                }keyExtractor={(item, index) => index.toString} />
-                                                <View style={{flex:1,flexDirection:'row',justifyContent: 'flex-end',alignItems:'center'}}>
-                                                    <Text style={{fontSize:16,fontWeight:"bold"}}>{this.convertSecondsToMinutes(this.state.data[0].duration)}</Text>
-                                                    <Text style={{fontSize:12,marginTop:9,marginLeft:5}}>min</Text>
-                                                </View>
-                                            </View>
-                                        </View>
-                                    </TouchableOpacity>
-                                    {/* <TouchableOpacity style={{flexDirection:'column',alignSelf: 'stretch',borderBottomColor: '#e5e5e5',borderBottomWidth: 1,marginLeft:20,marginRight:20,paddingTop:10}}>
-                                        <View style={{flexDirection:'row'}}>
-                                            <View style={{flex:3,flexDirection:'row',alignItems:'center',flexWrap: 'wrap',}}>
-                                                <FlatList data={this.state.data[1].sections} horizontal={true} ItemSeparatorComponent={_renderSeparator} renderItem={({item})=> 
-                                                    {
-                                                        let icon = IconLoader.getIconBySection(item);
-                                                        return(
-                                                            <Image style={styles.journeyCardBottomImg} source={icon} />
-                                                        )
-                                                    }
-                                                }keyExtractor={(item, index) => index.toString} />
-                                                <View style={{flex:1,flexDirection:'row',justifyContent: 'flex-end',alignItems:'center'}}>
-                                                    <Text style={{fontSize:24,fontWeight:"bold"}}>14</Text>
-                                                    <Text style={{fontSize:12,marginTop:9,marginLeft:5}}>min</Text>
-                                                </View>
-                                            </View>
-                                        </View>
-                                    </TouchableOpacity>
-                                    <TouchableOpacity style={{flexDirection:'column',alignSelf: 'stretch',borderBottomColor: '#e5e5e5',borderBottomWidth: 1,marginLeft:20,marginRight:20,paddingTop:10}}>
-                                        <View style={{flexDirection:'row'}}>
-                                            <View style={{flex:3,flexDirection:'row',alignItems:'center',flexWrap: 'wrap',}}>
-                                                <FlatList data={this.state.data[2].sections} horizontal={true} ItemSeparatorComponent={_renderSeparator} renderItem={({item})=> 
-                                                    {
-                                                        let icon = IconLoader.getIconBySection(item);
-                                                        return(
-                                                            <Image style={styles.journeyCardBottomImg} source={icon} />
-                                                        )
-                                                    }
-                                                }keyExtractor={(item, index) => index.toString} />
-                                                <View style={{flex:1,flexDirection:'row',justifyContent: 'flex-end',alignItems:'center'}}>
-                                                    <Text style={{fontSize:24,fontWeight:"bold"}}>14</Text>
-                                                    <Text style={{fontSize:12,marginTop:9,marginLeft:5}}>min</Text>
-                                                </View>
-                                            </View>
-                                        </View>
-                                    </TouchableOpacity> */}
-                                    {/* <TouchableOpacity style={{flexDirection:'column',alignSelf: 'stretch',borderBottomColor: '#e5e5e5',borderBottomWidth: 1,marginLeft:20,marginRight:20,paddingTop:10}}>
                                         <View style={{flexDirection:'row'}}>
                                             <View style={{flex:3,flexDirection:'row',alignItems:'center',flexWrap: 'wrap',}}>
                                                 <Image style={styles.journeyCardBottomImg} source={require('../../assets/icons/lines/RERBgenRVB.png')} />
@@ -222,6 +153,8 @@ class DisplayJourneysPage extends React.Component {
                                                 <Image style={styles.journeyCardBottomImg} source={require('../../assets/icons/lines/M7bisgenRVB.png')} />
                                                 <Image style={styles.journeyCardBottomImgDot} source={require('../../assets/icons/dot.png')} />
                                                 <Image style={styles.journeyCardBottomImg} source={require('../../assets/icons/lines/M7bisgenRVB.png')} />
+                                                {/*<Image style={styles.journeyCardBottomImgDot} source={require('../../assets/icons/dot.png')} />
+                                                <Image style={styles.journeyCardBottomImg} source={require('../../assets/icons/lines/M7bisgenRVB.png')} />*/}
                                             </View>
                                             <View style={{flex:1,flexDirection:'row',justifyContent: 'flex-end',alignItems:'center'}}>
                                                 <Text style={{fontSize:24,fontWeight:"bold"}}>14</Text>
@@ -254,7 +187,7 @@ class DisplayJourneysPage extends React.Component {
                                         <View style={{marginBottom:10}}>
                                             <Text style={{fontSize:12,color:'#898989',}}>Le moins de correspondance</Text>
                                         </View>
-                                    </TouchableOpacity> */}
+                                    </TouchableOpacity>
                                 </View>
                             </View> 
                         </View>
