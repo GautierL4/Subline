@@ -150,7 +150,7 @@ class SearchPage extends React.Component {
                                             <Text style={styles.resultItemText}>{item.name}</Text>
                                         </View>
                                     </TouchableWithoutFeedback>}
-                                keyExtractor={(item, index) => index.toString} />
+                                keyExtractor={(item, index) => index.toString()} />
                             </View>
                         </View>
 
