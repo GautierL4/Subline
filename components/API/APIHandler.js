@@ -52,14 +52,14 @@ class APIHandler{
     //Make an HTTP Request based on different cases
     async getJourneysFromAPI(departure,arrival,date=null,represents=null){
         if(date == null){
-            var request = APIBaseURL + this.coverage + to + departure + '&' + from + arrival + '&';
+            var request = APIBaseURL + this.coverage + to + arrival + '&' + from + departure + '&';
         }
         else {
             if(represents == "arrival"){
-                var request = APIBaseURL + this.coverage + to + departure + '&' + from + arrival + '&' + arrivalDate + date + '&';
+                var request = APIBaseURL + this.coverage + to + arrival + '&' + from + departure + '&' + arrivalDate + date + '&';
             }
             else{
-                var request = APIBaseURL + this.coverage + to + departure + '&' + from + arrival + '&' + departureDate + date + '&';
+                var request = APIBaseURL + this.coverage + to + arrival + '&' + from + departure + '&' + departureDate + date + '&';
             }
         }       
         try{
