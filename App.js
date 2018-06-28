@@ -6,6 +6,8 @@ import SearchPage from './components/Views/SearchPage';
 import MapPage from './components/Views/MapPage';
 import DisplayJourneysPage from './components/Views/DisplayJourneysPage';
 import JourneyPage from './components/Views/JourneyPage';
+import TimeTablePage from './components/Views/TimeTablePage';
+import ListOfStopPage from './components/Views/ListOfStopPage'
 
 export default class App extends React.Component {
   render() {
@@ -23,6 +25,8 @@ export const RootStack = createStackNavigator(
     JourneyPage: { screen: JourneyPage},
     MapPage: { screen: MapPage },
     DisplayJourneysPage: { screen: DisplayJourneysPage},
+    TimeTablePage: { screen: TimeTablePage},
+    ListOfStopPage : { screen: ListOfStopPage},
   },
   {
     initialRouteName: 'HomePage',
