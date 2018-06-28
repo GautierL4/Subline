@@ -11,6 +11,8 @@ const header = { headers :
 
 const APIBaseURL = 'https://api.navitia.io/v1/';
 const autoCompleteService = 'places?q=';
+const autoCompleteLinesService = 'pt_objects?q=';
+const lineOption = '&type%5B%5D=line&';
 const to = 'journeys?to=';
 const from = 'from=';
 const departureDate = 'datetime_represents=departure&datetime=';
@@ -109,6 +111,52 @@ class APIHandler{
         data = {
             places: places,
         }
+        return data;
+    }
+
+    // LINES
+
+    async getAutoCompleteLines(userInput){
+        var request = APIBaseURL + this.coverage + autoCompleteLinesService + userInput + lineOption;
+        // console.log(request);
+        try{
+            let response = await fetch(request,header);
+            responseJson = await response.json();
+        } catch(e){
+            console.error(e);
+        }
+        return responseJson;
+    }
+
+    extractLinesFromResponse(response){
+        places = [];
+        for(let i=0;i<response.pt_objects.length;i++){
+            places[i] = {
+                id : response.pt_objects[i].id,
+                name : response.pt_objects[i].name,
+                bgColor: response.pt_objects[i].line.color,
+                color: response.pt_objects[i].line.text_color,
+                // type : response.pt_objects[i].embedded_type
+            }
+        }
+        data = {
+            places: places,
+        }
+        return data;
+    }
+
+    async getLines(userInput) {
+        try{
+            response = await this.getAutoCompleteLines(userInput);
+            // console.log(response);
+            if(!(response.message == "Search word absent") && (response.pt_objects)){
+                var data = this.extractLinesFromResponse(response);
+            }
+        }
+        catch(e){
+            console.error(e);
+        }
+        // console.log(data);
         return data;
     }
 

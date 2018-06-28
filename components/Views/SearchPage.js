@@ -41,15 +41,26 @@ class SearchPage extends React.Component {
 
     async AutoCompleteResearch(input){
         this.setState({search: input});
-        try{
-            data = await APIManager.getPlaces(this.state.search)
-        }
-        catch(e){
-            console.error(e);
+        if(this.typename != "line") {
+            try{
+                data = await APIManager.getPlaces(this.state.search)
+            }
+            catch(e){
+                console.error(e);
+            }
+            
+        } else {
+            try{
+                data = await APIManager.getLines(this.state.search)
+            }
+            catch(e){
+                console.error(e);
+            }
         }
         if(!(typeof data === "undefined")){
             this.setState({locations: data})
         }
+
     }
 
     async sendFirstInputData(id,name){
@@ -107,15 +118,37 @@ class SearchPage extends React.Component {
         });
     }
 
-    async selectPlace(id,name){ 
+    sendLineData(id,name,bgColor,color) {
+        console.log(bgColor)
+        params = {
+            line : {
+                id: id,
+                name: name,
+                bgColor: '#'+bgColor,
+                color: '#'+color,
+            },
+        };
+        this.redirectToListOfStopWithPreviousParams(params);
+    }
+
+    redirectToListOfStopWithPreviousParams(params){
+        this.props.navigation.replace('ListOfStopPage', {
+            line: params.line,
+        });
+    }
+
+    async selectPlace(item){ 
         if(this.typename == "firstInput"){
-            this.sendFirstInputData(id,name);
+            this.sendFirstInputData(item.id,item.name);
         }
         else if(this.typename == "departure"){
-            this.sendDepartureData(id,name);
+            this.sendDepartureData(item.id,item.name);
         }
         else if(this.typename == "destination"){
-            this.sendDestinationData(id,name);
+            this.sendDestinationData(item.id,item.name);
+        }
+        else if(this.typename == "line"){
+            this.sendLineData(item.id,item.name,item.bgColor,item.color);
         }
     }
 
@@ -145,12 +178,12 @@ class SearchPage extends React.Component {
                         <View style={styles.resultCardBox}>
                             <View style={[styles.card,styles.resultCard]}>
                                 <FlatList style={{flex:1,flexDirection:'column'}} data={this.state.locations.places} renderItem={({item}) => 
-                                    <TouchableWithoutFeedback style={styles.resultClickable} onPress={() =>this.selectPlace(item.id,item.name)}>
+                                    <TouchableWithoutFeedback style={styles.resultClickable} onPress={() =>this.selectPlace(item)}>
                                         <View style={styles.resultItem}>
                                             <Text style={styles.resultItemText}>{item.name}</Text>
                                         </View>
                                     </TouchableWithoutFeedback>}
-                                keyExtractor={(item, index) => index.toString} />
+                                keyExtractor={(item, index) => index.toString()} />
                             </View>
                         </View>
 
