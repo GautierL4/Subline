@@ -325,6 +325,7 @@ export const styles = StyleSheet.create({
             height: 4,
             width: 0
         },
+        height:45,
       //android
       elevation: 7,
       flex:0.9,
