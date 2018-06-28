@@ -25,6 +25,7 @@ const icons = {
     T6: require('../../assets/icons/lines/T6genRVB.png'),
     T7: require('../../assets/icons/lines/T7genRVB.png'),
     T8: require('../../assets/icons/lines/T8genRVB.png'),
+    Bus: require('../../assets/icons/icon_bus.png'),
 };
 
 class FileLoader {
@@ -47,6 +48,10 @@ class FileLoader {
             console.log("Get Walk Icon");
             return icons.walkIcon;
         }
+        else if(section.type == "waiting"){
+            console.log("Get Wait Icon");
+            return "waitIcon";
+        }
         else{
             console.log("Get Public Transportation Icon");
             icon = this.getPublicTransportIcon(section);
@@ -56,7 +61,9 @@ class FileLoader {
 
     getPublicTransportIcon(section){
         let icon = null;
+        console.log(section.type);
         if(section.type == "public_transport" && section.display_informations != null){
+            console.log(section.display_informations.label);
             switch(section.display_informations.label){
                 case 'A':
                     icon = icons.RERA;
@@ -137,10 +144,9 @@ class FileLoader {
                     icon = icons.T8;
                     break;
                 default: 
-                    icon = "Case not handle";
+                    icon = icons.Bus;
             }
         }
-        console.log(icon);
         return icon
     }
 }
