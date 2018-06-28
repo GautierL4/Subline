@@ -279,10 +279,10 @@ class HomePage extends React.Component {
                             </ScrollView>
                             <Text style={styles.title}>Lignes</Text>
                             <View style={{flexDirection:'row',alignItems: 'center',justifyContent: 'center',position:'relative'}}>
-                                <TouchableWithoutFeedback onPress={() => this.props.navigation.navigate('SearchPage',{ type:'firstInput',})} style={{flex:1,flexDirection:'row',alignItems: 'center',justifyContent: 'center',padding:5}}>
+                                <TouchableWithoutFeedback onPress={() => this.props.navigation.navigate('SearchPage',{ type:'line',})} style={{flex:1,flexDirection:'row',alignItems: 'center',justifyContent: 'center',padding:5}}>
                                     <View style={styles.searchBar}>
                                         <Image source={require('../../assets/icons/search.png')} style={styles.ImageStyle} />
-                                        <Text style={styles.input}>Quel ligne recherchez-vous ?</Text>
+                                        <Text style={styles.input}>Quelle ligne recherchez-vous ?</Text>
                                     </View>
                                 </TouchableWithoutFeedback>
                             </View>

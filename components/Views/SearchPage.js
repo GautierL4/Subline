@@ -41,15 +41,26 @@ class SearchPage extends React.Component {
 
     async AutoCompleteResearch(input){
         this.setState({search: input});
-        try{
-            data = await APIManager.getPlaces(this.state.search)
-        }
-        catch(e){
-            console.error(e);
+        if(this.typename != "line") {
+            try{
+                data = await APIManager.getPlaces(this.state.search)
+            }
+            catch(e){
+                console.error(e);
+            }
+            
+        } else {
+            try{
+                data = await APIManager.getLines(this.state.search)
+            }
+            catch(e){
+                console.error(e);
+            }
         }
         if(!(typeof data === "undefined")){
             this.setState({locations: data})
         }
+
     }
 
     async sendFirstInputData(id,name){
@@ -99,6 +110,10 @@ class SearchPage extends React.Component {
         this.redirectWithPreviousParams(params);
     }
 
+    sendLineData(id,name) {
+
+    }
+
     redirectWithPreviousParams(params){
         this.props.navigation.replace('DisplayJourneysPage', {
             destination: params.destination,
@@ -116,6 +131,9 @@ class SearchPage extends React.Component {
         }
         else if(this.typename == "destination"){
             this.sendDestinationData(id,name);
+        }
+        else if(this.typename == "line"){
+            this.sendLineData(id,name);
         }
     }
 
@@ -150,7 +168,7 @@ class SearchPage extends React.Component {
                                             <Text style={styles.resultItemText}>{item.name}</Text>
                                         </View>
                                     </TouchableWithoutFeedback>}
-                                keyExtractor={(item, index) => index.toString} />
+                                keyExtractor={(item, index) => index.toString()} />
                             </View>
                         </View>
 
