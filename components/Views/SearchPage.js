@@ -180,7 +180,7 @@ class SearchPage extends React.Component {
                                 <FlatList style={{flex:1,flexDirection:'column'}} data={this.state.locations.places} renderItem={({item}) => 
                                     <TouchableWithoutFeedback style={styles.resultClickable} onPress={() =>this.selectPlace(item)}>
                                         <View style={styles.resultItem}>
-                                            <Text style={styles.resultItemText}>{item.name}</Text>
+                                            <Text style={styles.resultItemText}>{item.name} </Text>
                                         </View>
                                     </TouchableWithoutFeedback>}
                                 keyExtractor={(item, index) => index.toString()} />

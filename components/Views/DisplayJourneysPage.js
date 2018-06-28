@@ -151,22 +151,22 @@ class DisplayJourneysPage extends React.Component {
                             <Text style={styles.title}>Itinéraires</Text>
                             <View style={styles.mapCardBox}>
                                 <View style={[styles.card,styles.mapCard,{flexDirection:'column'}]}>
-                                    <TouchableOpacity style={{flexDirection:'column',alignSelf: 'stretch',borderBottomColor: '#e5e5e5',borderBottomWidth: 1,marginLeft:20,marginRight:20,paddingTop:10}}>
+                                    <TouchableOpacity style={{flexDirection:'column',justifyContent: 'center',alignItems:'center',alignSelf: 'stretch',marginLeft:20,marginRight:20}}>
                                         <View style={{flexDirection:'row'}}>
-                                            <View style={{flex:3,flexDirection:'row',alignItems:'center',flexWrap: 'wrap',}}>
-                                                <FlatList data={this.state.data[0].sections} horizontal={true} ItemSeparatorComponent={_renderSeparator} renderItem={({item})=> 
-                                                    {
-                                                        let icon = IconLoader.getIconBySection(item);
-                                                        return(
-                                                            <Image style={styles.journeyCardBottomImg} source={icon} />
-                                                        )
-                                                    }
-                                                }keyExtractor={(item, index) => index.toString} />
-                                                <View style={{flex:1,flexDirection:'row',justifyContent: 'flex-end',alignItems:'center'}}>
-                                                    <Text style={{fontSize:16,fontWeight:"bold"}}>{this.convertSecondsToMinutes(this.state.data[0].duration)}</Text>
-                                                    <Text style={{fontSize:12,marginTop:9,marginLeft:5}}>min</Text>
+                                                <View style={{flex:3,flexDirection:'row',alignItems:'center',flexWrap: 'wrap',}}>
+                                                    <FlatList style={{flexWrap: 'wrap',flex: 1,}} data={this.state.data[0].sections} horizontal={true} ItemSeparatorComponent={_renderSeparator} renderItem={({item})=> 
+                                                        {
+                                                            let icon = IconLoader.getIconBySection(item);
+                                                            return(
+                                                                <Image style={styles.journeyCardBottomImg} source={icon} />
+                                                            )
+                                                        }
+                                                    }keyExtractor={(item, index) => index.toString()} />
                                                 </View>
-                                            </View>
+                                                <View style={{flex:1,flexDirection:'row',justifyContent: 'flex-end',alignItems:'center'}}>
+                                                    <Text style={{fontSize:24,fontWeight:"bold"}}>{this.convertSecondsToMinutes(this.state.data[0].duration)}</Text>
+                                                    <Text style={{fontSize:12,marginTop:8,marginLeft:5}}>min</Text>
+                                                </View>
                                         </View>
                                     </TouchableOpacity>
                                     {/* <TouchableOpacity style={{flexDirection:'column',alignSelf: 'stretch',borderBottomColor: '#e5e5e5',borderBottomWidth: 1,marginLeft:20,marginRight:20,paddingTop:10}}>
