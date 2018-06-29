@@ -118,16 +118,18 @@ class SearchPage extends React.Component {
         });
     }
 
-    sendLineData(id,name,bgColor,color) {
-        console.log(bgColor)
+    async sendLineData(item) {        // console.log(bgColor)
         params = {
             line : {
-                id: id,
-                name: name,
-                bgColor: '#'+bgColor,
-                color: '#'+color,
+                id: item.id,
+                name: item.name,
+                bgColor: '#'+item.bgColor,
+                color: '#'+item.color,
+                stopList: await APIManager.getStopAreas(item.id)
             },
         };
+        console.log('aha')
+        console.log(JSON.stringify(params, null, 4))
         this.redirectToListOfStopWithPreviousParams(params);
     }
 
@@ -148,7 +150,8 @@ class SearchPage extends React.Component {
             this.sendDestinationData(item.id,item.name);
         }
         else if(this.typename == "line"){
-            this.sendLineData(item.id,item.name,item.bgColor,item.color);
+            // console.log(JSON.stringify(item, null, 4))
+            this.sendLineData(item);
         }
     }
 

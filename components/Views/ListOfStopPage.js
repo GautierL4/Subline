@@ -16,9 +16,11 @@ class ListOfStopPage extends React.Component {
             },
             titleStyle: {
                 color: this.props.navigation.getParam('line').color,
-            }
+            },
         };
+        
     }
+
 
     render(){
         return(
@@ -37,15 +39,17 @@ class ListOfStopPage extends React.Component {
                                 <Text style={[this.state.titleStyle,{fontWeight: 'bold',fontSize: 18,padding: 10,}]}>{this.state.line.name}</Text>
                             </View>
                         </View>
-                        <Text style={styles.title}>Liste des arrêts</Text>
+                        <Text style={styles.title}>Liste des arrêts (A-Z)</Text>
                         <View style={styles.resultCardBox}>
-                            {/* <FlatList style={{flex:1,flexDirection:'column'}} data={this.state.locations.places} renderItem={({item}) => 
+                            <View style={[styles.card,styles.resultCard]}>
+                                <FlatList style={{flex:1,flexDirection:'column'}} data={this.state.line.stopList.stop} renderItem={({item}) => 
                                         <TouchableWithoutFeedback style={styles.resultClickable} onPress={() =>this.selectPlace(item.id,item.name)}>
                                             <View style={styles.resultItem}>
                                                 <Text style={styles.resultItemText}>{item.name}</Text>
                                             </View>
                                         </TouchableWithoutFeedback>}
-                                    keyExtractor={(item, index) => index.toString} /> */}
+                                    keyExtractor={(item, index) => index.toString()} />
+                            </View>
                         </View>
                         
                     </View> 

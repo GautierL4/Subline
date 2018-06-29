@@ -160,6 +160,38 @@ class APIHandler{
         return data;
     }
 
+    // Stop areas
+
+    extractStopAreasFromResponse(response){
+        stop = []
+        for(let i=0;i<response.stop_points.length;i++){
+            stop[i] = {
+                id : response.stop_points[i].id,
+                name : response.stop_points[i].name,
+            }
+        }
+        data = {
+            stop: stop,
+        }
+        return data
+    }
+
+    async getStopAreas(line) {
+        var request = APIBaseURL + this.coverage + 'lines/' + line + '/stop_points?count=100'
+        try{
+            let response = await fetch(request,header)
+            responseJson = await response.json()
+        } catch(e){
+            console.error(e)
+        }
+        if(!(responseJson.message == "Search word absent") && (responseJson.stop_points)){
+            var data = this.extractStopAreasFromResponse(responseJson);
+        }
+        console.log('ehehe')
+        console.log(JSON.stringify(data, null, 4))
+        return data
+    }
+
 }
 
 module.exports = APIHandler;
