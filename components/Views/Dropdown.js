@@ -58,7 +58,8 @@ class Dropdown extends React.Component {
         this.setState({
             when: {datetime:datetime,type:type},
             title: title,
-        });      
+        });
+        this.props.date({datetime,type});      
         this.displayOptions()
     }
 

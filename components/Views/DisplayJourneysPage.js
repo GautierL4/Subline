@@ -25,18 +25,21 @@ class DisplayJourneysPage extends React.Component {
             }),
             savedParams: this.props.navigation.getParam('savedParams'),
             isLoading: true,
+            date: null,
         };
         // console.log("DisplayJourneyPage",this.state);
     }
+
+
 
     componentDidMount(){
         console.log("get data from API");
         this.searchJourney();
     }
 
-    async searchJourney(){
+    async searchJourney(date=null,represents=null){
         try{
-            data = await APIManager.getJourneys(this.state.departure.id, this.state.destination.id);
+            data = await APIManager.getJourneys(this.state.departure.id, this.state.destination.id,date,represents);
         }
         catch(e){
             console.error(e);
@@ -56,6 +59,17 @@ class DisplayJourneysPage extends React.Component {
         {
             journeyData: journey,
         });
+    }
+
+    getDataFromDropDown(val) {
+        // this.setState({
+        //     date: val,
+        // }); 
+        // console.log(this.state.date.datetime)
+        // console.log(val)
+        console.log(val.datetime)
+        console.log(val.type)
+        this.searchJourney(val.datetime,val.type)
     }
 
     // renderBestJourney(){
@@ -152,7 +166,7 @@ class DisplayJourneysPage extends React.Component {
                                     </View>
                                 </TouchableWithoutFeedback>
                             </View>
-                            <Dropdown />
+                            <Dropdown date={this.getDataFromDropDown} />
                         </View>
                         <View style={styles.body}>
                         
