@@ -188,8 +188,8 @@ class APIHandler{
         if(!(responseJson.message == "Search word absent") && (responseJson.stop_points)){
             var data = this.extractStopAreasFromResponse(responseJson);
         }
-        console.log('ehehe')
-        console.log(JSON.stringify(data, null, 4))
+        // console.log('ehehe')
+        // console.log(JSON.stringify(data, null, 4))
         return data
     }
 

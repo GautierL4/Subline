@@ -21,6 +21,10 @@ class ListOfStopPage extends React.Component {
         
     }
 
+    toTheTimeTablePage(item) {
+        console.log(JSON.stringify(item, null, 4))
+        this.props.navigation.navigate('TimeTablePage',{stop:item,line:this.state.line})
+    }
 
     render(){
         return(
@@ -43,7 +47,7 @@ class ListOfStopPage extends React.Component {
                         <View style={styles.resultCardBox}>
                             <View style={[styles.card,styles.resultCard]}>
                                 <FlatList style={{flex:1,flexDirection:'column'}} data={this.state.line.stopList.stop} renderItem={({item}) => 
-                                        <TouchableWithoutFeedback style={styles.resultClickable} onPress={() =>this.selectPlace(item.id,item.name)}>
+                                        <TouchableWithoutFeedback style={styles.resultClickable} onPress={() =>this.toTheTimeTablePage(item)}>
                                             <View style={styles.resultItem}>
                                                 <Text style={styles.resultItemText}>{item.name}</Text>
                                             </View>
