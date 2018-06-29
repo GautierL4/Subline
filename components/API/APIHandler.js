@@ -90,6 +90,7 @@ class APIHandler{
         journey = [];
         for(let i=0;i<response.journeys.length;i++){
             journey[i] = {
+                durations : response.journeys[i].durations,
                 duration : response.journeys[i].duration,
                 sections: response.journeys[i].sections,
                 type: response.journeys[i].type,

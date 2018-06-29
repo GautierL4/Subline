@@ -8,19 +8,20 @@ const APIManager = new APIHandler();
 
 class JourneyPage extends React.Component {
 
-    constructor () {
- 
-        super()
-     
+    constructor(props) {
+        super(props)
+        this.journeyData = this.props.navigation.getParam('journeyData')
+        
         this.RotateValueHolder = new Animated.Value(0);
      
       }
      
-    //   componentDidMount() {
+      componentDidMount() {
      
-    //     this.StartImageRotateFunction();
+        // this.StartImageRotateFunction();
+        // console.log("Debug Data Transit in Journey Details",this.journeyData);
      
-    //   }
+      }
      
     StartImageRotateFunction () {
      
@@ -40,6 +41,11 @@ class JourneyPage extends React.Component {
 
     async addBookmark(){
        await AsyncStorage.setItem('key', 'Je stock ça ici');
+    }
+
+    convertSecondsToMinutes(seconds){
+        var minutes = Math.floor(seconds / 60);
+        return minutes;
     }
 
     refresh() {
@@ -88,12 +94,12 @@ class JourneyPage extends React.Component {
                             </View>
                         </View>
                         <View style={{flexDirection:'row',justifyContent:'center',alignItems:'center'}}>
-                            <Text style={{color:'#ffffff',fontSize:70,fontWeight:'bold'}}>51</Text>
+                            <Text style={{color:'#ffffff',fontSize:70,fontWeight:'bold'}}>{this.convertSecondsToMinutes(this.journeyData.duration)}</Text>
                             <Text style={{color:'#ffffff',fontSize:30,marginTop:30}}>min</Text>
                         </View>
                         <View style={{flexDirection:'column',justifyContent:'center',alignItems:'center'}}>
                             <Image style={{width:18,height:18}} source={require('../../assets/icons/walk-white.png')} />
-                            <Text style={{color:'#fff',fontSize:16}}>12min</Text>
+                            <Text style={{color:'#fff',fontSize:16}}>{this.convertSecondsToMinutes(this.journeyData.durations.walking)} min</Text>
                         </View>
                     </View>
                     <View style={styles.body}> 
@@ -101,8 +107,14 @@ class JourneyPage extends React.Component {
                         <Text style={styles.title}>Itinéraire</Text>
                         <View style={{flexDirection:'row',alignItems: 'center',justifyContent: 'center',}}>
                             <View style={[styles.card,{flex:0.9,flexDirection:'column'}]}>
-                                <PartOfJourney/>
-                                <PartOfJourney/>
+                            <FlatList data={this.journeyData.sections} renderItem={({item})=> 
+                                                    {
+                                                        return(
+                                                            <PartOfJourney sectionData={item} />
+                                                        )
+                                                    }
+                                                }keyExtractor={(item, index) => index.toString} />
+                                
                             </View>
                         </View>
                     </View>
