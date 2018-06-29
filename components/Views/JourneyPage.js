@@ -113,7 +113,7 @@ class JourneyPage extends React.Component {
                                                             <PartOfJourney sectionData={item} />
                                                         )
                                                     }
-                                                }keyExtractor={(item, index) => index.toString} />
+                                                }keyExtractor={(item, index) => index.toString()} />
                                 
                             </View>
                         </View>

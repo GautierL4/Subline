@@ -47,11 +47,14 @@ class PartOfJourney extends React.Component {
 
     toggleDisplayStopAreas() {
         var value = this.state.showOrHideDropDown.display == 'none' ? 'flex' : 'none'
+        // console.log(value)
         this.setState({
             showOrHideDropDown: {
                 display:value,
             }
-        }); 
+        });
+        console.log(this.state.showOrHideDropDown.display) 
+
     }
 
     displayAllStops(){
@@ -62,16 +65,16 @@ class PartOfJourney extends React.Component {
                         <Text style={{ fontWeight: 'bold', color: '#898989', fontSize: 14 }}>{this.props.sectionData.stop_date_times.length} arrêts</Text>
                         <Image style={{ width: 7, height: 7, marginLeft: 5 }} source={require('../../assets/icons/sort-down-grey.png')} />
                     </TouchableOpacity>
-                    <View style={[this.state.showOrHideDropDown,{ marginLeft: 10, marginRight: 10 }]}>
-                        <FlatList listKey={(item, index) => index.toString()} data={this.props.sectionData.stop_date_times.stop_point} renderItem={({item})=> 
+                    <View style={[this.state.showOrHideDropDown,{marginLeft: 10, marginRight: 10}]}>
+                        <FlatList style={{flex:1}} listKey={(item, index) => index.toString()} data={this.props.sectionData.stop_date_times} renderItem={({item})=> 
                             {
                                 return(
                                     <View style={{ borderBottomColor: '#e5e5e5', borderBottomWidth: 1, marginTop: 2, paddingBottom: 2 }}>
-                                        <Text style={{ fontSize: 14, color: "#898989" }}>{item.name}</Text>
+                                        <Text style={{ fontSize: 14, color: "#898989" }}>{item.stop_point.name}</Text>
                                     </View>
                                 )
                             }
-                        }/>
+                        }keyExtractor={(item, index) => index.toString()} />
                     </View>
                     {/* <View style={[this.state.showOrHideDropDown,{ marginLeft: 10, marginRight: 10 }]}>
                         <View style={{ borderBottomColor: '#e5e5e5', borderBottomWidth: 1, marginTop: 2, paddingBottom: 2 }}>
