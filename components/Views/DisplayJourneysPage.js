@@ -25,21 +25,17 @@ class DisplayJourneysPage extends React.Component {
             }),
             savedParams: this.props.navigation.getParam('savedParams'),
             isLoading: true,
-            date: null,
         };
-        // console.log("DisplayJourneyPage",this.state);
     }
-
-
 
     componentDidMount(){
         console.log("get data from API");
         this.searchJourney();
     }
 
-    async searchJourney(date=null,represents=null){
+    async searchJourney(){
         try{
-            data = await APIManager.getJourneys(this.state.departure.id, this.state.destination.id,date,represents);
+            data = await APIManager.getJourneys(this.state.departure.id, this.state.destination.id);
         }
         catch(e){
             console.error(e);
@@ -54,61 +50,11 @@ class DisplayJourneysPage extends React.Component {
     }
 
     displayJourneyDetails(journey){
-        // console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",journey);
         this.props.navigation.navigate('JourneyPage',
         {
             journeyData: journey,
         });
     }
-
-    getDataFromDropDown(val) {
-        // this.setState({
-        //     date: val,
-        // }); 
-        // console.log(this.state.date.datetime)
-        // console.log(val)
-        console.log(val.datetime)
-        console.log(val.type)
-        this.searchJourney(val.datetime,val.type)
-    }
-
-    // renderBestJourney(){
-    //     for(var journey in this.state.data.journeys){
-    //         if(journey.type == "best"){
-    //             return(
-    //                 <View>
-    //                 <Text style={styles.title}>Meilleur itinéraire</Text>
-    //                         <View style={styles.mapCardBox}>
-    //                             <TouchableOpacity style={[styles.card,styles.mapCard]}>
-    //                                 <View style={{flex:3,marginLeft:20,flexDirection:'row',alignItems:'center',flexWrap: 'wrap',}}>
-    //                                     <Image style={styles.journeyCardBottomImg} source={require('../../assets/icons/lines/RERBgenRVB.png')} />
-    //                                     <Image style={styles.journeyCardBottomImgDot} source={require('../../assets/icons/dot.png')} />
-    //                                     <Image style={styles.journeyCardBottomImg} source={require('../../assets/icons/lines/RERAgenRVB.png')} />
-    //                                     <Image style={styles.journeyCardBottomImgDot} source={require('../../assets/icons/dot.png')} />
-    //                                     <Image style={styles.journeyCardBottomImg} source={require('../../assets/icons/walk.png')} />
-    //                                     <Image style={styles.journeyCardBottomImgDot} source={require('../../assets/icons/dot.png')} />
-    //                                     <View style={styles.busCard}>
-    //                                         <Image source={require('../../assets/icons/icon_bus.png')} style={styles.busCardImgBus} />
-    //                                         <Text style={styles.busCardTxt}>95-01</Text>
-    //                                     </View>
-    //                                     <Image style={styles.journeyCardBottomImgDot} source={require('../../assets/icons/dot.png')} />
-    //                                     <Image style={styles.journeyCardBottomImg} source={require('../../assets/icons/lines/M7bisgenRVB.png')} />
-    //                                     <Image style={styles.journeyCardBottomImgDot} source={require('../../assets/icons/dot.png')} />
-    //                                     <Image style={styles.journeyCardBottomImg} source={require('../../assets/icons/lines/M7bisgenRVB.png')} />
-    //                                     <Image style={styles.journeyCardBottomImgDot} source={require('../../assets/icons/dot.png')} />
-    //                                     <Image style={styles.journeyCardBottomImg} source={require('../../assets/icons/lines/M7bisgenRVB.png')} />
-    //                                 </View>
-    //                                 <View style={{flex:1,flexDirection:'row',justifyContent: 'flex-end',alignItems:'center',marginRight:20}}>
-    //                                     <Text style={{fontSize:24,fontWeight:"bold"}}>14</Text>
-    //                                     <Text style={{fontSize:12,marginTop:9,marginLeft:5}}>min</Text>
-    //                                 </View>
-    //                             </TouchableOpacity>
-    //                         </View>
-    //                     </View>
-    //             );
-    //         }
-    //     }
-    // }
 
     
     render(){
@@ -166,7 +112,7 @@ class DisplayJourneysPage extends React.Component {
                                     </View>
                                 </TouchableWithoutFeedback>
                             </View>
-                            <Dropdown date={this.getDataFromDropDown} />
+                            <Dropdown />
                         </View>
                         <View style={styles.body}>
                         
@@ -191,92 +137,6 @@ class DisplayJourneysPage extends React.Component {
                                                 </View>
                                         </View>
                                     </TouchableOpacity>
-                                    {/* <TouchableOpacity style={{flexDirection:'column',alignSelf: 'stretch',borderBottomColor: '#e5e5e5',borderBottomWidth: 1,marginLeft:20,marginRight:20,paddingTop:10}}>
-                                        <View style={{flexDirection:'row'}}>
-                                            <View style={{flex:3,flexDirection:'row',alignItems:'center',flexWrap: 'wrap',}}>
-                                                <FlatList data={this.state.data[1].sections} horizontal={true} ItemSeparatorComponent={_renderSeparator} renderItem={({item})=> 
-                                                    {
-                                                        let icon = IconLoader.getIconBySection(item);
-                                                        return(
-                                                            <Image style={styles.journeyCardBottomImg} source={icon} />
-                                                        )
-                                                    }
-                                                }keyExtractor={(item, index) => index.toString} />
-                                                <View style={{flex:1,flexDirection:'row',justifyContent: 'flex-end',alignItems:'center'}}>
-                                                    <Text style={{fontSize:24,fontWeight:"bold"}}>14</Text>
-                                                    <Text style={{fontSize:12,marginTop:9,marginLeft:5}}>min</Text>
-                                                </View>
-                                            </View>
-                                        </View>
-                                    </TouchableOpacity>
-                                    <TouchableOpacity style={{flexDirection:'column',alignSelf: 'stretch',borderBottomColor: '#e5e5e5',borderBottomWidth: 1,marginLeft:20,marginRight:20,paddingTop:10}}>
-                                        <View style={{flexDirection:'row'}}>
-                                            <View style={{flex:3,flexDirection:'row',alignItems:'center',flexWrap: 'wrap',}}>
-                                                <FlatList data={this.state.data[2].sections} horizontal={true} ItemSeparatorComponent={_renderSeparator} renderItem={({item})=> 
-                                                    {
-                                                        let icon = IconLoader.getIconBySection(item);
-                                                        return(
-                                                            <Image style={styles.journeyCardBottomImg} source={icon} />
-                                                        )
-                                                    }
-                                                }keyExtractor={(item, index) => index.toString} />
-                                                <View style={{flex:1,flexDirection:'row',justifyContent: 'flex-end',alignItems:'center'}}>
-                                                    <Text style={{fontSize:24,fontWeight:"bold"}}>14</Text>
-                                                    <Text style={{fontSize:12,marginTop:9,marginLeft:5}}>min</Text>
-                                                </View>
-                                            </View>
-                                        </View>
-                                    </TouchableOpacity> */}
-                                    {/* <TouchableOpacity style={{flexDirection:'column',alignSelf: 'stretch',borderBottomColor: '#e5e5e5',borderBottomWidth: 1,marginLeft:20,marginRight:20,paddingTop:10}}>
-                                        <View style={{flexDirection:'row'}}>
-                                            <View style={{flex:3,flexDirection:'row',alignItems:'center',flexWrap: 'wrap',}}>
-                                                <Image style={styles.journeyCardBottomImg} source={require('../../assets/icons/lines/RERBgenRVB.png')} />
-                                                <Image style={styles.journeyCardBottomImgDot} source={require('../../assets/icons/dot.png')} />
-                                                <Image style={styles.journeyCardBottomImg} source={require('../../assets/icons/lines/RERAgenRVB.png')} />
-                                                <Image style={styles.journeyCardBottomImgDot} source={require('../../assets/icons/dot.png')} />
-                                                <Image style={styles.journeyCardBottomImg} source={require('../../assets/icons/walk.png')} />
-                                                <Image style={styles.journeyCardBottomImgDot} source={require('../../assets/icons/dot.png')} />
-                                                <View style={styles.busCard}>
-                                                    <Image source={require('../../assets/icons/icon_bus.png')} style={styles.busCardImgBus} />
-                                                    <Text style={styles.busCardTxt}>95-01</Text>
-                                                </View>
-                                                <Image style={styles.journeyCardBottomImgDot} source={require('../../assets/icons/dot.png')} />
-                                                <Image style={styles.journeyCardBottomImg} source={require('../../assets/icons/lines/M7bisgenRVB.png')} />
-                                                <Image style={styles.journeyCardBottomImgDot} source={require('../../assets/icons/dot.png')} />
-                                                <Image style={styles.journeyCardBottomImg} source={require('../../assets/icons/lines/M7bisgenRVB.png')} />
-                                            </View>
-                                            <View style={{flex:1,flexDirection:'row',justifyContent: 'flex-end',alignItems:'center'}}>
-                                                <Text style={{fontSize:24,fontWeight:"bold"}}>14</Text>
-                                                <Text style={{fontSize:12,marginTop:9,marginLeft:5}}>min</Text>
-                                            </View>
-                                        </View>
-                                        <View style={{marginBottom:10}}>
-                                            <Text style={{fontSize:12,color:'#898989'}}>Le moins de marche à pied</Text>
-                                        </View>
-                                    </TouchableOpacity>
-                                    <TouchableOpacity style={{flexDirection:'column',alignSelf: 'stretch',borderBottomColor: '#e5e5e5',borderBottomWidth: 1,marginLeft:20,marginRight:20,paddingTop:10}}>
-                                        <View style={{flexDirection:'row'}}>
-                                            <View style={{flex:3,flexDirection:'row',alignItems:'center',flexWrap: 'wrap',}}>
-                                                <Image style={styles.journeyCardBottomImg} source={require('../../assets/icons/lines/RERBgenRVB.png')} />
-                                                <Image style={styles.journeyCardBottomImgDot} source={require('../../assets/icons/dot.png')} />
-                                                <Image style={styles.journeyCardBottomImg} source={require('../../assets/icons/lines/RERAgenRVB.png')} />
-                                                <Image style={styles.journeyCardBottomImgDot} source={require('../../assets/icons/dot.png')} />
-                                                <Image style={styles.journeyCardBottomImg} source={require('../../assets/icons/walk.png')} />
-                                                <Image style={styles.journeyCardBottomImgDot} source={require('../../assets/icons/dot.png')} />
-                                                <View style={styles.busCard}>
-                                                    <Image source={require('../../assets/icons/icon_bus.png')} style={styles.busCardImgBus} />
-                                                    <Text style={styles.busCardTxt}>95-01</Text>
-                                                </View>
-                                            </View>
-                                            <View style={{flex:1,flexDirection:'row',justifyContent: 'flex-end',alignItems:'center'}}>
-                                                <Text style={{fontSize:24,fontWeight:"bold"}}>14</Text>
-                                                <Text style={{fontSize:12,marginTop:9,marginLeft:5}}>min</Text>
-                                            </View>
-                                        </View>
-                                        <View style={{marginBottom:10}}>
-                                            <Text style={{fontSize:12,color:'#898989',}}>Le moins de correspondance</Text>
-                                        </View>
-                                    </TouchableOpacity> */}
                                 </View>
                             </View> 
                         </View>
@@ -349,8 +209,6 @@ class DisplayJourneysPage extends React.Component {
                                                 <Image style={styles.journeyCardBottomImg} source={require('../../assets/icons/lines/M7bisgenRVB.png')} />
                                                 <Image style={styles.journeyCardBottomImgDot} source={require('../../assets/icons/dot.png')} />
                                                 <Image style={styles.journeyCardBottomImg} source={require('../../assets/icons/lines/M7bisgenRVB.png')} />
-                                                {/*<Image style={styles.journeyCardBottomImgDot} source={require('../../assets/icons/dot.png')} />
-                                                <Image style={styles.journeyCardBottomImg} source={require('../../assets/icons/lines/M7bisgenRVB.png')} />*/}
                                             </View>
                                             <View style={{flex:1,flexDirection:'row',justifyContent: 'flex-end',alignItems:'center'}}>
                                                 <Text style={{fontSize:24,fontWeight:"bold"}}>14</Text>

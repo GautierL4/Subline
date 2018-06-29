@@ -1,7 +1,4 @@
 import { APIkey } from './key.js';
-//import base64 from "base-64";
-
-//const EncodedKey = base64.encode(`${APIkey}:${""}`);
 
 
 const header = { headers : 
@@ -137,7 +134,6 @@ class APIHandler{
                 name : response.pt_objects[i].name,
                 bgColor: response.pt_objects[i].line.color,
                 color: response.pt_objects[i].line.text_color,
-                // type : response.pt_objects[i].embedded_type
             }
         }
         data = {
@@ -149,7 +145,6 @@ class APIHandler{
     async getLines(userInput) {
         try{
             response = await this.getAutoCompleteLines(userInput);
-            // console.log(response);
             if(!(response.message == "Search word absent") && (response.pt_objects)){
                 var data = this.extractLinesFromResponse(response);
             }
@@ -157,7 +152,6 @@ class APIHandler{
         catch(e){
             console.error(e);
         }
-        // console.log(data);
         return data;
     }
 
@@ -188,8 +182,6 @@ class APIHandler{
         if(!(responseJson.message == "Search word absent") && (responseJson.stop_points)){
             var data = this.extractStopAreasFromResponse(responseJson);
         }
-        // console.log('ehehe')
-        // console.log(JSON.stringify(data, null, 4))
         return data
     }
 

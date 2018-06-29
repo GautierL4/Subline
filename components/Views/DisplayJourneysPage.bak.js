@@ -24,7 +24,6 @@ class DisplayJourneysPage extends React.Component {
             savedParams: this.props.navigation.getParam('savedParams'),
             isLoading: true,
         };
-        // console.log("DisplayJourneyPage",this.state);
     }
 
     componentDidMount(){
@@ -39,7 +38,6 @@ class DisplayJourneysPage extends React.Component {
             console.error(e);
         }
         this.setState({data: data, isLoading: false});
-        //  console.log("Data from API",this.state.data);
     }
 
     renderBestJourney(){
@@ -65,8 +63,6 @@ class DisplayJourneysPage extends React.Component {
                                         <Image style={styles.journeyCardBottomImg} source={require('../../assets/icons/lines/M7bisgenRVB.png')} />
                                         <Image style={styles.journeyCardBottomImgDot} source={require('../../assets/icons/dot.png')} />
                                         <Image style={styles.journeyCardBottomImg} source={require('../../assets/icons/lines/M7bisgenRVB.png')} />
-                                        {/*<Image style={styles.journeyCardBottomImgDot} source={require('../../assets/icons/dot.png')} />
-                                        <Image style={styles.journeyCardBottomImg} source={require('../../assets/icons/lines/M7bisgenRVB.png')} />*/}
                                     </View>
                                     <View style={{flex:1,flexDirection:'row',justifyContent: 'flex-end',alignItems:'center',marginRight:20}}>
                                         <Text style={{fontSize:24,fontWeight:"bold"}}>14</Text>
@@ -127,8 +123,6 @@ class DisplayJourneysPage extends React.Component {
                                     </View>
                                 </TouchableWithoutFeedback>
                             </View>
-                            {/* <View style={{ height:50, flexDirection:"row"}}>
-                            </View>  */}
                             <Dropdown />
                         </View>
                         <View style={styles.body}>
@@ -153,8 +147,6 @@ class DisplayJourneysPage extends React.Component {
                                                 <Image style={styles.journeyCardBottomImg} source={require('../../assets/icons/lines/M7bisgenRVB.png')} />
                                                 <Image style={styles.journeyCardBottomImgDot} source={require('../../assets/icons/dot.png')} />
                                                 <Image style={styles.journeyCardBottomImg} source={require('../../assets/icons/lines/M7bisgenRVB.png')} />
-                                                {/*<Image style={styles.journeyCardBottomImgDot} source={require('../../assets/icons/dot.png')} />
-                                                <Image style={styles.journeyCardBottomImg} source={require('../../assets/icons/lines/M7bisgenRVB.png')} />*/}
                                             </View>
                                             <View style={{flex:1,flexDirection:'row',justifyContent: 'flex-end',alignItems:'center'}}>
                                                 <Text style={{fontSize:24,fontWeight:"bold"}}>14</Text>

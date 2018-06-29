@@ -17,15 +17,6 @@ class PartOfJourney extends React.Component {
         }
     }
 
-    componentDidMount(){
-        //console.log("Data in partofJourney debug",this.props.sectionData);
-        // this.icon = IconLoader.getIconBySection(this.props.sectionData);
-        // console.log(this.icon);
-        console.log("Part of Journey loaded");
-        // console.log(this.props.sectionData.to.name);
-        // console.log(this.props.sectionData.from.name);
-    }
-
     loadIcon(section){
         let icon = IconLoader.getIconBySection(section);
         console.log("Icon Loaded");
@@ -47,7 +38,6 @@ class PartOfJourney extends React.Component {
 
     toggleDisplayStopAreas() {
         var value = this.state.showOrHideDropDown.display == 'none' ? 'flex' : 'none'
-        // console.log(value)
         this.setState({
             showOrHideDropDown: {
                 display:value,
@@ -76,17 +66,6 @@ class PartOfJourney extends React.Component {
                             }
                         }keyExtractor={(item, index) => index.toString()} />
                     </View>
-                    {/* <View style={[this.state.showOrHideDropDown,{ marginLeft: 10, marginRight: 10 }]}>
-                        <View style={{ borderBottomColor: '#e5e5e5', borderBottomWidth: 1, marginTop: 2, paddingBottom: 2 }}>
-                            <Text style={{ fontSize: 14, color: "#898989" }}>Parc des expositions</Text>
-                        </View>
-                        <View style={{ borderBottomColor: '#e5e5e5', borderBottomWidth: 1, marginTop: 2, paddingBottom: 2 }}>
-                            <Text style={{ fontSize: 14, color: "#898989" }}>Villepinte</Text>
-                        </View>
-                        <View style={{ borderBottomColor: '#e5e5e5', borderBottomWidth: 1, marginTop: 2, paddingBottom: 2 }}>
-                            <Text style={{ fontSize: 14, color: "#898989" }}>Sevran Beaudotte</Text>
-                        </View>
-                    </View> */}
                 </View>
             )
         }
@@ -123,23 +102,6 @@ class PartOfJourney extends React.Component {
                             </View>
                         </View>
                         {this.displayAllStops()}
-                        {/* <View style={{ flexDirection: 'column' }}>
-                            <TouchableOpacity onPress={()=>this.toggleDisplayStopAreas()} style={{ flexDirection: 'row', marginTop: 10, height:30, justifyContent: 'flex-start', alignItems: 'center' }}>
-                                <Text style={{ fontWeight: 'bold', color: '#898989', fontSize: 14 }}>9 arrêts</Text>
-                                <Image style={{ width: 7, height: 7, marginLeft: 5 }} source={require('../../assets/icons/sort-down-grey.png')} />
-                            </TouchableOpacity>
-                            <View style={[this.state.showOrHideDropDown,{ marginLeft: 10, marginRight: 10 }]}>
-                                <View style={{ borderBottomColor: '#e5e5e5', borderBottomWidth: 1, marginTop: 2, paddingBottom: 2 }}>
-                                    <Text style={{ fontSize: 14, color: "#898989" }}>Parc des expositions</Text>
-                                </View>
-                                <View style={{ borderBottomColor: '#e5e5e5', borderBottomWidth: 1, marginTop: 2, paddingBottom: 2 }}>
-                                    <Text style={{ fontSize: 14, color: "#898989" }}>Villepinte</Text>
-                                </View>
-                                <View style={{ borderBottomColor: '#e5e5e5', borderBottomWidth: 1, marginTop: 2, paddingBottom: 2 }}>
-                                    <Text style={{ fontSize: 14, color: "#898989" }}>Sevran Beaudotte</Text>
-                                </View>
-                            </View>
-                        </View> */}
                         <View style={{ flexDirection: 'row', marginTop: 10, justifyContent: 'flex-start', alignItems: 'center' }}>
                             <Text style={{ fontSize: 22, color: "#898989", flex: 1 }}>{this.getHoursFromISO(this.props.sectionData.arrival_date_time)}</Text>
                             <View style={{ flexDirection: 'column', flex: 3 }}>

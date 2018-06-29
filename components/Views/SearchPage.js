@@ -118,7 +118,7 @@ class SearchPage extends React.Component {
         });
     }
 
-    async sendLineData(item) {        // console.log(bgColor)
+    async sendLineData(item) {
         params = {
             line : {
                 id: item.id,
@@ -150,7 +150,6 @@ class SearchPage extends React.Component {
             this.sendDestinationData(item.id,item.name);
         }
         else if(this.typename == "line"){
-            // console.log(JSON.stringify(item, null, 4))
             this.sendLineData(item);
         }
     }

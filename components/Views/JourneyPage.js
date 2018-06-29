@@ -16,12 +16,6 @@ class JourneyPage extends React.Component {
      
       }
      
-      componentDidMount() {
-     
-        // this.StartImageRotateFunction();
-        // console.log("Debug Data Transit in Journey Details",this.journeyData);
-     
-      }
      
     StartImageRotateFunction () {
      
@@ -35,8 +29,6 @@ class JourneyPage extends React.Component {
           easing: Easing.linear
         }
     ).start()
-    // ).start(() => this.StartImageRotateFunction())
-    //  Ligne dessus pour une boucle infini
     }
 
     async addBookmark(){
@@ -103,7 +95,6 @@ class JourneyPage extends React.Component {
                         </View>
                     </View>
                     <View style={styles.body}> 
-                        {/* <Text style={styles.title}>Carte</Text> */}
                         <Text style={styles.title}>Itinéraire</Text>
                         <View style={{flexDirection:'row',alignItems: 'center',justifyContent: 'center',}}>
                             <View style={[styles.card,{flex:0.9,flexDirection:'column'}]}>
