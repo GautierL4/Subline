@@ -1,5 +1,7 @@
 # Subline - métro, bus, rer
 
+![PNG animé de l'application Subline](http://adrienlemaire.fr/animated111.png)
+
 ## Utiliser notre application
 
 ### Installation
