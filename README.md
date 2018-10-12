@@ -1,6 +1,6 @@
 # Subline - métro, bus, rer
 
-<img src="animated111.png" width="500px">
+<img src="animated111.png" width="1000px">
 
 ## Utiliser notre application
 
