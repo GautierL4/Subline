@@ -1,6 +1,5 @@
 import React from 'react';
 import { StyleSheet, Text, View, Image, Animated,Platform, TextInput, TouchableWithoutFeedback, ScrollView, Dimensions, FlatList, Picker, StatusBar, TouchableOpacity } from 'react-native';
-import ModalDropdown from 'react-native-modal-dropdown';
 import { styles, screenWidth, screenHeight } from '../../assets/styles/style';
 import FileLoader from './FileLoader.js';
 import APIHandler from '../API/APIHandler.js';

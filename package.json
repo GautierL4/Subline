@@ -3,26 +3,24 @@
   "version": "0.1.0",
   "private": true,
   "devDependencies": {
+    "babel-plugin-transform-react-jsx-source": "^6.22.0",
+    "babel-preset-expo": "^5.0.0",
     "jest-expo": "~27.0.0",
     "react-native-scripts": "^1.14.1",
     "react-test-renderer": "16.3.1"
   },
-  "main": "./node_modules/react-native-scripts/build/bin/crna-entry.js",
+  "main": "node_modules/expo/AppEntry.js",
   "scripts": {
-    "start": "react-native-scripts start",
-    "eject": "react-native-scripts eject",
-    "android": "react-native-scripts android",
-    "ios": "react-native-scripts ios",
-    "test": "jest"
-  },
-  "jest": {
-    "preset": "jest-expo"
+    "start": "expo start",
+    "android": "expo start --android",
+    "ios": "expo start --ios",
+    "eject": "expo eject"
   },
   "dependencies": {
     "base-64": "^0.1.0",
-    "expo": "^27.0.1",
-    "react": "16.3.1",
-    "react-native": "^0.55.4",
+    "expo": "^31.0.0",
+    "react": "16.5.0",
+    "react-native": "https://github.com/expo/react-native/archive/sdk-31.0.0.tar.gz",
     "react-native-fetch-blob": "^0.10.8",
     "react-native-pdf": "^3.0.16",
     "react-navigation": "^2.3.1"

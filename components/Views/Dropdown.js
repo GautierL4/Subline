@@ -1,10 +1,9 @@
 import React from 'react';
 import { StyleSheet, Text, View, DatePickerAndroid, TimePickerAndroid, Image, Animated, TextInput, TouchableWithoutFeedback, ScrollView, Dimensions, FlatList, Picker, StatusBar, TouchableOpacity } from 'react-native';
-import ModalDropdown from 'react-native-modal-dropdown';
 import { styles, screenWidth, screenHeight } from '../../assets/styles/style';
 
 class Dropdown extends React.Component {
-
+ 
     constructor() {
         super();
         this.state = {
