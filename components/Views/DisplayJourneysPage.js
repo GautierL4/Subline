@@ -68,7 +68,7 @@ class DisplayJourneysPage extends React.Component {
         if (this.state.isLoading) {
             return (
                 <View style={{ width: screenWidth, height: screenHeight, flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: 'black' }}>
-                    <Image style={{ width: 80, height: 80, }} source={require('../../assets/icons/loading-start.gif')} />
+                    {/* <Image style={{ width: 80, height: 80, }} source={require('../../assets/icons/loading-start.gif')} /> */}
                 </View>
             );
         }

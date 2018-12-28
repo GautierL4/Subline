@@ -2,6 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View, Image, Animated, TextInput, TouchableWithoutFeedback, TouchableNativeFeedback, ScrollView, Dimensions, WebView } from 'react-native';
 import { styles, screenWidth, screenHeight } from '../../assets/styles/style';
 import { Constants } from 'expo';
+import { BackButton } from '../Elements/buttons'
 
 class MapPage extends React.Component {
 
@@ -31,15 +32,10 @@ class MapPage extends React.Component {
                 <WebView
                     bounces={false}
                     scrollEnabled={false}
-                    source={{ uri: source }} />
+                    source={{ uri: source }}
+                    />
 
-                <View style={styles.returnButton} >
-                    <TouchableNativeFeedback background={TouchableNativeFeedback.Ripple('#CCCCCC')} onPress={() => this.props.navigation.goBack()} >
-                        <View>
-                            <Image style={styles.returnArrow} source={require('../../assets/icons/go-back-left-arrow.png')} />
-                        </View>
-                    </TouchableNativeFeedback>
-                </View>
+                <BackButton navigation={this.props.navigation} />
 
             </View>
         )

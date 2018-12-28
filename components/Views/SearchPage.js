@@ -39,8 +39,7 @@ class SearchPage extends React.Component {
         );
     }
 
-    async AutoCompleteResearch(input) {
-        this.setState({ search: input });
+    async AutoCompleteResearch() {
         if (this.typename != "line") {
             try {
                 data = await APIManager.getPlaces(this.state.search)
@@ -162,6 +161,8 @@ class SearchPage extends React.Component {
 
     render() {
 
+        this.AutoCompleteResearch()
+
         return (
             <View style={[styles.container]}>
                 <ScrollView horizontal={false} contentContainerStyle={{ flexGrow: 1 }} style={{ width: screenWidth }}>
@@ -171,12 +172,18 @@ class SearchPage extends React.Component {
                     <View style={styles.body}>
                         <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center', position: 'relative', top: -25 }}>
                             <View style={styles.searchBar}>
-                                <Image source={require('../../assets/icons/search.png')} style={styles.ImageStyle} />
-                                <TextInput onChangeText={(text) => this.AutoCompleteResearch(text)} style={styles.input} underlineColorAndroid='rgba(0,0,0,0)' placeholder={this.placeholder} autoFocus />
+                                {this.state.search.length === 0 ?
+                                    <Image source={require('../../assets/icons/search.png')} style={styles.ImageStyle} />
+                                    :
+                                    <TouchableNativeFeedback onPress={()=>this.setState({search:''})}>
+                                        <Image source={require('../../assets/icons/close.png')} style={styles.ImageStyle} />
+                                    </TouchableNativeFeedback>
+                                }
+                                <TextInput value={this.state.search} onChangeText={(input) => this.setState({ search: input })} style={styles.input} underlineColorAndroid='rgba(0,0,0,0)' placeholder={this.placeholder} autoFocus />
                             </View>
                         </View>
                         <Text style={styles.title}>Résultats</Text>
-                        {this.state.locations.places !== null ?
+                        {(this.state.locations.places !== null && this.state.search!=='') ?
                             <View style={styles.resultCardBox}>
                                 <View style={[styles.card, styles.resultCard]}>
                                     <FlatList style={{ flex: 1, flexDirection: 'column' }} data={this.state.locations.places} renderItem={({ item }) =>
@@ -188,15 +195,15 @@ class SearchPage extends React.Component {
                                         keyExtractor={(item, index) => index.toString()} />
                                 </View>
                             </View>
-                        : <Text style={{margin: 10,color: "#898989",}}>Aucun résultat</Text>}
+                            : <Text style={{ margin: 10, color: "#898989", }}>Aucun résultat</Text>}
                     </View>
                 </ScrollView>
             </View >
-                )
-            }
-        }
-        
-        const screenWidth = Dimensions.get('window').width;
-        const screenHeight = Dimensions.get('window').height;
-        
+        )
+    }
+}
+
+const screenWidth = Dimensions.get('window').width;
+const screenHeight = Dimensions.get('window').height;
+
 export default SearchPage;
