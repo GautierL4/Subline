@@ -166,7 +166,7 @@ class SearchPage extends React.Component {
             <View style={[styles.container]}>
                 <ScrollView horizontal={false} contentContainerStyle={{ flexGrow: 1 }} style={{ width: screenWidth }}>
                     <View style={{ flexDirection: 'row', height: 100, backgroundColor: '#000', width: 500, }}>
-                        <BackButton navigation={this.props.navigation}/>
+                        <BackButton navigation={this.props.navigation} />
                     </View>
                     <View style={styles.body}>
                         <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center', position: 'relative', top: -25 }}>
@@ -175,28 +175,28 @@ class SearchPage extends React.Component {
                                 <TextInput onChangeText={(text) => this.AutoCompleteResearch(text)} style={styles.input} underlineColorAndroid='rgba(0,0,0,0)' placeholder={this.placeholder} autoFocus />
                             </View>
                         </View>
-
                         <Text style={styles.title}>Résultats</Text>
-                        <View style={styles.resultCardBox}>
-                            <View style={[styles.card, styles.resultCard]}>
-                                <FlatList style={{ flex: 1, flexDirection: 'column' }} data={this.state.locations.places} renderItem={({ item }) =>
-                                    <TouchableWithoutFeedback style={styles.resultClickable} onPress={() => this.selectPlace(item)}>
-                                        <View style={styles.resultItem}>
-                                            <Text style={styles.resultItemText}>{item.name} </Text>
-                                        </View>
-                                    </TouchableWithoutFeedback>}
-                                    keyExtractor={(item, index) => index.toString()} />
+                        {this.state.locations.places !== null ?
+                            <View style={styles.resultCardBox}>
+                                <View style={[styles.card, styles.resultCard]}>
+                                    <FlatList style={{ flex: 1, flexDirection: 'column' }} data={this.state.locations.places} renderItem={({ item }) =>
+                                        <TouchableWithoutFeedback style={styles.resultClickable} onPress={() => this.selectPlace(item)}>
+                                            <View style={styles.resultItem}>
+                                                <Text style={styles.resultItemText}>{item.name} </Text>
+                                            </View>
+                                        </TouchableWithoutFeedback>}
+                                        keyExtractor={(item, index) => index.toString()} />
+                                </View>
                             </View>
-                        </View>
-
+                        : <Text style={{margin: 10,color: "#898989",}}>Aucun résultat</Text>}
                     </View>
                 </ScrollView>
             </View >
-        )
-    }
-}
-
-const screenWidth = Dimensions.get('window').width;
-const screenHeight = Dimensions.get('window').height;
-
+                )
+            }
+        }
+        
+        const screenWidth = Dimensions.get('window').width;
+        const screenHeight = Dimensions.get('window').height;
+        
 export default SearchPage;
