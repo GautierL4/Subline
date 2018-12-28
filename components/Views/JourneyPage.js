@@ -1,8 +1,9 @@
 import React from 'react';
-import { StyleSheet, Text, View, Image, Animated, TextInput, TouchableWithoutFeedback, TouchableOpacity, ScrollView, Dimensions, FlatList, AsyncStorage, Easing } from 'react-native';
+import { StyleSheet, Text, View, Image, Animated, TextInput, TouchableWithoutFeedback, TouchableNativeFeedback, TouchableOpacity, ScrollView, Dimensions, FlatList, AsyncStorage, Easing } from 'react-native';
 import { styles, screenWidth, screenHeight } from '../../assets/styles/style';
 import APIHandler from '../API/APIHandler.js';
 import PartOfJourney from '../Views/PartOfJourney';
+import { BackButton } from '../Elements/buttons'
 
 const APIManager = new APIHandler();
 
@@ -60,13 +61,7 @@ class JourneyPage extends React.Component {
                         <View style={{ flexDirection: 'row', height: 80, justifyContent: 'center' }}>
                             <View style={{ flex: 0.9, flexDirection: 'row', }}>
                                 <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center' }}>
-                                    <View style={styles.returnButton} >
-                                        <TouchableNativeFeedback background={TouchableNativeFeedback.Ripple('#CCCCCC')} onPress={() => this.props.navigation.goBack()} >
-                                            <View>
-                                                <Image style={styles.returnArrow} source={require('../../assets/icons/go-back-left-arrow.png')} />
-                                            </View>
-                                        </TouchableNativeFeedback>
-                                    </View>
+                                    <BackButton navigation={this.props.navigation} />
                                 </View>
                                 <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-end' }}>
                                     <TouchableWithoutFeedback onPress={() => this.refresh()}>

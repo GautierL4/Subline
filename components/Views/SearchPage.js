@@ -2,6 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View, Image, Animated, TextInput, TouchableWithoutFeedback, TouchableNativeFeedback, TouchableOpacity, ScrollView, Dimensions, FlatList } from 'react-native';
 import { styles } from '../../assets/styles/style';
 import APIHandler from '../API/APIHandler.js';
+import { BackButton } from '../Elements/buttons'
 
 const APIManager = new APIHandler();
 
@@ -165,13 +166,7 @@ class SearchPage extends React.Component {
             <View style={[styles.container]}>
                 <ScrollView horizontal={false} contentContainerStyle={{ flexGrow: 1 }} style={{ width: screenWidth }}>
                     <View style={{ flexDirection: 'row', height: 100, backgroundColor: '#000', width: 500, }}>
-                        <View style={styles.returnButton} >
-                            <TouchableNativeFeedback background={TouchableNativeFeedback.Ripple('#CCCCCC')} onPress={() => this.props.navigation.goBack()} >
-                                <View>
-                                    <Image style={styles.returnArrow} source={require('../../assets/icons/go-back-left-arrow.png')} />
-                                </View>
-                            </TouchableNativeFeedback>
-                        </View>
+                        <BackButton navigation={this.props.navigation}/>
                     </View>
                     <View style={styles.body}>
                         <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center', position: 'relative', top: -25 }}>
