@@ -161,11 +161,9 @@ class SearchPage extends React.Component {
 
     render() {
 
-        this.AutoCompleteResearch()
-
         return (
             <View style={[styles.container]}>
-                <ScrollView horizontal={false} contentContainerStyle={{ flexGrow: 1 }} style={{ width: screenWidth }}>
+                <ScrollView keyboardShouldPersistTaps='always' horizontal={false} contentContainerStyle={{ flexGrow: 1 }} style={{ width: screenWidth }}>
                     <View style={{ flexDirection: 'row', height: 100, backgroundColor: '#000', width: 500, }}>
                         <BackButton navigation={this.props.navigation} />
                     </View>
@@ -179,7 +177,7 @@ class SearchPage extends React.Component {
                                         <Image source={require('../../assets/icons/close.png')} style={styles.ImageStyle} />
                                     </TouchableNativeFeedback>
                                 }
-                                <TextInput value={this.state.search} onChangeText={(input) => this.setState({ search: input })} style={styles.input} underlineColorAndroid='rgba(0,0,0,0)' placeholder={this.placeholder} autoFocus />
+                                <TextInput value={this.state.search} onChangeText={(input) => this.setState({ search: input },()=>this.AutoCompleteResearch())} style={styles.input} underlineColorAndroid='rgba(0,0,0,0)' placeholder={this.placeholder} autoFocus />
                             </View>
                         </View>
                         <Text style={styles.title}>Résultats</Text>
