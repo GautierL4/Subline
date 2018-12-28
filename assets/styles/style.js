@@ -3,6 +3,8 @@ import { StyleSheet, Dimensions } from 'react-native';
 export const screenWidth = Dimensions.get('window').width;
 export const screenHeight = Dimensions.get('window').height;
 
+const primaryColor = "#70bd88"
+
 export const styles = StyleSheet.create({
     container: {
         flex:1,
@@ -346,7 +348,8 @@ export const styles = StyleSheet.create({
         top:25,
         left:13,
         height:50,
-        width:50
+        width:50,
+        backgroundColor:'#000',
     },
     returnArrow: {
         height:25,

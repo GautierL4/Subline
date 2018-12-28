@@ -1,6 +1,6 @@
 import React from 'react';
 import {createStackNavigator} from 'react-navigation';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, Easing, Animated } from 'react-native';
 import HomePage from './components/Views/HomePage';
 import SearchPage from './components/Views/SearchPage';
 import MapPage from './components/Views/MapPage';
@@ -17,6 +17,48 @@ export default class App extends React.Component {
   }
 }
 
+const transitionConfig = () => {
+  return {
+    transitionSpec: {
+      duration: 1000,
+      easing: Easing.out(Easing.poly(4)),
+      timing: Animated.timing,
+      useNativeDriver: true,
+      delay: 200,
+    },
+    screenInterpolator: sceneProps => {      
+      const { layout, position, scene } = sceneProps
+
+      const thisSceneIndex = scene.index
+      const width = layout.initWidth
+      const height = layout.initHeight
+
+      const translateX = position.interpolate({
+        inputRange: [thisSceneIndex - 1, thisSceneIndex, thisSceneIndex + 1],
+        outputRange: [width, 0, 0]
+      })
+
+      const translateY = position.interpolate({
+        inputRange: [thisSceneIndex - 1, thisSceneIndex, thisSceneIndex + 1],
+        outputRange: [height, 0, 0]
+      })
+
+      const opacity = position.interpolate({
+        inputRange: [thisSceneIndex - 1, thisSceneIndex - 0.5, thisSceneIndex],
+        outputRange: [0, 1, 1],
+      })
+
+      const scale = position.interpolate({
+        inputRange: [thisSceneIndex - 1, thisSceneIndex, thisSceneIndex + 1],
+        outputRange: [4, 1, 1]
+      })
+
+
+      return { transform: [{ scaleX: scale }, { scaleY: scale }], opacity }
+    },
+  }
+}
+
 export const RootStack = createStackNavigator(
   {
     HomePage: { screen: HomePage },
@@ -30,7 +72,7 @@ export const RootStack = createStackNavigator(
   },
   {
     initialRouteName: 'HomePage',
-    headerMode: 'none'
+    headerMode: 'none',
+    transitionConfig
   }
 );
-
