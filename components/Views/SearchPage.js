@@ -2,11 +2,13 @@ import React from 'react';
 import { StyleSheet, KeyboardAvoidingView, Keyboard, Text, View, Image, Animated, TextInput, TouchableWithoutFeedback, TouchableNativeFeedback, TouchableOpacity, ScrollView, Dimensions, FlatList } from 'react-native';
 import { styles } from '../../assets/styles/style';
 import APIHandler from '../API/APIHandler.js';
+import APIGoogle from '../API/APIGoogle';
 import { BackButton } from '../Elements/buttons'
 import FileLoader from './FileLoader.js';
 
 const APIManager = new APIHandler();
 const IconLoader = new FileLoader();
+const APIGoogleManager = new APIGoogle()
 
 class SearchPage extends React.Component {
 
@@ -27,10 +29,19 @@ class SearchPage extends React.Component {
 
     getCurrentLocation() {
         navigator.geolocation.getCurrentPosition(
-            (position) => {
+            async (position) => {
+                var longitude = position.coords.longitude
+                var latitude = position.coords.latitude
+                var address = null
+                try {
+                    address = await APIGoogleManager.getAddressFromLocation(latitude, longitude)
+                } catch (e) {
+                    console.error(e);
+                }
                 var departure = {
-                    id: position.coords.longitude + ";" + position.coords.latitude,
-                    name: "Ma position"
+                    id: longitude + ";" + latitude,
+                    name: "Ma position",
+                    address: address
                 }
                 this.setState({ departure: departure });
             },
@@ -38,6 +49,14 @@ class SearchPage extends React.Component {
             { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 },
         );
     }
+
+    // async getAddressFromLocation() {
+    //     try {
+    //         data = 
+    //     } catch (e) {
+    //         console.error(e);
+    //     }
+    // }
 
     async AutoCompleteResearch() {
         var data = { stop_areas: null, address: null, poi: null }

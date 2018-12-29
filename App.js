@@ -20,11 +20,11 @@ export default class App extends React.Component {
 const transitionConfig = () => {
   return {
     transitionSpec: {
-      duration: 1000,
+      duration: 800,
       easing: Easing.out(Easing.poly(4)),
       timing: Animated.timing,
       useNativeDriver: true,
-      delay: 200,
+      delay: 100,
     },
     screenInterpolator: sceneProps => {      
       const { layout, position, scene } = sceneProps

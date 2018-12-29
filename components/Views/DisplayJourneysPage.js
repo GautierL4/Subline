@@ -3,10 +3,12 @@ import { StyleSheet, Text, View, Image, Animated, Platform, TextInput, Touchable
 import { styles, screenWidth, screenHeight } from '../../assets/styles/style';
 import FileLoader from './FileLoader.js';
 import APIHandler from '../API/APIHandler.js';
+import APIGoogle from '../API/APIGoogle';
 import Dropdown from '../Views/Dropdown';
 import { BackButton } from '../Elements/buttons'
 
 const APIManager = new APIHandler();
+const APIGoogleManager = new APIGoogle()
 const IconLoader = new FileLoader();
 
 class DisplayJourneysPage extends React.Component {
@@ -17,7 +19,7 @@ class DisplayJourneysPage extends React.Component {
         this.state = {
             departure: this.props.navigation.getParam('departure', {
                 id: null,
-                name: "Ma position",
+                name: "Position actuelle",
             }),
             destination: this.props.navigation.getParam('destination', {
                 id: null,
@@ -56,9 +58,14 @@ class DisplayJourneysPage extends React.Component {
             });
     }
 
+    setAddress() {
+        test = this.state.departure
+        console.log(test.address.address_components[0].long_name)
+    }
+
 
     render() {
-
+        this.setAddress()
         const _renderSeparator = () => (
             <Image style={styles.journeyCardBottomImgDot} source={require('../../assets/icons/dot.png')} />
         )
@@ -91,7 +98,10 @@ class DisplayJourneysPage extends React.Component {
                                 <TouchableWithoutFeedback onPress={() => this.props.navigation.navigate('DepartureSearchPage', { type: 'departure', placeholder: 'Point de départ', savedParams: this.state.savedParams })} style={{ flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', padding: 5 }}>
                                     <View style={styles.searchBar}>
                                         <Image source={require('../../assets/icons/map-location.png')} style={styles.ImageStyle} />
-                                        <Text style={styles.input}>{this.state.departure.name}</Text>
+                                        <View style={{flex:1}}>
+                                            <Text style={[styles.input,{padding:0}]}>{this.state.departure.name}</Text>
+                                            <Text style={{fontSize:11,color: "#666666",fontWeight:'bold',marginTop: -20}}>{this.state.departure.address.address_components[0].long_name}</Text>
+                                        </View>
                                     </View>
                                 </TouchableWithoutFeedback>
                             </View>
