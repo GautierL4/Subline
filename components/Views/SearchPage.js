@@ -50,14 +50,6 @@ class SearchPage extends React.Component {
         );
     }
 
-    // async getAddressFromLocation() {
-    //     try {
-    //         data = 
-    //     } catch (e) {
-    //         console.error(e);
-    //     }
-    // }
-
     async AutoCompleteResearch() {
         var data = { stop_areas: null, address: null, poi: null }
         if (this.typename != "line") {

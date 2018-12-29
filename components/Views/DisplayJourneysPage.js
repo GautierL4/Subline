@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, Image, Animated, Platform, TextInput, TouchableWithoutFeedback, ScrollView, Dimensions, FlatList, Picker, StatusBar, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, Image, Animated, Platform, TextInput, TouchableNativeFeedback, TouchableWithoutFeedback, ScrollView, Dimensions, FlatList, Picker, StatusBar, TouchableOpacity } from 'react-native';
 import { styles, screenWidth, screenHeight } from '../../assets/styles/style';
 import FileLoader from './FileLoader.js';
 import APIHandler from '../API/APIHandler.js';
@@ -82,37 +82,38 @@ class DisplayJourneysPage extends React.Component {
                 <View style={styles.container}>
                     <ScrollView horizontal={false} contentContainerStyle={{ flexGrow: 1 }} style={{ width: screenWidth }}>
                         <View style={styles.header}>
-                            <View style={{ flexDirection: 'row', height: 80, justifyContent: 'center' }}>
-                                <View style={{ flex: 0.9, flexDirection: 'row', }}>
+                            <View style={{ flexDirection: 'row', height: 80, justifyContent: 'center', }}>
+                                <View style={{ flex: 1, flexDirection: 'row', }}>
                                     <BackButton navigation={this.props.navigation} />
-                                    <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-end' }}>
-                                        <TouchableWithoutFeedback onPress={() => this.props.navigation.navigate('HomePage')}>
-                                            <View style={styles.buttonTop} >
-                                                <Image style={styles.returnArrow} source={require('../../assets/icons/inverse.png')} />
-                                            </View>
-                                        </TouchableWithoutFeedback>
-                                    </View>
                                 </View>
                             </View>
-                            <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
-                                <TouchableWithoutFeedback onPress={() => this.props.navigation.navigate('DepartureSearchPage', { type: 'departure', placeholder: 'Point de départ', savedParams: this.state.savedParams })} style={{ flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', padding: 5 }}>
-                                    <View style={styles.searchBar}>
-                                        <Image source={require('../../assets/icons/map-location.png')} style={styles.ImageStyle} />
-                                        <View style={{flex:1}}>
-                                            <Text style={[styles.input,{padding:0}]}>{this.state.departure.name}</Text>
-                                            <Text style={{fontSize:11,color: "#666666",fontWeight:'bold',marginTop: -20}}>{this.state.departure.address.address_components[0].long_name}</Text>
+                            <View style={{ alignSelf: 'stretch', flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
+                                <View style={{ alignSelf: 'stretch', flex: 0.9, flexDirection: 'row' }}>
+                                    <View style={{ flexDirection: 'column', flex: 0.9, alignSelf: 'stretch' }}>
+                                        <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
+                                            <TouchableWithoutFeedback onPress={() => this.props.navigation.navigate('DepartureSearchPage', { type: 'departure', placeholder: 'Point de départ', savedParams: this.state.savedParams })} style={{ flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', padding: 5 }}>
+                                                <View style={[styles.searchBar, { flex: 1 }]}>
+                                                    <Image source={require('../../assets/icons/map-location.png')} style={styles.ImageStyle} />
+                                                    <View style={{ flex: 1 }}>
+                                                        <Text style={[styles.input, { padding: 0 }]}>{this.state.departure.name}</Text>
+                                                        <Text style={{ fontSize: 11, color: "#666666", fontWeight: 'bold', marginTop: -20 }}>{this.state.departure.address.address_components[0].long_name}</Text>
+                                                    </View>
+                                                </View>
+                                            </TouchableWithoutFeedback>
+                                        </View>
+                                        <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center', marginTop: 15 }}>
+                                            <TouchableWithoutFeedback onPress={() => this.props.navigation.replace('SearchPage', { type: "destination", savedParams: this.state.savedParams })} style={{ flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', padding: 5 }}>
+                                                <View style={[styles.searchBar, { flex: 1 }]}>
+                                                    <Image source={require('../../assets/icons/target.png')} style={styles.ImageStyle} />
+                                                    <Text style={styles.input}>{this.state.destination.name}</Text>
+                                                </View>
+                                            </TouchableWithoutFeedback>
                                         </View>
                                     </View>
-                                </TouchableWithoutFeedback>
-                            </View>
-
-                            <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center', marginTop: 15 }}>
-                                <TouchableWithoutFeedback onPress={() => this.props.navigation.replace('SearchPage', { type: "destination", savedParams: this.state.savedParams })} style={{ flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', padding: 5 }}>
-                                    <View style={styles.searchBar}>
-                                        <Image source={require('../../assets/icons/target.png')} style={styles.ImageStyle} />
-                                        <Text style={styles.input}>{this.state.destination.name}</Text>
+                                    <View style={{ flexDirection: 'row', flex: 0.1, alignSelf: 'stretch', alignItems:'center', justifyContent: 'center' }}>
+                                        <Image source={require('../../assets/icons/reverse.png')} style={{maxWidth:20,maxHeight:20}}></Image>
                                     </View>
-                                </TouchableWithoutFeedback>
+                                </View>
                             </View>
                             <Dropdown />
                         </View>
