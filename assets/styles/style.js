@@ -185,22 +185,13 @@ export const styles = StyleSheet.create({
         alignItems: 'flex-start',
         justifyContent: 'flex-start',
         flex:0.9,
-        minHeight:200,
         flexDirection:'row',
-        paddingTop: 10,
-        paddingBottom: 10,
-        
-    },
-    resultClickable: {
-        
     },
     resultItem: {
-        marginBottom: 10,
+        paddingLeft: 20,
+        paddingRight: 20,
+        paddingTop: 10,
         paddingBottom: 10,
-        borderBottomColor: '#e5e5e5',
-        borderBottomWidth: 1,
-        marginLeft: 20,
-        marginRight: 20,
     },
     resultItemText: {
         fontSize: 17,

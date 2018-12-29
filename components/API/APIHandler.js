@@ -14,6 +14,8 @@ const to = 'journeys?to=';
 const from = 'from=';
 const departureDate = 'datetime_represents=departure&datetime=';
 const arrivalDate = 'datetime_represents=arrival&datetime=';
+const typeOption = '&type%5B%5D='
+const countOption = '&count='
 
 class APIHandler{
 
@@ -22,8 +24,9 @@ class APIHandler{
     }
 
     //Make an HTTP Request to the API to request Places based on user input
-    async getAutoCompletePlaces(userInput){
-        var request = APIBaseURL + this.coverage + autoCompleteService + userInput;
+    async getAutoCompletePlaces(userInput,type){
+        var request = APIBaseURL + this.coverage + autoCompleteService + userInput + typeOption + type + countOption + 3;
+        console.log(request)
         try{
             let response = await fetch(request,header);
             responseJson = await response.json();
@@ -34,9 +37,9 @@ class APIHandler{
     }
 
     //Get places base on user input and extract important value
-    async getPlaces(userInput){
+    async getPlaces(userInput,type){
         try{
-            response = await this.getAutoCompletePlaces(userInput);
+            response = await this.getAutoCompletePlaces(userInput,type);
             // console.log(response);
             if(!(response.message == "Search word absent") && (response.places)){
                 var data = this.extractPlacesFromResponse(response);
@@ -109,6 +112,7 @@ class APIHandler{
         data = {
             places: places,
         }
+        // console.log(data)
         return data;
     }
 

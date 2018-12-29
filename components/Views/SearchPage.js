@@ -40,9 +40,11 @@ class SearchPage extends React.Component {
     }
 
     async AutoCompleteResearch() {
+        var data = { stop_areas: null, address: null }
         if (this.typename != "line") {
             try {
-                data = await APIManager.getPlaces(this.state.search)
+                data.stop_areas = await APIManager.getPlaces(this.state.search, 'stop_area')
+                data.address = await APIManager.getPlaces(this.state.search, 'address')
             }
             catch (e) {
                 console.error(e);
@@ -56,7 +58,7 @@ class SearchPage extends React.Component {
                 console.error(e);
             }
         }
-        if (!(typeof data === "undefined")) {
+        if (!(typeof data.stop_areas === "undefined" && typeof data.address === "undefined")) {
             this.setState({ locations: data })
         }
 
@@ -160,7 +162,7 @@ class SearchPage extends React.Component {
     }
 
     render() {
-
+        // console.log(this.state.locations)
         return (
             <View style={[styles.container]}>
                 <ScrollView keyboardShouldPersistTaps='always' horizontal={false} contentContainerStyle={{ flexGrow: 1 }} style={{ width: screenWidth }}>
@@ -173,27 +175,46 @@ class SearchPage extends React.Component {
                                 {this.state.search.length === 0 ?
                                     <Image source={require('../../assets/icons/search.png')} style={styles.ImageStyle} />
                                     :
-                                    <TouchableNativeFeedback onPress={()=>this.setState({search:''})}>
+                                    <TouchableNativeFeedback onPress={() => this.setState({ search: '' })}>
                                         <Image source={require('../../assets/icons/close.png')} style={styles.ImageStyle} />
                                     </TouchableNativeFeedback>
                                 }
-                                <TextInput value={this.state.search} onChangeText={(input) => this.setState({ search: input },()=>this.AutoCompleteResearch())} style={styles.input} underlineColorAndroid='rgba(0,0,0,0)' placeholder={this.placeholder} autoFocus />
+                                <TextInput value={this.state.search} onChangeText={(input) => this.setState({ search: input }, () => this.AutoCompleteResearch())} style={styles.input} underlineColorAndroid='rgba(0,0,0,0)' placeholder={this.placeholder} autoFocus />
                             </View>
                         </View>
-                        <Text style={styles.title}>Résultats</Text>
-                        {(this.state.locations.places !== null && this.state.search!=='') ?
-                            <View style={styles.resultCardBox}>
-                                <View style={[styles.card, styles.resultCard]}>
-                                    <FlatList style={{ flex: 1, flexDirection: 'column' }} data={this.state.locations.places} renderItem={({ item }) =>
-                                        <TouchableWithoutFeedback style={styles.resultClickable} onPress={() => this.selectPlace(item)}>
-                                            <View style={styles.resultItem}>
-                                                <Text style={styles.resultItemText}>{item.name} </Text>
-                                            </View>
-                                        </TouchableWithoutFeedback>}
-                                        keyExtractor={(item, index) => index.toString()} />
+                        {(this.state.locations.places !== null && this.state.search !== '') ?
+                            <View>
+                                <Text style={styles.title}>Arrêts / Gares</Text>
+                                <View style={styles.resultCardBox}>
+                                    <View style={[styles.card, styles.resultCard]}>
+                                        <FlatList style={{ flex: 1, flexDirection: 'column' }} data={this.state.locations.stop_areas.places} keyboardShouldPersistTaps={'handled'} ItemSeparatorComponent={() => <View style={{ borderBottomColor: '#e5e5e5', borderBottomWidth: 1, marginLeft: 20, marginRight: 20, }} />} renderItem={({ item }) =>
+                                            <TouchableNativeFeedback onPress={() => this.selectPlace(item)}>
+                                                <View style={styles.resultItem}>
+                                                    <Text style={styles.resultItemText}>{item.name} </Text>
+                                                </View>
+                                            </TouchableNativeFeedback>}
+                                            keyExtractor={(item, index) => index.toString()} />
+                                    </View>
+                                </View>
+                                <Text style={styles.title}>Adresses</Text>
+                                <View style={styles.resultCardBox}>
+                                    <View style={[styles.card, styles.resultCard]}>
+                                        <FlatList style={{ flex: 1, flexDirection: 'column' }} data={this.state.locations.address.places} keyboardShouldPersistTaps={'handled'} ItemSeparatorComponent={() => <View style={{ borderBottomColor: '#e5e5e5', borderBottomWidth: 1, marginLeft: 20, marginRight: 20, }} />} renderItem={({ item }) =>
+                                            <TouchableNativeFeedback onPress={() => this.selectPlace(item)}>
+                                                <View style={styles.resultItem}>
+                                                    <Text style={styles.resultItemText}>{item.name} </Text>
+                                                </View>
+                                            </TouchableNativeFeedback>}
+                                            keyExtractor={(item, index) => index.toString()} />
+                                    </View>
                                 </View>
                             </View>
-                            : <Text style={{ margin: 10, color: "#898989", }}>Aucun résultat</Text>}
+                            :
+                            <View style={{ flex: 1, alignItems: 'center', }}>
+                                {/* <Text style={{ margin: 10, color: "#898989", fontSize: 60, fontWeight:"bold" }}>:(</Text> */}
+                                <Text style={{ margin: 10, color: "#A9A9A9", fontSize: 30, marginTop: 50 }}>Aucun résultat :(</Text>
+                            </View>
+                        }
                     </View>
                 </ScrollView>
             </View >
