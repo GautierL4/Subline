@@ -186,6 +186,7 @@ export const styles = StyleSheet.create({
         justifyContent: 'flex-start',
         flex:0.9,
         flexDirection:'row',
+        marginBottom: 10,
     },
     resultItem: {
         paddingLeft: 20,

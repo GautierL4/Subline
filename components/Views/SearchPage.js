@@ -40,11 +40,12 @@ class SearchPage extends React.Component {
     }
 
     async AutoCompleteResearch() {
-        var data = { stop_areas: null, address: null }
+        var data = { stop_areas: null, address: null, poi:null }
         if (this.typename != "line") {
             try {
                 data.stop_areas = await APIManager.getPlaces(this.state.search, 'stop_area')
                 data.address = await APIManager.getPlaces(this.state.search, 'address')
+                data.poi = await APIManager.getPlaces(this.state.search, 'poi')
             }
             catch (e) {
                 console.error(e);
@@ -58,7 +59,7 @@ class SearchPage extends React.Component {
                 console.error(e);
             }
         }
-        if (!(typeof data.stop_areas === "undefined" && typeof data.address === "undefined")) {
+        if (!(typeof data.stop_areas === "undefined" || typeof data.address === "undefined" || typeof data.poi === "undefined")) {
             this.setState({ locations: data })
         }
 
@@ -200,6 +201,18 @@ class SearchPage extends React.Component {
                                 <View style={styles.resultCardBox}>
                                     <View style={[styles.card, styles.resultCard]}>
                                         <FlatList style={{ flex: 1, flexDirection: 'column' }} data={this.state.locations.address.places} keyboardShouldPersistTaps={'handled'} ItemSeparatorComponent={() => <View style={{ borderBottomColor: '#e5e5e5', borderBottomWidth: 1, marginLeft: 20, marginRight: 20, }} />} renderItem={({ item }) =>
+                                            <TouchableNativeFeedback onPress={() => this.selectPlace(item)}>
+                                                <View style={styles.resultItem}>
+                                                    <Text style={styles.resultItemText}>{item.name} </Text>
+                                                </View>
+                                            </TouchableNativeFeedback>}
+                                            keyExtractor={(item, index) => index.toString()} />
+                                    </View>
+                                </View>
+                                <Text style={styles.title}>Points d'intérêt</Text>
+                                <View style={styles.resultCardBox}>
+                                    <View style={[styles.card, styles.resultCard]}>
+                                        <FlatList style={{ flex: 1, flexDirection: 'column' }} data={this.state.locations.poi.places} keyboardShouldPersistTaps={'handled'} ItemSeparatorComponent={() => <View style={{ borderBottomColor: '#e5e5e5', borderBottomWidth: 1, marginLeft: 20, marginRight: 20, }} />} renderItem={({ item }) =>
                                             <TouchableNativeFeedback onPress={() => this.selectPlace(item)}>
                                                 <View style={styles.resultItem}>
                                                     <Text style={styles.resultItemText}>{item.name} </Text>
