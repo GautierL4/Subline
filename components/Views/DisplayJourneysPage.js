@@ -59,8 +59,6 @@ class DisplayJourneysPage extends React.Component {
 
     render() {
 
-
-
         const _renderSeparator = () => (
             <Image style={styles.journeyCardBottomImgDot} source={require('../../assets/icons/dot.png')} />
         )

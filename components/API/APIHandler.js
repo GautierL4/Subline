@@ -16,6 +16,7 @@ const departureDate = 'datetime_represents=departure&datetime=';
 const arrivalDate = 'datetime_represents=arrival&datetime=';
 const typeOption = '&type%5B%5D='
 const countOption = '&count='
+const line = '/lines?'
 
 class APIHandler{
 
@@ -26,7 +27,7 @@ class APIHandler{
     //Make an HTTP Request to the API to request Places based on user input
     async getAutoCompletePlaces(userInput,type){
         var request = APIBaseURL + this.coverage + autoCompleteService + userInput + typeOption + type + countOption + 3;
-        console.log(request)
+        // console.log(request)
         try{
             let response = await fetch(request,header);
             responseJson = await response.json();
@@ -40,7 +41,6 @@ class APIHandler{
     async getPlaces(userInput,type){
         try{
             response = await this.getAutoCompletePlaces(userInput,type);
-            // console.log(response);
             if(!(response.message == "Search word absent") && (response.places)){
                 var data = this.extractPlacesFromResponse(response);
             }
@@ -106,7 +106,10 @@ class APIHandler{
             places[i] = {
                 id : response.places[i].id,
                 name : response.places[i].name,
-                type : response.places[i].embedded_type
+                type : response.places[i].embedded_type,
+            }
+            if(response.places[i].embedded_type==='stop_area') {
+                places[i].commercial_modes = response.places[i].stop_area.commercial_modes
             }
         }
         data = {

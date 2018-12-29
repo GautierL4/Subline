@@ -39,45 +39,70 @@ const icons = {
     TRAINR: require('../../assets/icons/lines/tn-icon-trar.png'),
     TRAINU: require('../../assets/icons/lines/tn-icon-trau.png'),
     Bus: require('../../assets/icons/icon_bus.png'),
+    general_bus: require('../../assets/icons/ratp_icon_bus.png'),
+    general_metro: require('../../assets/icons/icon_metro.png'),
+    general_rer: require('../../assets/icons/icon_rer.png'),
+    general_tram: require('../../assets/icons/icon_tram.png'),
 };
 
 class FileLoader {
 
-    async getIconForJourney(sections){
+    async getIconForJourney(sections) {
         console.log("Starting Loaded Icons");
         let iconList = [];
-        for(let i=0;i<sections.length;i++){
-            console.log("Get "+i+" Icon");
+        for (let i = 0; i < sections.length; i++) {
+            console.log("Get " + i + " Icon");
             iconList[i] = await this.getIconBySection(sections[i]);
-            console.log("Icon "+i+" Loaded");
+            console.log("Icon " + i + " Loaded");
         }
-        console.log("Icon Loaded",icons);
+        console.log("Icon Loaded", icons);
         return iconList;
     }
 
-    getIconBySection(section){
+    getIconBySection(section) {
         console.log("Get Icon from Section");
-        if(section.type == "street_network" || section.type == "crow_fly" || section.type == "transfer"){
+        if (section.type == "street_network" || section.type == "crow_fly" || section.type == "transfer") {
             console.log("Get Walk Icon");
             return icons.walkIcon;
         }
-        else if(section.type == "waiting"){
+        else if (section.type == "waiting") {
             console.log("Get Wait Icon");
             return icons.wait;
         }
-        else{
+        else {
             console.log("Get Public Transportation Icon");
             icon = this.getPublicTransportIcon(section);
             return icon;
         }
     }
 
-    getPublicTransportIcon(section){
+    getIconForTypeOfPublicTransportation(name) {
+        let icon = null
+        switch (name) {
+            case 'Métro':
+                icon = icons.general_metro;
+                break
+            case 'Bus':
+                icon = icons.general_bus;
+                break
+            case 'RER':
+                icon = icons.general_rer;
+                break
+            case 'Tramway':
+                icon = icons.general_tram;
+                break
+            default:
+                break
+        }
+        return icon
+    }
+
+    getPublicTransportIcon(section) {
         let icon = null;
         console.log(section.type);
-        if(section.type == "public_transport" && section.display_informations != null){
+        if (section.type == "public_transport" && section.display_informations != null) {
             console.log(section.display_informations.label);
-            switch(section.display_informations.label){
+            switch (section.display_informations.label) {
                 case 'A':
                     icon = icons.RERA;
                     break;
@@ -110,13 +135,13 @@ class FileLoader {
                     break;
                 case 'P':
                     icon = icons.TRAINP;
-                    break;      
+                    break;
                 case 'R':
                     icon = icons.TRAINR;
-                    break; 
+                    break;
                 case 'U':
                     icon = icons.TRAINU;
-                    break; 
+                    break;
                 case '1':
                     icon = icons.M1;
                     break;
@@ -189,7 +214,7 @@ class FileLoader {
                 case 'T8':
                     icon = icons.T8;
                     break;
-                default: 
+                default:
                     icon = icons.Bus;
             }
         }

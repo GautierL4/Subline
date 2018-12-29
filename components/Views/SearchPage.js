@@ -1,12 +1,12 @@
 import React from 'react';
-import { StyleSheet, Text, View, Image, Animated, TextInput, TouchableWithoutFeedback, TouchableNativeFeedback, TouchableOpacity, ScrollView, Dimensions, FlatList } from 'react-native';
+import { StyleSheet, KeyboardAvoidingView, Keyboard, Text, View, Image, Animated, TextInput, TouchableWithoutFeedback, TouchableNativeFeedback, TouchableOpacity, ScrollView, Dimensions, FlatList } from 'react-native';
 import { styles } from '../../assets/styles/style';
 import APIHandler from '../API/APIHandler.js';
 import { BackButton } from '../Elements/buttons'
+import FileLoader from './FileLoader.js';
 
 const APIManager = new APIHandler();
-
-
+const IconLoader = new FileLoader();
 
 class SearchPage extends React.Component {
 
@@ -40,7 +40,7 @@ class SearchPage extends React.Component {
     }
 
     async AutoCompleteResearch() {
-        var data = { stop_areas: null, address: null, poi:null }
+        var data = { stop_areas: null, address: null, poi: null }
         if (this.typename != "line") {
             try {
                 data.stop_areas = await APIManager.getPlaces(this.state.search, 'stop_area')
@@ -164,8 +164,9 @@ class SearchPage extends React.Component {
 
     render() {
         // console.log(this.state.locations)
+        
         return (
-            <View style={[styles.container]}>
+            <KeyboardAvoidingView style={[styles.container]} behavior="padding" enabled>
                 <ScrollView keyboardShouldPersistTaps='always' horizontal={false} contentContainerStyle={{ flexGrow: 1 }} style={{ width: screenWidth }}>
                     <View style={{ flexDirection: 'row', height: 100, backgroundColor: '#000', width: 500, }}>
                         <BackButton navigation={this.props.navigation} />
@@ -192,6 +193,14 @@ class SearchPage extends React.Component {
                                             <TouchableNativeFeedback onPress={() => this.selectPlace(item)}>
                                                 <View style={styles.resultItem}>
                                                     <Text style={styles.resultItemText}>{item.name} </Text>
+                                                    <FlatList horizontal data={item.commercial_modes} renderItem={({ item }) => {
+
+                                                        let icon = IconLoader.getIconForTypeOfPublicTransportation(item.name);
+                                                        return (
+                                                            <Image style={styles.journeyCardBottomImg} source={icon} />
+                                                        )
+                                                    }
+                                                    } keyExtractor={(item, index) => index.toString()} />
                                                 </View>
                                             </TouchableNativeFeedback>}
                                             keyExtractor={(item, index) => index.toString()} />
@@ -230,7 +239,7 @@ class SearchPage extends React.Component {
                         }
                     </View>
                 </ScrollView>
-            </View >
+            </KeyboardAvoidingView>
         )
     }
 }
