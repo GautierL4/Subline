@@ -17,6 +17,7 @@ const arrivalDate = 'datetime_represents=arrival&datetime=';
 const typeOption = '&type%5B%5D='
 const countOption = '&count='
 const line = '/lines?'
+const minimumNbJourneys = 'min_nb_journeys='
 
 class APIHandler{
 
@@ -54,15 +55,15 @@ class APIHandler{
     //Make an HTTP Request based on different cases
     async getJourneysFromAPI(departure,arrival,date=null,represents=null){
         if(date == null){
-            var request = APIBaseURL + this.coverage + to + arrival + '&' + from + departure + '&';
+            var request = APIBaseURL + this.coverage + to + arrival + '&' + from + departure + '&' + minimumNbJourneys + 6;
             console.log(request)
         }
         else {
             if(represents == "arrival"){
-                var request = APIBaseURL + this.coverage + to + arrival + '&' + from + departure + '&' + arrivalDate + date + '&';
+                var request = APIBaseURL + this.coverage + to + arrival + '&' + from + departure + '&' + arrivalDate + date + '&' + minimumNbJourneys + 6;
             }
             else{
-                var request = APIBaseURL + this.coverage + to + arrival + '&' + from + departure + '&' + departureDate + date + '&';
+                var request = APIBaseURL + this.coverage + to + arrival + '&' + from + departure + '&' + departureDate + date + '&' + minimumNbJourneys + 6;
             }
         }       
         try{
