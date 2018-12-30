@@ -55,6 +55,7 @@ class APIHandler{
     async getJourneysFromAPI(departure,arrival,date=null,represents=null){
         if(date == null){
             var request = APIBaseURL + this.coverage + to + arrival + '&' + from + departure + '&';
+            console.log(request)
         }
         else {
             if(represents == "arrival"){
@@ -93,6 +94,8 @@ class APIHandler{
                 durations : response.journeys[i].durations,
                 duration : response.journeys[i].duration,
                 sections: response.journeys[i].sections,
+                departure_date_time: response.journeys[i].departure_date_time,
+                requested_date_time: response.journeys[i].requested_date_time,
                 type: response.journeys[i].type,
             };
         }

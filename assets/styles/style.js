@@ -207,6 +207,8 @@ export const styles = StyleSheet.create({
         justifyContent: 'center',
         height: 20,
         marginRight: 5,
+        paddingLeft: 3,
+        paddingRight: 3,
     },
     busCardImgBus: {
         width: 15,
@@ -258,7 +260,9 @@ export const styles = StyleSheet.create({
         //android
         elevation: 5,
         flex:0.9,
-        flexDirection:'row'
+        flexDirection:'row',
+        paddingTop: 10,
+        paddingBottom: 10
     },
     interractiveMapCard: {
 

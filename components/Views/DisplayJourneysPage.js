@@ -6,6 +6,7 @@ import APIHandler from '../API/APIHandler.js';
 import APIGoogle from '../API/APIGoogle';
 import Dropdown from '../Views/Dropdown';
 import { BackButton } from '../Elements/buttons'
+import BusIcon from '../Elements/BusIcon'
 
 const APIManager = new APIHandler();
 const APIGoogleManager = new APIGoogle()
@@ -66,10 +67,10 @@ class DisplayJourneysPage extends React.Component {
 
     render() {
         this.setAddress()
+
         const _renderSeparator = () => (
             <Image style={styles.journeyCardBottomImgDot} source={require('../../assets/icons/dot.png')} />
         )
-
         if (this.state.isLoading) {
             return (
                 <View style={{ width: screenWidth, height: screenHeight, flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: 'black' }}>
@@ -110,8 +111,8 @@ class DisplayJourneysPage extends React.Component {
                                             </TouchableWithoutFeedback>
                                         </View>
                                     </View>
-                                    <View style={{ flexDirection: 'row', flex: 0.1, alignSelf: 'stretch', alignItems:'center', justifyContent: 'center' }}>
-                                        <Image source={require('../../assets/icons/reverse.png')} style={{maxWidth:20,maxHeight:20}}></Image>
+                                    <View style={{ flexDirection: 'row', flex: 0.1, alignSelf: 'stretch', alignItems: 'center', justifyContent: 'center' }}>
+                                        <Image source={require('../../assets/icons/reverse.png')} style={{ maxWidth: 20, maxHeight: 20 }}></Image>
                                     </View>
                                 </View>
                             </View>
@@ -119,27 +120,36 @@ class DisplayJourneysPage extends React.Component {
                         </View>
                         <View style={styles.body}>
 
-                            <Text style={styles.title}>Itinéraires</Text>
+                            <Text style={styles.title}>Meilleur itinéraire</Text>
                             <View style={styles.mapCardBox}>
-                                <View style={[styles.card, styles.mapCard, { flexDirection: 'column' }]}>
-                                    <TouchableOpacity style={{ flexDirection: 'column', justifyContent: 'center', alignItems: 'center', alignSelf: 'stretch', marginLeft: 20, marginRight: 20 }} onPress={() => this.displayJourneyDetails(this.state.data[0])} >
-                                        <View style={{ flexDirection: 'row' }}>
-                                            <View style={{ flex: 3, flexDirection: 'row', alignItems: 'center', flexWrap: 'wrap', }}>
-                                                <FlatList style={{ flexWrap: 'wrap', flex: 1, }} data={this.state.data[0].sections} horizontal={true} ItemSeparatorComponent={_renderSeparator} renderItem={({ item }) => {
-                                                    let icon = IconLoader.getIconBySection(item);
-                                                    return (
-                                                        <Image style={styles.journeyCardBottomImg} source={icon} />
-                                                    )
-                                                }
-                                                } keyExtractor={(item, index) => index.toString()} />
-                                            </View>
-                                            <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-end', alignItems: 'center' }}>
-                                                <Text style={{ fontSize: 24, fontWeight: "bold" }}>{this.convertSecondsToMinutes(this.state.data[0].duration)}</Text>
-                                                <Text style={{ fontSize: 12, marginTop: 8, marginLeft: 5 }}>min</Text>
+                                <TouchableNativeFeedback onPress={() => this.displayJourneyDetails(this.state.data[0])} >
+                                    <View style={[styles.card, styles.mapCard, { flexDirection: 'column' }]}>
+                                        <View style={{ flexDirection: 'column', justifyContent: 'center', alignItems: 'center', alignSelf: 'stretch', marginLeft: 20, marginRight: 20 }}>
+                                            <Text style={{ color: "#898989", fontSize: 14, textAlign: 'left', alignSelf: 'flex-start', fontWeight: 'bold', marginBottom: 5 }}>Départ à {this.state.data[0].departure_date_time.substring(9, 11)}:{this.state.data[0].departure_date_time.substring(11, 13)}</Text>
+                                            <View style={{ flexDirection: 'row' }}>
+                                                <View style={{ flex: 3, flexDirection: 'row', alignItems: 'center', flexWrap: 'wrap', }}>
+                                                    <FlatList style={{ flexWrap: 'wrap', flex: 1, }} data={this.state.data[0].sections} horizontal={true} ItemSeparatorComponent={_renderSeparator} renderItem={({ item }) => {
+                                                        let icon = IconLoader.getIconBySection(item);
+                                                        if (item.display_informations !== undefined && (item.display_informations.physical_mode === 'Bus' || item.display_informations.commercial_mode === 'Bus')) {
+                                                            return (
+                                                                <BusIcon lineName={item.display_informations.label} style={{marginTop:4}} />
+                                                            )
+                                                        } else {
+                                                            return (
+                                                                <Image style={styles.journeyCardBottomImg} source={icon} />
+                                                            )
+                                                        }
+                                                    }
+                                                    } keyExtractor={(item, index) => index.toString()} />
+                                                </View>
+                                                <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-end', alignItems: 'center' }}>
+                                                    <Text style={{ fontSize: 24, fontWeight: "bold" }}>{this.convertSecondsToMinutes(this.state.data[0].duration)}</Text>
+                                                    <Text style={{ fontSize: 12, marginTop: 8, marginLeft: 5 }}>min</Text>
+                                                </View>
                                             </View>
                                         </View>
-                                    </TouchableOpacity>
-                                </View>
+                                    </View>
+                                </TouchableNativeFeedback>
                             </View>
                         </View>
                     </ScrollView>
