@@ -91,6 +91,7 @@ class APIHandler{
     extractJourneysFromResponse(response){
         journey = [];
         for(let i=0;i<response.journeys.length;i++){
+            sections_without_waiting_and_transfer = []
             journey[i] = {
                 durations : response.journeys[i].durations,
                 duration : response.journeys[i].duration,
@@ -99,6 +100,13 @@ class APIHandler{
                 requested_date_time: response.journeys[i].requested_date_time,
                 type: response.journeys[i].type,
             };
+            for(let j=0; j<journey[i].sections.length;j++) {
+                let section = journey[i].sections[j]
+                if(section.type !== 'transfer' && section.type !== 'waiting') {
+                    sections_without_waiting_and_transfer.push(section)
+                }
+            }
+            journey[i].sections_without_waiting_and_transfer = sections_without_waiting_and_transfer
         }
         return journey;
     }

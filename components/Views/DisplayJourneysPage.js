@@ -75,7 +75,7 @@ class DisplayJourneysPage extends React.Component {
         if (this.state.isLoading) {
             return (
                 <View style={{ width: screenWidth, height: screenHeight, flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: 'black' }}>
-                    {/* <Image style={{ width: 80, height: 80, }} source={require('../../assets/icons/loading-start.gif')} /> */}
+                    <Image style={{ width: 80, height: 80, }} source={require('../../assets/icons/loading-start.gif')} />
                 </View>
             );
         }
@@ -129,7 +129,7 @@ class DisplayJourneysPage extends React.Component {
                                             <Text style={{ color: "#898989", fontSize: 14, textAlign: 'left', alignSelf: 'flex-start', fontWeight: 'bold', marginBottom: 5 }}>Départ à {this.state.dataBestJourney.departure_date_time.substring(9, 11)}:{this.state.dataBestJourney.departure_date_time.substring(11, 13)}</Text>
                                             <View style={{ flexDirection: 'row' }}>
                                                 <View style={{ flex: 3, flexDirection: 'row', alignItems: 'center', flexWrap: 'wrap', }}>
-                                                    <FlatList style={{ flexWrap: 'wrap', flex: 1, }} data={this.state.dataBestJourney.sections} horizontal={true} ItemSeparatorComponent={_renderSeparator} renderItem={({ item }) => {
+                                                    <FlatList style={{ flexWrap: 'wrap', flex: 1, }} data={this.state.dataBestJourney.sections_without_waiting_and_transfer} horizontal={true} ItemSeparatorComponent={_renderSeparator} renderItem={({ item }) => {
                                                         let icon = IconLoader.getIconBySection(item);
                                                         if (item.display_informations !== undefined && (item.display_informations.physical_mode === 'Bus' || item.display_informations.commercial_mode === 'Bus')) {
                                                             return (
@@ -161,7 +161,7 @@ class DisplayJourneysPage extends React.Component {
                                                     <Text style={{ color: "#898989", fontSize: 14, textAlign: 'left', alignSelf: 'flex-start', fontWeight: 'bold', marginBottom: 5 }}>Départ à {item.departure_date_time.substring(9, 11)}:{item.departure_date_time.substring(11, 13)}</Text>
                                                     <View style={{ flexDirection: 'row' }}>
                                                         <View style={{ flex: 3, flexDirection: 'row', alignItems: 'center', flexWrap: 'wrap', }}>
-                                                            <FlatList style={{ flexWrap: 'wrap', flex: 1, }} data={item.sections} horizontal={true} ItemSeparatorComponent={_renderSeparator} renderItem={({ item }) => {
+                                                            <FlatList style={{ flexWrap: 'wrap', flex: 1, }} data={item.sections_without_waiting_and_transfer} horizontal={true} ItemSeparatorComponent={_renderSeparator} renderItem={({ item }) => {
                                                                 let icon = IconLoader.getIconBySection(item);
                                                                 if (item.display_informations !== undefined && (item.display_informations.physical_mode === 'Bus' || item.display_informations.commercial_mode === 'Bus')) {
                                                                     return (
