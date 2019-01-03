@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, Image, Animated, TextInput, TouchableWithoutFee
 import { styles, screenWidth, screenHeight } from '../../assets/styles/style';
 import APIHandler from '../API/APIHandler.js';
 import FileLoader from './FileLoader.js';
+import BusIcon from '../Elements/BusIcon'
 
 const IconLoader = new FileLoader();
 
@@ -59,7 +60,7 @@ class PartOfJourney extends React.Component {
                         <FlatList style={{flex:1}} listKey={(item, index) => index.toString()} data={this.props.sectionData.stop_date_times} renderItem={({item})=> 
                             {
                                 return(
-                                    <View style={{ borderBottomColor: '#e5e5e5', borderBottomWidth: 1, marginTop: 2, paddingBottom: 2 }}>
+                                    <View style={{ marginTop: 2, paddingBottom: 2 }}>
                                         <Text style={{ fontSize: 14, color: "#898989" }}>{item.stop_point.name}</Text>
                                     </View>
                                 )
@@ -82,14 +83,19 @@ class PartOfJourney extends React.Component {
         if(this.props.sectionData.type == "waiting"){
             return(
                 <View>
+                    
                 </View>
             )
         }
         else if(this.props.sectionData.type == "public_transport"){
             return(
-                <View style={{ flexDirection: 'column', marginRight: 20, marginLeft: 20, paddingBottom: 20, borderBottomColor: '#e5e5e5', borderBottomWidth: 1 }}>
+                <View style={{ flexDirection: 'column', marginRight: 20, marginLeft: 20, paddingBottom: 20}}>
                         <View style={{ flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center', marginTop: 20 }}>
+                        { (this.props.sectionData.display_informations !== undefined && (this.props.sectionData.display_informations.physical_mode === 'Bus' || this.props.sectionData.display_informations.commercial_mode === 'Bus')) ?
+                            <BusIcon lineName={this.props.sectionData.display_informations.label} style={{ height: 25 }} /> 
+                            :
                             <Image style={{ height: 25, width: 25 }} source={this.loadIcon(this.props.sectionData)} />
+                        }
                         </View>
                         <View style={{ flexDirection: 'row', marginTop: 10, justifyContent: 'flex-start', alignItems: 'flex-start' }}>
                             <Text style={{ fontSize: 22, color: "#898989", flex: 1 }}>{this.getHoursFromISO(this.props.sectionData.departure_date_time)}</Text>
@@ -113,7 +119,7 @@ class PartOfJourney extends React.Component {
         }
         else{
             return (
-                <View style={{ flexDirection: 'column', marginRight: 20, marginLeft: 20, paddingBottom: 20, borderBottomColor: '#e5e5e5', borderBottomWidth: 1 }}>
+                <View style={{ flexDirection: 'column', marginRight: 20, marginLeft: 20, paddingBottom: 20}}>
                     <View style={{ flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center', marginTop: 20 }}>
                         <Image style={{ height: 25, width: 25 }} source={this.loadIcon(this.props.sectionData)} />
                     </View>

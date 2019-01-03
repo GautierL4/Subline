@@ -100,7 +100,8 @@ class APIHandler {
                 departure_date_time: response.journeys[i].departure_date_time,
                 requested_date_time: response.journeys[i].requested_date_time,
                 type: response.journeys[i].type,
-            };
+                co2_emission: response.journeys[i].co2_emission,
+            }
             for (let j = 0; j < journey[i].sections.length; j++) {
                 let section = journey[i].sections[j]
                 if (section.type !== 'transfer' && section.type !== 'waiting') {

@@ -347,6 +347,14 @@ export const styles = StyleSheet.create({
         width:50,
         backgroundColor:'#000',
     },
+    button: {
+        borderRadius:5,
+        marginTop:25,
+        marginRight:13,
+        height:50,
+        width:50,
+        backgroundColor:'#000',
+    },
     returnArrow: {
         height:25,
         width:25,
