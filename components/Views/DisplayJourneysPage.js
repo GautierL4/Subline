@@ -82,7 +82,7 @@ class DisplayJourneysPage extends React.Component {
         else if (Platform.OS === 'android') {
             return (
                 <View style={styles.container}>
-                    <ScrollView horizontal={false} contentContainerStyle={{ flexGrow: 1 }} style={{ width: screenWidth }}>
+                    <ScrollView horizontal={false} contentContainerStyle={{ flexGrow: 1 }} style={{ width: screenWidth}}>
                         <View style={styles.header}>
                             <View style={{ flexDirection: 'row', height: 80, justifyContent: 'center', }}>
                                 <View style={{ flex: 1, flexDirection: 'row', }}>
@@ -98,7 +98,7 @@ class DisplayJourneysPage extends React.Component {
                                                     <Image source={require('../../assets/icons/map-location.png')} style={styles.ImageStyle} />
                                                     <View style={{ flex: 1 }}>
                                                         <Text style={[styles.input, { padding: 0 }]}>{this.state.departure.name}</Text>
-                                                        <Text style={{ fontSize: 11, color: "#666666", fontWeight: 'bold', marginTop: -20 }}>{this.state.departure.address.address_components[0].long_name}</Text>
+                                                        <Text style={{ fontSize: 11, color: "#BBBBBB", fontWeight: 'bold', marginTop: -20 }}>{this.state.departure.address.address_components[0].long_name}</Text>
                                                     </View>
                                                 </View>
                                             </TouchableWithoutFeedback>
@@ -154,7 +154,7 @@ class DisplayJourneysPage extends React.Component {
                             </View>
                             <Text style={styles.title}>Autres itinéraires</Text>
                             <View style={styles.mapCardBox}>
-                                <View style={[styles.card, styles.mapCard, { flexDirection: 'row',paddingTop: 0, paddingBottom: 0}]}>
+                                <View style={[styles.card, styles.mapCard, { flexDirection: 'row',paddingTop: 0, paddingBottom: 0, marginBottom: 50}]}>
                                     <FlatList style={{flex:1}} data={this.state.dataOtherJourneys} keyboardShouldPersistTaps={'handled'} ItemSeparatorComponent={() => <View style={{ borderBottomColor: '#e5e5e5', borderBottomWidth: 1, marginLeft: 20, marginRight: 20, }} />} renderItem={({ item }) =>
                                         <TouchableNativeFeedback onPress={() => this.displayJourneyDetails(item)} >
                                                 <View style={{ flexDirection: 'column', justifyContent: 'center', alignItems: 'center', alignSelf: 'stretch', paddingLeft: 20, paddingRight: 20, paddingTop: 10, paddingBottom: 10, }}>
@@ -180,7 +180,7 @@ class DisplayJourneysPage extends React.Component {
                                                             <Text style={{ fontSize: 12, marginTop: 8, marginLeft: 5 }}>min</Text>
                                                         </View>
                                                     </View>
-                                                    <Text style={{ color: "#898989", fontSize: 14, textAlign: 'left', alignSelf: 'flex-start', marginTop: 5 }}>{item.type}</Text>
+                                                    <Text style={{ color: "#898989", fontSize: 14, textAlign: 'left', alignSelf: 'flex-start', marginTop: 5 }}>{APIManager.translateType(item.type)}</Text>
                                                 </View>
                                         </TouchableNativeFeedback>
                                     } keyExtractor={(item, index) => index.toString()} />
