@@ -15,10 +15,12 @@ Télécharger l'application Expo sur votre téléphone :
 
 #### Méthode 1 (meilleure)
 
-Dans l'application, aller dans "Explore" et rechercher "Subline". Ouvrir le premier résultat (celui de l'utilisateur redha95).
+Dans l'application, aller dans "Explore" et rechercher "Subline". Ouvrir l'application de l'utilisateur :
+- @renadr, pour la dernière version. Uniquement pour Android.
+- @redha95, pour la version antérieur, disponible sur Android et iOS.
 
 #### Méthode 2 (alternative valable uniquement pour Android)
 
-Sur votre ordinateur, aller sur le lien suivant : https://expo.io/@redha95/subline.
+Sur votre ordinateur, aller sur le lien suivant : https://expo.io/@renadr/subline.
 
 Sur votre téléphone, scanner le QR code du lien précédement cité.
