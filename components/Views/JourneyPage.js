@@ -69,7 +69,7 @@ class JourneyPage extends React.Component {
                                 <BackButton navigation={this.props.navigation} />
                             </View>
                             <View style={{ flex: 1, flexDirection: 'row-reverse', }}>
-                                <FavoriteButton />
+                                <FavoriteButton dataJourney={this.journeyData} />
                                 <AlarmButton />
                             </View>
                         </View>
@@ -98,7 +98,7 @@ class JourneyPage extends React.Component {
                             </View>
                         </View> */}
                         <Text style={styles.title}>Itinéraire</Text>
-                        <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center', }}>
+                        <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center', marginBottom: 50}}>
                             <View style={[styles.card, { flex: 0.9, flexDirection: 'column' }]}>
                                 <FlatList data={this.journeyData.sections} ItemSeparatorComponent={() => <View style={{ borderBottomColor: '#e5e5e5', borderBottomWidth: 1, marginLeft: 20, marginRight: 20, }} />} renderItem={({ item }) => {
                                     return (

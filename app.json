@@ -1,6 +1,11 @@
 {
   "expo": {
     "sdkVersion": "31.0.0",
-    "orientation": "portrait"
+    "orientation": "portrait",
+    "name": "Subline",
+    "slug": "subline",
+    "version": "0.1.0",
+    "description": "",
+    "githubUrl": "https://github.com/GautierL4/Subline"
   }
 }
