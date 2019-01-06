@@ -1,6 +1,10 @@
 import React from 'react';
-import { StyleSheet, Text, View, Image, Animated, TextInput, ScrollView, Dimensions, TouchableHighlight, TouchableOpacity, TouchableWithoutFeedback, TouchableNativeFeedback, AsyncStorage } from 'react-native';
+import { StyleSheet, Text, FlatList, View, Image, Animated, TextInput, ScrollView, Dimensions, TouchableHighlight, TouchableOpacity, TouchableWithoutFeedback, TouchableNativeFeedback, AsyncStorage } from 'react-native';
 import { styles } from '../../assets/styles/style';
+import BusIcon from '../Elements/BusIcon'
+import FileLoader from './FileLoader.js';
+
+const IconLoader = new FileLoader();
 
 class FadeInView extends React.Component {
     state = {
@@ -40,8 +44,34 @@ class HomePage extends React.Component {
         super(props);
         this.state = {
             isLoading: true,
-            data: null
+            data: null,
+            favoritesJourneys: []
         };
+    }
+
+    /**
+    * Return the list of the 'favoriteJourneys' from phone storage.
+    * @returns {string} The list of favorites from phone storage.
+    * @memberof FavoriteButton
+    */
+    async _retrieveData() {
+        let value = null
+        try {
+            value = await AsyncStorage.getItem('favoriteJourneys');
+        } catch (error) {
+            console.error('erreur 4826')
+        }
+        return value === null ? [] : value
+    }
+
+    async componentWillMount() {
+        let value = null
+        try {
+            value = await this._retrieveData()
+        } catch (error) {
+            console.error('erreur 409')
+        }
+        this.setState({ favoritesJourneys: JSON.parse(value) })
     }
 
     componentDidMount() {
@@ -59,13 +89,24 @@ class HomePage extends React.Component {
 
     changeView(page, parameters) {
         // setTimeout(function () {
-            this.props.navigation.navigate(page, parameters)
+        this.props.navigation.navigate(page, parameters)
         // }.bind(this), 100)
+    }
+
+    displayJourneyDetails(journey) {
+        this.props.navigation.navigate('JourneyPage',
+            {
+                journeyData: journey,
+            });
     }
 
     render() {
 
         this.displayBookmark();
+
+        const _renderSeparator = () => (
+            <Image style={styles.journeyCardBottomImgDot} source={require('../../assets/icons/dot.png')} />
+        )
 
         if (this.state.isLoading) {
             return (
@@ -176,126 +217,38 @@ class HomePage extends React.Component {
                             </ScrollView>
                             <Text style={styles.title}>Vos itinéraires</Text>
                             <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-                                <View style={styles.stopJourneyCard} onPress={() => this.props.navigation.navigate('JourneyPage')}>
-                                    <TouchableNativeFeedback background={TouchableNativeFeedback.Ripple('#CCCCCC')}>
-                                        <View style={[styles.journeyCard, styles.card]}>
-                                            <View style={styles.journeyCardTop}>
-                                                <View style={styles.journeyCardTopRow}>
-                                                    <Image style={styles.journeyCardTopRowImg} source={require('../../assets/icons/map-location.png')} />
-                                                    <Text style={styles.journeyCardTopRowTxt}>Châtelet-Les-Halles</Text>
+                                <FlatList horizontal={true} style={{ flexDirection: 'row' }} data={this.state.favoritesJourneys} renderItem={({ item }) =>
+                                    <View style={styles.stopJourneyCard}>
+                                        <TouchableNativeFeedback onPress={() => this.displayJourneyDetails(item)} background={TouchableNativeFeedback.Ripple('#CCCCCC')}>
+                                            <View style={[styles.journeyCard, styles.card]}>
+                                                <View style={styles.journeyCardTop}>
+                                                    <View style={styles.journeyCardTopRow}>
+                                                        <Image style={styles.journeyCardTopRowImg} source={require('../../assets/icons/map-location.png')} />
+                                                        <Text style={styles.journeyCardTopRowTxt}>{item.sections[0].from.name}</Text>
+                                                    </View>
+                                                    <View style={styles.journeyCardTopRow}>
+                                                        <Image style={styles.journeyCardTopRowImg} source={require('../../assets/icons/target.png')} />
+                                                        <Text style={styles.journeyCardTopRowTxt}>{item.sections[item.sections.length - 1].to.name}</Text>
+                                                    </View>
                                                 </View>
-                                                <View style={styles.journeyCardTopRow}>
-                                                    <Image style={styles.journeyCardTopRowImg} source={require('../../assets/icons/target.png')} />
-                                                    <Text style={styles.journeyCardTopRowTxt}>43 rue de Bruxelles, Paris 75004</Text>
-                                                </View>
-                                            </View>
-                                            <View style={styles.journeyCardBottom}>
-                                                <Image style={styles.journeyCardBottomImg} source={require('../../assets/icons/lines/RERBgenRVB.png')} />
-                                                <Image style={styles.journeyCardBottomImgDot} source={require('../../assets/icons/dot.png')} />
-                                                <Image style={styles.journeyCardBottomImg} source={require('../../assets/icons/lines/RERAgenRVB.png')} />
-                                                <Image style={styles.journeyCardBottomImgDot} source={require('../../assets/icons/dot.png')} />
-                                                <Image style={styles.journeyCardBottomImg} source={require('../../assets/icons/walk.png')} />
-                                                <Image style={styles.journeyCardBottomImgDot} source={require('../../assets/icons/dot.png')} />
-                                                <View style={styles.busCard}>
-                                                    <Image source={require('../../assets/icons/icon_bus.png')} style={styles.busCardImgBus} />
-                                                    <Text style={styles.busCardTxt}>95-01</Text>
-                                                </View>
-                                                <Image style={styles.journeyCardBottomImgDot} source={require('../../assets/icons/dot.png')} />
-                                                <Image style={styles.journeyCardBottomImg} source={require('../../assets/icons/lines/M7bisgenRVB.png')} />
-                                            </View>
-                                        </View>
-                                    </TouchableNativeFeedback>
-                                </View>
-                                <View style={styles.stopJourneyCard} onPress={() => this.props.navigation.navigate('JourneyPage')}>
-                                    <TouchableNativeFeedback background={TouchableNativeFeedback.Ripple('#CCCCCC')}>
-                                        <View style={[styles.journeyCard, styles.card]}>
-                                            <View style={styles.journeyCardTop}>
-                                                <View style={styles.journeyCardTopRow}>
-                                                    <Image style={styles.journeyCardTopRowImg} source={require('../../assets/icons/map-location.png')} />
-                                                    <Text style={styles.journeyCardTopRowTxt}>Châtelet-Les-Halles</Text>
-                                                </View>
-                                                <View style={styles.journeyCardTopRow}>
-                                                    <Image style={styles.journeyCardTopRowImg} source={require('../../assets/icons/target.png')} />
-                                                    <Text style={styles.journeyCardTopRowTxt}>43 rue de Bruxelles, Paris 75004</Text>
+                                                <View style={styles.journeyCardBottom}>
+                                                    <FlatList horizontal={true} style={{ flexDirection: 'row' }} data={item.sections_without_waiting_and_transfer} ItemSeparatorComponent={_renderSeparator} renderItem={({ item }) => {
+                                                        let icon = IconLoader.getIconBySection(item);
+                                                        if (item.display_informations !== undefined && (item.display_informations.physical_mode === 'Bus' || item.display_informations.commercial_mode === 'Bus')) {
+                                                            return (
+                                                                <BusIcon lineName={item.display_informations.label} style={{ marginTop: 4 }} />
+                                                            )
+                                                        } else {
+                                                            return (
+                                                                <Image style={styles.journeyCardBottomImg} source={icon} />
+                                                            )
+                                                        }
+                                                    }} keyExtractor={(item, index) => index.toString()} />
                                                 </View>
                                             </View>
-                                            <View style={styles.journeyCardBottom}>
-                                                <Image style={styles.journeyCardBottomImg} source={require('../../assets/icons/lines/RERBgenRVB.png')} />
-                                                <Image style={styles.journeyCardBottomImgDot} source={require('../../assets/icons/dot.png')} />
-                                                <Image style={styles.journeyCardBottomImg} source={require('../../assets/icons/lines/RERAgenRVB.png')} />
-                                                <Image style={styles.journeyCardBottomImgDot} source={require('../../assets/icons/dot.png')} />
-                                                <Image style={styles.journeyCardBottomImg} source={require('../../assets/icons/walk.png')} />
-                                                <Image style={styles.journeyCardBottomImgDot} source={require('../../assets/icons/dot.png')} />
-                                                <View style={styles.busCard}>
-                                                    <Image source={require('../../assets/icons/icon_bus.png')} style={styles.busCardImgBus} />
-                                                    <Text style={styles.busCardTxt}>95-01</Text>
-                                                </View>
-                                                <Image style={styles.journeyCardBottomImgDot} source={require('../../assets/icons/dot.png')} />
-                                                <Image style={styles.journeyCardBottomImg} source={require('../../assets/icons/lines/M7bisgenRVB.png')} />
-                                            </View>
-                                        </View>
-                                    </TouchableNativeFeedback>
-                                </View>
-                                <View style={styles.stopJourneyCard} onPress={() => this.props.navigation.navigate('JourneyPage')}>
-                                    <TouchableNativeFeedback background={TouchableNativeFeedback.Ripple('#CCCCCC')}>
-                                        <View style={[styles.journeyCard, styles.card]}>
-                                            <View style={styles.journeyCardTop}>
-                                                <View style={styles.journeyCardTopRow}>
-                                                    <Image style={styles.journeyCardTopRowImg} source={require('../../assets/icons/map-location.png')} />
-                                                    <Text style={styles.journeyCardTopRowTxt}>Châtelet-Les-Halles</Text>
-                                                </View>
-                                                <View style={styles.journeyCardTopRow}>
-                                                    <Image style={styles.journeyCardTopRowImg} source={require('../../assets/icons/target.png')} />
-                                                    <Text style={styles.journeyCardTopRowTxt}>43 rue de Bruxelles, Paris 75004</Text>
-                                                </View>
-                                            </View>
-                                            <View style={styles.journeyCardBottom}>
-                                                <Image style={styles.journeyCardBottomImg} source={require('../../assets/icons/lines/RERBgenRVB.png')} />
-                                                <Image style={styles.journeyCardBottomImgDot} source={require('../../assets/icons/dot.png')} />
-                                                <Image style={styles.journeyCardBottomImg} source={require('../../assets/icons/lines/RERAgenRVB.png')} />
-                                                <Image style={styles.journeyCardBottomImgDot} source={require('../../assets/icons/dot.png')} />
-                                                <Image style={styles.journeyCardBottomImg} source={require('../../assets/icons/walk.png')} />
-                                                <Image style={styles.journeyCardBottomImgDot} source={require('../../assets/icons/dot.png')} />
-                                                <View style={styles.busCard}>
-                                                    <Image source={require('../../assets/icons/icon_bus.png')} style={styles.busCardImgBus} />
-                                                    <Text style={styles.busCardTxt}>95-01</Text>
-                                                </View>
-                                                <Image style={styles.journeyCardBottomImgDot} source={require('../../assets/icons/dot.png')} />
-                                                <Image style={styles.journeyCardBottomImg} source={require('../../assets/icons/lines/M7bisgenRVB.png')} />
-                                            </View>
-                                        </View>
-                                    </TouchableNativeFeedback>
-                                </View>
-                                <View style={styles.stopJourneyCard} onPress={() => this.props.navigation.navigate('JourneyPage')}>
-                                    <TouchableNativeFeedback background={TouchableNativeFeedback.Ripple('#CCCCCC')}>
-                                        <View style={[styles.journeyCard, styles.card]}>
-                                            <View style={styles.journeyCardTop}>
-                                                <View style={styles.journeyCardTopRow}>
-                                                    <Image style={styles.journeyCardTopRowImg} source={require('../../assets/icons/map-location.png')} />
-                                                    <Text style={styles.journeyCardTopRowTxt}>Châtelet-Les-Halles</Text>
-                                                </View>
-                                                <View style={styles.journeyCardTopRow}>
-                                                    <Image style={styles.journeyCardTopRowImg} source={require('../../assets/icons/target.png')} />
-                                                    <Text style={styles.journeyCardTopRowTxt}>43 rue de Bruxelles, Paris 75004</Text>
-                                                </View>
-                                            </View>
-                                            <View style={styles.journeyCardBottom}>
-                                                <Image style={styles.journeyCardBottomImg} source={require('../../assets/icons/lines/RERBgenRVB.png')} />
-                                                <Image style={styles.journeyCardBottomImgDot} source={require('../../assets/icons/dot.png')} />
-                                                <Image style={styles.journeyCardBottomImg} source={require('../../assets/icons/lines/RERAgenRVB.png')} />
-                                                <Image style={styles.journeyCardBottomImgDot} source={require('../../assets/icons/dot.png')} />
-                                                <Image style={styles.journeyCardBottomImg} source={require('../../assets/icons/walk.png')} />
-                                                <Image style={styles.journeyCardBottomImgDot} source={require('../../assets/icons/dot.png')} />
-                                                <View style={styles.busCard}>
-                                                    <Image source={require('../../assets/icons/icon_bus.png')} style={styles.busCardImgBus} />
-                                                    <Text style={styles.busCardTxt}>95-01</Text>
-                                                </View>
-                                                <Image style={styles.journeyCardBottomImgDot} source={require('../../assets/icons/dot.png')} />
-                                                <Image style={styles.journeyCardBottomImg} source={require('../../assets/icons/lines/M7bisgenRVB.png')} />
-                                            </View>
-                                        </View>
-                                    </TouchableNativeFeedback>
-                                </View>
+                                        </TouchableNativeFeedback>
+                                    </View>
+                                } keyExtractor={(item, index) => index.toString()} />
                             </ScrollView>
                             <Text style={styles.title}>Lignes</Text>
 
