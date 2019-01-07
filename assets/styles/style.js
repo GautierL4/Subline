@@ -4,16 +4,18 @@ export const screenWidth = Dimensions.get('window').width;
 export const screenHeight = Dimensions.get('window').height;
 
 const primaryColor = "#70bd88"
+const secondaryColor = "#000"
+const tertiaryColor = "#fff"
 
 export const styles = StyleSheet.create({
     container: {
         flex:1,
         alignItems: 'center', 
         justifyContent: 'center',
-        backgroundColor: '#fff',
+        backgroundColor: tertiaryColor,
     },
     card: {
-        backgroundColor: '#ffffff',
+        backgroundColor: tertiaryColor,
         borderRadius: 5,
         //IOS
         shadowOpacity: 0.2,
@@ -26,7 +28,7 @@ export const styles = StyleSheet.create({
         elevation: 7,
     },
     header: {
-        backgroundColor: '#000',
+        backgroundColor: secondaryColor,
         alignItems: 'center',
         justifyContent: 'flex-start',
         alignSelf: 'stretch',  
@@ -104,7 +106,7 @@ export const styles = StyleSheet.create({
         fontSize: 20,
         marginLeft: 10,
         fontWeight: 'bold',
-        color: '#000'
+        color: secondaryColor
     },
     stopCardPlaceNextPassageText: {
         fontSize: 20,
@@ -247,7 +249,7 @@ export const styles = StyleSheet.create({
         flexDirection:'row',
         alignItems: 'center',
         minHeight: 60,
-        backgroundColor: '#ffffff',
+        backgroundColor: tertiaryColor,
         justifyContent: 'center',
         borderRadius: 5,
         //IOS
@@ -265,12 +267,10 @@ export const styles = StyleSheet.create({
         paddingBottom: 10
     },
     interractiveMapCard: {
-
         flexDirection:'row',
         alignItems: 'center',
         height:60,
-        backgroundColor: '#000',
-        
+        backgroundColor: secondaryColor,
         justifyContent: 'center',
         borderRadius: 5,
         //IOS
@@ -287,8 +287,7 @@ export const styles = StyleSheet.create({
 
     },
     interractiveMapColor: {
-
-        color:"#ffffff"
+        color: tertiaryColor
     },
     home: {
       flex:1,
@@ -305,16 +304,16 @@ export const styles = StyleSheet.create({
     },
     ImageStyle: {
       marginLeft: 10,
+      marginTop:12,
       paddingLeft: 5,
       resizeMode : 'contain',
       alignItems: 'center',
       justifyContent:'center',
       maxHeight:20,
       flex:0.1,
-      marginTop:12,
     },
     searchBar: {
-      backgroundColor: '#ffffff',
+      backgroundColor: tertiaryColor,
       borderRadius: 5,
       //IOS
         shadowOpacity: 0.2,
@@ -330,7 +329,7 @@ export const styles = StyleSheet.create({
       flexDirection:'row',
     },
     returnButtonBg: {
-        backgroundColor:'#000',
+        backgroundColor: secondaryColor,
         position:'absolute',
         borderRadius:5,
         top:25,
@@ -345,7 +344,7 @@ export const styles = StyleSheet.create({
         left:13,
         height:50,
         width:50,
-        backgroundColor:'#000',
+        backgroundColor: secondaryColor,
     },
     button: {
         borderRadius:5,
@@ -353,7 +352,7 @@ export const styles = StyleSheet.create({
         marginRight:13,
         height:50,
         width:50,
-        backgroundColor:'#000',
+        backgroundColor: secondaryColor,
     },
     returnArrow: {
         height:25,
