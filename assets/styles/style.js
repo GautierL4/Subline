@@ -299,12 +299,12 @@ export const styles = StyleSheet.create({
     input: {
       color: "#666666",
       fontWeight: 'bold',
-      fontSize: 18,
+      fontSize: 17,
       padding: 10,
       flex:0.9,
     },
     ImageStyle: {
-      margin: 10,
+      marginLeft: 10,
       paddingLeft: 5,
       resizeMode : 'contain',
       alignItems: 'center',

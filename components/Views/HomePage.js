@@ -88,13 +88,6 @@ class HomePage extends React.Component {
         setTimeout(() => {
             this.setState({ isLoading: false })
         }, 4000);
-        // BackHandler.addEventListener('hardwareBackPress', async function() {
-        //     try {
-        //         await this.getFavoritesJourneys()
-        //     } catch(e) {
-        //         console.error('error 098')
-        //     }
-        //   })
     }
     
     async displayBookmark() {
@@ -154,46 +147,6 @@ class HomePage extends React.Component {
                             </View>
                             <Text style={styles.title}>Vos arrêts</Text>
                             <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-                                <View onPress={() => console.log('hey')} style={styles.stopCardBox}>
-                                    <TouchableNativeFeedback background={TouchableNativeFeedback.Ripple('#CCCCCC')}>
-                                        <View style={[styles.stopCard, styles.card]}>
-                                            <View style={styles.stopCardLine}>
-                                                <Image source={require('../../assets/icons/icon_bus.png')} style={styles.stopCardLineIcon} />
-                                                <Text style={styles.stopCardLineDirection}>Aéroport Cdg1 RER B</Text>
-                                                <Text style={styles.stopCardLineNumber}>95-01</Text>
-                                            </View>
-                                            <View style={styles.stopCardPlace}>
-                                                <Text style={styles.stopCardPlaceText}>Hôtel de ville</Text>
-                                                <Text style={styles.stopCardPlaceNextPassageLabel}>Prochains passage :</Text>
-                                                <View style={styles.stopCardPlaceNextPassage}>
-                                                    <Text style={styles.stopCardPlaceNextPassageTextHighLight}>10:05</Text>
-                                                    <Text style={styles.stopCardPlaceNextPassageText}>10:35</Text>
-                                                    <Text style={styles.stopCardPlaceNextPassageText}>11:23</Text>
-                                                </View>
-                                            </View>
-                                        </View>
-                                    </TouchableNativeFeedback>
-                                </View>
-                                <View onPress={() => console.log('hey')} style={styles.stopCardBox}>
-                                    <TouchableNativeFeedback background={TouchableNativeFeedback.Ripple('#CCCCCC')}>
-                                        <View style={[styles.stopCard, styles.card]}>
-                                            <View style={styles.stopCardLine}>
-                                                <Image source={require('../../assets/icons/icon_bus.png')} style={styles.stopCardLineIcon} />
-                                                <Text style={styles.stopCardLineDirection}>Aéroport Cdg1 RER B</Text>
-                                                <Text style={styles.stopCardLineNumber}>95-01</Text>
-                                            </View>
-                                            <View style={styles.stopCardPlace}>
-                                                <Text style={styles.stopCardPlaceText}>Hôtel de ville</Text>
-                                                <Text style={styles.stopCardPlaceNextPassageLabel}>Prochains passage :</Text>
-                                                <View style={styles.stopCardPlaceNextPassage}>
-                                                    <Text style={styles.stopCardPlaceNextPassageTextHighLight}>10:05</Text>
-                                                    <Text style={styles.stopCardPlaceNextPassageText}>10:35</Text>
-                                                    <Text style={styles.stopCardPlaceNextPassageText}>11:23</Text>
-                                                </View>
-                                            </View>
-                                        </View>
-                                    </TouchableNativeFeedback>
-                                </View>
                                 <View onPress={() => console.log('hey')} style={styles.stopCardBox}>
                                     <TouchableNativeFeedback background={TouchableNativeFeedback.Ripple('#CCCCCC')}>
                                         <View style={[styles.stopCard, styles.card]}>
