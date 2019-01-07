@@ -72,7 +72,7 @@ class JourneyPage extends React.Component {
                             </View>
                             <View style={{ flex: 1, flexDirection: 'row-reverse', }}>
                                 <FavoriteButton dataJourney={this.journeyData} />
-                                <AlarmButton />
+                                {/* <AlarmButton /> */}
                             </View>
                         </View>
                         <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>

@@ -12,11 +12,13 @@ import { styles, screenWidth, screenHeight } from '../../assets/styles/style';
  */
 export class BackButton extends React.Component {
 
+    /**
+     * Creates an instance of BackButton.
+     * @param {*} props
+     * @memberof BackButton
+     */
     constructor(props) {
         super(props)
-        this.state = {
-            reload: true
-        }
     }
 
     componentDidMount() {
@@ -245,7 +247,7 @@ export class FavoriteButton extends React.Component {
  */
 export class AlarmButton extends React.Component {
 
-    test() {
+    clickHandler() {
         AsyncStorage.clear()
     }
 
@@ -257,7 +259,7 @@ export class AlarmButton extends React.Component {
     render() {
         return (
             <View style={styles.button} >
-                <TouchableNativeFeedback onPress={() => this.test()} >
+                <TouchableNativeFeedback onPress={() => this.clickHandler()} >
                     <View>
                         <Image style={styles.returnArrow} source={require('../../assets/icons/alarm_off.png')} />
                     </View>
