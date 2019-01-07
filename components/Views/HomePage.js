@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, FlatList, View, Image, Animated, TextInput, ScrollView, Dimensions, TouchableHighlight, TouchableOpacity, TouchableWithoutFeedback, TouchableNativeFeedback, AsyncStorage } from 'react-native';
+import { StyleSheet, Text, BackHandler, FlatList, View, Image, Animated, TextInput, ScrollView, Dimensions, TouchableHighlight, TouchableOpacity, TouchableWithoutFeedback, TouchableNativeFeedback, AsyncStorage } from 'react-native';
 import { styles } from '../../assets/styles/style';
 import BusIcon from '../Elements/BusIcon'
 import FileLoader from './FileLoader.js';
@@ -45,8 +45,12 @@ class HomePage extends React.Component {
         this.state = {
             isLoading: true,
             data: null,
-            favoritesJourneys: []
+            favoritesJourneys: [],
         };
+    }
+
+    onSelect = data => {
+        this.setState(data);
     }
 
     /**
@@ -64,7 +68,11 @@ class HomePage extends React.Component {
         return value === null ? [] : value
     }
 
-    async componentWillMount() {
+    componentWillMount() {
+        this.getFavoritesJourneys()   
+    }
+
+    async getFavoritesJourneys() {
         let value = null
         try {
             value = await this._retrieveData()
@@ -80,8 +88,15 @@ class HomePage extends React.Component {
         setTimeout(() => {
             this.setState({ isLoading: false })
         }, 4000);
+        // BackHandler.addEventListener('hardwareBackPress', async function() {
+        //     try {
+        //         await this.getFavoritesJourneys()
+        //     } catch(e) {
+        //         console.error('error 098')
+        //     }
+        //   })
     }
-
+    
     async displayBookmark() {
         const value = await AsyncStorage.getItem('key');
         console.log(value);
@@ -93,10 +108,15 @@ class HomePage extends React.Component {
         // }.bind(this), 100)
     }
 
+    handleOnNavigateBack = () => {
+        this.getFavoritesJourneys()
+    }
+
     displayJourneyDetails(journey) {
         this.props.navigation.navigate('JourneyPage',
             {
                 journeyData: journey,
+                onNavigateBack: this.handleOnNavigateBack,
             });
     }
 
@@ -125,7 +145,7 @@ class HomePage extends React.Component {
                         </View>
                         <View style={styles.body}>
                             <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center', position: 'relative', top: -25 }}>
-                                <TouchableNativeFeedback background={TouchableNativeFeedback.Ripple('#CCCCCC')} onPress={() => this.changeView('SearchPage', { type: 'firstInput', })} style={{ flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', padding: 5 }}>
+                                <TouchableNativeFeedback background={TouchableNativeFeedback.Ripple('#CCCCCC')} onPress={() => this.changeView('SearchPage', { type: 'firstInput', onNavigateBack: this.handleOnNavigateBack, })} style={{ flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', padding: 5 }}>
                                     <View style={styles.searchBar}>
                                         <Image source={require('../../assets/icons/search.png')} style={styles.ImageStyle} />
                                         <Text style={styles.input}>Où souhaitez-vous aller ?</Text>

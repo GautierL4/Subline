@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Image, TouchableNativeFeedback, AsyncStorage, ToastAndroid } from 'react-native';
+import { View, BackHandler, Image, TouchableNativeFeedback, AsyncStorage, ToastAndroid } from 'react-native';
 import { styles, screenWidth, screenHeight } from '../../assets/styles/style';
 
 
@@ -12,6 +12,42 @@ import { styles, screenWidth, screenHeight } from '../../assets/styles/style';
  */
 export class BackButton extends React.Component {
 
+    constructor(props) {
+        super(props)
+        this.state = {
+            reload: true
+        }
+    }
+
+    componentDidMount() {
+        BackHandler.addEventListener('hardwareBackPress', this.handleBackPress)
+    }
+
+    componentWillUnmount() {
+        BackHandler.removeEventListener('hardwareBackPress', this.handleBackPress)
+    }
+
+    /**
+     * Replace the action from hardware button by the function goBack()
+     * @memberof BackButton
+     */
+    handleBackPress = () => {
+        this.goBack()
+        return true
+    }
+
+    /**
+     * Go to the previous screen with React Navigation.
+     * If onNavigateBack exists in the navigation state, call its function in previous screen. 
+     * @memberof BackButton
+     */
+    goBack() {
+        if (this.props.navigation.state.params.onNavigateBack !== undefined) {
+            this.props.navigation.state.params.onNavigateBack()
+        }
+        this.props.navigation.goBack();
+    }
+
     /**
      * Display the back button.
      * @returns
@@ -20,7 +56,7 @@ export class BackButton extends React.Component {
     render() {
         return (
             <View style={styles.returnButton} >
-                <TouchableNativeFeedback background={TouchableNativeFeedback.Ripple('#CCCCCC')} onPress={() => this.props.navigation.goBack()} >
+                <TouchableNativeFeedback background={TouchableNativeFeedback.Ripple('#CCCCCC')} onPress={() => this.goBack()} >
                     <View>
                         <Image style={styles.returnArrow} source={require('../../assets/icons/go-back-left-arrow.png')} />
                     </View>
@@ -47,10 +83,10 @@ export class FavoriteButton extends React.Component {
         super(props)
         this.state = {
             listOfFavorite: [],
-            isAFavorite:false,
+            isAFavorite: false,
             isLoading: true
         }
-    } 
+    }
 
     /**
      * Add a specific journey to the favorite list (component state) if it is not already. Remove if it is. 
@@ -58,7 +94,7 @@ export class FavoriteButton extends React.Component {
      * @memberof FavoriteButton
      */
     toggleAJourneyInFavoriteJourneys(dataJourney) {
-        if(this.state.isAFavorite) {
+        if (this.state.isAFavorite) {
             this.removeJourneyFromFavoriteJourneys(dataJourney)
         } else {
             this.addJourneyToFavoriteJourneys(dataJourney)
@@ -73,10 +109,10 @@ export class FavoriteButton extends React.Component {
     addJourneyToFavoriteJourneys(dataJourney) {
         let listOfFavorite = [...this.state.listOfFavorite]
         listOfFavorite.push(dataJourney)
-        this.setState({listOfFavorite: listOfFavorite,isAFavorite:true}, async () =>{
+        this.setState({ listOfFavorite: listOfFavorite, isAFavorite: true }, async () => {
             try {
                 await this._storeData(JSON.stringify(this.state.listOfFavorite))
-            } catch(e) {
+            } catch (e) {
                 console.error('error 321')
             }
         })
@@ -90,13 +126,13 @@ export class FavoriteButton extends React.Component {
      */
     removeJourneyFromFavoriteJourneys(dataJourney) {
         // let listOfFavorite = [...this.state.listOfFavorite]
-        let filtered = this.state.listOfFavorite.filter(function(value, index, arr){
+        let filtered = this.state.listOfFavorite.filter(function (value, index, arr) {
             return JSON.stringify(value) !== JSON.stringify(dataJourney)
         })
-        this.setState({listOfFavorite: filtered,isAFavorite:false}, async () =>{
+        this.setState({ listOfFavorite: filtered, isAFavorite: false }, async () => {
             try {
                 await this._storeData(JSON.stringify(this.state.listOfFavorite))
-            } catch(e) {
+            } catch (e) {
                 console.error('error 321')
             }
         })
@@ -168,10 +204,10 @@ export class FavoriteButton extends React.Component {
             console.error(e)
         }
         this.setState({
-            listOfFavorite: newListOfFavoriteJourneys, 
+            listOfFavorite: newListOfFavoriteJourneys,
             isLoading: false,
-        },()=>{
-            this.setState({isAFavorite: this.checkIfJourneyIsAlreadyInFavorites(this.props.dataJourney)})
+        }, () => {
+            this.setState({ isAFavorite: this.checkIfJourneyIsAlreadyInFavorites(this.props.dataJourney) })
         })
     }
 
@@ -180,7 +216,7 @@ export class FavoriteButton extends React.Component {
      * @returns
      * @memberof FavoriteButton
      */
-    render() {  
+    render() {
         const icon = this.state.isAFavorite ? require('../../assets/icons/star_on.png') : require('../../assets/icons/star_off.png')
         if (this.state.isLoading) {
             return (

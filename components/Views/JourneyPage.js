@@ -12,7 +12,9 @@ class JourneyPage extends React.Component {
     constructor(props) {
         super(props)
         this.journeyData = this.props.navigation.getParam('journeyData')
-
+        // this.state = {
+        //     handleOnNavigateBack: this.props.navigation.getParam('onNavigateBack')
+        // }
         this.RotateValueHolder = new Animated.Value(0);
 
     }
