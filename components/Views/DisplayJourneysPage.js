@@ -5,7 +5,7 @@ import FileLoader from './FileLoader.js';
 import APIHandler from '../API/APIHandler.js';
 import APIGoogle from '../API/APIGoogle';
 import Dropdown from '../Views/Dropdown';
-import { BackButton, ReloadButton } from '../Elements/buttons'
+import { BackButton, ReloadButton, ReverseButton } from '../Elements/buttons'
 import BusIcon from '../Elements/BusIcon'
 
 const APIManager = new APIHandler();
@@ -30,6 +30,7 @@ class DisplayJourneysPage extends React.Component {
             isLoading: true,
         };
         this.handlerReload = this.handlerReload.bind(this)
+        this.handlerReverse = this.handlerReverse.bind(this)
     }
 
     componentDidMount() {
@@ -70,8 +71,22 @@ class DisplayJourneysPage extends React.Component {
     handlerReload() {
         this.setState({
             isLoading: true
-        })
-        this.searchJourney()
+        }, () => this.searchJourney())
+
+    }
+
+    handlerReverse() {
+        let { departure, destination } = this.state
+        this.setState({
+            isLoading: true,
+            departure: destination,
+            destination: departure,
+            savedParams: {
+                departure: destination,
+                destination: departure
+            }
+        }, () => this.searchJourney())
+
     }
 
     render() {
@@ -123,13 +138,21 @@ class DisplayJourneysPage extends React.Component {
                                             <TouchableWithoutFeedback onPress={() => this.props.navigation.replace('SearchPage', { type: "destination", savedParams: this.state.savedParams })} style={{ flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', padding: 5 }}>
                                                 <View style={[styles.searchBar, { flex: 1 }]}>
                                                     <Image source={require('../../assets/icons/target.png')} style={styles.ImageStyle} />
-                                                    <Text style={styles.input}>{this.state.destination.name}</Text>
+                                                    {this.state.destination.address !== undefined ?
+                                                        <View style={{ flex: 1 }}>
+                                                            <Text style={[styles.input, { padding: 0 }]}>{this.state.destination.name}</Text>
+                                                            <Text style={{ fontSize: 11, color: "#BBBBBB", fontWeight: 'bold', marginTop: -20 }}>{this.state.destination.address.address_components[0].long_name}</Text>
+                                                        </View>
+                                                        :
+                                                        <Text style={styles.input}>{this.state.destination.name}</Text>
+                                                    }
+
                                                 </View>
                                             </TouchableWithoutFeedback>
                                         </View>
                                     </View>
                                     <View style={{ flexDirection: 'row', flex: 0.1, alignSelf: 'stretch', alignItems: 'center', justifyContent: 'center' }}>
-                                        <Image source={require('../../assets/icons/reverse.png')} style={{ maxWidth: 20, maxHeight: 20 }}></Image>
+                                        <ReverseButton handler={this.handlerReverse} />
                                     </View>
                                 </View>
                             </View>
@@ -204,7 +227,7 @@ class DisplayJourneysPage extends React.Component {
                             </View>
                         </View>
                     </ScrollView>
-                </View>
+                </View >
             )
         } else {
 

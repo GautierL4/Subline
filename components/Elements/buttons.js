@@ -296,7 +296,6 @@ export class ReloadButton extends React.Component {
     }
 
     render() {
-        console.log('LITTLE RELOAD')
         const RotateData = this.RotateValueHolder.interpolate({
             inputRange: [0, 1],
             outputRange: ['0deg', '-360deg']
@@ -313,4 +312,47 @@ export class ReloadButton extends React.Component {
             </View>
         )
     }
+}
+
+export class ReverseButton extends React.Component {
+
+    constructor(props) {
+        super(props)
+        this.RotateValueHolder = new Animated.Value(0)
+    }
+
+    StartImageRotateFunction() {
+        this.RotateValueHolder.setValue(0)
+        Animated.timing(
+            this.RotateValueHolder,
+            {
+                toValue: 1,
+                duration: 200,
+                easing: Easing.linear
+            }
+        ).start()
+    }
+
+    reverse(handler) {
+        this.StartImageRotateFunction()
+        handler()
+    }
+
+    render() {
+        const RotateData = this.RotateValueHolder.interpolate({
+            inputRange: [0, 1],
+            outputRange: ['0deg', '-180deg']
+        })
+        const { handler } = this.props;
+        return (
+            <View style={{maxWidth: 20, maxHeight: 20}}>
+                <TouchableNativeFeedback onPress={() => this.reverse(handler)} >
+                    <View>
+                        <Animated.Image style={[{maxWidth: 20, maxHeight: 20, transform: [{ rotate: RotateData }] }]} source={require('../../assets/icons/reverse.png')} />
+                    </View>
+                </TouchableNativeFeedback>
+            </View>
+        )
+    }
+
 }
