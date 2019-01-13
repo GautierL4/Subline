@@ -12,26 +12,6 @@ class JourneyPage extends React.Component {
     constructor(props) {
         super(props)
         this.journeyData = this.props.navigation.getParam('journeyData')
-        // this.state = {
-        //     handleOnNavigateBack: this.props.navigation.getParam('onNavigateBack')
-        // }
-        this.RotateValueHolder = new Animated.Value(0);
-
-    }
-
-
-    StartImageRotateFunction() {
-
-        this.RotateValueHolder.setValue(0)
-
-        Animated.timing(
-            this.RotateValueHolder,
-            {
-                toValue: 1,
-                duration: 500,
-                easing: Easing.linear
-            }
-        ).start()
     }
 
     async addBookmark() {
@@ -43,11 +23,6 @@ class JourneyPage extends React.Component {
         return minutes;
     }
 
-    refresh() {
-        console.log('ehehe')
-        this.StartImageRotateFunction();
-    }
-
     roundDecimal(value, precision){
         var precision = precision || 2;
         var tmp = Math.pow(10, precision);
@@ -56,12 +31,6 @@ class JourneyPage extends React.Component {
 
 
     render() {
-
-        // const RotateData = this.RotateValueHolder.interpolate({
-        //     inputRange: [0, 1],
-        //     outputRange: ['0deg', '-360deg']
-        // })
-
         return (
             <View style={styles.container}>
                 <ScrollView horizontal={false} contentContainerStyle={{ flexGrow: 1 }} style={{ width: screenWidth }}>
@@ -91,14 +60,6 @@ class JourneyPage extends React.Component {
                                 <Text style={{ color: '#000', fontSize: 14, fontWeight: 'bold', marginLeft: 5 }}>{this.roundDecimal(this.journeyData.co2_emission.value,2) + " " + this.journeyData.co2_emission.unit} </Text>
                             </View>
                         </View>
-                        {/* <Text style={styles.title}>Carte</Text>
-                        <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center', }}>
-                            <View style={[styles.card, { flex: 0.9, flexDirection: 'column' }]}>
-                                <TouchableNativeFeedback onPress={() => console.log('test touch')}>
-                                    <View style={{ height: 110, flex: 1 }} ></View>
-                                </TouchableNativeFeedback>
-                            </View>
-                        </View> */}
                         <Text style={styles.title}>Itinéraire</Text>
                         <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center', marginBottom: 50}}>
                             <View style={[styles.card, { flex: 0.9, flexDirection: 'column' }]}>
@@ -108,7 +69,6 @@ class JourneyPage extends React.Component {
                                     )
                                 }
                                 } keyExtractor={(item, index) => index.toString()} />
-
                             </View>
                         </View>
                     </View>

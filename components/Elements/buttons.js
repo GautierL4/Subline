@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, BackHandler, Image, TouchableNativeFeedback, AsyncStorage, ToastAndroid } from 'react-native';
+import { View, BackHandler, Image, TouchableNativeFeedback, AsyncStorage, ToastAndroid, Animated, Easing } from 'react-native';
 import { styles, screenWidth, screenHeight } from '../../assets/styles/style';
 
 
@@ -265,6 +265,52 @@ export class AlarmButton extends React.Component {
                     </View>
                 </TouchableNativeFeedback>
             </View>
-        );
+        )
+    }
+}
+
+export class ReloadButton extends React.Component {
+
+    constructor(props) {
+        super(props)
+        this.RotateValueHolder = new Animated.Value(0)
+    }
+
+    StartImageRotateFunction() {
+        this.RotateValueHolder.setValue(0)
+        Animated.timing(
+            this.RotateValueHolder,
+            {
+                toValue: 1,
+                duration: 200,
+                easing: Easing.linear
+            }
+        ).start()
+    }
+
+    reloadPage(handler) {
+        this.StartImageRotateFunction()
+        setTimeout(function () {
+            handler()
+        }, 200)
+    }
+
+    render() {
+        console.log('LITTLE RELOAD')
+        const RotateData = this.RotateValueHolder.interpolate({
+            inputRange: [0, 1],
+            outputRange: ['0deg', '-360deg']
+        })
+        const { handler } = this.props;
+
+        return (
+            <View style={styles.button} >
+                <TouchableNativeFeedback onPress={() => this.reloadPage(handler)} >
+                    <View>
+                        <Animated.Image style={[styles.returnArrow, { transform: [{ rotate: RotateData }] }]} source={require('../../assets/icons/refresh.png')} />
+                    </View>
+                </TouchableNativeFeedback>
+            </View>
+        )
     }
 }

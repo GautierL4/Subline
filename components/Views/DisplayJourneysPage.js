@@ -5,7 +5,7 @@ import FileLoader from './FileLoader.js';
 import APIHandler from '../API/APIHandler.js';
 import APIGoogle from '../API/APIGoogle';
 import Dropdown from '../Views/Dropdown';
-import { BackButton } from '../Elements/buttons'
+import { BackButton, ReloadButton } from '../Elements/buttons'
 import BusIcon from '../Elements/BusIcon'
 
 const APIManager = new APIHandler();
@@ -13,7 +13,6 @@ const APIGoogleManager = new APIGoogle()
 const IconLoader = new FileLoader();
 
 class DisplayJourneysPage extends React.Component {
-
 
     constructor(props) {
         super(props);
@@ -29,6 +28,7 @@ class DisplayJourneysPage extends React.Component {
             savedParams: this.props.navigation.getParam('savedParams'),
             isLoading: true,
         };
+        this.handlerReload = this.handlerReload.bind(this)
     }
 
     componentDidMount() {
@@ -65,6 +65,12 @@ class DisplayJourneysPage extends React.Component {
         console.log(test.address.address_components[0].long_name)
     }
 
+    handlerReload() {
+        this.setState({
+            isLoading: true
+        })
+        this.searchJourney()
+      }
 
     render() {
         this.setAddress()
@@ -72,6 +78,9 @@ class DisplayJourneysPage extends React.Component {
         const _renderSeparator = () => (
             <Image style={styles.journeyCardBottomImgDot} source={require('../../assets/icons/dot.png')} />
         )
+        console.log('RELOAD !')
+        console.log(this.state.isLoading)
+
         if (this.state.isLoading) {
             return (
                 <View style={{ width: screenWidth, height: screenHeight, flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: 'black' }}>
@@ -80,13 +89,16 @@ class DisplayJourneysPage extends React.Component {
             );
         }
         else if (Platform.OS === 'android') {
-            return (
+            return (  
                 <View style={styles.container}>
-                    <ScrollView horizontal={false} contentContainerStyle={{ flexGrow: 1 }} style={{ width: screenWidth}}>
+                    <ScrollView horizontal={false} contentContainerStyle={{ flexGrow: 1 }} style={{ width: screenWidth }}>
                         <View style={styles.header}>
                             <View style={{ flexDirection: 'row', height: 80, justifyContent: 'center', }}>
                                 <View style={{ flex: 1, flexDirection: 'row', }}>
                                     <BackButton navigation={this.props.navigation} />
+                                </View>
+                                <View style={{ flex: 1, flexDirection: 'row-reverse', }}>
+                                    <ReloadButton handler={this.handlerReload} />
                                 </View>
                             </View>
                             <View style={{ alignSelf: 'stretch', flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
@@ -154,34 +166,34 @@ class DisplayJourneysPage extends React.Component {
                             </View>
                             <Text style={styles.title}>Autres itinéraires</Text>
                             <View style={styles.mapCardBox}>
-                                <View style={[styles.card, styles.mapCard, { flexDirection: 'row',paddingTop: 0, paddingBottom: 0, marginBottom: 50}]}>
-                                    <FlatList style={{flex:1}} data={this.state.dataOtherJourneys} keyboardShouldPersistTaps={'handled'} ItemSeparatorComponent={() => <View style={{ borderBottomColor: '#e5e5e5', borderBottomWidth: 1, marginLeft: 20, marginRight: 20, }} />} renderItem={({ item }) =>
+                                <View style={[styles.card, styles.mapCard, { flexDirection: 'row', paddingTop: 0, paddingBottom: 0, marginBottom: 50 }]}>
+                                    <FlatList style={{ flex: 1 }} data={this.state.dataOtherJourneys} keyboardShouldPersistTaps={'handled'} ItemSeparatorComponent={() => <View style={{ borderBottomColor: '#e5e5e5', borderBottomWidth: 1, marginLeft: 20, marginRight: 20, }} />} renderItem={({ item }) =>
                                         <TouchableNativeFeedback onPress={() => this.displayJourneyDetails(item)} >
-                                                <View style={{ flexDirection: 'column', justifyContent: 'center', alignItems: 'center', alignSelf: 'stretch', paddingLeft: 20, paddingRight: 20, paddingTop: 10, paddingBottom: 10, }}>
-                                                    <Text style={{ color: "#898989", fontSize: 14, textAlign: 'left', alignSelf: 'flex-start', fontWeight: 'bold', marginBottom: 5 }}>Départ à {item.departure_date_time.substring(9, 11)}:{item.departure_date_time.substring(11, 13)}</Text>
-                                                    <View style={{ flexDirection: 'row' }}>
-                                                        <View style={{ flex: 3, flexDirection: 'row', alignItems: 'center', flexWrap: 'wrap', }}>
-                                                            <FlatList style={{ flexWrap: 'wrap', flex: 1, }} data={item.sections_without_waiting_and_transfer} horizontal={true} ItemSeparatorComponent={_renderSeparator} renderItem={({ item }) => {
-                                                                let icon = IconLoader.getIconBySection(item);
-                                                                if (item.display_informations !== undefined && (item.display_informations.physical_mode === 'Bus' || item.display_informations.commercial_mode === 'Bus')) {
-                                                                    return (
-                                                                        <BusIcon lineName={item.display_informations.label} style={{ marginTop: 4 }} />
-                                                                    )
-                                                                } else {
-                                                                    return (
-                                                                        <Image style={styles.journeyCardBottomImg} source={icon} />
-                                                                    )
-                                                                }
+                                            <View style={{ flexDirection: 'column', justifyContent: 'center', alignItems: 'center', alignSelf: 'stretch', paddingLeft: 20, paddingRight: 20, paddingTop: 10, paddingBottom: 10, }}>
+                                                <Text style={{ color: "#898989", fontSize: 14, textAlign: 'left', alignSelf: 'flex-start', fontWeight: 'bold', marginBottom: 5 }}>Départ à {item.departure_date_time.substring(9, 11)}:{item.departure_date_time.substring(11, 13)}</Text>
+                                                <View style={{ flexDirection: 'row' }}>
+                                                    <View style={{ flex: 3, flexDirection: 'row', alignItems: 'center', flexWrap: 'wrap', }}>
+                                                        <FlatList style={{ flexWrap: 'wrap', flex: 1, }} data={item.sections_without_waiting_and_transfer} horizontal={true} ItemSeparatorComponent={_renderSeparator} renderItem={({ item }) => {
+                                                            let icon = IconLoader.getIconBySection(item);
+                                                            if (item.display_informations !== undefined && (item.display_informations.physical_mode === 'Bus' || item.display_informations.commercial_mode === 'Bus')) {
+                                                                return (
+                                                                    <BusIcon lineName={item.display_informations.label} style={{ marginTop: 4 }} />
+                                                                )
+                                                            } else {
+                                                                return (
+                                                                    <Image style={styles.journeyCardBottomImg} source={icon} />
+                                                                )
                                                             }
-                                                            } keyExtractor={(item, index) => index.toString()} />
-                                                        </View>
-                                                        <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-end', alignItems: 'center' }}>
-                                                            <Text style={{ fontSize: 24, fontWeight: "bold" }}>{this.convertSecondsToMinutes(item.duration)}</Text>
-                                                            <Text style={{ fontSize: 12, marginTop: 8, marginLeft: 5 }}>min</Text>
-                                                        </View>
+                                                        }
+                                                        } keyExtractor={(item, index) => index.toString()} />
                                                     </View>
-                                                    <Text style={{ color: "#898989", fontSize: 14, textAlign: 'left', alignSelf: 'flex-start', marginTop: 5 }}>{APIManager.translateType(item.type)}</Text>
+                                                    <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-end', alignItems: 'center' }}>
+                                                        <Text style={{ fontSize: 24, fontWeight: "bold" }}>{this.convertSecondsToMinutes(item.duration)}</Text>
+                                                        <Text style={{ fontSize: 12, marginTop: 8, marginLeft: 5 }}>min</Text>
+                                                    </View>
                                                 </View>
+                                                <Text style={{ color: "#898989", fontSize: 14, textAlign: 'left', alignSelf: 'flex-start', marginTop: 5 }}>{APIManager.translateType(item.type)}</Text>
+                                            </View>
                                         </TouchableNativeFeedback>
                                     } keyExtractor={(item, index) => index.toString()} />
                                 </View>
