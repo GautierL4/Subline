@@ -20,6 +20,7 @@ class DisplayJourneysPage extends React.Component {
             departure: this.props.navigation.getParam('departure', {
                 id: null,
                 name: "Position actuelle",
+                address: null,
             }),
             destination: this.props.navigation.getParam('destination', {
                 id: null,
@@ -33,6 +34,7 @@ class DisplayJourneysPage extends React.Component {
 
     componentDidMount() {
         console.log("get data from API");
+        console.log(this.state.departure)
         this.searchJourney();
     }
 
@@ -62,7 +64,7 @@ class DisplayJourneysPage extends React.Component {
 
     setAddress() {
         test = this.state.departure
-        console.log(test.address.address_components[0].long_name)
+        // console.log(test.address.address_components[0].long_name)
     }
 
     handlerReload() {
@@ -70,7 +72,7 @@ class DisplayJourneysPage extends React.Component {
             isLoading: true
         })
         this.searchJourney()
-      }
+    }
 
     render() {
         this.setAddress()
@@ -78,8 +80,6 @@ class DisplayJourneysPage extends React.Component {
         const _renderSeparator = () => (
             <Image style={styles.journeyCardBottomImgDot} source={require('../../assets/icons/dot.png')} />
         )
-        console.log('RELOAD !')
-        console.log(this.state.isLoading)
 
         if (this.state.isLoading) {
             return (
@@ -89,7 +89,7 @@ class DisplayJourneysPage extends React.Component {
             );
         }
         else if (Platform.OS === 'android') {
-            return (  
+            return (
                 <View style={styles.container}>
                     <ScrollView horizontal={false} contentContainerStyle={{ flexGrow: 1 }} style={{ width: screenWidth }}>
                         <View style={styles.header}>
@@ -108,10 +108,14 @@ class DisplayJourneysPage extends React.Component {
                                             <TouchableWithoutFeedback onPress={() => this.props.navigation.navigate('DepartureSearchPage', { type: 'departure', placeholder: 'Point de départ', savedParams: this.state.savedParams })} style={{ flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', padding: 5 }}>
                                                 <View style={[styles.searchBar, { flex: 1 }]}>
                                                     <Image source={require('../../assets/icons/map-location.png')} style={styles.ImageStyle} />
-                                                    <View style={{ flex: 1 }}>
-                                                        <Text style={[styles.input, { padding: 0 }]}>{this.state.departure.name}</Text>
-                                                        <Text style={{ fontSize: 11, color: "#BBBBBB", fontWeight: 'bold', marginTop: -20 }}>{this.state.departure.address.address_components[0].long_name}</Text>
-                                                    </View>
+                                                    {this.state.departure.address !== undefined ?
+                                                        <View style={{ flex: 1 }}>
+                                                            <Text style={[styles.input, { padding: 0 }]}>{this.state.departure.name}</Text>
+                                                            <Text style={{ fontSize: 11, color: "#BBBBBB", fontWeight: 'bold', marginTop: -20 }}>{this.state.departure.address.address_components[0].long_name}</Text>
+                                                        </View>
+                                                        :
+                                                        <Text style={styles.input}>{this.state.departure.name}</Text>
+                                                    }
                                                 </View>
                                             </TouchableWithoutFeedback>
                                         </View>

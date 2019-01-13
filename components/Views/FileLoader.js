@@ -48,29 +48,29 @@ const icons = {
 class FileLoader {
 
     async getIconForJourney(sections) {
-        console.log("Starting Loaded Icons");
+        // console.log("Starting Loaded Icons");
         let iconList = [];
         for (let i = 0; i < sections.length; i++) {
-            console.log("Get " + i + " Icon");
+            // console.log("Get " + i + " Icon");
             iconList[i] = await this.getIconBySection(sections[i]);
-            console.log("Icon " + i + " Loaded");
+            // console.log("Icon " + i + " Loaded");
         }
-        console.log("Icon Loaded", icons);
+        // console.log("Icon Loaded", icons);
         return iconList;
     }
 
     getIconBySection(section) {
-        console.log("Get Icon from Section");
+        // console.log("Get Icon from Section");
         if (section.type == "street_network" || section.type == "crow_fly" || section.type == "transfer") {
-            console.log("Get Walk Icon");
+            // console.log("Get Walk Icon");
             return icons.walkIcon;
         }
         else if (section.type == "waiting") {
-            console.log("Get Wait Icon");
+            // console.log("Get Wait Icon");
             return icons.wait;
         }
         else {
-            console.log("Get Public Transportation Icon");
+            // console.log("Get Public Transportation Icon");
             icon = this.getPublicTransportIcon(section);
             return icon;
         }
@@ -99,9 +99,9 @@ class FileLoader {
 
     getPublicTransportIcon(section) {
         let icon = null;
-        console.log(section.type);
+        // console.log(section.type);
         if (section.type == "public_transport" && section.display_informations != null) {
-            console.log(section.display_informations.label);
+            // console.log(section.display_informations.label);
             switch (section.display_informations.label) {
                 case 'A':
                     icon = icons.RERA;

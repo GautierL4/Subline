@@ -17,6 +17,7 @@ class SearchPage extends React.Component {
         this.state = {
             locations: { places: null },
             search: '',
+            geoLocation: null,
             savedParams: this.props.navigation.getParam('savedParams', { destination: null, departure: null })
         };
         this.placeholder = this.props.navigation.getParam('placeholder', 'Votre destination');
@@ -24,7 +25,7 @@ class SearchPage extends React.Component {
     }
 
     componentDidMount() {
-        this.getCurrentLocation();
+        this.getCurrentLocation()
     }
 
     getCurrentLocation() {
@@ -38,12 +39,12 @@ class SearchPage extends React.Component {
                 } catch (e) {
                     console.error(e);
                 }
-                var departure = {
+                var geoLocation = {
                     id: longitude + ";" + latitude,
                     name: "Ma position",
                     address: address
                 }
-                this.setState({ departure: departure });
+                this.setState({ geoLocation: geoLocation });
             },
             (error) => console.log(error),
             { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 },
@@ -73,15 +74,15 @@ class SearchPage extends React.Component {
         if (!(typeof data.stop_areas === "undefined" || typeof data.address === "undefined" || typeof data.poi === "undefined")) {
             this.setState({ locations: data })
         }
-
     }
 
     async sendFirstInputData(id, name) {
         try {
             params = {
                 departure: {
-                    id: this.state.departure.id,
-                    name: this.state.departure.name,
+                    id: this.state.geoLocation.id,
+                    name: this.state.geoLocation.name,
+                    address: this.state.geoLocation.address
                 },
                 destination: {
                     id: id,
@@ -89,7 +90,7 @@ class SearchPage extends React.Component {
                 },
             };
             this.props.navigation.navigate('DisplayJourneysPage', {
-                departure: this.state.departure,
+                departure: params.departure,
                 destination: params.destination,
                 savedParams: params
             });
@@ -97,8 +98,6 @@ class SearchPage extends React.Component {
         catch (e) {
             console.error(e);
         }
-
-
     }
 
     sendDepartureData(id, name) {
@@ -168,9 +167,7 @@ class SearchPage extends React.Component {
     }
 
     changeView(page, parameters) {
-        // setTimeout(function () {
         this.props.navigation.navigate(page, parameters)
-        // }.bind(this), 100)
     }
 
     render() {
