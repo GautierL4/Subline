@@ -54,19 +54,16 @@ class APIHandler {
     }
 
     //Make an HTTP Request based on different cases
-    async getJourneysFromAPI(departure, arrival, date = null, represents = null) {
-        if (date == null) {
-            var request = APIBaseURL + this.coverage + to + arrival + '&' + from + departure + '&' + minimumNbJourneys + 6;
-            console.log(request)
+    async getJourneysFromAPI(departure, arrival, date, represents) {
+        let request = ''
+        if (represents == "now") {
+            request = APIBaseURL + this.coverage + to + arrival + '&' + from + departure + '&' + minimumNbJourneys + 6;
+        } else if (represents == "arrival") {
+            request = APIBaseURL + this.coverage + to + arrival + '&' + from + departure + '&' + arrivalDate + date + '&' + minimumNbJourneys + 6;
+        } else if (represents == "departure") {
+            request = APIBaseURL + this.coverage + to + arrival + '&' + from + departure + '&' + departureDate + date + '&' + minimumNbJourneys + 6;
         }
-        else {
-            if (represents == "arrival") {
-                var request = APIBaseURL + this.coverage + to + arrival + '&' + from + departure + '&' + arrivalDate + date + '&' + minimumNbJourneys + 6;
-            }
-            else {
-                var request = APIBaseURL + this.coverage + to + arrival + '&' + from + departure + '&' + departureDate + date + '&' + minimumNbJourneys + 6;
-            }
-        }
+        console.log(request)
         try {
             let response = await fetch(request, header);
             responseJson = await response.json();
@@ -76,10 +73,19 @@ class APIHandler {
         return responseJson;
     }
 
+    addAZeroBeforeSmallNumber(nb) {
+        return nb.toString().padStart(2, '0')
+    }
+
+    stringifyDateTimeForAPI(datetime) {
+        let { date, time } = datetime
+        return date.year + this.addAZeroBeforeSmallNumber(date.month) + this.addAZeroBeforeSmallNumber(date.day) + 'T' + this.addAZeroBeforeSmallNumber(time.hour) + this.addAZeroBeforeSmallNumber(time.minute) + '00'
+    }
+
     //Get journeys base on different cases and extract important value
-    async getJourneys(departure, arrival, date = null, represents = null) {
+    async getJourneys(departure, arrival, datetime, represents) {
         try {
-            response = await this.getJourneysFromAPI(departure, arrival, date, represents);
+            response = await this.getJourneysFromAPI(departure, arrival, this.stringifyDateTimeForAPI(datetime), represents);
             data = this.extractJourneysFromResponse(response);
         }
         catch (e) {

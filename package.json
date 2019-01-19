@@ -21,9 +21,11 @@
     "expo": "^31.0.0",
     "react": "16.5.0",
     "react-native": "https://github.com/expo/react-native/archive/sdk-31.0.0.tar.gz",
+    "react-native-dialog-component": "^0.2.17",
     "react-native-fetch-blob": "^0.10.8",
     "react-native-maps": "^0.22.1",
     "react-native-pdf": "^3.0.16",
+    "react-native-popup-dialog": "^0.16.6",
     "react-navigation": "^2.3.1"
   }
 }

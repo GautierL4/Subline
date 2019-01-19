@@ -1,12 +1,12 @@
 import React from 'react';
-import { StyleSheet, Text, View, Image, Animated, Platform, TextInput, TouchableNativeFeedback, TouchableWithoutFeedback, ScrollView, Dimensions, FlatList, Picker, StatusBar, TouchableOpacity } from 'react-native';
-import { styles, screenWidth, screenHeight } from '../../assets/styles/style';
+import { StyleSheet, Text, View, Image, Animated, TimePickerAndroid, DatePickerAndroid, Platform, TextInput, TouchableNativeFeedback, TouchableWithoutFeedback, ScrollView, Dimensions, FlatList, Picker, StatusBar, TouchableOpacity } from 'react-native';
+import { styles, screenWidth, screenHeight, primaryColor } from '../../assets/styles/style';
 import FileLoader from './FileLoader.js';
 import APIHandler from '../API/APIHandler.js';
 import APIGoogle from '../API/APIGoogle';
-import Dropdown from '../Views/Dropdown';
 import { BackButton, ReloadButton, ReverseButton } from '../Elements/buttons'
 import BusIcon from '../Elements/BusIcon'
+import Dialog, { DialogContent, DialogTitle, DialogButton } from 'react-native-popup-dialog';
 
 const APIManager = new APIHandler();
 const APIGoogleManager = new APIGoogle()
@@ -28,9 +28,54 @@ class DisplayJourneysPage extends React.Component {
             }),
             savedParams: this.props.navigation.getParam('savedParams'),
             isLoading: true,
+            popUpVisible: false,
+            datetime: {
+                type: '',
+                date: {
+                    day: null,
+                    month: null,
+                    year: null
+                },
+                time: {
+                    hour: null,
+                    minute: null,
+                }
+            },
+            datetimeSaved: {
+                type: '',
+                date: {
+                    day: null,
+                    month: null,
+                    year: null
+                },
+                time: {
+                    hour: null,
+                    minute: null,
+                }
+            },
         };
         this.handlerReload = this.handlerReload.bind(this)
         this.handlerReverse = this.handlerReverse.bind(this)
+    }
+
+    componentWillMount() {
+        const today = new Date()
+        this.setState({
+            datetimeSaved: {
+                type: 'now',
+                date: {
+                    day: today.getDate(),
+                    month: today.getMonth() + 1,
+                    year: today.getFullYear()
+                },
+                time: {
+                    hour: today.getHours(),
+                    minute: today.getMinutes(),
+                }
+            }
+        }, () => {
+            this.setState({ datetime: this.state.datetimeSaved })
+        })
     }
 
     componentDidMount() {
@@ -41,14 +86,13 @@ class DisplayJourneysPage extends React.Component {
 
     async searchJourney() {
         try {
-            data = await APIManager.getJourneys(this.state.departure.id, this.state.destination.id);
+            data = await APIManager.getJourneys(this.state.departure.id, this.state.destination.id, this.state.datetimeSaved, this.state.datetimeSaved.type);
         }
         catch (e) {
             console.error(e);
         }
         dataBestJourney = data.shift()
         this.setState({ dataBestJourney: dataBestJourney, dataOtherJourneys: data, isLoading: false });
-
     }
 
     convertSecondsToMinutes(seconds) {
@@ -86,11 +130,123 @@ class DisplayJourneysPage extends React.Component {
                 destination: departure
             }
         }, () => this.searchJourney())
+    }
 
+    stringifyDate(date) {
+        let { year, month, day } = date
+        let monthString = ''
+        switch (month) {
+            case 1:
+                monthString = 'Janvier'
+                break
+            case 2:
+                monthString = 'Février'
+                break
+            case 3:
+                monthString = 'Mars'
+                break
+            case 4:
+                monthString = 'Avril'
+                break
+            case 5:
+                monthString = 'Mai'
+                break
+            case 6:
+                monthString = 'Juin'
+                break
+            case 7:
+                monthString = 'Juillet'
+                break
+            case 8:
+                monthString = 'Août'
+                break
+            case 9:
+                monthString = 'Septembre'
+                break
+            case 10:
+                monthString = 'Octobre'
+                break
+            case 11:
+                monthString = 'Novembre'
+                break
+            case 12:
+                monthString = 'Décembre'
+                break
+            default:
+                monthString = ''
+                break
+        }
+        return day + ' ' + monthString + ' ' + year
+    }
+
+    stringifyTime(time) {
+        let { hour, minute } = time
+        hour = hour.toString().padStart(2, '0')
+        minute = minute.toString().padStart(2, '0')
+        return hour + ':' + minute
+    }
+
+    async chooseDate() {
+        let date = null
+        let type = this.state.datetime.type === 'now' ? 'departure' : this.state.datetime.type
+        try {
+            const { action, year, month, day } = await DatePickerAndroid.open({
+                date: new Date(),
+                minDate: new Date(),
+            })
+            date = {
+                day: day,
+                month: month + 1,
+                year: year,
+            }
+        } catch ({ code, message }) {
+            console.warn('Cannot open date picker', message);
+        }
+        this.setState({
+            datetime: {
+                type,
+                date,
+                time: this.state.datetime.time
+            },
+        });
+    }
+
+    async chooseTime() {
+        let time = null
+        let type = this.state.datetime.type === 'now' ? 'departure' : this.state.datetime.type
+        try {
+            const { action, hour, minute } = await TimePickerAndroid.open({});
+            time = {
+                hour: hour,
+                minute: minute
+            }
+        } catch ({ code, message }) {
+            console.warn('Cannot open time picker', message);
+        }
+        this.setState({
+            datetime: {
+                type,
+                date: this.state.datetime.date,
+                time
+            },
+        })
+    }
+
+    saveDateTimeAndClose() {
+        this.setState({ datetimeSaved: this.state.datetime }, () => {
+            this.closePopUp()
+            this.searchJourney()
+        })
+    }
+
+    closePopUp() {
+        this.setState({ popUpVisible: false })
     }
 
     render() {
         this.setAddress()
+
+
 
         const _renderSeparator = () => (
             <Image style={styles.journeyCardBottomImgDot} source={require('../../assets/icons/dot.png')} />
@@ -156,10 +312,62 @@ class DisplayJourneysPage extends React.Component {
                                     </View>
                                 </View>
                             </View>
-                            <Dropdown />
+                            {/* <Dropdown /> */}
                         </View>
                         <View style={styles.body}>
-
+                            <Dialog
+                                visible={this.state.popUpVisible}
+                                onTouchOutside={() => this.setState({ popUpVisible: false })}
+                                width={0.9}
+                                actions={[
+                                    <DialogButton
+                                        textStyle={{ color: '#AAA', fontSize: 14 }}
+                                        text="Fermer"
+                                        onPress={() => { this.closePopUp() }}
+                                    />,
+                                    <DialogButton
+                                        textStyle={{ color: primaryColor, fontSize: 14 }}
+                                        text="OK"
+                                        onPress={() => { this.saveDateTimeAndClose() }}
+                                    />,
+                                ]}>
+                                <DialogTitle title="Date et heure" />
+                                <DialogContent>
+                                    <View style={{ height: 100, flexDirection: 'column' }}>
+                                        <View style={{ flex: 1, justifyContent: 'center' }}>
+                                            <Picker
+                                                mode='dropdown'
+                                                selectedValue={this.state.datetime.type}
+                                                onValueChange={(itemValue, itemIndex) => this.setState({ datetime: { type: itemValue, date: this.state.datetime.date, time: this.state.datetime.time } })}>
+                                                <Picker.Item label="Partir maintenant" value="now" />
+                                                <Picker.Item label="Partir à" value="departure" />
+                                                <Picker.Item label="Arriver à" value="arrival" />
+                                            </Picker>
+                                        </View>
+                                        <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
+                                            <View style={{flex: 0.9, flexDirection: 'row'}}>
+                                                <View style={{ flex: 0.6, alignItems: 'flex-start', justifyContent: 'center' }}>
+                                                    <TouchableNativeFeedback onPress={() => this.chooseDate()}>
+                                                        <Text style={{ fontWeight: 'bold', fontSize: 16 }}>{this.stringifyDate(this.state.datetime.date)}</Text>
+                                                    </TouchableNativeFeedback>
+                                                </View>
+                                                <View style={{ flex: 0.4, alignItems: 'flex-end', justifyContent: 'center' }}>
+                                                    <TouchableNativeFeedback onPress={() => this.chooseTime()} >
+                                                        <Text style={{ fontWeight: 'bold', fontSize: 16 }}>{this.stringifyTime(this.state.datetime.time)}</Text>
+                                                    </TouchableNativeFeedback>
+                                                </View>
+                                            </View>
+                                        </View>
+                                    </View>
+                                </DialogContent>
+                            </Dialog>
+                            <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center', position: 'relative', top: -15 }}>
+                                <TouchableNativeFeedback onPress={() => this.setState({ popUpVisible: true })}>
+                                    <View style={[styles.card, { paddingTop: 5, paddingBottom: 5, paddingLeft: 10, paddingRight: 10, flexDirection: 'row' }]}>
+                                        <Text style={{ color: '#000', fontSize: 14, fontWeight: 'bold' }}>Départ maintenant</Text>
+                                    </View>
+                                </TouchableNativeFeedback>
+                            </View>
                             <Text style={styles.title}>Meilleur itinéraire</Text>
                             <View style={styles.mapCardBox}>
                                 <TouchableNativeFeedback onPress={() => this.displayJourneyDetails(this.state.dataBestJourney)} >
@@ -270,8 +478,6 @@ class DisplayJourneysPage extends React.Component {
                                     </View>
                                 </TouchableWithoutFeedback>
                             </View>
-
-
                         </View>
                         <View style={styles.body}>
                             {this.renderBestJourney()}

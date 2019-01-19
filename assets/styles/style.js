@@ -3,9 +3,9 @@ import { StyleSheet, Dimensions } from 'react-native';
 export const screenWidth = Dimensions.get('window').width;
 export const screenHeight = Dimensions.get('window').height;
 
-const primaryColor = "#70bd88"
-const secondaryColor = "#000"
-const tertiaryColor = "#fff"
+export const primaryColor = "#70bd88"
+export const secondaryColor = "#000"
+export const tertiaryColor = "#fff"
 
 export const styles = StyleSheet.create({
     container: {
