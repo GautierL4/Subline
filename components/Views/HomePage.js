@@ -69,7 +69,7 @@ class HomePage extends React.Component {
     }
 
     componentWillMount() {
-        this.getFavoritesJourneys()   
+        this.getFavoritesJourneys()
     }
 
     async getFavoritesJourneys() {
@@ -89,7 +89,7 @@ class HomePage extends React.Component {
             this.setState({ isLoading: false })
         }, 4000);
     }
-    
+
     async displayBookmark() {
         const value = await AsyncStorage.getItem('key');
         console.log(value);
@@ -190,38 +190,50 @@ class HomePage extends React.Component {
                             </ScrollView>
                             <Text style={styles.title}>Vos itinéraires</Text>
                             <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-                                <FlatList horizontal={true} style={{ flexDirection: 'row' }} data={this.state.favoritesJourneys} renderItem={({ item }) =>
-                                    <View style={styles.stopJourneyCard}>
-                                        <TouchableNativeFeedback onPress={() => this.displayJourneyDetails(item)} background={TouchableNativeFeedback.Ripple('#CCCCCC')}>
-                                            <View style={[styles.journeyCard, styles.card]}>
-                                                <View style={styles.journeyCardTop}>
-                                                    <View style={styles.journeyCardTopRow}>
-                                                        <Image style={styles.journeyCardTopRowImg} source={require('../../assets/icons/map-location.png')} />
-                                                        <Text style={styles.journeyCardTopRowTxt}>{item.sections[0].from.name}</Text>
-                                                    </View>
-                                                    <View style={styles.journeyCardTopRow}>
-                                                        <Image style={styles.journeyCardTopRowImg} source={require('../../assets/icons/target.png')} />
-                                                        <Text style={styles.journeyCardTopRowTxt}>{item.sections[item.sections.length - 1].to.name}</Text>
-                                                    </View>
-                                                </View>
-                                                <View style={styles.journeyCardBottom}>
-                                                    <FlatList horizontal={true} style={{ flexDirection: 'row' }} data={item.sections_without_waiting_and_transfer} ItemSeparatorComponent={_renderSeparator} renderItem={({ item }) => {
-                                                        let icon = IconLoader.getIconBySection(item);
-                                                        if (item.display_informations !== undefined && (item.display_informations.physical_mode === 'Bus' || item.display_informations.commercial_mode === 'Bus')) {
-                                                            return (
-                                                                <BusIcon lineName={item.display_informations.label} style={{ marginTop: 4 }} />
-                                                            )
-                                                        } else {
-                                                            return (
-                                                                <Image style={styles.journeyCardBottomImg} source={icon} />
-                                                            )
-                                                        }
-                                                    }} keyExtractor={(item, index) => index.toString()} />
-                                                </View>
+                                <FlatList
+                                    horizontal={true}
+                                    style={{ flexDirection: 'row' }}
+                                    data={this.state.favoritesJourneys}
+                                    ListEmptyComponent={() =>
+                                        <View style={{ height: 170, width:screenWidth, flex: 1, flexDirection:'row', justifyContent:'center', alignItems:'center' }}>
+                                            <View style={{ flex: 0.9}}>
+                                                <Text style={{fontSize:15, fontWeight:'bold', color:'#898989'}}>Vous n'avez pas d'itinéraires favoris pour le moment.</Text>
+                                                <Text style={{fontSize:10, color:'#898989'}}>Recherchez un itinéraire et cliquez sur l'étoile pour l'ajouter en favoris.</Text>
                                             </View>
-                                        </TouchableNativeFeedback>
-                                    </View>
-                                } keyExtractor={(item, index) => index.toString()} />
+                                        </View>
+                                    }
+                                    renderItem={({ item }) =>
+                                        <View style={styles.stopJourneyCard}>
+                                            <TouchableNativeFeedback onPress={() => this.displayJourneyDetails(item)} background={TouchableNativeFeedback.Ripple('#CCCCCC')}>
+                                                <View style={[styles.journeyCard, styles.card]}>
+                                                    <View style={styles.journeyCardTop}>
+                                                        <View style={styles.journeyCardTopRow}>
+                                                            <Image style={styles.journeyCardTopRowImg} source={require('../../assets/icons/map-location.png')} />
+                                                            <Text style={styles.journeyCardTopRowTxt}>{item.sections[0].from.name}</Text>
+                                                        </View>
+                                                        <View style={styles.journeyCardTopRow}>
+                                                            <Image style={styles.journeyCardTopRowImg} source={require('../../assets/icons/target.png')} />
+                                                            <Text style={styles.journeyCardTopRowTxt}>{item.sections[item.sections.length - 1].to.name}</Text>
+                                                        </View>
+                                                    </View>
+                                                    <View style={styles.journeyCardBottom}>
+                                                        <FlatList horizontal={true} style={{ flexDirection: 'row' }} data={item.sections_without_waiting_and_transfer} ItemSeparatorComponent={_renderSeparator} renderItem={({ item }) => {
+                                                            let icon = IconLoader.getIconBySection(item);
+                                                            if (item.display_informations !== undefined && (item.display_informations.physical_mode === 'Bus' || item.display_informations.commercial_mode === 'Bus')) {
+                                                                return (
+                                                                    <BusIcon lineName={item.display_informations.label} style={{ marginTop: 4 }} />
+                                                                )
+                                                            } else {
+                                                                return (
+                                                                    <Image style={styles.journeyCardBottomImg} source={icon} />
+                                                                )
+                                                            }
+                                                        }} keyExtractor={(item, index) => index.toString()} />
+                                                    </View>
+                                                </View>
+                                            </TouchableNativeFeedback>
+                                        </View>
+                                    } keyExtractor={(item, index) => index.toString()} />
                             </ScrollView>
                             <Text style={styles.title}>Lignes</Text>
 
