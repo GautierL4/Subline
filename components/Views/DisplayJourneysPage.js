@@ -319,21 +319,10 @@ class DisplayJourneysPage extends React.Component {
                                 visible={this.state.popUpVisible}
                                 onTouchOutside={() => this.setState({ popUpVisible: false })}
                                 width={0.9}
-                                actions={[
-                                    <DialogButton
-                                        textStyle={{ color: '#AAA', fontSize: 14 }}
-                                        text="Fermer"
-                                        onPress={() => { this.closePopUp() }}
-                                    />,
-                                    <DialogButton
-                                        textStyle={{ color: primaryColor, fontSize: 14 }}
-                                        text="OK"
-                                        onPress={() => { this.saveDateTimeAndClose() }}
-                                    />,
-                                ]}>
+                            >
                                 <DialogTitle title="Date et heure" />
                                 <DialogContent>
-                                    <View style={{ height: 100, flexDirection: 'column' }}>
+                                    <View style={{ height: 130, flexDirection: 'column' }}>
                                         <View style={{ flex: 1, justifyContent: 'center' }}>
                                             <Picker
                                                 mode='dropdown'
@@ -345,7 +334,7 @@ class DisplayJourneysPage extends React.Component {
                                             </Picker>
                                         </View>
                                         <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
-                                            <View style={{flex: 0.9, flexDirection: 'row'}}>
+                                            <View style={{ flex: 0.9, flexDirection: 'row' }}>
                                                 <View style={{ flex: 0.6, alignItems: 'flex-start', justifyContent: 'center' }}>
                                                     <TouchableNativeFeedback onPress={() => this.chooseDate()}>
                                                         <Text style={{ fontWeight: 'bold', fontSize: 16 }}>{this.stringifyDate(this.state.datetime.date)}</Text>
@@ -356,6 +345,18 @@ class DisplayJourneysPage extends React.Component {
                                                         <Text style={{ fontWeight: 'bold', fontSize: 16 }}>{this.stringifyTime(this.state.datetime.time)}</Text>
                                                     </TouchableNativeFeedback>
                                                 </View>
+                                            </View>
+                                        </View>
+                                        <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', fontSize: 14, marginTop: 20 }}>
+                                            <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+                                                <TouchableNativeFeedback onPress={() => this.closePopUp()}>
+                                                    <Text style={{ color: '#AAA', fontWeight: 'bold' }}>Fermer</Text>
+                                                </TouchableNativeFeedback>
+                                            </View>
+                                            <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+                                                <TouchableNativeFeedback onPress={() => this.saveDateTimeAndClose()}>
+                                                    <Text style={{ color: primaryColor, fontWeight: 'bold' }}>Valider</Text>
+                                                </TouchableNativeFeedback>
                                             </View>
                                         </View>
                                     </View>
