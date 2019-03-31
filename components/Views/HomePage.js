@@ -145,7 +145,7 @@ class HomePage extends React.Component {
                                     </View>
                                 </TouchableNativeFeedback>
                             </View>
-                            <Text style={styles.title}>Vos arrêts</Text>
+                            {/* <Text style={styles.title}>Vos arrêts</Text>
                             <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
                                 <View onPress={() => console.log('hey')} style={styles.stopCardBox}>
                                     <TouchableNativeFeedback background={TouchableNativeFeedback.Ripple('#CCCCCC')}>
@@ -187,7 +187,7 @@ class HomePage extends React.Component {
                                         </View>
                                     </TouchableNativeFeedback>
                                 </View>
-                            </ScrollView>
+                            </ScrollView> */}
                             <Text style={styles.title}>Vos itinéraires</Text>
                             <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
                                 <FlatList
@@ -235,7 +235,7 @@ class HomePage extends React.Component {
                                         </View>
                                     } keyExtractor={(item, index) => index.toString()} />
                             </ScrollView>
-                            <Text style={styles.title}>Lignes</Text>
+                            {/* <Text style={styles.title}>Lignes</Text>
 
                             <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center', position: 'relative', height: 75 }}>
                                 <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', padding: 5 }}>
@@ -249,7 +249,7 @@ class HomePage extends React.Component {
                                         </View>
                                     </TouchableNativeFeedback>
                                 </View>
-                            </View>
+                            </View> */}
                             <Text style={styles.title}>Plans</Text>
                             <View style={styles.mapCardBox}>
                                 <TouchableNativeFeedback background={TouchableNativeFeedback.Ripple('#CCCCCC')}

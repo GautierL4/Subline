@@ -1,34 +1,53 @@
 import React from 'react';
-import { StyleSheet, Text, View, Image, Animated, TextInput, TouchableWithoutFeedback, TouchableNativeFeedback, TouchableOpacity, ScrollView, Dimensions, FlatList, AsyncStorage, Easing } from 'react-native';
+import { Text, View, Image, ScrollView, FlatList, AsyncStorage } from 'react-native';
 import { styles, screenWidth, screenHeight } from '../../assets/styles/style';
-import APIHandler from '../API/APIHandler.js';
 import PartOfJourney from '../Views/PartOfJourney';
 import { BackButton, FavoriteButton, AlarmButton } from '../Elements/buttons'
 
-const APIManager = new APIHandler();
-
+/**
+ * Class representing the page of a specific journey
+ *
+ * @class JourneyPage
+ * @extends {React.Component}
+ */
 class JourneyPage extends React.Component {
 
+    /**
+     * Creates an instance of JourneyPage.
+     * 
+     * @param {*} props
+     * @memberof JourneyPage
+     */
     constructor(props) {
         super(props)
         this.journeyData = this.props.navigation.getParam('journeyData')
     }
 
-    async addBookmark() {
-        await AsyncStorage.setItem('key', 'Je stock ça ici');
-    }
-
+    /**
+     * Convert seconds to minutes.
+     *
+     * @param {number} seconds
+     * @returns {number} minutes.
+     * @memberof JourneyPage
+     */
     convertSecondsToMinutes(seconds) {
         var minutes = Math.floor(seconds / 60);
         return minutes;
     }
 
+    /**
+     * Round the number depending of the precision.
+     *
+     * @param {number} value
+     * @param {number} precision
+     * @returns {number} New value, the rounded number.
+     * @memberof JourneyPage
+     */
     roundDecimal(value, precision){
         var precision = precision || 2;
         var tmp = Math.pow(10, precision);
         return Math.round( value*tmp )/tmp;
     }
-
 
     render() {
         return (

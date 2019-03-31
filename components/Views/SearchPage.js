@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, KeyboardAvoidingView, Keyboard, Text, View, Image, Animated, TextInput, TouchableWithoutFeedback, TouchableNativeFeedback, TouchableOpacity, ScrollView, Dimensions, FlatList } from 'react-native';
+import { KeyboardAvoidingView, Text, View, Image, TextInput, TouchableNativeFeedback, ScrollView, Dimensions, FlatList } from 'react-native';
 import { styles } from '../../assets/styles/style';
 import APIHandler from '../API/APIHandler.js';
 import APIGoogle from '../API/APIGoogle';
@@ -10,8 +10,20 @@ const APIManager = new APIHandler();
 const IconLoader = new FileLoader();
 const APIGoogleManager = new APIGoogle()
 
+/**
+ * Class representig the search page.
+ *
+ * @class SearchPage
+ * @extends {React.Component}
+ */
 class SearchPage extends React.Component {
 
+    /**
+     * Creates an instance of SearchPage.
+     * 
+     * @param {*} props
+     * @memberof SearchPage
+     */
     constructor(props) {
         super(props);
         this.state = {
@@ -28,6 +40,11 @@ class SearchPage extends React.Component {
         this.getCurrentLocation()
     }
 
+    /**
+     * Get the current geographic location of user.
+     *
+     * @memberof SearchPage
+     */
     getCurrentLocation() {
         navigator.geolocation.getCurrentPosition(
             async (position) => {
@@ -51,6 +68,11 @@ class SearchPage extends React.Component {
         );
     }
 
+    /**
+     * Display the results for a search.
+     *
+     * @memberof SearchPage
+     */
     async AutoCompleteResearch() {
         var data = { stop_areas: null, address: null, poi: null }
         if (this.typename != "line") {
@@ -76,6 +98,13 @@ class SearchPage extends React.Component {
         }
     }
 
+    /**
+     * 
+     *
+     * @param {*} id
+     * @param {*} name
+     * @memberof SearchPage
+     */
     async sendFirstInputData(id, name) {
         try {
             params = {

@@ -45,37 +45,55 @@ const icons = {
     general_tram: require('../../assets/icons/icon_tram.png'),
 };
 
+/**
+ * Class representing everything related to files .
+ *
+ * @class FileLoader
+ */
 class FileLoader {
 
+    /**
+     * Get icons for a specific journey.
+     *
+     * @param {Object} sections
+     * @returns {Array} List of icons.
+     * @memberof FileLoader
+     */
     async getIconForJourney(sections) {
-        // console.log("Starting Loaded Icons");
         let iconList = [];
         for (let i = 0; i < sections.length; i++) {
-            // console.log("Get " + i + " Icon");
             iconList[i] = await this.getIconBySection(sections[i]);
-            // console.log("Icon " + i + " Loaded");
         }
-        // console.log("Icon Loaded", icons);
         return iconList;
     }
 
+    /**
+     * Get icon for a section of the journey.
+     *
+     * @param {Object} section
+     * @returns {function} The icon.
+     * @memberof FileLoader
+     */
     getIconBySection(section) {
-        // console.log("Get Icon from Section");
         if (section.type == "street_network" || section.type == "crow_fly" || section.type == "transfer") {
-            // console.log("Get Walk Icon");
             return icons.walkIcon;
         }
         else if (section.type == "waiting") {
-            // console.log("Get Wait Icon");
             return icons.wait;
         }
         else {
-            // console.log("Get Public Transportation Icon");
             icon = this.getPublicTransportIcon(section);
             return icon;
         }
     }
 
+    /**
+     * Get the icon for a type of public transport.
+     *
+     * @param {String} name
+     * @returns {function} The icon.
+     * @memberof FileLoader
+     */
     getIconForTypeOfPublicTransportation(name) {
         let icon = null
         switch (name) {
@@ -97,11 +115,16 @@ class FileLoader {
         return icon
     }
 
+    /**
+     * Get the icon of the public transport.
+     *
+     * @param {object} section
+     * @returns {function} The icon.
+     * @memberof FileLoader
+     */
     getPublicTransportIcon(section) {
         let icon = null;
-        // console.log(section.type);
         if (section.type == "public_transport" && section.display_informations != null) {
-            // console.log(section.display_informations.label);
             switch (section.display_informations.label) {
                 case 'A':
                     icon = icons.RERA;
@@ -221,5 +244,4 @@ class FileLoader {
         return icon
     }
 }
-
 export default FileLoader;

@@ -1,11 +1,22 @@
 import React from 'react';
-import { StyleSheet, Text, View, Image, Animated, TextInput, TouchableWithoutFeedback, TouchableNativeFeedback, ScrollView, Dimensions, WebView } from 'react-native';
-import { styles, screenWidth, screenHeight } from '../../assets/styles/style';
+import { View, WebView } from 'react-native';
 import { Constants } from 'expo';
 import { BackButton } from '../Elements/buttons'
 
+/**
+ * Class representing map page.
+ *
+ * @class MapPage
+ * @extends {React.Component}
+ */
 class MapPage extends React.Component {
 
+    /**
+     * Creates an instance of MapPage.
+     * 
+     * @param {*} props
+     * @memberof MapPage
+     */
     constructor(props) {
         super(props);
         this.state = {
@@ -14,18 +25,26 @@ class MapPage extends React.Component {
         };
     }
 
+    /**
+     * Change page.
+     *
+     * @param {string} page
+     * @param {*} parameters
+     * @memberof MapPage
+     */
     changeView(page, parameters) {
-        // setTimeout(function () {
         this.props.navigation.navigate(page, parameters)
-        // }.bind(this), 100)
     }
 
+    /**
+     * Display the map page.
+     *
+     * @returns
+     * @memberof MapPage
+     */
     render() {
-
         const { navigation } = this.props;
         const source = navigation.getParam('param');
-
-
         return (
             <View style={{ flex: 1, backgroundColor: '#fff', paddingTop: Constants.statusBarHeight }}>
 
@@ -34,12 +53,9 @@ class MapPage extends React.Component {
                     scrollEnabled={false}
                     source={{ uri: source }}
                     />
-
                 <BackButton navigation={this.props.navigation} />
-
             </View>
         )
     }
 }
-
 export default MapPage;

@@ -1,19 +1,29 @@
 import React from 'react';
-import { StyleSheet, Text, View, Image, Animated, TimePickerAndroid, DatePickerAndroid, Platform, TextInput, TouchableNativeFeedback, TouchableWithoutFeedback, ScrollView, Dimensions, FlatList, Picker, StatusBar, TouchableOpacity } from 'react-native';
+import { Text, View, Image, TimePickerAndroid, DatePickerAndroid, Platform, TouchableNativeFeedback, TouchableWithoutFeedback, ScrollView, FlatList, Picker, TouchableOpacity } from 'react-native';
 import { styles, screenWidth, screenHeight, primaryColor } from '../../assets/styles/style';
 import FileLoader from './FileLoader.js';
 import APIHandler from '../API/APIHandler.js';
-import APIGoogle from '../API/APIGoogle';
 import { BackButton, ReloadButton, ReverseButton } from '../Elements/buttons'
 import BusIcon from '../Elements/BusIcon'
-import Dialog, { DialogContent, DialogTitle, DialogButton } from 'react-native-popup-dialog';
+import Dialog, { DialogContent, DialogTitle } from 'react-native-popup-dialog';
 
 const APIManager = new APIHandler();
-const APIGoogleManager = new APIGoogle()
 const IconLoader = new FileLoader();
 
+/**
+ * Class representing the page that contains the list of journeys
+ *
+ * @class DisplayJourneysPage
+ * @extends {React.Component}
+ */
 class DisplayJourneysPage extends React.Component {
 
+    /**
+     * Creates an instance of DisplayJourneysPage.
+     * 
+     * @param {*} props
+     * @memberof DisplayJourneysPage
+     */
     constructor(props) {
         super(props);
         this.state = {
@@ -84,6 +94,11 @@ class DisplayJourneysPage extends React.Component {
         this.searchJourney();
     }
 
+    /**
+     * Search journeys with the departure location, destination location and when. Save the results in the state. 
+     *
+     * @memberof DisplayJourneysPage
+     */
     async searchJourney() {
         try {
             data = await APIManager.getJourneys(this.state.departure.id, this.state.destination.id, this.state.datetimeSaved, this.state.datetimeSaved.type);
@@ -95,11 +110,24 @@ class DisplayJourneysPage extends React.Component {
         this.setState({ dataBestJourney: dataBestJourney, dataOtherJourneys: data, isLoading: false });
     }
 
+    /**
+     * Convert seconds to minutes.
+     *
+     * @param {number} seconds
+     * @returns {number} minutes 
+     * @memberof DisplayJourneysPage
+     */
     convertSecondsToMinutes(seconds) {
         var minutes = Math.floor(seconds / 60);
         return minutes;
     }
 
+    /**
+     * Navigate to the page 'JourneyPage' to see all informations about the journey.
+     *
+     * @param {Object} journey
+     * @memberof DisplayJourneysPage
+     */
     displayJourneyDetails(journey) {
         this.props.navigation.navigate('JourneyPage',
             {
@@ -107,18 +135,22 @@ class DisplayJourneysPage extends React.Component {
             });
     }
 
-    setAddress() {
-        test = this.state.departure
-        // console.log(test.address.address_components[0].long_name)
-    }
-
+    /**
+     * Re-search the journeys.
+     *
+     * @memberof DisplayJourneysPage
+     */
     handlerReload() {
         this.setState({
             isLoading: true
         }, () => this.searchJourney())
-
     }
 
+    /**
+     * Switch departure location with destination location and re-search.
+     *
+     * @memberof DisplayJourneysPage
+     */
     handlerReverse() {
         let { departure, destination } = this.state
         this.setState({
@@ -132,6 +164,13 @@ class DisplayJourneysPage extends React.Component {
         }, () => this.searchJourney())
     }
 
+    /**
+     *
+     *
+     * @param {Object} date
+     * @returns {string} French date.
+     * @memberof DisplayJourneysPage
+     */
     stringifyDate(date) {
         let { year, month, day } = date
         let monthString = ''
@@ -179,6 +218,13 @@ class DisplayJourneysPage extends React.Component {
         return day + ' ' + monthString + ' ' + year
     }
 
+    /**
+     * 
+     *
+     * @param {Object} time
+     * @returns {string} Hour and minute.
+     * @memberof DisplayJourneysPage
+     */
     stringifyTime(time) {
         let { hour, minute } = time
         hour = hour.toString().padStart(2, '0')
@@ -186,6 +232,11 @@ class DisplayJourneysPage extends React.Component {
         return hour + ':' + minute
     }
 
+    /**
+     * Display the datepicker and save the chosen date to state.
+     *
+     * @memberof DisplayJourneysPage
+     */
     async chooseDate() {
         let date = null
         let type = this.state.datetime.type === 'now' ? 'departure' : this.state.datetime.type
@@ -211,6 +262,11 @@ class DisplayJourneysPage extends React.Component {
         });
     }
 
+    /**
+     * Display the timepicker and save the chosen time to state.
+     *
+     * @memberof DisplayJourneysPage
+     */
     async chooseTime() {
         let time = null
         let type = this.state.datetime.type === 'now' ? 'departure' : this.state.datetime.type
@@ -232,6 +288,11 @@ class DisplayJourneysPage extends React.Component {
         })
     }
 
+    /**
+     * Save the date, the time and the type to another state, close the pop-up and re-search.
+     *
+     * @memberof DisplayJourneysPage
+     */
     saveDateTimeAndClose() {
         this.setState({ datetimeSaved: this.state.datetime }, () => {
             this.closePopUp()
@@ -239,19 +300,25 @@ class DisplayJourneysPage extends React.Component {
         })
     }
 
+    /**
+     * Close the pop-up.
+     *
+     * @memberof DisplayJourneysPage
+     */
     closePopUp() {
         this.setState({ popUpVisible: false })
     }
 
+    /**
+     * Display the page.
+     *
+     * @returns
+     * @memberof DisplayJourneysPage
+     */
     render() {
-        this.setAddress()
-
-
-
         const _renderSeparator = () => (
             <Image style={styles.journeyCardBottomImgDot} source={require('../../assets/icons/dot.png')} />
         )
-
         if (this.state.isLoading) {
             return (
                 <View style={{ width: screenWidth, height: screenHeight, flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: 'black' }}>
@@ -312,14 +379,12 @@ class DisplayJourneysPage extends React.Component {
                                     </View>
                                 </View>
                             </View>
-                            {/* <Dropdown /> */}
                         </View>
                         <View style={styles.body}>
                             <Dialog
                                 visible={this.state.popUpVisible}
                                 onTouchOutside={() => this.setState({ popUpVisible: false })}
-                                width={0.9}
-                            >
+                                width={0.9} >
                                 <DialogTitle title="Date et heure" />
                                 <DialogContent>
                                     <View style={{ height: 130, flexDirection: 'column' }}>
@@ -420,8 +485,7 @@ class DisplayJourneysPage extends React.Component {
                                                                     <Image style={styles.journeyCardBottomImg} source={icon} />
                                                                 )
                                                             }
-                                                        }
-                                                        } keyExtractor={(item, index) => index.toString()} />
+                                                        }} keyExtractor={(item, index) => index.toString()} />
                                                     </View>
                                                     <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-end', alignItems: 'center' }}>
                                                         <Text style={{ fontSize: 24, fontWeight: "bold" }}>{this.convertSecondsToMinutes(item.duration)}</Text>
@@ -439,7 +503,6 @@ class DisplayJourneysPage extends React.Component {
                 </View >
             )
         } else {
-
             return (
                 <View style={styles.container}>
                     <ScrollView horizontal={false} contentContainerStyle={{ flexGrow: 1 }} style={{ width: screenWidth }}>
@@ -544,5 +607,4 @@ class DisplayJourneysPage extends React.Component {
         }
     }
 }
-
 export default DisplayJourneysPage;
