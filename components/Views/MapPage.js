@@ -1,6 +1,5 @@
 import React from 'react';
 import { View, WebView } from 'react-native';
-import { Constants } from 'expo';
 import { BackButton } from '../Elements/buttons'
 
 /**
@@ -46,7 +45,7 @@ class MapPage extends React.Component {
         const { navigation } = this.props;
         const source = navigation.getParam('param');
         return (
-            <View style={{ flex: 1, backgroundColor: '#fff', paddingTop: Constants.statusBarHeight }}>
+            <View style={{ flex: 1, backgroundColor: '#fff' }}>
 
                 <WebView
                     bounces={false}
