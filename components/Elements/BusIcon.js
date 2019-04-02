@@ -1,20 +1,15 @@
-import React from 'react'
-import { StyleSheet, Text, View, Image, Animated, Platform, TextInput, TouchableNativeFeedback, TouchableWithoutFeedback, ScrollView, Dimensions, FlatList, Picker, StatusBar, TouchableOpacity } from 'react-native'
-import { styles, screenWidth, screenHeight } from '../../assets/styles/style';
+import React from 'react';
+import { Text, View, Image } from 'react-native';
+import { styles } from '../../assets/styles/style';
 
-export default class BusIcon extends React.Component {
+const BusIcon = props => {
+  const { style, lineName } = props;
+  return (
+    <View style={[styles.busCard, style]}>
+      <Image source={require('../../assets/icons/icon_bus.png')} style={styles.busCardImgBus} />
+      <Text style={styles.busCardTxt}>{lineName}</Text>
+    </View>
+  );
+};
 
-    constructor(props) {
-        super(props)
-    }
-
-    render() {
-        return (
-            <View style={[styles.busCard,this.props.style]}>
-                <Image source={require('../../assets/icons/icon_bus.png')} style={styles.busCardImgBus} />
-                <Text style={styles.busCardTxt}>{this.props.lineName}</Text>
-            </View>
-        )
-    }
-
-}
+export default BusIcon;
