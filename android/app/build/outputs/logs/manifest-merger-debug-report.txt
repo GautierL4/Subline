@@ -5,14 +5,17 @@ INJECTED from C:\Users\Adrien\Documents\Projets\Subline\android\app\src\main\And
 INJECTED from C:\Users\Adrien\Documents\Projets\Subline\android\app\src\main\AndroidManifest.xml:1:1-27:12
 INJECTED from C:\Users\Adrien\Documents\Projets\Subline\android\app\src\main\AndroidManifest.xml:1:1-27:12
 MERGED from [:react-native-geolocation-service] C:\Users\Adrien\Documents\Projets\Subline\node_modules\react-native-geolocation-service\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-14:12
+MERGED from [:react-native-view-pdf] C:\Users\Adrien\Documents\Projets\Subline\node_modules\react-native-view-pdf\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-9:12
 MERGED from [:@react-native-community_async-storage] C:\Users\Adrien\Documents\Projets\Subline\node_modules\@react-native-community\async-storage\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-9:12
 MERGED from [com.facebook.react:react-native:0.59.3] C:\Users\Adrien\.gradle\caches\transforms-1\files-1.1\react-native-0.59.3.aar\7a11f8f9c2fcf72c39c3badfc2678b22\AndroidManifest.xml:2:1-13:12
 MERGED from [com.android.support:appcompat-v7:28.0.0] C:\Users\Adrien\.gradle\caches\transforms-1\files-1.1\appcompat-v7-28.0.0.aar\0bfff9c7690cdfa40b7c1a00efd56df2\AndroidManifest.xml:17:1-22:12
 MERGED from [com.google.android.gms:play-services-location:15.0.1] C:\Users\Adrien\.gradle\caches\transforms-1\files-1.1\play-services-location-15.0.1.aar\e965f1533a5f16ac3b6e8d2cf2841c28\AndroidManifest.xml:2:1-9:12
+MERGED from [com.github.barteksc:android-pdf-viewer:2.8.2] C:\Users\Adrien\.gradle\caches\transforms-1\files-1.1\android-pdf-viewer-2.8.2.aar\c985aff9e705b2e0586578c7a2bb9f18\AndroidManifest.xml:2:1-11:12
 MERGED from [com.google.android.gms:play-services-base:15.0.1] C:\Users\Adrien\.gradle\caches\transforms-1\files-1.1\play-services-base-15.0.1.aar\5dccb949d22114d4e438b98a1770aaeb\AndroidManifest.xml:17:1-29:12
 MERGED from [com.google.android.gms:play-services-places-placereport:15.0.1] C:\Users\Adrien\.gradle\caches\transforms-1\files-1.1\play-services-places-placereport-15.0.1.aar\05ff51c6837a1f01cf8203001fa13652\AndroidManifest.xml:17:1-24:12
 MERGED from [com.google.android.gms:play-services-tasks:15.0.1] C:\Users\Adrien\.gradle\caches\transforms-1\files-1.1\play-services-tasks-15.0.1.aar\d29e23269237699e73c1cc9b1639f2d7\AndroidManifest.xml:2:1-9:12
 MERGED from [com.google.android.gms:play-services-basement:15.0.1] C:\Users\Adrien\.gradle\caches\transforms-1\files-1.1\play-services-basement-15.0.1.aar\2271ff9883f6422775e81d2c8adc2f18\AndroidManifest.xml:17:1-28:12
+MERGED from [com.github.barteksc:pdfium-android:1.7.1] C:\Users\Adrien\.gradle\caches\transforms-1\files-1.1\pdfium-android-1.7.1.aar\1204c86e3e2890896c909aeba95cc1dd\AndroidManifest.xml:2:1-11:12
 MERGED from [com.android.support:support-v4:26.1.0] C:\Users\Adrien\.gradle\caches\transforms-1\files-1.1\support-v4-26.1.0.aar\3afc6e3b269216a8a358afbe4007b7e4\AndroidManifest.xml:17:1-31:12
 MERGED from [com.android.support:support-fragment:28.0.0] C:\Users\Adrien\.gradle\caches\transforms-1\files-1.1\support-fragment-28.0.0.aar\fa95d41bffe6a7f905ea7081a6c6dfd5\AndroidManifest.xml:17:1-22:12
 MERGED from [com.android.support:animated-vector-drawable:28.0.0] C:\Users\Adrien\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-28.0.0.aar\2ab4bb252d7ecf2f938d38bb5a16d112\AndroidManifest.xml:17:1-22:12
@@ -146,6 +149,8 @@ INJECTED from C:\Users\Adrien\Documents\Projets\Subline\android\app\src\main\And
 INJECTED from C:\Users\Adrien\Documents\Projets\Subline\android\app\src\main\AndroidManifest.xml
 MERGED from [:react-native-geolocation-service] C:\Users\Adrien\Documents\Projets\Subline\node_modules\react-native-geolocation-service\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-7:41
 MERGED from [:react-native-geolocation-service] C:\Users\Adrien\Documents\Projets\Subline\node_modules\react-native-geolocation-service\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-7:41
+MERGED from [:react-native-view-pdf] C:\Users\Adrien\Documents\Projets\Subline\node_modules\react-native-view-pdf\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-7:41
+MERGED from [:react-native-view-pdf] C:\Users\Adrien\Documents\Projets\Subline\node_modules\react-native-view-pdf\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-7:41
 MERGED from [:@react-native-community_async-storage] C:\Users\Adrien\Documents\Projets\Subline\node_modules\@react-native-community\async-storage\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-7:41
 MERGED from [:@react-native-community_async-storage] C:\Users\Adrien\Documents\Projets\Subline\node_modules\@react-native-community\async-storage\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-7:41
 MERGED from [com.facebook.react:react-native:0.59.3] C:\Users\Adrien\.gradle\caches\transforms-1\files-1.1\react-native-0.59.3.aar\7a11f8f9c2fcf72c39c3badfc2678b22\AndroidManifest.xml:7:5-9:41
@@ -154,6 +159,8 @@ MERGED from [com.android.support:appcompat-v7:28.0.0] C:\Users\Adrien\.gradle\ca
 MERGED from [com.android.support:appcompat-v7:28.0.0] C:\Users\Adrien\.gradle\caches\transforms-1\files-1.1\appcompat-v7-28.0.0.aar\0bfff9c7690cdfa40b7c1a00efd56df2\AndroidManifest.xml:20:5-44
 MERGED from [com.google.android.gms:play-services-location:15.0.1] C:\Users\Adrien\.gradle\caches\transforms-1\files-1.1\play-services-location-15.0.1.aar\e965f1533a5f16ac3b6e8d2cf2841c28\AndroidManifest.xml:5:5-44
 MERGED from [com.google.android.gms:play-services-location:15.0.1] C:\Users\Adrien\.gradle\caches\transforms-1\files-1.1\play-services-location-15.0.1.aar\e965f1533a5f16ac3b6e8d2cf2841c28\AndroidManifest.xml:5:5-44
+MERGED from [com.github.barteksc:android-pdf-viewer:2.8.2] C:\Users\Adrien\.gradle\caches\transforms-1\files-1.1\android-pdf-viewer-2.8.2.aar\c985aff9e705b2e0586578c7a2bb9f18\AndroidManifest.xml:7:5-9:41
+MERGED from [com.github.barteksc:android-pdf-viewer:2.8.2] C:\Users\Adrien\.gradle\caches\transforms-1\files-1.1\android-pdf-viewer-2.8.2.aar\c985aff9e705b2e0586578c7a2bb9f18\AndroidManifest.xml:7:5-9:41
 MERGED from [com.google.android.gms:play-services-base:15.0.1] C:\Users\Adrien\.gradle\caches\transforms-1\files-1.1\play-services-base-15.0.1.aar\5dccb949d22114d4e438b98a1770aaeb\AndroidManifest.xml:20:5-44
 MERGED from [com.google.android.gms:play-services-base:15.0.1] C:\Users\Adrien\.gradle\caches\transforms-1\files-1.1\play-services-base-15.0.1.aar\5dccb949d22114d4e438b98a1770aaeb\AndroidManifest.xml:20:5-44
 MERGED from [com.google.android.gms:play-services-places-placereport:15.0.1] C:\Users\Adrien\.gradle\caches\transforms-1\files-1.1\play-services-places-placereport-15.0.1.aar\05ff51c6837a1f01cf8203001fa13652\AndroidManifest.xml:20:5-44
@@ -162,6 +169,8 @@ MERGED from [com.google.android.gms:play-services-tasks:15.0.1] C:\Users\Adrien\
 MERGED from [com.google.android.gms:play-services-tasks:15.0.1] C:\Users\Adrien\.gradle\caches\transforms-1\files-1.1\play-services-tasks-15.0.1.aar\d29e23269237699e73c1cc9b1639f2d7\AndroidManifest.xml:5:5-44
 MERGED from [com.google.android.gms:play-services-basement:15.0.1] C:\Users\Adrien\.gradle\caches\transforms-1\files-1.1\play-services-basement-15.0.1.aar\2271ff9883f6422775e81d2c8adc2f18\AndroidManifest.xml:20:5-44
 MERGED from [com.google.android.gms:play-services-basement:15.0.1] C:\Users\Adrien\.gradle\caches\transforms-1\files-1.1\play-services-basement-15.0.1.aar\2271ff9883f6422775e81d2c8adc2f18\AndroidManifest.xml:20:5-44
+MERGED from [com.github.barteksc:pdfium-android:1.7.1] C:\Users\Adrien\.gradle\caches\transforms-1\files-1.1\pdfium-android-1.7.1.aar\1204c86e3e2890896c909aeba95cc1dd\AndroidManifest.xml:7:5-9:41
+MERGED from [com.github.barteksc:pdfium-android:1.7.1] C:\Users\Adrien\.gradle\caches\transforms-1\files-1.1\pdfium-android-1.7.1.aar\1204c86e3e2890896c909aeba95cc1dd\AndroidManifest.xml:7:5-9:41
 MERGED from [com.android.support:support-v4:26.1.0] C:\Users\Adrien\.gradle\caches\transforms-1\files-1.1\support-v4-26.1.0.aar\3afc6e3b269216a8a358afbe4007b7e4\AndroidManifest.xml:21:5-23:54
 MERGED from [com.android.support:support-v4:26.1.0] C:\Users\Adrien\.gradle\caches\transforms-1\files-1.1\support-v4-26.1.0.aar\3afc6e3b269216a8a358afbe4007b7e4\AndroidManifest.xml:21:5-23:54
 MERGED from [com.android.support:support-fragment:28.0.0] C:\Users\Adrien\.gradle\caches\transforms-1\files-1.1\support-fragment-28.0.0.aar\fa95d41bffe6a7f905ea7081a6c6dfd5\AndroidManifest.xml:20:5-44

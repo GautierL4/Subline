@@ -668,6 +668,10 @@
         "source": "C:\\Users\\Adrien\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-28.0.0.aar\\0bfff9c7690cdfa40b7c1a00efd56df2\\res\\drawable-v21\\abc_action_bar_item_background_material.xml"
     },
     {
+        "merged": "C:\\Users\\Adrien\\Documents\\Projets\\Subline\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable_default_scroll_handle_right.xml.flat",
+        "source": "C:\\Users\\Adrien\\.gradle\\caches\\transforms-1\\files-1.1\\android-pdf-viewer-2.8.2.aar\\c985aff9e705b2e0586578c7a2bb9f18\\res\\drawable\\default_scroll_handle_right.xml"
+    },
+    {
         "merged": "C:\\Users\\Adrien\\Documents\\Projets\\Subline\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable_redbox_top_border_background.xml.flat",
         "source": "C:\\Users\\Adrien\\.gradle\\caches\\transforms-1\\files-1.1\\react-native-0.59.3.aar\\7a11f8f9c2fcf72c39c3badfc2678b22\\res\\drawable\\redbox_top_border_background.xml"
     },
@@ -932,6 +936,10 @@
         "source": "C:\\Users\\Adrien\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-28.0.0.aar\\0bfff9c7690cdfa40b7c1a00efd56df2\\res\\color\\abc_secondary_text_material_dark.xml"
     },
     {
+        "merged": "C:\\Users\\Adrien\\Documents\\Projets\\Subline\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable_default_scroll_handle_bottom.xml.flat",
+        "source": "C:\\Users\\Adrien\\.gradle\\caches\\transforms-1\\files-1.1\\android-pdf-viewer-2.8.2.aar\\c985aff9e705b2e0586578c7a2bb9f18\\res\\drawable\\default_scroll_handle_bottom.xml"
+    },
+    {
         "merged": "C:\\Users\\Adrien\\Documents\\Projets\\Subline\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi-v4_abc_btn_check_to_on_mtrl_015.png.flat",
         "source": "C:\\Users\\Adrien\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-28.0.0.aar\\0bfff9c7690cdfa40b7c1a00efd56df2\\res\\drawable-mdpi-v4\\abc_btn_check_to_on_mtrl_015.png"
     },
@@ -1180,12 +1188,12 @@
         "source": "C:\\Users\\Adrien\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-28.0.0.aar\\0bfff9c7690cdfa40b7c1a00efd56df2\\res\\drawable-xhdpi-v4\\abc_ic_star_half_black_48dp.png"
     },
     {
-        "merged": "C:\\Users\\Adrien\\Documents\\Projets\\Subline\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4_googleg_standard_color_18.png.flat",
-        "source": "C:\\Users\\Adrien\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-base-15.0.1.aar\\5dccb949d22114d4e438b98a1770aaeb\\res\\drawable-hdpi-v4\\googleg_standard_color_18.png"
-    },
-    {
         "merged": "C:\\Users\\Adrien\\Documents\\Projets\\Subline\\android\\app\\build\\intermediates\\res\\merged\\debug\\anim_abc_tooltip_enter.xml.flat",
         "source": "C:\\Users\\Adrien\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-28.0.0.aar\\0bfff9c7690cdfa40b7c1a00efd56df2\\res\\anim\\abc_tooltip_enter.xml"
+    },
+    {
+        "merged": "C:\\Users\\Adrien\\Documents\\Projets\\Subline\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4_googleg_standard_color_18.png.flat",
+        "source": "C:\\Users\\Adrien\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-base-15.0.1.aar\\5dccb949d22114d4e438b98a1770aaeb\\res\\drawable-hdpi-v4\\googleg_standard_color_18.png"
     },
     {
         "merged": "C:\\Users\\Adrien\\Documents\\Projets\\Subline\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-ldrtl-xhdpi-v17_abc_spinner_mtrl_am_alpha.9.png.flat",
@@ -1404,6 +1412,10 @@
         "source": "C:\\Users\\Adrien\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-28.0.0.aar\\0bfff9c7690cdfa40b7c1a00efd56df2\\res\\drawable-mdpi-v4\\abc_tab_indicator_mtrl_alpha.9.png"
     },
     {
+        "merged": "C:\\Users\\Adrien\\Documents\\Projets\\Subline\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable_default_scroll_handle_left.xml.flat",
+        "source": "C:\\Users\\Adrien\\.gradle\\caches\\transforms-1\\files-1.1\\android-pdf-viewer-2.8.2.aar\\c985aff9e705b2e0586578c7a2bb9f18\\res\\drawable\\default_scroll_handle_left.xml"
+    },
+    {
         "merged": "C:\\Users\\Adrien\\Documents\\Projets\\Subline\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable_abc_btn_check_material.xml.flat",
         "source": "C:\\Users\\Adrien\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-28.0.0.aar\\0bfff9c7690cdfa40b7c1a00efd56df2\\res\\drawable\\abc_btn_check_material.xml"
     },
@@ -1554,6 +1566,10 @@
     {
         "merged": "C:\\Users\\Adrien\\Documents\\Projets\\Subline\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4_abc_ic_star_black_16dp.png.flat",
         "source": "C:\\Users\\Adrien\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-28.0.0.aar\\0bfff9c7690cdfa40b7c1a00efd56df2\\res\\drawable-hdpi-v4\\abc_ic_star_black_16dp.png"
+    },
+    {
+        "merged": "C:\\Users\\Adrien\\Documents\\Projets\\Subline\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable_default_scroll_handle_top.xml.flat",
+        "source": "C:\\Users\\Adrien\\.gradle\\caches\\transforms-1\\files-1.1\\android-pdf-viewer-2.8.2.aar\\c985aff9e705b2e0586578c7a2bb9f18\\res\\drawable\\default_scroll_handle_top.xml"
     },
     {
         "merged": "C:\\Users\\Adrien\\Documents\\Projets\\Subline\\android\\app\\build\\intermediates\\res\\merged\\debug\\color_common_google_signin_btn_text_light.xml.flat",

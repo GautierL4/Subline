@@ -347,8 +347,11 @@ class HomePage extends React.Component {
                 background={TouchableNativeFeedback.Ripple('#CCCCCC')}
                 onPress={() => {
                   this.changeView('MapPage', {
-                    param:
-                      'https://drive.google.com/viewerng/viewer?embedded=true&url=https://www.ratp.fr/sites/default/files/plans-lignes/Plans-essentiels/Plan-Metro.1496264586.pdf'
+                    param: {
+                      src:
+                        'https://www.ratp.fr/sites/default/files/plans-lignes/Plans-essentiels/Plan-Metro.1553075320.pdf',
+                      type: 'url'
+                    }
                   });
                 }}
               >
@@ -362,8 +365,11 @@ class HomePage extends React.Component {
                 background={TouchableNativeFeedback.Ripple('#CCCCCC')}
                 onPress={() => {
                   this.changeView('MapPage', {
-                    param:
-                      'https://drive.google.com/viewerng/viewer?embedded=true&url=https://www.ratp.fr/sites/default/files/plans-lignes/Plans-essentiels/Plan-RER-et-transiliens.1505744115.pdf'
+                    param: {
+                      src:
+                        'https://www.ratp.fr/sites/default/files/plans-lignes/Plans-essentiels/Plan-RER-et-transiliens.1505744115.pdf',
+                      type: 'url'
+                    }
                   });
                 }}
               >
@@ -377,8 +383,11 @@ class HomePage extends React.Component {
                 background={TouchableNativeFeedback.Ripple('#CCCCCC')}
                 onPress={() => {
                   this.changeView('MapPage', {
-                    param:
-                      'https://drive.google.com/viewerng/viewer?embedded=true&url=https://www.ratp.fr/sites/default/files/plans-lignes/Plans-essentiels/Plan-des-Bus.1496264585.pdf'
+                    param: {
+                      src:
+                        'https://www.ratp.fr/sites/default/files/plans-lignes/Plans-essentiels/Plan-des-Bus.1496264585.pdf',
+                      type: 'url'
+                    }
                   });
                 }}
               >
@@ -392,8 +401,11 @@ class HomePage extends React.Component {
                 background={TouchableNativeFeedback.Ripple('#CCCCCC')}
                 onPress={() => {
                   this.changeView('MapPage', {
-                    param:
-                      'https://drive.google.com/viewerng/viewer?embedded=true&url=https://www.ratp.fr/sites/default/files/plans-lignes/Plans-essentiels/Plan-des-Noctilien.1527497902.pdf'
+                    param: {
+                      src:
+                        'https://www.ratp.fr/sites/default/files/plans-lignes/Plans-essentiels/Plan-des-Noctilien.1527497902.pdf',
+                      type: 'url'
+                    }
                   });
                 }}
               >
@@ -407,8 +419,11 @@ class HomePage extends React.Component {
                 background={TouchableNativeFeedback.Ripple('#CCCCCC')}
                 onPress={() => {
                   this.changeView('MapPage', {
-                    param:
-                      'https://drive.google.com/viewerng/viewer?embedded=true&url=https://www.ratp.fr/sites/default/files/plans-lignes/Plans-essentiels/Acces-Aeroports.1496264586.pdf'
+                    param: {
+                      src:
+                        'https://www.ratp.fr/sites/default/files/plans-lignes/Plans-essentiels/Acces-Aeroports.1496264586.pdf',
+                      type: 'url'
+                    }
                   });
                 }}
               >

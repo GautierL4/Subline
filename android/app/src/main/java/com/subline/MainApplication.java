@@ -3,12 +3,14 @@ package com.subline;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.rumax.reactnative.pdfviewer.PDFViewPackage;
 import com.reactnativecommunity.asyncstorage.AsyncStoragePackage;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
 import com.facebook.soloader.SoLoader;
 import com.agontuk.RNFusedLocation.RNFusedLocationPackage;
+import com.rumax.reactnative.pdfviewer.PDFViewPackage;
 
 import java.util.Arrays;
 import java.util.List;
@@ -25,8 +27,10 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+          new PDFViewPackage(),
           new AsyncStoragePackage(),
-          new RNFusedLocationPackage()
+          new RNFusedLocationPackage(),
+          new PDFViewPackage()
       );
     }
 

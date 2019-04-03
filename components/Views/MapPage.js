@@ -1,5 +1,6 @@
 import React from 'react';
-import { View, WebView } from 'react-native';
+import { View } from 'react-native';
+import PDFView from 'react-native-view-pdf';
 import { BackButton } from '../Elements/buttons';
 
 /**
@@ -31,8 +32,15 @@ class MapPage extends React.Component {
     const { navigation } = this.props;
     const source = navigation.getParam('param');
     return (
-      <View style={{ flex: 1, backgroundColor: '#fff' }}>
-        <WebView bounces={false} scrollEnabled={false} source={{ uri: source }} />
+      <View style={{ flex: 1, backgroundColor: '#fff', flexDirection: 'column' }}>
+        <PDFView
+          fadeInDuration={250.0}
+          style={{ flex: 1, height: 3000 }}
+          resource={source.src}
+          resourceType={source.type}
+          onLoad={() => console.log(`PDF rendered from ${source.type}`)}
+          onError={() => console.log('Cannot render PDF')}
+        />
         <BackButton navigation={navigation} />
       </View>
     );

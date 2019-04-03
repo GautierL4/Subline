@@ -37,6 +37,7 @@
     "react-native-maps": "^0.22.1",
     "react-native-pdf": "^3.0.16",
     "react-native-popup-dialog": "^0.16.6",
+    "react-native-view-pdf": "^0.8.1",
     "react-navigation": "^2.3.1"
   },
   "jest": {
