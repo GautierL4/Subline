@@ -1,6 +1,5 @@
 import React from 'react';
 import {
-  KeyboardAvoidingView,
   Text,
   View,
   Image,
@@ -10,6 +9,7 @@ import {
   Dimensions,
   FlatList
 } from 'react-native';
+import Geolocation from 'react-native-geolocation-service';
 import { styles } from '../../assets/styles/style';
 import APIHandler from '../API/APIHandler';
 import APIGoogle from '../API/APIGoogle';
@@ -59,7 +59,7 @@ class SearchPage extends React.Component {
    * @memberof SearchPage
    */
   getCurrentLocation() {
-    navigator.geolocation.getCurrentPosition(
+    Geolocation.getCurrentPosition(
       async position => {
         const { longitude, latitude } = position.coords;
         let address = null;
@@ -222,172 +222,170 @@ class SearchPage extends React.Component {
     const { search, locations } = this.state;
     const screenWidth = Dimensions.get('window').width;
     return (
-      <KeyboardAvoidingView style={[styles.container]} behavior="padding" enabled>
-        <ScrollView
-          keyboardShouldPersistTaps="always"
-          horizontal={false}
-          contentContainerStyle={{ flexGrow: 1 }}
-          style={{ width: screenWidth }}
-        >
-          <View style={{ flexDirection: 'row', height: 100, backgroundColor: '#000', width: 500 }}>
-            <BackButton navigation={navigation} />
-          </View>
-          <View style={styles.body}>
-            <View
-              style={{
-                flexDirection: 'row',
-                alignItems: 'center',
-                justifyContent: 'center',
-                position: 'relative',
-                top: -25
-              }}
-            >
-              <View style={styles.searchBar}>
-                {search.length === 0 ? (
+      <ScrollView
+        keyboardShouldPersistTaps="always"
+        horizontal={false}
+        contentContainerStyle={{ flexGrow: 1 }}
+        style={{ width: screenWidth }}
+      >
+        <View style={{ flexDirection: 'row', height: 100, backgroundColor: '#000', width: 500 }}>
+          <BackButton navigation={navigation} />
+        </View>
+        <View style={styles.body}>
+          <View
+            style={{
+              flexDirection: 'row',
+              alignItems: 'center',
+              justifyContent: 'center',
+              position: 'relative',
+              top: -25
+            }}
+          >
+            <View style={styles.searchBar}>
+              {search.length === 0 ? (
+                <Image
+                  source={require('../../assets/icons/search.png')}
+                  style={styles.ImageStyle}
+                />
+              ) : (
+                <TouchableNativeFeedback onPress={() => this.setState({ search: '' })}>
                   <Image
-                    source={require('../../assets/icons/search.png')}
+                    source={require('../../assets/icons/close.png')}
                     style={styles.ImageStyle}
                   />
-                ) : (
-                  <TouchableNativeFeedback onPress={() => this.setState({ search: '' })}>
-                    <Image
-                      source={require('../../assets/icons/close.png')}
-                      style={styles.ImageStyle}
-                    />
-                  </TouchableNativeFeedback>
-                )}
-                <TextInput
-                  value={search}
-                  onChangeText={input =>
-                    this.setState({ search: input }, () => this.AutoCompleteResearch())
-                  }
-                  style={styles.input}
-                  underlineColorAndroid="rgba(0,0,0,0)"
-                  placeholder={this.placeholder}
-                  autoFocus
-                />
-              </View>
+                </TouchableNativeFeedback>
+              )}
+              <TextInput
+                value={search}
+                onChangeText={input =>
+                  this.setState({ search: input }, () => this.AutoCompleteResearch())
+                }
+                style={styles.input}
+                underlineColorAndroid="rgba(0,0,0,0)"
+                placeholder={this.placeholder}
+                autoFocus
+              />
             </View>
-            {locations.places !== null && search !== '' ? (
-              <View>
-                {locations.stop_areas.places[0] !== undefined && (
-                  <View>
-                    <Text style={styles.title}>Arrêts / Gares</Text>
-                    <View style={styles.resultCardBox}>
-                      <View style={[styles.card, styles.resultCard]}>
-                        <FlatList
-                          style={{ flex: 1, flexDirection: 'column' }}
-                          data={locations.stop_areas.places}
-                          keyboardShouldPersistTaps="handled"
-                          ItemSeparatorComponent={() => (
-                            <View
-                              style={{
-                                borderBottomColor: '#e5e5e5',
-                                borderBottomWidth: 1,
-                                marginLeft: 20,
-                                marginRight: 20
-                              }}
-                            />
-                          )}
-                          renderItem={({ item }) => (
-                            <TouchableNativeFeedback onPress={() => this.selectPlace(item)}>
-                              <View style={styles.resultItem}>
-                                <Text style={styles.resultItemText}>{item.name}</Text>
-                                <FlatList
-                                  horizontal
-                                  data={item.commercial_modes}
-                                  renderItem={({ item }) => {
-                                    const icon = IconLoader.getIconForTypeOfPublicTransportation(
-                                      item.name
-                                    );
-                                    return (
-                                      <Image style={styles.journeyCardBottomImg} source={icon} />
-                                    );
-                                  }}
-                                  keyExtractor={(item, index) => index.toString()}
-                                />
-                              </View>
-                            </TouchableNativeFeedback>
-                          )}
-                          keyExtractor={(item, index) => index.toString()}
-                        />
-                      </View>
-                    </View>
-                  </View>
-                )}
-                {locations.address.places[0] !== undefined && (
-                  <View>
-                    <Text style={styles.title}>Adresses</Text>
-                    <View style={styles.resultCardBox}>
-                      <View style={[styles.card, styles.resultCard]}>
-                        <FlatList
-                          style={{ flex: 1, flexDirection: 'column' }}
-                          data={locations.address.places}
-                          keyboardShouldPersistTaps="handled"
-                          ItemSeparatorComponent={() => (
-                            <View
-                              style={{
-                                borderBottomColor: '#e5e5e5',
-                                borderBottomWidth: 1,
-                                marginLeft: 20,
-                                marginRight: 20
-                              }}
-                            />
-                          )}
-                          renderItem={({ item }) => (
-                            <TouchableNativeFeedback onPress={() => this.selectPlace(item)}>
-                              <View style={styles.resultItem}>
-                                <Text style={styles.resultItemText}>{item.name}</Text>
-                              </View>
-                            </TouchableNativeFeedback>
-                          )}
-                          keyExtractor={(item, index) => index.toString()}
-                        />
-                      </View>
-                    </View>
-                  </View>
-                )}
-                {locations.poi.places[0] !== undefined && (
-                  <View>
-                    <Text style={styles.title}>Points d'intérêt</Text>
-                    <View style={styles.resultCardBox}>
-                      <View style={[styles.card, styles.resultCard]}>
-                        <FlatList
-                          style={{ flex: 1, flexDirection: 'column' }}
-                          data={locations.poi.places}
-                          keyboardShouldPersistTaps="handled"
-                          ItemSeparatorComponent={() => (
-                            <View
-                              style={{
-                                borderBottomColor: '#e5e5e5',
-                                borderBottomWidth: 1,
-                                marginLeft: 20,
-                                marginRight: 20
-                              }}
-                            />
-                          )}
-                          renderItem={({ item }) => (
-                            <TouchableNativeFeedback onPress={() => this.selectPlace(item)}>
-                              <View style={styles.resultItem}>
-                                <Text style={styles.resultItemText}>{item.name}</Text>
-                              </View>
-                            </TouchableNativeFeedback>
-                          )}
-                          keyExtractor={(item, index) => index.toString()}
-                        />
-                      </View>
-                    </View>
-                  </View>
-                )}
-              </View>
-            ) : (
-              <View style={{ flex: 1, alignItems: 'center' }}>
-                {/* <Text style={{ margin: 10, color: "#A9A9A9", fontSize: 30, marginTop: 50 }}>Aucun résultat :(</Text> */}
-              </View>
-            )}
           </View>
-        </ScrollView>
-      </KeyboardAvoidingView>
+          {locations.places !== null && search !== '' ? (
+            <View>
+              {locations.stop_areas.places[0] !== undefined && (
+                <View>
+                  <Text style={styles.title}>Arrêts / Gares</Text>
+                  <View style={styles.resultCardBox}>
+                    <View style={[styles.card, styles.resultCard]}>
+                      <FlatList
+                        style={{ flex: 1, flexDirection: 'column' }}
+                        data={locations.stop_areas.places}
+                        keyboardShouldPersistTaps="handled"
+                        ItemSeparatorComponent={() => (
+                          <View
+                            style={{
+                              borderBottomColor: '#e5e5e5',
+                              borderBottomWidth: 1,
+                              marginLeft: 20,
+                              marginRight: 20
+                            }}
+                          />
+                        )}
+                        renderItem={({ item }) => (
+                          <TouchableNativeFeedback onPress={() => this.selectPlace(item)}>
+                            <View style={styles.resultItem}>
+                              <Text style={styles.resultItemText}>{item.name}</Text>
+                              <FlatList
+                                horizontal
+                                data={item.commercial_modes}
+                                renderItem={({ item }) => {
+                                  const icon = IconLoader.getIconForTypeOfPublicTransportation(
+                                    item.name
+                                  );
+                                  return (
+                                    <Image style={styles.journeyCardBottomImg} source={icon} />
+                                  );
+                                }}
+                                keyExtractor={(item, index) => index.toString()}
+                              />
+                            </View>
+                          </TouchableNativeFeedback>
+                        )}
+                        keyExtractor={(item, index) => index.toString()}
+                      />
+                    </View>
+                  </View>
+                </View>
+              )}
+              {locations.address.places[0] !== undefined && (
+                <View>
+                  <Text style={styles.title}>Adresses</Text>
+                  <View style={styles.resultCardBox}>
+                    <View style={[styles.card, styles.resultCard]}>
+                      <FlatList
+                        style={{ flex: 1, flexDirection: 'column' }}
+                        data={locations.address.places}
+                        keyboardShouldPersistTaps="handled"
+                        ItemSeparatorComponent={() => (
+                          <View
+                            style={{
+                              borderBottomColor: '#e5e5e5',
+                              borderBottomWidth: 1,
+                              marginLeft: 20,
+                              marginRight: 20
+                            }}
+                          />
+                        )}
+                        renderItem={({ item }) => (
+                          <TouchableNativeFeedback onPress={() => this.selectPlace(item)}>
+                            <View style={styles.resultItem}>
+                              <Text style={styles.resultItemText}>{item.name}</Text>
+                            </View>
+                          </TouchableNativeFeedback>
+                        )}
+                        keyExtractor={(item, index) => index.toString()}
+                      />
+                    </View>
+                  </View>
+                </View>
+              )}
+              {locations.poi.places[0] !== undefined && (
+                <View>
+                  <Text style={styles.title}>Points d'intérêt</Text>
+                  <View style={styles.resultCardBox}>
+                    <View style={[styles.card, styles.resultCard]}>
+                      <FlatList
+                        style={{ flex: 1, flexDirection: 'column' }}
+                        data={locations.poi.places}
+                        keyboardShouldPersistTaps="handled"
+                        ItemSeparatorComponent={() => (
+                          <View
+                            style={{
+                              borderBottomColor: '#e5e5e5',
+                              borderBottomWidth: 1,
+                              marginLeft: 20,
+                              marginRight: 20
+                            }}
+                          />
+                        )}
+                        renderItem={({ item }) => (
+                          <TouchableNativeFeedback onPress={() => this.selectPlace(item)}>
+                            <View style={styles.resultItem}>
+                              <Text style={styles.resultItemText}>{item.name}</Text>
+                            </View>
+                          </TouchableNativeFeedback>
+                        )}
+                        keyExtractor={(item, index) => index.toString()}
+                      />
+                    </View>
+                  </View>
+                </View>
+              )}
+            </View>
+          ) : (
+            <View style={{ flex: 1, alignItems: 'center' }}>
+              {/* <Text style={{ margin: 10, color: "#A9A9A9", fontSize: 30, marginTop: 50 }}>Aucun résultat :(</Text> */}
+            </View>
+          )}
+        </View>
+      </ScrollView>
     );
   }
 }

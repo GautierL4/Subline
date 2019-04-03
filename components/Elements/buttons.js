@@ -4,12 +4,12 @@ import {
   BackHandler,
   Image,
   TouchableNativeFeedback,
-  AsyncStorage,
   ToastAndroid,
   Animated,
   Easing
 } from 'react-native';
-import { styles, screenWidth, screenHeight } from '../../assets/styles/style';
+import AsyncStorage from '@react-native-community/async-storage';
+import { styles } from '../../assets/styles/style';
 
 /**
  * Class representing the back button
@@ -19,15 +19,6 @@ import { styles, screenWidth, screenHeight } from '../../assets/styles/style';
  * @extends {React.Component}
  */
 export class BackButton extends React.Component {
-  /**
-   * Creates an instance of BackButton.
-   * @param {*} props
-   * @memberof BackButton
-   */
-  constructor(props) {
-    super(props);
-  }
-
   componentDidMount() {
     BackHandler.addEventListener('hardwareBackPress', this.handleBackPress);
   }
@@ -51,10 +42,11 @@ export class BackButton extends React.Component {
    * @memberof BackButton
    */
   goBack() {
-    if (this.props.navigation.state.params.onNavigateBack !== undefined) {
-      this.props.navigation.state.params.onNavigateBack();
+    const { navigation } = this.props;
+    if (navigation.state.params.onNavigateBack !== undefined) {
+      navigation.state.params.onNavigateBack();
     }
-    this.props.navigation.goBack();
+    navigation.goBack();
   }
 
   /**
@@ -103,115 +95,12 @@ export class FavoriteButton extends React.Component {
   }
 
   /**
-   * Add a specific journey to the favorite list (component state) if it is not already. Remove if it is.
-   * @param {object} dataJourney
-   * @memberof FavoriteButton
-   */
-  toggleAJourneyInFavoriteJourneys(dataJourney) {
-    if (this.state.isAFavorite) {
-      this.removeJourneyFromFavoriteJourneys(dataJourney);
-    } else {
-      this.addJourneyToFavoriteJourneys(dataJourney);
-    }
-  }
-
-  /**
-   * Add a specific journey to the list of favorite journeys in the component state and phone storage.
-   * @param {object} dataJourney
-   * @memberof FavoriteButton
-   */
-  addJourneyToFavoriteJourneys(dataJourney) {
-    let listOfFavorite = [...this.state.listOfFavorite];
-    listOfFavorite.push(dataJourney);
-    this.setState({ listOfFavorite: listOfFavorite, isAFavorite: true }, async () => {
-      try {
-        await this._storeData(JSON.stringify(this.state.listOfFavorite));
-      } catch (e) {
-        console.error('error 321');
-      }
-    });
-    ToastAndroid.show("L'itinéraire a été ajouté à vos favoris.", ToastAndroid.SHORT);
-  }
-
-  /**
-   * Remove a specific journey from the list of favorite journeys in the component state and phone storage.
-   * @param {object} dataJourney
-   * @memberof FavoriteButton
-   */
-  removeJourneyFromFavoriteJourneys(dataJourney) {
-    // let listOfFavorite = [...this.state.listOfFavorite]
-    let filtered = this.state.listOfFavorite.filter(function(value, index, arr) {
-      return JSON.stringify(value) !== JSON.stringify(dataJourney);
-    });
-    this.setState({ listOfFavorite: filtered, isAFavorite: false }, async () => {
-      try {
-        await this._storeData(JSON.stringify(this.state.listOfFavorite));
-      } catch (e) {
-        console.error('error 321');
-      }
-    });
-    ToastAndroid.show("L'itinéraire a été retiré de vos favoris.", ToastAndroid.SHORT);
-  }
-
-  /**
-   * Check if the current journey is already in the list of favorite journeys of component state.
-   * @param {object} dataJourney - The current journey
-   * @returns {boolean} Return true if the journey is in favorite list and false if not.
-   * @memberof FavoriteButton
-   */
-  checkIfJourneyIsAlreadyInFavorites(dataJourney) {
-    return JSON.stringify(this.state.listOfFavorite).includes(JSON.stringify(dataJourney));
-  }
-
-  /**
-   * Store on phone the new list of favorite journeys in 'favoriteJourneys'.
-   * @param {string} data - The new list of favorite journeys.
-   * @memberof FavoriteButton
-   */
-  async _storeData(data) {
-    try {
-      await AsyncStorage.setItem('favoriteJourneys', data);
-    } catch (error) {
-      console.error('erreur 3');
-    }
-  }
-
-  /**
-   * Return the list of the 'favoriteJourneys' from phone storage.
-   * @returns {string} The list of favorites from phone storage.
-   * @memberof FavoriteButton
-   */
-  async _retrieveData() {
-    var value = null;
-    try {
-      value = await AsyncStorage.getItem('favoriteJourneys');
-    } catch (error) {
-      console.error('erreur 4');
-    }
-    return value;
-  }
-
-  /**
-   * Store favorite journeys from phone storage to component state.
-   * Stop loading.
-   * @memberof FavoriteButton
-   */
-  async getListOfFavoriteJourneys() {
-    let newListOfFavoriteJourneys = [];
-    try {
-      newListOfFavoriteJourneys = await this._retrieveData();
-    } catch (error) {
-      console.error('erreur 8');
-    }
-    return newListOfFavoriteJourneys === null ? [] : JSON.parse(newListOfFavoriteJourneys);
-  }
-
-  /**
    * Set states.
    * @memberof FavoriteButton
    */
   async componentWillMount() {
-    newListOfFavoriteJourneys = [];
+    const { dataJourney } = this.props;
+    let newListOfFavoriteJourneys = [];
     try {
       newListOfFavoriteJourneys = await this.getListOfFavoriteJourneys();
     } catch (e) {
@@ -224,10 +113,116 @@ export class FavoriteButton extends React.Component {
       },
       () => {
         this.setState({
-          isAFavorite: this.checkIfJourneyIsAlreadyInFavorites(this.props.dataJourney)
+          isAFavorite: this.checkIfJourneyIsAlreadyInFavorites(dataJourney)
         });
       }
     );
+  }
+
+  /**
+   * Store favorite journeys from phone storage to component state.
+   * Stop loading.
+   * @memberof FavoriteButton
+   */
+  async getListOfFavoriteJourneys() {
+    let newListOfFavoriteJourneys = [];
+    try {
+      newListOfFavoriteJourneys = await this.retrieveData();
+    } catch (error) {
+      console.error('erreur 8');
+    }
+    return newListOfFavoriteJourneys === null ? [] : JSON.parse(newListOfFavoriteJourneys);
+  }
+
+  /**
+   * Check if the current journey is already in the list of favorite journeys of component state.
+   * @param {object} dataJourney - The current journey
+   * @returns {boolean} Return true if the journey is in favorite list and false if not.
+   * @memberof FavoriteButton
+   */
+  checkIfJourneyIsAlreadyInFavorites(dataJourney) {
+    const { listOfFavorite } = this.state;
+    return JSON.stringify(listOfFavorite).includes(JSON.stringify(dataJourney));
+  }
+
+  /**
+   * Store on phone the new list of favorite journeys in 'favoriteJourneys'.
+   * @param {string} data - The new list of favorite journeys.
+   * @memberof FavoriteButton
+   */
+  async storeData(data) {
+    try {
+      await AsyncStorage.setItem('favoriteJourneys', data);
+    } catch (error) {
+      console.error('erreur 3');
+    }
+  }
+
+  /**
+   * Return the list of the 'favoriteJourneys' from phone storage.
+   * @returns {string} The list of favorites from phone storage.
+   * @memberof FavoriteButton
+   */
+  async retrieveData() {
+    let value = null;
+    try {
+      value = await AsyncStorage.getItem('favoriteJourneys');
+    } catch (error) {
+      console.error('erreur 4');
+    }
+    return value;
+  }
+
+  /**
+   * Remove a specific journey from the list of favorite journeys in the component state and phone storage.
+   * @param {object} dataJourney
+   * @memberof FavoriteButton
+   */
+  removeJourneyFromFavoriteJourneys(dataJourney) {
+    const { listOfFavorite } = this.state;
+    const filtered = listOfFavorite.filter(function(value, index, arr) {
+      return JSON.stringify(value) !== JSON.stringify(dataJourney);
+    });
+    this.setState({ listOfFavorite: filtered, isAFavorite: false }, async () => {
+      try {
+        await this.storeData(JSON.stringify(listOfFavorite));
+      } catch (e) {
+        console.error('error 321');
+      }
+    });
+    ToastAndroid.show("L'itinéraire a été retiré de vos favoris.", ToastAndroid.SHORT);
+  }
+
+  /**
+   * Add a specific journey to the list of favorite journeys in the component state and phone storage.
+   * @param {object} dataJourney
+   * @memberof FavoriteButton
+   */
+  addJourneyToFavoriteJourneys(dataJourney) {
+    let listOfFavorite = [...this.state.listOfFavorite];
+    listOfFavorite.push(dataJourney);
+    this.setState({ listOfFavorite: listOfFavorite, isAFavorite: true }, async () => {
+      try {
+        await this.storeData(JSON.stringify(this.state.listOfFavorite));
+      } catch (e) {
+        console.error('error 321');
+      }
+    });
+    ToastAndroid.show("L'itinéraire a été ajouté à vos favoris.", ToastAndroid.SHORT);
+  }
+
+  /**
+   * Add a specific journey to the favorite list (component state) if it is not already. Remove if it is.
+   * @param {object} dataJourney
+   * @memberof FavoriteButton
+   */
+  toggleAJourneyInFavoriteJourneys(dataJourney) {
+    const { isAFavorite } = this.state;
+    if (isAFavorite) {
+      this.removeJourneyFromFavoriteJourneys(dataJourney);
+    } else {
+      this.addJourneyToFavoriteJourneys(dataJourney);
+    }
   }
 
   /**
@@ -236,24 +231,23 @@ export class FavoriteButton extends React.Component {
    * @memberof FavoriteButton
    */
   render() {
-    const icon = this.state.isAFavorite
+    const { isLoading, isAFavorite } = this.state;
+    const { dataJourney } = this.props;
+    const icon = isAFavorite
       ? require('../../assets/icons/star_on.png')
       : require('../../assets/icons/star_off.png');
-    if (this.state.isLoading) {
+    if (isLoading) {
       return <View />;
-    } else {
-      return (
-        <View style={styles.button}>
-          <TouchableNativeFeedback
-            onPress={() => this.toggleAJourneyInFavoriteJourneys(this.props.dataJourney)}
-          >
-            <View>
-              <Image style={styles.returnArrow} source={icon} />
-            </View>
-          </TouchableNativeFeedback>
-        </View>
-      );
     }
+    return (
+      <View style={styles.button}>
+        <TouchableNativeFeedback onPress={() => this.toggleAJourneyInFavoriteJourneys(dataJourney)}>
+          <View>
+            <Image style={styles.returnArrow} source={icon} />
+          </View>
+        </TouchableNativeFeedback>
+      </View>
+    );
   }
 }
 

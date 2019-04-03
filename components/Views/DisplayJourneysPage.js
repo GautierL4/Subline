@@ -83,7 +83,6 @@ class DisplayJourneysPage extends React.Component {
 
   componentWillMount() {
     const today = new Date();
-    const { datetimeSaved } = this.state;
     this.setState(
       {
         datetimeSaved: {
@@ -100,6 +99,7 @@ class DisplayJourneysPage extends React.Component {
         }
       },
       () => {
+        const { datetimeSaved } = this.state;
         this.setState({ datetime: datetimeSaved });
       }
     );
@@ -356,6 +356,8 @@ class DisplayJourneysPage extends React.Component {
       dataOtherJourneys
     } = this.state;
     const { navigation } = this.props;
+    console.log('AAAAAAAAAabbbbbc');
+    console.log(datetime);
     const renderSeparator = () => (
       <Image
         style={styles.journeyCardBottomImgDot}
