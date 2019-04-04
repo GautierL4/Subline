@@ -14,6 +14,8 @@ import {
   TouchableOpacity
 } from 'react-native';
 import Dialog, { DialogContent, DialogTitle } from 'react-native-popup-dialog';
+import { Rect } from 'react-native-svg';
+import ContentLoader from 'rn-content-loader';
 import { styles, screenWidth, screenHeight, primaryColor } from '../../assets/styles/style';
 import FileLoader from './FileLoader';
 import APIHandler from '../API/APIHandler';
@@ -356,8 +358,6 @@ class DisplayJourneysPage extends React.Component {
       dataOtherJourneys
     } = this.state;
     const { navigation } = this.props;
-    console.log('AAAAAAAAAabbbbbc');
-    console.log(datetime);
     const renderSeparator = () => (
       <Image
         style={styles.journeyCardBottomImgDot}
@@ -366,20 +366,25 @@ class DisplayJourneysPage extends React.Component {
     );
     if (isLoading) {
       return (
-        <View
-          style={{
-            width: screenWidth,
-            height: screenHeight,
-            flex: 1,
-            alignItems: 'center',
-            justifyContent: 'center',
-            backgroundColor: 'black'
-          }}
-        >
-          <Image
-            style={{ width: 80, height: 80 }}
-            source={require('../../assets/icons/loading-start.gif')}
-          />
+        <View style={styles.container}>
+          <View style={{ width: screenWidth, flex: 1 }}>
+            <View style={styles.header} />
+            <View style={styles.body}>
+              <ContentLoader
+                primaryColor="#f3f3f3"
+                secondaryColor="#ecebeb"
+                width={screenWidth}
+                height={screenHeight}
+              >
+                <Rect x="10" y="40" rx="5" ry="5" width="150" height="25" />
+                <Rect x="20" y="80" rx="5" ry="5" width={screenWidth - 40} height="75" />
+                <Rect x="10" y="170" rx="5" ry="5" width="150" height="25" />
+                <Rect x="20" y="210" rx="5" ry="5" width={screenWidth - 40} height="75" />
+                <Rect x="20" y="300" rx="5" ry="5" width={screenWidth - 40} height="75" />
+                <Rect x="20" y="390" rx="5" ry="5" width={screenWidth - 40} height="75" />
+              </ContentLoader>
+            </View>
+          </View>
         </View>
       );
     }
@@ -625,7 +630,7 @@ class DisplayJourneysPage extends React.Component {
                     ]}
                   >
                     <Text style={{ color: '#000', fontSize: 14, fontWeight: 'bold' }}>
-                      Départ maintenant
+                      {`Départ maintenant`}
                     </Text>
                   </View>
                 </TouchableNativeFeedback>
@@ -656,8 +661,10 @@ class DisplayJourneysPage extends React.Component {
                           marginBottom: 5
                         }}
                       >
-                        Départ à {dataBestJourney.departure_date_time.substring(9, 11)}:
-                        {dataBestJourney.departure_date_time.substring(11, 13)}
+                        {`Départ à ${dataBestJourney.departure_date_time.substring(
+                          9,
+                          11
+                        )}:${dataBestJourney.departure_date_time.substring(11, 13)}`}
                       </Text>
                       <View style={{ flexDirection: 'row' }}>
                         <View
@@ -722,7 +729,7 @@ class DisplayJourneysPage extends React.Component {
                   <FlatList
                     style={{ flex: 1 }}
                     data={dataOtherJourneys}
-                    keyboardShouldPersistTaps={'handled'}
+                    keyboardShouldPersistTaps="handled"
                     ItemSeparatorComponent={() => (
                       <View
                         style={{
@@ -757,8 +764,10 @@ class DisplayJourneysPage extends React.Component {
                               marginBottom: 5
                             }}
                           >
-                            Départ à {item.departure_date_time.substring(9, 11)}:
-                            {item.departure_date_time.substring(11, 13)}
+                            {`Départ à ${item.departure_date_time.substring(
+                              9,
+                              11
+                            )}:${item.departure_date_time.substring(11, 13)}`}
                           </Text>
                           <View style={{ flexDirection: 'row' }}>
                             <View
@@ -1018,7 +1027,7 @@ class DisplayJourneysPage extends React.Component {
                   </View>
                   <View style={{ marginBottom: 10 }}>
                     <Text style={{ fontSize: 12, color: '#898989' }}>
-                      Le moins de marche à pied
+                      {`Le moins de marche à pied`}
                     </Text>
                   </View>
                 </TouchableOpacity>
@@ -1088,7 +1097,7 @@ class DisplayJourneysPage extends React.Component {
                   </View>
                   <View style={{ marginBottom: 10 }}>
                     <Text style={{ fontSize: 12, color: '#898989' }}>
-                      Le moins de correspondance
+                      {`Le moins de correspondance`}
                     </Text>
                   </View>
                 </TouchableOpacity>

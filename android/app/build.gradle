@@ -134,9 +134,15 @@ android {
             }
         }
     }
+    compileOptions {
+        sourceCompatibility 1.8
+        targetCompatibility 1.8
+    }
 }
 
 dependencies {
+    implementation project(':lottie-react-native')
+    implementation project(':react-native-svg')
     implementation project(':react-native-view-pdf')
     implementation project(':@react-native-community_async-storage')
     implementation fileTree(dir: "libs", include: ["*.jar"])

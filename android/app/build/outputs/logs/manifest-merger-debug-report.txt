@@ -6,8 +6,11 @@ INJECTED from C:\Users\Adrien\Documents\Projets\Subline\android\app\src\main\And
 INJECTED from C:\Users\Adrien\Documents\Projets\Subline\android\app\src\main\AndroidManifest.xml:1:1-27:12
 MERGED from [:react-native-geolocation-service] C:\Users\Adrien\Documents\Projets\Subline\node_modules\react-native-geolocation-service\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-14:12
 MERGED from [:react-native-view-pdf] C:\Users\Adrien\Documents\Projets\Subline\node_modules\react-native-view-pdf\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-9:12
+MERGED from [:lottie-react-native] C:\Users\Adrien\Documents\Projets\Subline\node_modules\lottie-react-native\src\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-11:12
+MERGED from [:react-native-svg] C:\Users\Adrien\Documents\Projets\Subline\node_modules\react-native-svg\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-9:12
 MERGED from [:@react-native-community_async-storage] C:\Users\Adrien\Documents\Projets\Subline\node_modules\@react-native-community\async-storage\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-9:12
 MERGED from [com.facebook.react:react-native:0.59.3] C:\Users\Adrien\.gradle\caches\transforms-1\files-1.1\react-native-0.59.3.aar\7a11f8f9c2fcf72c39c3badfc2678b22\AndroidManifest.xml:2:1-13:12
+MERGED from [com.airbnb.android:lottie:2.5.6] C:\Users\Adrien\.gradle\caches\transforms-1\files-1.1\lottie-2.5.6.aar\f97c983765b6d1529e4f72bb222f925e\AndroidManifest.xml:2:1-13:12
 MERGED from [com.android.support:appcompat-v7:28.0.0] C:\Users\Adrien\.gradle\caches\transforms-1\files-1.1\appcompat-v7-28.0.0.aar\0bfff9c7690cdfa40b7c1a00efd56df2\AndroidManifest.xml:17:1-22:12
 MERGED from [com.google.android.gms:play-services-location:15.0.1] C:\Users\Adrien\.gradle\caches\transforms-1\files-1.1\play-services-location-15.0.1.aar\e965f1533a5f16ac3b6e8d2cf2841c28\AndroidManifest.xml:2:1-9:12
 MERGED from [com.github.barteksc:android-pdf-viewer:2.8.2] C:\Users\Adrien\.gradle\caches\transforms-1\files-1.1\android-pdf-viewer-2.8.2.aar\c985aff9e705b2e0586578c7a2bb9f18\AndroidManifest.xml:2:1-11:12
@@ -71,6 +74,8 @@ uses-permission#android.permission.INTERNET
 ADDED from C:\Users\Adrien\Documents\Projets\Subline\android\app\src\main\AndroidManifest.xml:4:5-67
 MERGED from [:react-native-geolocation-service] C:\Users\Adrien\Documents\Projets\Subline\node_modules\react-native-geolocation-service\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:9:5-67
 MERGED from [:react-native-geolocation-service] C:\Users\Adrien\Documents\Projets\Subline\node_modules\react-native-geolocation-service\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:9:5-67
+MERGED from [:lottie-react-native] C:\Users\Adrien\Documents\Projets\Subline\node_modules\lottie-react-native\src\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:9:5-67
+MERGED from [:lottie-react-native] C:\Users\Adrien\Documents\Projets\Subline\node_modules\lottie-react-native\src\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:9:5-67
 	android:name
 		ADDED from C:\Users\Adrien\Documents\Projets\Subline\android\app\src\main\AndroidManifest.xml:4:22-64
 uses-permission#android.permission.SYSTEM_ALERT_WINDOW
@@ -87,6 +92,8 @@ application
 ADDED from C:\Users\Adrien\Documents\Projets\Subline\android\app\src\main\AndroidManifest.xml:8:5-25:19
 MERGED from [com.facebook.react:react-native:0.59.3] C:\Users\Adrien\.gradle\caches\transforms-1\files-1.1\react-native-0.59.3.aar\7a11f8f9c2fcf72c39c3badfc2678b22\AndroidManifest.xml:11:5-20
 MERGED from [com.facebook.react:react-native:0.59.3] C:\Users\Adrien\.gradle\caches\transforms-1\files-1.1\react-native-0.59.3.aar\7a11f8f9c2fcf72c39c3badfc2678b22\AndroidManifest.xml:11:5-20
+MERGED from [com.airbnb.android:lottie:2.5.6] C:\Users\Adrien\.gradle\caches\transforms-1\files-1.1\lottie-2.5.6.aar\f97c983765b6d1529e4f72bb222f925e\AndroidManifest.xml:11:5-20
+MERGED from [com.airbnb.android:lottie:2.5.6] C:\Users\Adrien\.gradle\caches\transforms-1\files-1.1\lottie-2.5.6.aar\f97c983765b6d1529e4f72bb222f925e\AndroidManifest.xml:11:5-20
 MERGED from [com.google.android.gms:play-services-location:15.0.1] C:\Users\Adrien\.gradle\caches\transforms-1\files-1.1\play-services-location-15.0.1.aar\e965f1533a5f16ac3b6e8d2cf2841c28\AndroidManifest.xml:7:5-20
 MERGED from [com.google.android.gms:play-services-location:15.0.1] C:\Users\Adrien\.gradle\caches\transforms-1\files-1.1\play-services-location-15.0.1.aar\e965f1533a5f16ac3b6e8d2cf2841c28\AndroidManifest.xml:7:5-20
 MERGED from [com.google.android.gms:play-services-base:15.0.1] C:\Users\Adrien\.gradle\caches\transforms-1\files-1.1\play-services-base-15.0.1.aar\5dccb949d22114d4e438b98a1770aaeb\AndroidManifest.xml:22:5-27:19
@@ -151,10 +158,16 @@ MERGED from [:react-native-geolocation-service] C:\Users\Adrien\Documents\Projet
 MERGED from [:react-native-geolocation-service] C:\Users\Adrien\Documents\Projets\Subline\node_modules\react-native-geolocation-service\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-7:41
 MERGED from [:react-native-view-pdf] C:\Users\Adrien\Documents\Projets\Subline\node_modules\react-native-view-pdf\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-7:41
 MERGED from [:react-native-view-pdf] C:\Users\Adrien\Documents\Projets\Subline\node_modules\react-native-view-pdf\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-7:41
+MERGED from [:lottie-react-native] C:\Users\Adrien\Documents\Projets\Subline\node_modules\lottie-react-native\src\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-7:41
+MERGED from [:lottie-react-native] C:\Users\Adrien\Documents\Projets\Subline\node_modules\lottie-react-native\src\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-7:41
+MERGED from [:react-native-svg] C:\Users\Adrien\Documents\Projets\Subline\node_modules\react-native-svg\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-7:41
+MERGED from [:react-native-svg] C:\Users\Adrien\Documents\Projets\Subline\node_modules\react-native-svg\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-7:41
 MERGED from [:@react-native-community_async-storage] C:\Users\Adrien\Documents\Projets\Subline\node_modules\@react-native-community\async-storage\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-7:41
 MERGED from [:@react-native-community_async-storage] C:\Users\Adrien\Documents\Projets\Subline\node_modules\@react-native-community\async-storage\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-7:41
 MERGED from [com.facebook.react:react-native:0.59.3] C:\Users\Adrien\.gradle\caches\transforms-1\files-1.1\react-native-0.59.3.aar\7a11f8f9c2fcf72c39c3badfc2678b22\AndroidManifest.xml:7:5-9:41
 MERGED from [com.facebook.react:react-native:0.59.3] C:\Users\Adrien\.gradle\caches\transforms-1\files-1.1\react-native-0.59.3.aar\7a11f8f9c2fcf72c39c3badfc2678b22\AndroidManifest.xml:7:5-9:41
+MERGED from [com.airbnb.android:lottie:2.5.6] C:\Users\Adrien\.gradle\caches\transforms-1\files-1.1\lottie-2.5.6.aar\f97c983765b6d1529e4f72bb222f925e\AndroidManifest.xml:7:5-9:41
+MERGED from [com.airbnb.android:lottie:2.5.6] C:\Users\Adrien\.gradle\caches\transforms-1\files-1.1\lottie-2.5.6.aar\f97c983765b6d1529e4f72bb222f925e\AndroidManifest.xml:7:5-9:41
 MERGED from [com.android.support:appcompat-v7:28.0.0] C:\Users\Adrien\.gradle\caches\transforms-1\files-1.1\appcompat-v7-28.0.0.aar\0bfff9c7690cdfa40b7c1a00efd56df2\AndroidManifest.xml:20:5-44
 MERGED from [com.android.support:appcompat-v7:28.0.0] C:\Users\Adrien\.gradle\caches\transforms-1\files-1.1\appcompat-v7-28.0.0.aar\0bfff9c7690cdfa40b7c1a00efd56df2\AndroidManifest.xml:20:5-44
 MERGED from [com.google.android.gms:play-services-location:15.0.1] C:\Users\Adrien\.gradle\caches\transforms-1\files-1.1\play-services-location-15.0.1.aar\e965f1533a5f16ac3b6e8d2cf2841c28\AndroidManifest.xml:5:5-44

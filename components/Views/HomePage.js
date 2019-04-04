@@ -10,6 +10,7 @@ import {
   TouchableNativeFeedback
 } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
+import LottieView from 'lottie-react-native';
 import { styles } from '../../assets/styles/style';
 import BusIcon from '../Elements/BusIcon';
 import FileLoader from './FileLoader';
@@ -146,9 +147,12 @@ class HomePage extends React.Component {
             justifyContent: 'center'
           }}
         >
-          <Image
-            style={{ width: 80, height: 80 }}
-            source={require('../../assets/icons/loading-start.gif')}
+          <LottieView
+            source={require('../../assets/animation/start.json')}
+            autoPlay
+            duration={2000}
+            loop={false}
+            style={{ width: 90, height: 90 }}
           />
         </FadeInView>
       );

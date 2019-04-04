@@ -99,18 +99,18 @@ public final class R {
         public static final int italic = 0x7f070055;
         public static final int line1 = 0x7f070058;
         public static final int line3 = 0x7f070059;
-        public static final int media_actions = 0x7f07005c;
-        public static final int normal = 0x7f070062;
-        public static final int notification_background = 0x7f070063;
-        public static final int notification_main_column = 0x7f070064;
-        public static final int notification_main_column_container = 0x7f070065;
-        public static final int right_icon = 0x7f07006c;
-        public static final int right_side = 0x7f07006d;
-        public static final int status_bar_latest_event_content = 0x7f070092;
-        public static final int text = 0x7f070099;
-        public static final int text2 = 0x7f07009a;
-        public static final int time = 0x7f07009d;
-        public static final int title = 0x7f07009e;
+        public static final int media_actions = 0x7f07005d;
+        public static final int normal = 0x7f070063;
+        public static final int notification_background = 0x7f070064;
+        public static final int notification_main_column = 0x7f070065;
+        public static final int notification_main_column_container = 0x7f070066;
+        public static final int right_icon = 0x7f07006f;
+        public static final int right_side = 0x7f070070;
+        public static final int status_bar_latest_event_content = 0x7f070095;
+        public static final int text = 0x7f07009d;
+        public static final int text2 = 0x7f07009e;
+        public static final int time = 0x7f0700a1;
+        public static final int title = 0x7f0700a2;
     }
     public static final class integer {
         private integer() {}
@@ -168,7 +168,7 @@ public final class R {
         public static final int FontFamily_fontProviderFetchTimeout = 3;
         public static final int FontFamily_fontProviderPackage = 4;
         public static final int FontFamily_fontProviderQuery = 5;
-        public static final int[] FontFamilyFont = { 0x1010532, 0x1010533, 0x101053f, 0x101056f, 0x1010570, 0x7f02007d, 0x7f020085, 0x7f020086, 0x7f020087, 0x7f02012b };
+        public static final int[] FontFamilyFont = { 0x1010532, 0x1010533, 0x101053f, 0x101056f, 0x1010570, 0x7f02007d, 0x7f020085, 0x7f020086, 0x7f020087, 0x7f020137 };
         public static final int FontFamilyFont_android_font = 0;
         public static final int FontFamilyFont_android_fontWeight = 1;
         public static final int FontFamilyFont_android_fontStyle = 2;

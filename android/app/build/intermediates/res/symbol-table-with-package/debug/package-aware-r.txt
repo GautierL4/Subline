@@ -193,6 +193,18 @@ attr listPreferredItemPaddingLeft
 attr listPreferredItemPaddingRight
 attr logo
 attr logoDescription
+attr lottie_autoPlay
+attr lottie_cacheStrategy
+attr lottie_colorFilter
+attr lottie_enableMergePathsForKitKatAndAbove
+attr lottie_fileName
+attr lottie_imageAssetsFolder
+attr lottie_loop
+attr lottie_progress
+attr lottie_rawRes
+attr lottie_repeatCount
+attr lottie_repeatMode
+attr lottie_scale
 attr maxButtonHeight
 attr measureWithLargestChild
 attr multiChoiceItemLayout
@@ -760,6 +772,7 @@ id line1
 id line3
 id listMode
 id list_item
+id lottie_layer_name
 id media_actions
 id message
 id middle
@@ -775,6 +788,8 @@ id progress_circular
 id progress_horizontal
 id radio
 id react_test_id
+id restart
+id reverse
 id right
 id right_icon
 id right_side
@@ -815,6 +830,7 @@ id src_over
 id standard
 id start
 id status_bar_latest_event_content
+id strong
 id submenuarrow
 id submit_area
 id tabMode
@@ -836,6 +852,7 @@ id up
 id useLogo
 id view_tag_instance_handle
 id view_tag_native_id
+id weak
 id wide
 id withText
 id wrap_content
@@ -1391,6 +1408,7 @@ styleable LinearLayoutCompat android_gravity android_orientation android_baselin
 styleable LinearLayoutCompat_Layout android_layout_gravity android_layout_width android_layout_height android_layout_weight
 styleable ListPopupWindow android_dropDownHorizontalOffset android_dropDownVerticalOffset
 styleable LoadingImageView circleCrop imageAspectRatio imageAspectRatioAdjust
+styleable LottieAnimationView lottie_autoPlay lottie_cacheStrategy lottie_colorFilter lottie_enableMergePathsForKitKatAndAbove lottie_fileName lottie_imageAssetsFolder lottie_loop lottie_progress lottie_rawRes lottie_repeatCount lottie_repeatMode lottie_scale
 styleable MenuGroup android_enabled android_id android_visible android_menuCategory android_orderInCategory android_checkableBehavior
 styleable MenuItem android_icon android_enabled android_id android_checked android_visible android_menuCategory android_orderInCategory android_title android_titleCondensed android_alphabeticShortcut android_numericShortcut android_checkable android_onClick actionLayout actionProviderClass actionViewClass alphabeticModifiers contentDescription iconTint iconTintMode numericModifiers showAsAction tooltipText
 styleable MenuView android_windowAnimationStyle android_itemTextAppearance android_horizontalDivider android_verticalDivider android_headerBackground android_itemBackground android_itemIconDisabledAlpha preserveIconSpacing subMenuArrow

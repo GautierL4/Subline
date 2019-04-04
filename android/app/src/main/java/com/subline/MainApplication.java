@@ -3,6 +3,8 @@ package com.subline;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.airbnb.android.react.lottie.LottiePackage;
+import com.horcrux.svg.SvgPackage;
 import com.rumax.reactnative.pdfviewer.PDFViewPackage;
 import com.reactnativecommunity.asyncstorage.AsyncStoragePackage;
 import com.facebook.react.ReactNativeHost;
@@ -27,6 +29,8 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new LottiePackage(),
+            new SvgPackage(),
           new PDFViewPackage(),
           new AsyncStoragePackage(),
           new RNFusedLocationPackage(),

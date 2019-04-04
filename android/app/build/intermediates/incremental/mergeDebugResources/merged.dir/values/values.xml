@@ -205,6 +205,7 @@
     <item name="home" type="id"/>
     <item name="line1" type="id"/>
     <item name="line3" type="id"/>
+    <item name="lottie_layer_name" type="id"/>
     <item name="progress_circular" type="id"/>
     <item name="progress_horizontal" type="id"/>
     <item name="react_test_id" type="id"/>
@@ -2912,6 +2913,14 @@
 
 <attr format="boolean" name="circleCrop"/>
 </declare-styleable>
+    <declare-styleable name="LottieAnimationView"><attr format="string" name="lottie_fileName"/><attr format="reference" name="lottie_rawRes"/><attr format="boolean" name="lottie_autoPlay"/><attr format="boolean" name="lottie_loop"/><attr format="enum" name="lottie_repeatMode">
+            <enum name="restart" value="1"/>
+            <enum name="reverse" value="2"/>
+        </attr><attr format="integer" name="lottie_repeatCount"/><attr format="string" name="lottie_imageAssetsFolder"/><attr format="float" name="lottie_progress"/><attr format="boolean" name="lottie_enableMergePathsForKitKatAndAbove"/><attr format="enum" name="lottie_cacheStrategy">
+            <enum name="none" value="0"/>
+            <enum name="weak" value="1"/>
+            <enum name="strong" value="2"/>
+        </attr><attr format="color" name="lottie_colorFilter"/><attr format="float" name="lottie_scale"/></declare-styleable>
     <declare-styleable name="MenuGroup">
 
         <!-- The ID of the group. -->
