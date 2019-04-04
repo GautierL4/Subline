@@ -1,6 +1,6 @@
 import React from 'react';
 import { createStackNavigator } from 'react-navigation';
-import { Easing, Animated } from 'react-native';
+import { Easing, Animated, StatusBar } from 'react-native';
 import HomePage from './components/Views/HomePage';
 import SearchPage from './components/Views/SearchPage';
 import MapPage from './components/Views/MapPage';
@@ -8,6 +8,10 @@ import DisplayJourneysPage from './components/Views/DisplayJourneysPage';
 import JourneyPage from './components/Views/JourneyPage';
 import TimeTablePage from './components/Views/TimeTablePage';
 import ListOfStopPage from './components/Views/ListOfStopPage';
+
+StatusBar.setBackgroundColor('#000');
+StatusBar.setBarStyle('light-content');
+StatusBar.setTranslucent(true);
 
 const App = () => <RootStack />;
 

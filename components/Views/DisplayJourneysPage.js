@@ -364,30 +364,6 @@ class DisplayJourneysPage extends React.Component {
         source={require('../../assets/icons/dot.png')}
       />
     );
-    if (isLoading) {
-      return (
-        <View style={styles.container}>
-          <View style={{ width: screenWidth, flex: 1 }}>
-            <View style={styles.header} />
-            <View style={styles.body}>
-              <ContentLoader
-                primaryColor="#f3f3f3"
-                secondaryColor="#ecebeb"
-                width={screenWidth}
-                height={screenHeight}
-              >
-                <Rect x="10" y="40" rx="5" ry="5" width="150" height="25" />
-                <Rect x="20" y="80" rx="5" ry="5" width={screenWidth - 40} height="75" />
-                <Rect x="10" y="170" rx="5" ry="5" width="150" height="25" />
-                <Rect x="20" y="210" rx="5" ry="5" width={screenWidth - 40} height="75" />
-                <Rect x="20" y="300" rx="5" ry="5" width={screenWidth - 40} height="75" />
-                <Rect x="20" y="390" rx="5" ry="5" width={screenWidth - 40} height="75" />
-              </ContentLoader>
-            </View>
-          </View>
-        </View>
-      );
-    }
     if (Platform.OS === 'android') {
       return (
         <View style={styles.container}>
@@ -395,6 +371,7 @@ class DisplayJourneysPage extends React.Component {
             horizontal={false}
             contentContainerStyle={{ flexGrow: 1 }}
             style={{ width: screenWidth }}
+            scrollEnabled={!isLoading}
           >
             <View style={styles.header}>
               <View style={{ flexDirection: 'row', height: 80, justifyContent: 'center' }}>
@@ -526,317 +503,341 @@ class DisplayJourneysPage extends React.Component {
                 </View>
               </View>
             </View>
-            <View style={styles.body}>
-              <Dialog
-                visible={popUpVisible}
-                onTouchOutside={() => this.setState({ popUpVisible: false })}
-                width={0.9}
-              >
-                <DialogTitle title="Date et heure" />
-                <DialogContent>
-                  <View style={{ height: 130, flexDirection: 'column' }}>
-                    <View style={{ flex: 1, justifyContent: 'center' }}>
-                      <Picker
-                        mode="dropdown"
-                        selectedValue={datetime.type}
-                        onValueChange={(itemValue, itemIndex) =>
-                          this.setState({
-                            datetime: {
-                              type: itemValue,
-                              date: datetime.date,
-                              time: datetime.time
-                            }
-                          })
-                        }
-                      >
-                        <Picker.Item label="Partir maintenant" value="now" />
-                        <Picker.Item label="Partir à" value="departure" />
-                        <Picker.Item label="Arriver à" value="arrival" />
-                      </Picker>
-                    </View>
-                    <View
-                      style={{
-                        flex: 1,
-                        flexDirection: 'row',
-                        alignItems: 'center',
-                        justifyContent: 'center'
-                      }}
-                    >
-                      <View style={{ flex: 0.9, flexDirection: 'row' }}>
-                        <View
-                          style={{ flex: 0.6, alignItems: 'flex-start', justifyContent: 'center' }}
-                        >
-                          <TouchableNativeFeedback onPress={() => this.chooseDate()}>
-                            <Text style={{ fontWeight: 'bold', fontSize: 16 }}>
-                              {this.stringifyDate(datetime.date)}
-                            </Text>
-                          </TouchableNativeFeedback>
-                        </View>
-                        <View
-                          style={{ flex: 0.4, alignItems: 'flex-end', justifyContent: 'center' }}
-                        >
-                          <TouchableNativeFeedback onPress={() => this.chooseTime()}>
-                            <Text style={{ fontWeight: 'bold', fontSize: 16 }}>
-                              {this.stringifyTime(datetime.time)}
-                            </Text>
-                          </TouchableNativeFeedback>
-                        </View>
-                      </View>
-                    </View>
-                    <View
-                      style={{
-                        flex: 1,
-                        flexDirection: 'row',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        fontSize: 14,
-                        marginTop: 20
-                      }}
-                    >
-                      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-                        <TouchableNativeFeedback onPress={() => this.closePopUp()}>
-                          <Text style={{ color: '#AAA', fontWeight: 'bold' }}>Fermer</Text>
-                        </TouchableNativeFeedback>
-                      </View>
-                      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-                        <TouchableNativeFeedback onPress={() => this.saveDateTimeAndClose()}>
-                          <Text style={{ color: primaryColor, fontWeight: 'bold' }}>Valider</Text>
-                        </TouchableNativeFeedback>
-                      </View>
-                    </View>
-                  </View>
-                </DialogContent>
-              </Dialog>
-              <View
-                style={{
-                  flexDirection: 'row',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  position: 'relative',
-                  top: -15
-                }}
-              >
-                <TouchableNativeFeedback onPress={() => this.setState({ popUpVisible: true })}>
-                  <View
-                    style={[
-                      styles.card,
-                      {
-                        paddingTop: 5,
-                        paddingBottom: 5,
-                        paddingLeft: 10,
-                        paddingRight: 10,
-                        flexDirection: 'row'
-                      }
-                    ]}
-                  >
-                    <Text style={{ color: '#000', fontSize: 14, fontWeight: 'bold' }}>
-                      {`Départ maintenant`}
-                    </Text>
-                  </View>
-                </TouchableNativeFeedback>
-              </View>
-              <Text style={styles.title}>Meilleur itinéraire</Text>
-              <View style={styles.mapCardBox}>
-                <TouchableNativeFeedback
-                  onPress={() => this.displayJourneyDetails(dataBestJourney)}
+            {isLoading ? (
+              <View style={styles.body}>
+                <ContentLoader
+                  primaryColor="#f3f3f3"
+                  secondaryColor="#ecebeb"
+                  width={screenWidth}
+                  height={screenHeight}
                 >
-                  <View style={[styles.card, styles.mapCard, { flexDirection: 'column' }]}>
-                    <View
-                      style={{
-                        flexDirection: 'column',
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                        alignSelf: 'stretch',
-                        marginLeft: 20,
-                        marginRight: 20
-                      }}
-                    >
-                      <Text
-                        style={{
-                          color: '#898989',
-                          fontSize: 14,
-                          textAlign: 'left',
-                          alignSelf: 'flex-start',
-                          fontWeight: 'bold',
-                          marginBottom: 5
-                        }}
-                      >
-                        {`Départ à ${dataBestJourney.departure_date_time.substring(
-                          9,
-                          11
-                        )}:${dataBestJourney.departure_date_time.substring(11, 13)}`}
-                      </Text>
-                      <View style={{ flexDirection: 'row' }}>
-                        <View
-                          style={{
-                            flex: 3,
-                            flexDirection: 'row',
-                            alignItems: 'center',
-                            flexWrap: 'wrap'
-                          }}
-                        >
-                          <FlatList
-                            style={{ flexWrap: 'wrap', flex: 1 }}
-                            data={dataBestJourney.sections_without_waiting_and_transfer}
-                            horizontal
-                            ItemSeparatorComponent={renderSeparator}
-                            renderItem={({ item }) => {
-                              const icon = IconLoader.getIconBySection(item);
-                              if (
-                                item.display_informations !== undefined &&
-                                (item.display_informations.physical_mode === 'Bus' ||
-                                  item.display_informations.commercial_mode === 'Bus')
-                              ) {
-                                return (
-                                  <BusIcon
-                                    lineName={item.display_informations.label}
-                                    style={{ marginTop: 4 }}
-                                  />
-                                );
+                  <Rect x="10" y="40" rx="5" ry="5" width="150" height="25" />
+                  <Rect x="20" y="80" rx="5" ry="5" width={screenWidth - 40} height="75" />
+                  <Rect x="10" y="170" rx="5" ry="5" width="150" height="25" />
+                  <Rect x="20" y="210" rx="5" ry="5" width={screenWidth - 40} height="75" />
+                  <Rect x="20" y="300" rx="5" ry="5" width={screenWidth - 40} height="75" />
+                  <Rect x="20" y="390" rx="5" ry="5" width={screenWidth - 40} height="75" />
+                </ContentLoader>
+              </View>
+            ) : (
+              <View style={styles.body}>
+                <Dialog
+                  visible={popUpVisible}
+                  onTouchOutside={() => this.setState({ popUpVisible: false })}
+                  width={0.9}
+                >
+                  <DialogTitle title="Date et heure" />
+                  <DialogContent>
+                    <View style={{ height: 130, flexDirection: 'column' }}>
+                      <View style={{ flex: 1, justifyContent: 'center' }}>
+                        <Picker
+                          mode="dropdown"
+                          selectedValue={datetime.type}
+                          onValueChange={(itemValue, itemIndex) =>
+                            this.setState({
+                              datetime: {
+                                type: itemValue,
+                                date: datetime.date,
+                                time: datetime.time
                               }
-                              return <Image style={styles.journeyCardBottomImg} source={icon} />;
-                            }}
-                            keyExtractor={(item, index) => index.toString()}
-                          />
-                        </View>
-                        <View
-                          style={{
-                            flex: 1,
-                            flexDirection: 'row',
-                            justifyContent: 'flex-end',
-                            alignItems: 'center'
-                          }}
+                            })
+                          }
                         >
-                          <Text style={{ fontSize: 24, fontWeight: 'bold' }}>
-                            {this.convertSecondsToMinutes(dataBestJourney.duration)}
-                          </Text>
-                          <Text style={{ fontSize: 12, marginTop: 8, marginLeft: 5 }}>min</Text>
-                        </View>
+                          <Picker.Item label="Partir maintenant" value="now" />
+                          <Picker.Item label="Partir à" value="departure" />
+                          <Picker.Item label="Arriver à" value="arrival" />
+                        </Picker>
                       </View>
-                    </View>
-                  </View>
-                </TouchableNativeFeedback>
-              </View>
-              <Text style={styles.title}>Autres itinéraires</Text>
-              <View style={styles.mapCardBox}>
-                <View
-                  style={[
-                    styles.card,
-                    styles.mapCard,
-                    { flexDirection: 'row', paddingTop: 0, paddingBottom: 0, marginBottom: 50 }
-                  ]}
-                >
-                  <FlatList
-                    style={{ flex: 1 }}
-                    data={dataOtherJourneys}
-                    keyboardShouldPersistTaps="handled"
-                    ItemSeparatorComponent={() => (
                       <View
                         style={{
-                          borderBottomColor: '#e5e5e5',
-                          borderBottomWidth: 1,
+                          flex: 1,
+                          flexDirection: 'row',
+                          alignItems: 'center',
+                          justifyContent: 'center'
+                        }}
+                      >
+                        <View style={{ flex: 0.9, flexDirection: 'row' }}>
+                          <View
+                            style={{
+                              flex: 0.6,
+                              alignItems: 'flex-start',
+                              justifyContent: 'center'
+                            }}
+                          >
+                            <TouchableNativeFeedback onPress={() => this.chooseDate()}>
+                              <Text style={{ fontWeight: 'bold', fontSize: 16 }}>
+                                {this.stringifyDate(datetime.date)}
+                              </Text>
+                            </TouchableNativeFeedback>
+                          </View>
+                          <View
+                            style={{ flex: 0.4, alignItems: 'flex-end', justifyContent: 'center' }}
+                          >
+                            <TouchableNativeFeedback onPress={() => this.chooseTime()}>
+                              <Text style={{ fontWeight: 'bold', fontSize: 16 }}>
+                                {this.stringifyTime(datetime.time)}
+                              </Text>
+                            </TouchableNativeFeedback>
+                          </View>
+                        </View>
+                      </View>
+                      <View
+                        style={{
+                          flex: 1,
+                          flexDirection: 'row',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          fontSize: 14,
+                          marginTop: 20
+                        }}
+                      >
+                        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+                          <TouchableNativeFeedback onPress={() => this.closePopUp()}>
+                            <Text style={{ color: '#AAA', fontWeight: 'bold' }}>Fermer</Text>
+                          </TouchableNativeFeedback>
+                        </View>
+                        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+                          <TouchableNativeFeedback onPress={() => this.saveDateTimeAndClose()}>
+                            <Text style={{ color: primaryColor, fontWeight: 'bold' }}>Valider</Text>
+                          </TouchableNativeFeedback>
+                        </View>
+                      </View>
+                    </View>
+                  </DialogContent>
+                </Dialog>
+                <View
+                  style={{
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    position: 'relative',
+                    top: -15
+                  }}
+                >
+                  <TouchableNativeFeedback onPress={() => this.setState({ popUpVisible: true })}>
+                    <View
+                      style={[
+                        styles.card,
+                        {
+                          paddingTop: 5,
+                          paddingBottom: 5,
+                          paddingLeft: 10,
+                          paddingRight: 10,
+                          flexDirection: 'row'
+                        }
+                      ]}
+                    >
+                      <Text style={{ color: '#000', fontSize: 14, fontWeight: 'bold' }}>
+                        {`Départ maintenant`}
+                      </Text>
+                    </View>
+                  </TouchableNativeFeedback>
+                </View>
+                <Text style={styles.title}>Meilleur itinéraire</Text>
+                <View style={styles.mapCardBox}>
+                  <TouchableNativeFeedback
+                    onPress={() => this.displayJourneyDetails(dataBestJourney)}
+                  >
+                    <View style={[styles.card, styles.mapCard, { flexDirection: 'column' }]}>
+                      <View
+                        style={{
+                          flexDirection: 'column',
+                          justifyContent: 'center',
+                          alignItems: 'center',
+                          alignSelf: 'stretch',
                           marginLeft: 20,
                           marginRight: 20
                         }}
-                      />
-                    )}
-                    renderItem={({ item }) => (
-                      <TouchableNativeFeedback onPress={() => this.displayJourneyDetails(item)}>
-                        <View
+                      >
+                        <Text
                           style={{
-                            flexDirection: 'column',
-                            justifyContent: 'center',
-                            alignItems: 'center',
-                            alignSelf: 'stretch',
-                            paddingLeft: 20,
-                            paddingRight: 20,
-                            paddingTop: 10,
-                            paddingBottom: 10
+                            color: '#898989',
+                            fontSize: 14,
+                            textAlign: 'left',
+                            alignSelf: 'flex-start',
+                            fontWeight: 'bold',
+                            marginBottom: 5
                           }}
                         >
-                          <Text
+                          {`Départ à ${dataBestJourney.departure_date_time.substring(
+                            9,
+                            11
+                          )}:${dataBestJourney.departure_date_time.substring(11, 13)}`}
+                        </Text>
+                        <View style={{ flexDirection: 'row' }}>
+                          <View
                             style={{
-                              color: '#898989',
-                              fontSize: 14,
-                              textAlign: 'left',
-                              alignSelf: 'flex-start',
-                              fontWeight: 'bold',
-                              marginBottom: 5
+                              flex: 3,
+                              flexDirection: 'row',
+                              alignItems: 'center',
+                              flexWrap: 'wrap'
                             }}
                           >
-                            {`Départ à ${item.departure_date_time.substring(
-                              9,
-                              11
-                            )}:${item.departure_date_time.substring(11, 13)}`}
-                          </Text>
-                          <View style={{ flexDirection: 'row' }}>
-                            <View
-                              style={{
-                                flex: 3,
-                                flexDirection: 'row',
-                                alignItems: 'center',
-                                flexWrap: 'wrap'
-                              }}
-                            >
-                              <FlatList
-                                style={{ flexWrap: 'wrap', flex: 1 }}
-                                data={item.sections_without_waiting_and_transfer}
-                                horizontal
-                                ItemSeparatorComponent={renderSeparator}
-                                renderItem={({ item }) => {
-                                  const icon = IconLoader.getIconBySection(item);
-                                  if (
-                                    item.display_informations !== undefined &&
-                                    (item.display_informations.physical_mode === 'Bus' ||
-                                      item.display_informations.commercial_mode === 'Bus')
-                                  ) {
-                                    return (
-                                      <BusIcon
-                                        lineName={item.display_informations.label}
-                                        style={{ marginTop: 4 }}
-                                      />
-                                    );
-                                  }
+                            <FlatList
+                              style={{ flexWrap: 'wrap', flex: 1 }}
+                              data={dataBestJourney.sections_without_waiting_and_transfer}
+                              horizontal
+                              ItemSeparatorComponent={renderSeparator}
+                              renderItem={({ item }) => {
+                                const icon = IconLoader.getIconBySection(item);
+                                if (
+                                  item.display_informations !== undefined &&
+                                  (item.display_informations.physical_mode === 'Bus' ||
+                                    item.display_informations.commercial_mode === 'Bus')
+                                ) {
                                   return (
-                                    <Image style={styles.journeyCardBottomImg} source={icon} />
+                                    <BusIcon
+                                      lineName={item.display_informations.label}
+                                      style={{ marginTop: 4 }}
+                                    />
                                   );
-                                }}
-                                keyExtractor={(item, index) => index.toString()}
-                              />
-                            </View>
-                            <View
-                              style={{
-                                flex: 1,
-                                flexDirection: 'row',
-                                justifyContent: 'flex-end',
-                                alignItems: 'center'
+                                }
+                                return <Image style={styles.journeyCardBottomImg} source={icon} />;
                               }}
-                            >
-                              <Text style={{ fontSize: 24, fontWeight: 'bold' }}>
-                                {this.convertSecondsToMinutes(item.duration)}
-                              </Text>
-                              <Text style={{ fontSize: 12, marginTop: 8, marginLeft: 5 }}>min</Text>
-                            </View>
+                              keyExtractor={(item, index) => index.toString()}
+                            />
                           </View>
-                          <Text
+                          <View
                             style={{
-                              color: '#898989',
-                              fontSize: 14,
-                              textAlign: 'left',
-                              alignSelf: 'flex-start',
-                              marginTop: 5
+                              flex: 1,
+                              flexDirection: 'row',
+                              justifyContent: 'flex-end',
+                              alignItems: 'center'
                             }}
                           >
-                            {APIManager.translateType(item.type)}
-                          </Text>
+                            <Text style={{ fontSize: 24, fontWeight: 'bold' }}>
+                              {this.convertSecondsToMinutes(dataBestJourney.duration)}
+                            </Text>
+                            <Text style={{ fontSize: 12, marginTop: 8, marginLeft: 5 }}>min</Text>
+                          </View>
                         </View>
-                      </TouchableNativeFeedback>
-                    )}
-                    keyExtractor={(item, index) => index.toString()}
-                  />
+                      </View>
+                    </View>
+                  </TouchableNativeFeedback>
+                </View>
+                <Text style={styles.title}>Autres itinéraires</Text>
+                <View style={styles.mapCardBox}>
+                  <View
+                    style={[
+                      styles.card,
+                      styles.mapCard,
+                      { flexDirection: 'row', paddingTop: 0, paddingBottom: 0, marginBottom: 50 }
+                    ]}
+                  >
+                    <FlatList
+                      style={{ flex: 1 }}
+                      data={dataOtherJourneys}
+                      keyboardShouldPersistTaps="handled"
+                      ItemSeparatorComponent={() => (
+                        <View
+                          style={{
+                            borderBottomColor: '#e5e5e5',
+                            borderBottomWidth: 1,
+                            marginLeft: 20,
+                            marginRight: 20
+                          }}
+                        />
+                      )}
+                      renderItem={({ item }) => (
+                        <TouchableNativeFeedback onPress={() => this.displayJourneyDetails(item)}>
+                          <View
+                            style={{
+                              flexDirection: 'column',
+                              justifyContent: 'center',
+                              alignItems: 'center',
+                              alignSelf: 'stretch',
+                              paddingLeft: 20,
+                              paddingRight: 20,
+                              paddingTop: 10,
+                              paddingBottom: 10
+                            }}
+                          >
+                            <Text
+                              style={{
+                                color: '#898989',
+                                fontSize: 14,
+                                textAlign: 'left',
+                                alignSelf: 'flex-start',
+                                fontWeight: 'bold',
+                                marginBottom: 5
+                              }}
+                            >
+                              {`Départ à ${item.departure_date_time.substring(
+                                9,
+                                11
+                              )}:${item.departure_date_time.substring(11, 13)}`}
+                            </Text>
+                            <View style={{ flexDirection: 'row' }}>
+                              <View
+                                style={{
+                                  flex: 3,
+                                  flexDirection: 'row',
+                                  alignItems: 'center',
+                                  flexWrap: 'wrap'
+                                }}
+                              >
+                                <FlatList
+                                  style={{ flexWrap: 'wrap', flex: 1 }}
+                                  data={item.sections_without_waiting_and_transfer}
+                                  horizontal
+                                  ItemSeparatorComponent={renderSeparator}
+                                  renderItem={({ item }) => {
+                                    const icon = IconLoader.getIconBySection(item);
+                                    if (
+                                      item.display_informations !== undefined &&
+                                      (item.display_informations.physical_mode === 'Bus' ||
+                                        item.display_informations.commercial_mode === 'Bus')
+                                    ) {
+                                      return (
+                                        <BusIcon
+                                          lineName={item.display_informations.label}
+                                          style={{ marginTop: 4 }}
+                                        />
+                                      );
+                                    }
+                                    return (
+                                      <Image style={styles.journeyCardBottomImg} source={icon} />
+                                    );
+                                  }}
+                                  keyExtractor={(item, index) => index.toString()}
+                                />
+                              </View>
+                              <View
+                                style={{
+                                  flex: 1,
+                                  flexDirection: 'row',
+                                  justifyContent: 'flex-end',
+                                  alignItems: 'center'
+                                }}
+                              >
+                                <Text style={{ fontSize: 24, fontWeight: 'bold' }}>
+                                  {this.convertSecondsToMinutes(item.duration)}
+                                </Text>
+                                <Text style={{ fontSize: 12, marginTop: 8, marginLeft: 5 }}>
+                                  min
+                                </Text>
+                              </View>
+                            </View>
+                            <Text
+                              style={{
+                                color: '#898989',
+                                fontSize: 14,
+                                textAlign: 'left',
+                                alignSelf: 'flex-start',
+                                marginTop: 5
+                              }}
+                            >
+                              {APIManager.translateType(item.type)}
+                            </Text>
+                          </View>
+                        </TouchableNativeFeedback>
+                      )}
+                      keyExtractor={(item, index) => index.toString()}
+                    />
+                  </View>
                 </View>
               </View>
-            </View>
+            )}
           </ScrollView>
         </View>
       );

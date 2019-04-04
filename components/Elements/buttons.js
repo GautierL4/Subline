@@ -9,6 +9,7 @@ import {
   Easing
 } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
+import LottieView from 'lottie-react-native';
 import { styles } from '../../assets/styles/style';
 
 /**
@@ -180,7 +181,7 @@ export class FavoriteButton extends React.Component {
    */
   removeJourneyFromFavoriteJourneys(dataJourney) {
     const { listOfFavorite } = this.state;
-    const filtered = listOfFavorite.filter(function(value, index, arr) {
+    const filtered = listOfFavorite.filter(function(value) {
       return JSON.stringify(value) !== JSON.stringify(dataJourney);
     });
     this.setState({ listOfFavorite: filtered, isAFavorite: false }, async () => {
@@ -199,7 +200,7 @@ export class FavoriteButton extends React.Component {
    * @memberof FavoriteButton
    */
   addJourneyToFavoriteJourneys(dataJourney) {
-    let listOfFavorite = [...this.state.listOfFavorite];
+    const listOfFavorite = [...this.state.listOfFavorite];
     listOfFavorite.push(dataJourney);
     this.setState({ listOfFavorite: listOfFavorite, isAFavorite: true }, async () => {
       try {
@@ -219,8 +220,10 @@ export class FavoriteButton extends React.Component {
   toggleAJourneyInFavoriteJourneys(dataJourney) {
     const { isAFavorite } = this.state;
     if (isAFavorite) {
+      this.animation.reset();
       this.removeJourneyFromFavoriteJourneys(dataJourney);
     } else {
+      this.animation.play();
       this.addJourneyToFavoriteJourneys(dataJourney);
     }
   }
@@ -233,17 +236,23 @@ export class FavoriteButton extends React.Component {
   render() {
     const { isLoading, isAFavorite } = this.state;
     const { dataJourney } = this.props;
-    const icon = isAFavorite
-      ? require('../../assets/icons/star_on.png')
-      : require('../../assets/icons/star_off.png');
     if (isLoading) {
       return <View />;
     }
     return (
-      <View style={styles.button}>
+      <View style={[styles.button, { width: 60, height: 60, marginTop: 20 }]}>
         <TouchableNativeFeedback onPress={() => this.toggleAJourneyInFavoriteJourneys(dataJourney)}>
           <View>
-            <Image style={styles.returnArrow} source={icon} />
+            <LottieView
+              ref={animation => {
+                this.animation = animation;
+              }}
+              source={require('../../assets/animation/star.json')}
+              duration={2000}
+              loop={false}
+              resizeMode="cover"
+              style={{ width: 60, height: 60 }}
+            />
           </View>
         </TouchableNativeFeedback>
       </View>
@@ -284,41 +293,34 @@ export class AlarmButton extends React.Component {
 }
 
 export class ReloadButton extends React.Component {
-  constructor(props) {
-    super(props);
-    this.RotateValueHolder = new Animated.Value(0);
-  }
-
-  StartImageRotateFunction() {
-    this.RotateValueHolder.setValue(0);
-    Animated.timing(this.RotateValueHolder, {
-      toValue: 1,
-      duration: 200,
-      easing: Easing.linear
-    }).start();
+  startRotate() {
+    this.animation.play();
   }
 
   reloadPage(handler) {
-    this.StartImageRotateFunction();
+    this.startRotate();
     setTimeout(function() {
       handler();
     }, 200);
   }
 
   render() {
-    const RotateData = this.RotateValueHolder.interpolate({
-      inputRange: [0, 1],
-      outputRange: ['0deg', '-360deg']
-    });
     const { handler } = this.props;
 
     return (
       <View style={styles.button}>
         <TouchableNativeFeedback onPress={() => this.reloadPage(handler)}>
           <View>
-            <Animated.Image
-              style={[styles.returnArrow, { transform: [{ rotate: RotateData }] }]}
-              source={require('../../assets/icons/refresh.png')}
+            <LottieView
+              ref={animation => {
+                this.animation = animation;
+              }}
+              source={require('../../assets/animation/reload.json')}
+              duration={2000}
+              loop={false}
+              progress={1}
+              resizeMode="cover"
+              style={{ width: 50, height: 50 }}
             />
           </View>
         </TouchableNativeFeedback>

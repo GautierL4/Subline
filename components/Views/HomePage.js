@@ -139,7 +139,7 @@ class HomePage extends React.Component {
         <ScrollView
           horizontal={false}
           contentContainerStyle={{ flexGrow: 1 }}
-          scrollEnabled={scrollEnabled}
+          scrollEnabled={!isLoading}
         >
           <Animated.View
             style={[
