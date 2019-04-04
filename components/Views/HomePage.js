@@ -7,7 +7,8 @@ import {
   Animated,
   ScrollView,
   Dimensions,
-  TouchableNativeFeedback
+  TouchableNativeFeedback,
+  Easing
 } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 import LottieView from 'lottie-react-native';
@@ -16,50 +17,18 @@ import BusIcon from '../Elements/BusIcon';
 import FileLoader from './FileLoader';
 
 const IconLoader = new FileLoader();
-
-class FadeInView extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      fadeAnim: new Animated.Value(screenHeight) // Initial value for opacity: 0
-    };
-  }
-
-  componentDidMount() {
-    Animated.timing(
-      // Animate over time
-      this.state.fadeAnim, // The animated value to drive
-      {
-        toValue: 230, // Animate to opacity: 1 (opaque)
-        duration: 1000, // Make it take a while
-        delay: 3000
-      }
-    ).start(); // Starts the animation
-  }
-
-  render() {
-    const { fadeAnim } = this.state;
-    const { style, children } = this.props;
-    return (
-      <Animated.View // Special animatable View
-        style={{
-          ...style,
-          height: fadeAnim // Bind opacity to animated value
-        }}
-      >
-        {children}
-      </Animated.View>
-    );
-  }
-}
+const screenWidth = Dimensions.get('window').width;
+const screenHeight = Dimensions.get('window').height;
 
 class HomePage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      isLoading: true,
+      isLoading: false,
       data: null,
-      favoritesJourneys: []
+      favoritesJourneys: [],
+      scaleAnim: new Animated.Value(screenHeight + 50),
+      scrollEnabled: false
     };
   }
 
@@ -67,13 +36,7 @@ class HomePage extends React.Component {
     this.getFavoritesJourneys();
   }
 
-  componentDidMount() {
-    this.setState({ isLoading: true });
-    // Setting the loading screen for 3 seconds
-    setTimeout(() => {
-      this.setState({ isLoading: false });
-    }, 4000);
-  }
+  componentDidMount() {}
 
   onSelect = data => {
     this.setState(data);
@@ -126,8 +89,20 @@ class HomePage extends React.Component {
     });
   }
 
+  openAppAnimation() {
+    const { scaleAnim } = this.state;
+    Animated.timing(scaleAnim, {
+      easing: Easing.elastic(1),
+      toValue: 230,
+      duration: 1500
+    }).start();
+    this.setState({
+      scrollEnabled: true
+    });
+  }
+
   render() {
-    const { isLoading, favoritesJourneys } = this.state;
+    const { isLoading, favoritesJourneys, scaleAnim, scrollEnabled } = this.state;
     this.displayBookmark();
     const renderSeparator = () => (
       <Image
@@ -138,13 +113,14 @@ class HomePage extends React.Component {
 
     if (isLoading) {
       return (
-        <FadeInView
+        <Animated.View
           style={{
             backgroundColor: 'black',
             width: screenWidth,
             flexDirection: 'row',
             alignItems: 'center',
-            justifyContent: 'center'
+            justifyContent: 'center',
+            height: scaleAnim
           }}
         >
           <LottieView
@@ -153,19 +129,34 @@ class HomePage extends React.Component {
             duration={2000}
             loop={false}
             style={{ width: 90, height: 90 }}
+            onAnimationFinish={() => this.openAppAnimation()}
           />
-        </FadeInView>
+        </Animated.View>
       );
     }
     return (
       <View style={styles.container}>
-        <ScrollView horizontal={false} contentContainerStyle={{ flexGrow: 1 }}>
-          <View style={[styles.header, styles.headerMax, { justifyContent: 'center' }]}>
-            <Image
-              source={require('../../assets/icons/subline.png')}
+        <ScrollView
+          horizontal={false}
+          contentContainerStyle={{ flexGrow: 1 }}
+          scrollEnabled={scrollEnabled}
+        >
+          <Animated.View
+            style={[
+              styles.header,
+              styles.headerMax,
+              { justifyContent: 'center', height: scaleAnim }
+            ]}
+          >
+            <LottieView
+              source={require('../../assets/animation/start.json')}
+              autoPlay
+              duration={2000}
+              loop={false}
               style={{ width: 90, height: 90 }}
+              onAnimationFinish={() => this.openAppAnimation()}
             />
-          </View>
+          </Animated.View>
           <View style={styles.body}>
             <View
               style={{
@@ -461,8 +452,5 @@ class HomePage extends React.Component {
     );
   }
 }
-
-const screenWidth = Dimensions.get('window').width;
-const screenHeight = Dimensions.get('window').height;
 
 export default HomePage;
