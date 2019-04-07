@@ -76,7 +76,7 @@ class SearchPage extends React.Component {
         this.setState({ geoLocation });
       },
       error => console.log(error),
-      { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
+      { enableHighAccuracy: true, timeout: 15000, maximumAge: 10000 }
     );
   }
 

@@ -46,10 +46,8 @@ class HomePage extends React.Component {
     let value = null;
     try {
       value = await this.retrieveData();
-    } catch (error) {
-      console.error('erreur 409');
-    }
-    this.setState({ favoritesJourneys: JSON.parse(value) });
+      this.setState({ favoritesJourneys: JSON.parse(value) });
+    } catch (error) {}
   }
 
   handleOnNavigateBack = () => {
@@ -139,7 +137,7 @@ class HomePage extends React.Component {
         <ScrollView
           horizontal={false}
           contentContainerStyle={{ flexGrow: 1 }}
-          scrollEnabled={!isLoading}
+          scrollEnabled={scrollEnabled}
         >
           <Animated.View
             style={[
@@ -424,25 +422,6 @@ class HomePage extends React.Component {
               >
                 <View style={styles.mapCard}>
                   <Text>Accès Aéroports</Text>
-                </View>
-              </TouchableNativeFeedback>
-            </View>
-            <View style={styles.mapCardBox}>
-              <TouchableNativeFeedback
-                background={TouchableNativeFeedback.Ripple('#ffffff')}
-                onPress={() => {
-                  this.changeView('MapPage', {
-                    param:
-                      'http://tracker.geops.de/?z=13&s=1&x=261676.7892&y=6251254.5413&l=transport'
-                  });
-                }}
-              >
-                <View style={styles.interractiveMapCard}>
-                  <Text style={styles.interractiveMapColor}>Carte intéractive</Text>
-                  <Image
-                    source={require('../../assets/icons/connection-signal.png')}
-                    style={styles.interractiveImg}
-                  />
                 </View>
               </TouchableNativeFeedback>
             </View>
