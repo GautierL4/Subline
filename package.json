@@ -39,6 +39,7 @@
     "react-native-pdf": "^3.0.16",
     "react-native-popup-dialog": "^0.16.6",
     "react-native-svg": "^9.3.7",
+    "react-native-svg-uri": "^1.2.3",
     "react-native-view-pdf": "^0.8.1",
     "react-navigation": "^2.3.1",
     "rn-content-loader": "^0.0.4"
