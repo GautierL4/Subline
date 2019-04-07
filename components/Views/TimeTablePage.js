@@ -1,22 +1,19 @@
 import React from 'react';
-import { StyleSheet, Text, View, Image, Animated, TextInput, TouchableNativeFeedback, TouchableWithoutFeedback, TouchableOpacity, ScrollView, Dimensions, FlatList } from 'react-native';
+import { View, ScrollView } from 'react-native';
 import { styles } from '../../assets/styles/style';
-import APIHandler from '../API/APIHandler.js';
-import { BackButton } from '../Elements/buttons'
+import { BackButton } from '../Elements/buttons';
 
+const TimeTablePage = props => {
+  const { navigation } = props;
+  return (
+    <View style={styles.container}>
+      <ScrollView horizontal={false} contentContainerStyle={{ flexGrow: 1 }}>
+        <View style={{ flexDirection: 'row', height: 100, backgroundColor: '#000', width: 500 }}>
+          <BackButton navigation={navigation} />
+        </View>
+      </ScrollView>
+    </View>
+  );
+};
 
-class TimeTablePage extends React.Component {
-
-    render() {
-        return (
-            <View style={styles.container}>
-                <ScrollView horizontal={false} contentContainerStyle={{ flexGrow: 1 }}>
-                    <View style={{ flexDirection: 'row', height: 100, backgroundColor: '#000', width: 500 }}>
-                        <BackButton navigation={this.props.navigation} />
-                    </View>
-                </ScrollView>
-            </View>
-        )
-    }
-}
 export default TimeTablePage;
