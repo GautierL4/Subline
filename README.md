@@ -13,6 +13,8 @@ Télécharger l'application Expo sur votre téléphone :
 
 ### Lancement
 
+Les deux versions ci-dessous ne sont pas à jour.
+
 #### Méthode 1 (meilleure)
 
 Dans l'application, aller dans "Explore" et rechercher "Subline". Ouvrir l'application de l'utilisateur :
